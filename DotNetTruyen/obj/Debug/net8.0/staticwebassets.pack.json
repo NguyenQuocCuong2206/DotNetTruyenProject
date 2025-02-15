@@ -1,1092 +1,1728 @@
 {
   "Files": [
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DotNetTruyen.bundle.scp.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\DotNetTruyen.bundle.scp.css",
       "PackagePath": "staticwebassets\\DotNetTruyen.bundle.scp.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\all.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\all.min.css",
       "PackagePath": "staticwebassets\\css\\all.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\chapter-coin.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\chapter-coin.css",
       "PackagePath": "staticwebassets\\css\\chapter-coin.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\chapter_thumbnail.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\chapter_thumbnail.css",
       "PackagePath": "staticwebassets\\css\\chapter_thumbnail.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\ct-icon.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\ct-icon.css",
       "PackagePath": "staticwebassets\\css\\ct-icon.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\ionicons.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\dashboard_style.css",
+      "PackagePath": "staticwebassets\\css\\dashboard_style.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\dashboard_style.min.css",
+      "PackagePath": "staticwebassets\\css\\dashboard_style.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\dashboard_style.min.css.map",
+      "PackagePath": "staticwebassets\\css\\dashboard_style.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\ionicons.min.css",
       "PackagePath": "staticwebassets\\css\\ionicons.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\lightbox.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\lightbox.min.css",
       "PackagePath": "staticwebassets\\css\\lightbox.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\loaders.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\loaders.min.css",
       "PackagePath": "staticwebassets\\css\\loaders.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\mycred-front.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\mycred-front.css",
       "PackagePath": "staticwebassets\\css\\mycred-front.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\mycred-social-icons.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\mycred-social-icons.css",
       "PackagePath": "staticwebassets\\css\\mycred-social-icons.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\mycred-social-share.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\mycred-social-share.css",
       "PackagePath": "staticwebassets\\css\\mycred-social-share.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\shortcodes.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\shortcodes.css",
       "PackagePath": "staticwebassets\\css\\shortcodes.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\slick-theme.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\slick-theme.css",
       "PackagePath": "staticwebassets\\css\\slick-theme.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\slick.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\slick.css",
       "PackagePath": "staticwebassets\\css\\slick.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
       "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.min.css",
       "PackagePath": "staticwebassets\\css\\style.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style_1.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style_1.css",
       "PackagePath": "staticwebassets\\css\\style_1.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\widget-options.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\widget-options.css",
       "PackagePath": "staticwebassets\\css\\widget-options.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.eot",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.eot",
       "PackagePath": "staticwebassets\\fonts\\fa-brands-400.eot"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.ttf",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.ttf",
       "PackagePath": "staticwebassets\\fonts\\fa-brands-400.ttf"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.woff",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.woff",
       "PackagePath": "staticwebassets\\fonts\\fa-brands-400.woff"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-brands-400.woff2",
       "PackagePath": "staticwebassets\\fonts\\fa-brands-400.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.eot",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.eot",
       "PackagePath": "staticwebassets\\fonts\\fa-regular-400.eot"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.ttf",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.ttf",
       "PackagePath": "staticwebassets\\fonts\\fa-regular-400.ttf"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.woff",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.woff",
       "PackagePath": "staticwebassets\\fonts\\fa-regular-400.woff"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-regular-400.woff2",
       "PackagePath": "staticwebassets\\fonts\\fa-regular-400.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.eot",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.eot",
       "PackagePath": "staticwebassets\\fonts\\fa-solid-900.eot"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.ttf",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.ttf",
       "PackagePath": "staticwebassets\\fonts\\fa-solid-900.ttf"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.woff",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.woff",
       "PackagePath": "staticwebassets\\fonts\\fa-solid-900.woff"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\fa-solid-900.woff2",
       "PackagePath": "staticwebassets\\fonts\\fa-solid-900.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.eot",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.eot",
       "PackagePath": "staticwebassets\\fonts\\ionicons.eot"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.ttf",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.ttf",
       "PackagePath": "staticwebassets\\fonts\\ionicons.ttf"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.woff",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.woff",
       "PackagePath": "staticwebassets\\fonts\\ionicons.woff"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\ionicons.woff2",
       "PackagePath": "staticwebassets\\fonts\\ionicons.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\mycred-social-icons.eot",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\mycred-social-icons.eot",
       "PackagePath": "staticwebassets\\fonts\\mycred-social-icons.eot"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\mycred-social-icons.ttf",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\mycred-social-icons.ttf",
       "PackagePath": "staticwebassets\\fonts\\mycred-social-icons.ttf"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\mycred-social-icons.woff",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\mycred-social-icons.woff",
       "PackagePath": "staticwebassets\\fonts\\mycred-social-icons.woff"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tCMPI.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tCMPI.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tCMPI.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tDMPKzSQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tDMPKzSQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tDMPKzSQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tMMPKzSQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tMMPKzSQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiAyp8kv8JHgFVrJJLmE0tMMPKzSQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLBT5Z11lFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLBT5Z11lFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLBT5Z11lFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLBT5Z1JlFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLBT5Z1JlFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLBT5Z1JlFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLBT5Z1xlFQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLBT5Z1xlFQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLBT5Z1xlFQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDD4Z11lFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDD4Z11lFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLDD4Z11lFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDD4Z1JlFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDD4Z1JlFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLDD4Z1JlFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLFj_Z11lFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLFj_Z11lFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLFj_Z11lFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLFj_Z1JlFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLFj_Z1JlFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLFj_Z1JlFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm111VF9eO.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm111VF9eO.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm111VF9eO.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm111VFteOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm111VFteOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm111VFteOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm111VGdeOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm111VGdeOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm111VGdeOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVF9eO.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVF9eO.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVF9eO.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVFteOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVFteOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVFteOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVGdeOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVGdeOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm21lVGdeOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVF9eO.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVF9eO.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVF9eO.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVFteOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVFteOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVFteOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVGdeOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVGdeOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLm81xVGdeOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVF9eO.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVF9eO.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVF9eO.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVFteOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVFteOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVFteOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVGdeOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVGdeOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmg1hVGdeOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VF9eO.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VF9eO.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VF9eO.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VFteOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VFteOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VFteOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VGdeOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VGdeOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmr19VGdeOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVF9eO.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVF9eO.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVF9eO.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVFteOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVFteOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVFteOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVGdeOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVGdeOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmv1pVGdeOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VF9eO.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VF9eO.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VF9eO.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VFteOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VFteOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VFteOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VGdeOcEg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VGdeOcEg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiDyp8kv8JHgFVrJJLmy15VGdeOcEg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiEyp8kv8JHgFVrJJbecmNE.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiEyp8kv8JHgFVrJJbecmNE.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiEyp8kv8JHgFVrJJbecmNE.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiEyp8kv8JHgFVrJJfecg.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiEyp8kv8JHgFVrJJfecg.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiEyp8kv8JHgFVrJJfecg.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiEyp8kv8JHgFVrJJnecmNE.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiEyp8kv8JHgFVrJJnecmNE.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiEyp8kv8JHgFVrJJnecmNE.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrJJLucHtA.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrJJLucHtA.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiGyp8kv8JHgFVrJJLucHtA.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrJJLucXtAKPY.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrJJLucXtAKPY.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiGyp8kv8JHgFVrJJLucXtAKPY.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrJJLufntAKPY.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrJJLufntAKPY.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiGyp8kv8JHgFVrJJLufntAKPY.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrLPTucHtA.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrLPTucHtA.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiGyp8kv8JHgFVrLPTucHtA.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrLPTucXtAKPY.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrLPTucXtAKPY.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiGyp8kv8JHgFVrLPTucXtAKPY.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrLPTufntAKPY.woff2",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\pxiGyp8kv8JHgFVrLPTufntAKPY.woff2",
       "PackagePath": "staticwebassets\\fonts\\pxiGyp8kv8JHgFVrLPTufntAKPY.woff2"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\slick.eot",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\slick.eot",
       "PackagePath": "staticwebassets\\fonts\\slick.eot"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\slick.ttf",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\slick.ttf",
       "PackagePath": "staticwebassets\\fonts\\slick.ttf"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\slick.woff",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\fonts\\slick.woff",
       "PackagePath": "staticwebassets\\fonts\\slick.woff"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\1.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\1.jpg",
       "PackagePath": "staticwebassets\\images\\1.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\2.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\2.jpg",
       "PackagePath": "staticwebassets\\images\\2.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\Build-The-Best-Manga-Site.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\256x256bb.jpg",
+      "PackagePath": "staticwebassets\\images\\256x256bb.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\Build-The-Best-Manga-Site.jpg",
       "PackagePath": "staticwebassets\\images\\Build-The-Best-Manga-Site.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\ajax-loader.gif",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\ajax-loader.gif",
       "PackagePath": "staticwebassets\\images\\ajax-loader.gif"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\bg-search.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\Avatar.svg",
+      "PackagePath": "staticwebassets\\images\\avatar\\Avatar.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-2.svg",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-2.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-02.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-02.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-02.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-02.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-03.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-03.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-03.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-03.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-04.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-04.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-04.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-04.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-05.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-05.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-face-05.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-face-05.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-01.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-01.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-01.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-01.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-02.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-02.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-02.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-02.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-03.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-03.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-03.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-03.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-04.png",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-04.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\avatar\\avatar-illustrated-04.webp",
+      "PackagePath": "staticwebassets\\images\\avatar\\avatar-illustrated-04.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\bg-search.jpg",
       "PackagePath": "staticwebassets\\images\\bg-search.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\close.png",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\01.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\01.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\01.webp",
+      "PackagePath": "staticwebassets\\images\\categories\\01.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\02.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\02.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\02.webp",
+      "PackagePath": "staticwebassets\\images\\categories\\02.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\03.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\03.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\03.webp",
+      "PackagePath": "staticwebassets\\images\\categories\\03.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\04.jpg",
+      "PackagePath": "staticwebassets\\images\\categories\\04.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\categories\\04.webp",
+      "PackagePath": "staticwebassets\\images\\categories\\04.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\close.png",
       "PackagePath": "staticwebassets\\images\\close.png"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\fa-brands-400.svg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\fa-brands-400.svg",
       "PackagePath": "staticwebassets\\images\\fa-brands-400.svg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\fa-regular-400.svg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\fa-regular-400.svg",
       "PackagePath": "staticwebassets\\images\\fa-regular-400.svg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\fa-solid-900.svg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\fa-solid-900.svg",
       "PackagePath": "staticwebassets\\images\\fa-solid-900.svg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-43.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-43.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-1-43.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-46.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-46.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-1-46.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-67.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-67.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-1-67.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-70.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-1-70.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-1-70.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-4-25.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-4-25.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-4-25.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-4-49.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-4-49.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-4-49.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-5-28.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-5-28.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-5-28.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-5-64.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\horiimage-5-64.jpg",
       "PackagePath": "staticwebassets\\images\\horiimage-5-64.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\ionicons.svg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\ionicons.svg",
       "PackagePath": "staticwebassets\\images\\ionicons.svg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\loading.gif",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\loading.gif",
       "PackagePath": "staticwebassets\\images\\loading.gif"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\logo.png",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\logo.png",
       "PackagePath": "staticwebassets\\images\\logo.png"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\mycred-social-icons.svg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\mycred-social-icons.svg",
       "PackagePath": "staticwebassets\\images\\mycred-social-icons.svg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\new.gif",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\new.gif",
       "PackagePath": "staticwebassets\\images\\new.gif"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\next.png",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\next.png",
       "PackagePath": "staticwebassets\\images\\next.png"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\pin.png",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\pin.png",
       "PackagePath": "staticwebassets\\images\\pin.png"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\prev.png",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\prev.png",
       "PackagePath": "staticwebassets\\images\\prev.png"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\slick.svg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\slick.svg",
       "PackagePath": "staticwebassets\\images\\slick.svg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-150x150.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\404.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\404.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\2 User.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\2 User.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\3-User-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\3-User-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\3-User-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\3-User-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Activity.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Activity.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\AddUser.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\AddUser.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Down.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Down.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Down2.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Down2.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Down3.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Down3.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-DownCircle.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-DownCircle.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-DownSquare.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-DownSquare.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Left.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Left.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Left2.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Left2.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Left3.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Left3.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-LeftCircle.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-LeftCircle.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-LeftSquare.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-LeftSquare.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Right.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Right.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Right2.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Right2.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Right3.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Right3.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-RightCircle.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-RightCircle.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-RightSquare.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-RightSquare.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Up.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Up.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Up2.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Up2.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-Up3.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-Up3.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-UpCircle.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-UpCircle.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrow-UpSquare.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrow-UpSquare.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Arrows-up-down.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Arrows-up-down.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Bag 3.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Bag 3.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Bag.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Bag.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Bookmark.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Bookmark.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Buy.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Buy.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Calendar.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Calendar.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Call Missed.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Call Missed.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Call Silent.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Call Silent.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Call.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Call.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Calling.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Calling.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Camera.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Camera.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Category-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Category-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Category-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Category-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Chart.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Chart.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Chat.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Chat.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Close Square.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Close Square.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Danger.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Danger.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Delete.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Delete.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Discount.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Discount.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Discovery.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Discovery.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Document-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Document-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Document-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Document-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Download.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Download.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Edit Square.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Edit Square.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Edit-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Edit-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Edit-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Edit-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Filter 2.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Filter 2.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Filter.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Filter.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Folder-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Folder-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Folder-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Folder-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Game.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Game.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Graph.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Graph.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Heart.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Heart.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Hide.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Hide.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Home-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Home-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Home-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Home-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Image 3.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Image 3.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Image-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Image-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Image-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Image-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Info Circle.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Info Circle.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Info Square.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Info Square.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Location.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Location.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Lock.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Lock.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Login.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Login.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Logout.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Logout.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Menu-toggle-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Menu-toggle-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Menu-toggle-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Menu-toggle-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Message-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Message-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Message-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Message-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\More Circle.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\More Circle.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\More Square.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\More Square.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Notification-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Notification-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Notification.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Notification.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Paper Download.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Paper Download.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Paper Fail.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Paper Fail.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Paper Negative.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Paper Negative.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Paper Plus.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Paper Plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Paper Upload.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Paper Upload.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Paper-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Paper-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Paper-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Paper-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Password.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Password.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Play.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Play.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Plus.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Plus.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Profile.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Profile.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Scan.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Scan.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Search.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Search.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Send.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Send.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Setting-gray.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Setting-gray.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Setting-white.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Setting-white.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Settings-line.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Settings-line.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Shield Done.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Shield Done.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Shield Fail.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Shield Fail.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Show.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Show.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Star.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Star.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Swap.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Swap.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Tick Square.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Tick Square.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Ticket Star.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Ticket Star.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Ticket.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Ticket.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Time Square.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Time Square.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\TimeCircle.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\TimeCircle.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Unlock.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Unlock.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Upload.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Upload.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Video.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Video.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Voice 3.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Voice 3.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Voice.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Voice.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Volume Down.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Volume Down.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Volume Off.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Volume Off.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Volume Up.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Volume Up.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Wallet.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Wallet.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Bulk\\Work.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Bulk\\Work.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\GoogleDrive.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\GoogleDrive.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Logo.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\Logo.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\baloon.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\baloon.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\customers.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\customers.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\dropbox.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\dropbox.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\image-frame.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\image-frame.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\move.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\move.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\radio.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\radio.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\thumbnail.svg",
+      "PackagePath": "staticwebassets\\images\\svg\\thumbnail.svg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-150x150.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-207-150x150.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-207-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-360x206.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-360x206.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-207-360x206.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-450x450.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-450x450.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-207-450x450.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-550x315.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-550x315.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-207-550x315.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-207-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-207-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-28-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-28-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-28-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-31-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-1-31-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-1-31-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-222-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-222-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-222-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-222-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-222-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-222-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-228-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-360x206.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-360x206.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-228-360x206.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-550x315.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-550x315.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-228-550x315.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-228-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-228-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-234-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-360x206.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-360x206.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-234-360x206.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-550x315.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-550x315.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-234-550x315.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-234-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-234-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-25-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-25-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-25-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-34-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-2-34-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-2-34-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-210-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-210-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-210-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-216-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-216-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-216-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-225-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-225-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-225-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-225-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-225-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-225-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-150x150.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-150x150.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-237-150x150.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-237-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-360x206.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-360x206.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-237-360x206.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-450x450.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-450x450.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-237-450x450.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-550x315.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-550x315.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-237-550x315.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-560x320.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-560x320.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-237-560x320.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-237-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-237-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-49-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-3-49-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-3-49-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-201-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-201-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-201-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-204-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-204-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-204-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-213-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-213-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-213-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-219-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-219-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-219-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-150x150.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-150x150.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-243-150x150.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-243-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-360x206.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-360x206.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-243-360x206.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-450x450.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-450x450.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-243-450x450.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-550x315.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-550x315.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-243-550x315.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-560x320.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-560x320.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-243-560x320.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-243-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-243-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-246-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-246-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-246-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-150x150.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-150x150.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-249-150x150.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-249-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-360x206.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-360x206.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-249-360x206.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-450x450.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-450x450.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-249-450x450.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-550x315.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-550x315.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-249-550x315.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-560x320.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-560x320.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-249-560x320.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-249-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-249-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-43-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-43-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-43-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-46-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-46-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-46-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-52-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-52-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-52-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-58-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-58-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-58-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-64-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-64-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-64-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-67-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-4-67-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-4-67-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-150x150.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-150x150.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-5-231-150x150.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-250x500.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-250x500.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-5-231-250x500.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-360x206.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-360x206.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-5-231-360x206.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-450x450.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-450x450.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-5-231-450x450.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-550x315.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-550x315.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-5-231-550x315.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-75x106.jpg",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\thumb-5-231-75x106.jpg",
       "PackagePath": "staticwebassets\\images\\thumb-5-231-75x106.jpg"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\a11y.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\a11y.min.js",
       "PackagePath": "staticwebassets\\js\\a11y.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\ajax.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\ajax.js",
       "PackagePath": "staticwebassets\\js\\ajax.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\aos.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\aos.js",
       "PackagePath": "staticwebassets\\js\\aos.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\autocomplete.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\autocomplete.min.js",
       "PackagePath": "staticwebassets\\js\\autocomplete.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\js\\bootstrap.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\child.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\child.js",
       "PackagePath": "staticwebassets\\js\\child.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\core.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\core.js",
       "PackagePath": "staticwebassets\\js\\core.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\core.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\core.min.js",
       "PackagePath": "staticwebassets\\js\\core.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\ct-shortcodes.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\ct-shortcodes.js",
       "PackagePath": "staticwebassets\\js\\ct-shortcodes.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\dom-ready.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\dashboard_script.js",
+      "PackagePath": "staticwebassets\\js\\dashboard_script.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\dom-ready.min.js",
       "PackagePath": "staticwebassets\\js\\dom-ready.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\front.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\front.js",
       "PackagePath": "staticwebassets\\js\\front.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\frontend.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\frontend.js",
       "PackagePath": "staticwebassets\\js\\frontend.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\frontend_1.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\frontend_1.js",
       "PackagePath": "staticwebassets\\js\\frontend_1.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\hooks.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\hooks.min.js",
       "PackagePath": "staticwebassets\\js\\hooks.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\i18n.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\i18n.min.js",
       "PackagePath": "staticwebassets\\js\\i18n.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\imagesloaded.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\imagesloaded.min.js",
       "PackagePath": "staticwebassets\\js\\imagesloaded.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\jquery-migrate.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\jquery-migrate.min.js",
       "PackagePath": "staticwebassets\\js\\jquery-migrate.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\jquery.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\jquery.min.js",
       "PackagePath": "staticwebassets\\js\\jquery.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\lazysizes.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\lazysizes.min.js",
       "PackagePath": "staticwebassets\\js\\lazysizes.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\lightbox.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\lightbox.min.js",
       "PackagePath": "staticwebassets\\js\\lightbox.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\login.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\login.js",
       "PackagePath": "staticwebassets\\js\\login.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\menu.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\menu.min.js",
       "PackagePath": "staticwebassets\\js\\menu.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\script.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\script.js",
       "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\shuffle.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\shuffle.min.js",
       "PackagePath": "staticwebassets\\js\\shuffle.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\slick.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\slick.min.js",
       "PackagePath": "staticwebassets\\js\\slick.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\slick.min_1.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\slick.min_1.js",
       "PackagePath": "staticwebassets\\js\\slick.min_1.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\smoothscroll.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\smoothscroll.js",
       "PackagePath": "staticwebassets\\js\\smoothscroll.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\template.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\template.js",
       "PackagePath": "staticwebassets\\js\\template.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\widgetopts.resize.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\widgetopts.resize.js",
       "PackagePath": "staticwebassets\\js\\widgetopts.resize.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\wp-emoji-release.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\wp-emoji-release.min.js",
       "PackagePath": "staticwebassets\\js\\wp-emoji-release.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\plugins\\chart.min.js",
+      "PackagePath": "staticwebassets\\plugins\\chart.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\plugins\\feather.min.js",
+      "PackagePath": "staticwebassets\\plugins\\feather.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\plugins\\feather.min.js.map",
+      "PackagePath": "staticwebassets\\plugins\\feather.min.js.map"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DotNetTruyen.Microsoft.AspNetCore.StaticWebAssets.props",
