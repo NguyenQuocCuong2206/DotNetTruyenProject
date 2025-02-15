@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "F:\\PRN222-Project\\DotNetTruyenProject\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|f:\\prn222-project\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|f:\\prn222-project\\dotnettruyenproject\\dotnettruyen\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|f:\\prn222-project\\dotnettruyenproject\\dotnettruyen\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|f:\\prn222-project\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\style_1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\style_1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|f:\\prn222-project\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|f:\\prn222-project\\dotnettruyenproject\\dotnettruyen\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|f:\\prn222-project\\dotnettruyenproject\\dotnettruyen\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -30,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 16,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -87,18 +91,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "style.css",
-              "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
-              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\style.css",
-              "ToolTip": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
-              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\style.css",
-              "ViewState": "AQIAAAgnAAAA8szMzMwNwLMnAAABAAAA",
+              "Title": "style_1.css",
+              "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "ToolTip": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAAAAsAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-15T09:41:50.864Z"
+              "WhenOpened": "2025-02-15T14:58:56.901Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "style.css",
+              "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
+              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\style.css",
+              "ToolTip": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css*",
+              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\style.css*",
+              "ViewState": "AQIAAO8LAAAAAAAAAAAEwAwMAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-15T14:48:24.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-15T11:37:44.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\appsettings.json",
               "RelativeDocumentMoniker": "DotNetTruyen\\appsettings.json",
@@ -106,36 +137,25 @@
               "RelativeToolTip": "DotNetTruyen\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-15T09:25:59Z"
+              "WhenOpened": "2025-02-15T09:25:59Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Index.cshtml",
               "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Home\\Index.cshtml",
               "ToolTip": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "DotNetTruyen\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAJYAAABXAAAA",
+              "ViewState": "AQIAAC4IAAAAAAAAAAAAAG8IAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T03:53:13.659Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T03:26:57.082Z",
+              "WhenOpened": "2025-02-15T03:53:13.659Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "HomeController.cs",
               "DocumentMoniker": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "DotNetTruyen\\Controllers\\HomeController.cs",
