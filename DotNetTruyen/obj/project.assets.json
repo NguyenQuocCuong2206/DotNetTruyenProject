@@ -4179,19 +4179,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\ASUS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Code\\C#_PRN222\\Project\\DotNetTruyen\\DotNetTruyen\\DotNetTruyen.csproj",
+      "projectUniqueName": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\DotNetTruyen.csproj",
       "projectName": "DotNetTruyen",
-      "projectPath": "D:\\Code\\C#_PRN222\\Project\\DotNetTruyen\\DotNetTruyen\\DotNetTruyen.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\C#_PRN222\\Project\\DotNetTruyen\\DotNetTruyen\\obj\\",
+      "projectPath": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\DotNetTruyen.csproj",
+      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+      "outputPath": "F:\\PRN222-Project\\DotNetTruyenProject\\DotNetTruyen\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4199,7 +4199,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4257,7 +4256,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
