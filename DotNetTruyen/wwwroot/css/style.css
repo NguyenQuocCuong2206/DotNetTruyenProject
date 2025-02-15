@@ -3082,7 +3082,7 @@ img.lazyloaded {
   border-left: 1px solid rgba(255, 255, 255, 0.3);
 }
 .site-header .main-navigation.style-1 {
-  background: #eb3349;
+  background: #0f0f0f !important;
   /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left, #eb3349 40%, #f45c43);
   /* For Safari 5.1 to 6.0 */
