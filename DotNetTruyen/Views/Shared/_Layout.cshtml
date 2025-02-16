@@ -3,44 +3,252 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DotNetTruyen</title>
+    <title>@ViewData["Title"] DotNetTruyen </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/DotNetTruyen.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DotNetTruyen</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+       <header class="site-header">
+            <div class="c-header__top">
+                <ul class="search-main-menu">
+                    <li>
+                        <form id="blog-post-search" class="ajax" action="https://live.mangabooth.com/x/" method="get">
+                            <input type="text" placeholder="Search..." name="s" value="">
+                            <input type="submit" value="Search">
+                            <div class="loader-inner line-scale">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+                <div class="main-navigation style-1 ">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-navigation_wrap">
+                                    <div class="menu-left">
+                                        <a class="logo" href="https://live.mangabooth.com/x/" title="Madara Child X Theme">
+											                                            <img class="img-responsive" src="images/logo.png" alt="Madara Child X Theme">
+                                        </a>
+                                        <div class="main-menu">
+                                            			<div class="section_adult off">
+				<a href="https://live.mangabooth.com/x/" target="_self" title="Family Safe">
+					<span class="dot"><!-- --></span><span>Family Safe</span>
+				</a>
+			</div>
+			                                            <ul class="nav navbar-nav main-navbar"><li id="menu-item-197" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-189 current_page_item menu-item-197"><a href="https://live.mangabooth.com/x/" aria-current="page">Home</a></li>
+<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><a href="https://live.mangabooth.com/x/all-series/">All Series</a></li>
+<li id="menu-item-199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-199"><a href="https://live.mangabooth.com/x/calendar-2/">Calendar</a></li>
+</ul>                                        </div>
+                                    </div>
+
+                                    <div class="menu-right">
+                                    
+                                    <div id="search-sidebar">
+		
+                                        <form class="manga-search-form search-form ajax" id="blog-post-search" action="https://live.mangabooth.com/x/" method="get">
+                                            <input class="manga-search-field" type="text" placeholder="Search" name="s" value="">			
+                                            <button type="submit" class="btn-search"><i class="fas fa-search-minus"></i></button>
+                                            <div class="loader-inner line-scale">
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                                <div></div>
+                                            </div>
+                                            <input type="hidden" name="post_type" value="wp-manga"> 
+                                        </form>
+                                    </div>
+
+                                            <div class="c-sub-header-nav ">
+                <div class="c-sub-nav_wrap">
+					                        <div class="c-modal_item">
+                            <!-- Button trigger modal -->
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#form-login" class="btn-active-modal">Sign in</a>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#form-sign-up" class="btn-active-modal">Sign up</a>
+                        </div>
+					                </div>
+
+				        </div>
+
+	 
+
+                                    <div class="c-togle__menu">
+                                        <button type="button" class="menu_icon__open">
+                                            <span></span> <span></span> <span></span>
+                                        </button>
+                                    </div>
+
+                                </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+			
+<div class="mobile-menu menu-collapse off-canvas">
+    <div class="close-nav">
+        <button class="menu_icon__close">
+            <span></span> <span></span>
+        </button>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - DotNetTruyen - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+	<div id="search-sidebar">
+		<form class="manga-search-form search-form ajax" id="blog-post-search" action="https://live.mangabooth.com/x/" method="get">
+			<input class="manga-search-field" type="text" placeholder="Search" name="s" value="">			
+			<button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
+			<div class="loader-inner line-scale">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<input type="hidden" name="post_type" value="wp-manga"> 
+		</form>
+	</div>
+
+    <nav class="off-menu">
+		<ul id="menu-primary-menu-594" class="nav navbar-nav main-navbar"><li id="nav-menu-item-197" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-189 current_page_item"><a href="https://live.mangabooth.com/x/" class="menu-link  main-menu-link">Home </a></li>
+<li id="nav-menu-item-198" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://live.mangabooth.com/x/all-series/" class="menu-link  main-menu-link">All Series </a></li>
+<li id="nav-menu-item-199" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://live.mangabooth.com/x/calendar-2/" class="menu-link  main-menu-link">Calendar </a></li>
+</ul>    </nav>
+	
+	<div class="center">			<div class="section_adult off">
+				<a href="https://live.mangabooth.com/x/" target="_self" title="Family Safe">
+					<span class="dot"><!-- --></span><span>Family Safe</span>
+				</a>
+			</div>
+			</div>
+</div>
+			
+        </header>
+            @RenderBody()
+        <footer class="site-footer">
+
+			<div class="ad c-ads custom-code footer-ads col-md-12"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/Build-The-Best-Manga-Site.jpg"></a></div>
+						
+						<div class="c-footer-sidebar">
+				<div class="container">
+					<div class="row c-row">
+						<div id="manga-genres-id-3" class="widget col-12 col-md-12   default no-icon  manga-genres-class-name"><div class="widget__inner manga-genres-class-name__inner c-widget-wrap">        <div class="genres_wrap">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="widget-heading font-nav"><h5 class="heading">All Genres</h5></div><div class="widget-content">                        <div class="genres__collapse" style="display:block;">
+                            <div class="row genres">
+                                <ul class="list-unstyled">
+                                                                            <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/action/">
+                                                action                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/adventure/">
+                                                adventure                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/boys/">
+                                                boys                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/chinese/">
+                                                chinese                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/drama/">
+                                                drama                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/ecchi/">
+                                                ecchi                                                                                                    <span class="count">
+                                                        (38)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/fighting/">
+                                                fighting                                                                                                    <span class="count">
+                                                        (38)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/fun/">
+                                                fun                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/girl/">
+                                                girl                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/horrow/">
+                                                horrow                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                                <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                            <a href="https://live.mangabooth.com/x/manga-genre/manhwa/">
+                                                manhwa                                                                                                    <span class="count">
+                                                        (37)
+                                                    </span>
+                                                                                                </a>
+                                        </li>
+                                                                        </ul>
+                            </div>
+                        </div>
+                        
+                </div>
+            </div>
         </div>
-    </footer>
+
+        </div></div></div>					</div>
+				</div>
+			</div>
+			
+            <div class="bottom-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="copyright">
+								<h3>Manta</h3>
+								<p>Madara WordPress Theme by Mangabooth.com</p>                            </div>
+                            
+                                                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
