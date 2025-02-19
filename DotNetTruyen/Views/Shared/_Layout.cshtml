@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using DotNetTruyen.ViewModels
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Identity
+@model LoginViewModel
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,128 +17,161 @@
     <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
 </head>
 <body>
-       <header class="site-header">
-            <div class="c-header__top">
-                <ul class="search-main-menu">
-                    <li>
-                        <form id="blog-post-search" class="ajax" action="https://live.mangabooth.com/x/" method="get">
-                            <input type="text" placeholder="Search..." name="s" value="">
-                            <input type="submit" value="Search">
-                            <div class="loader-inner line-scale">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-                <div class="main-navigation style-1 ">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="main-navigation_wrap">
-                                    <div class="menu-left">
-                                        <a class="logo" href="https://live.mangabooth.com/x/" title="Madara Child X Theme">
-											                                            <img class="img-responsive" src="images/logo.png" alt="Madara Child X Theme">
-                                        </a>
-                                        <div class="main-menu">
-                                            			<div class="section_adult off">
-				<a href="https://live.mangabooth.com/x/" target="_self" title="Family Safe">
-					<span class="dot"><!-- --></span><span>Family Safe</span>
-				</a>
-			</div>
-			                                            <ul class="nav navbar-nav main-navbar"><li id="menu-item-197" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-189 current_page_item menu-item-197"><a href="https://live.mangabooth.com/x/" aria-current="page">Home</a></li>
-<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><a href="https://live.mangabooth.com/x/all-series/">All Series</a></li>
-<li id="menu-item-199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-199"><a href="https://live.mangabooth.com/x/calendar-2/">Calendar</a></li>
-</ul>                                        </div>
-                                    </div>
+        <header class="site-header">
+             <div class="c-header__top">
+                 <ul class="search-main-menu">
+                     <li>
+                         <form id="blog-post-search" class="ajax" action="https://live.mangabooth.com/x/" method="get">
+                             <input type="text" placeholder="Search..." name="s" value="">
+                             <input type="submit" value="Search">
+                             <div class="loader-inner line-scale">
+                                 <div></div>
+                                 <div></div>
+                                 <div></div>
+                                 <div></div>
+                                 <div></div>
+                             </div>
+                         </form>
+                     </li>
+                 </ul>
+                 <div class="main-navigation style-1 ">
+                     <div class="container ">
+                         <div class="row">
+                             <div class="col-md-12">
+                                 <div class="main-navigation_wrap">
+                                     <div class="menu-left">
+                                         <a class="logo" href="/Home" title="Madara Child X Theme">
+ 											                                            <img class="img-responsive" src="images/logo.png" alt="Madara Child X Theme">
+                                         </a>
+                                         <div class="main-menu">
+                                             			<div class="section_adult off">
+ 				<a href="https://live.mangabooth.com/x/" target="_self" title="Family Safe">
+ 					<span class="dot"><!-- --></span><span>Family Safe</span>
+ 				</a>
+ 			</div>
+ 			                                            <ul class="nav navbar-nav main-navbar"><li id="menu-item-197" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-189 current_page_item menu-item-197"><a href="https://live.mangabooth.com/x/" aria-current="page">Home</a></li>
+ <li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><a href="https://live.mangabooth.com/x/all-series/">All Series</a></li>
+ <li id="menu-item-199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-199"><a href="https://live.mangabooth.com/x/calendar-2/">Calendar</a></li>
+ </ul>                                        </div>
+                                     </div>
 
-                                    <div class="menu-right">
+                                     <div class="menu-right">
                                     
-                                    <div id="search-sidebar">
+                                     <div id="search-sidebar">
 		
-                                        <form class="manga-search-form search-form ajax" id="blog-post-search" action="https://live.mangabooth.com/x/" method="get">
-                                            <input class="manga-search-field" type="text" placeholder="Search" name="s" value="">			
-                                            <button type="submit" class="btn-search"><i class="fas fa-search-minus"></i></button>
-                                            <div class="loader-inner line-scale">
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
-                                                <div></div>
+                                         <form class="manga-search-form search-form ajax" id="blog-post-search" action="https://live.mangabooth.com/x/" method="get">
+                                             <input class="manga-search-field" type="text" placeholder="Search" name="s" value="">			
+                                             <button type="submit" class="btn-search"><i class="fas fa-search-minus"></i></button>
+                                             <div class="loader-inner line-scale">
+                                                 <div></div>
+                                                 <div></div>
+                                                 <div></div>
+                                                 <div></div>
+                                                 <div></div>
+                                             </div>
+                                             <input type="hidden" name="post_type" value="wp-manga"> 
+                                         </form>
+                                     </div>
+
+                                             <div class="c-sub-header-nav ">
+                                        @if (!SignInManager.IsSignedIn(User))
+                                        {
+                                            <div class="c-sub-nav_wrap">
+                                                <div class="c-modal_item">
+                                                    <a href="/login" class="btn-active-modal">Sign in</a>
+                                                    <a href="/register" class="btn-active-modal">Sign up</a>
+                                                </div>
                                             </div>
-                                            <input type="hidden" name="post_type" value="wp-manga"> 
-                                        </form>
-                                    </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="c-sub-nav_wrap">
+                                                <div class="c-modal_item">
+                                                    <div class="c-user_item">
+                                                        <h5>Xin chào, @UserManager.GetUserName(User)</h5>
+                                                        <div class="c-user_avatar">
+                                                            <div class="c-user_avatar-image"><img alt='' src='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' decoding='async' /></div>
+                                                            <ul class="c-user_menu">
+                                                                <li class="user-info"><img alt='' src='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=96&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=192&#038;d=mm&#038;r=g 2x' class='avatar avatar-96 photo' height='96' width='96' decoding='async' /><span class="info"><span class="user-email">@User.Identity.Name</span></span></li>
+                                                                
+                                                                <li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-200"><a href="">Truyện đã theo dõi</a></li>
+                                                                <li>
+                                                                    <a href="">Cài đặt thông tin người dùng</a>
+                                                                </li>
+                                                                @if (User.IsInRole("Admin"))
+                                                                {
+                                                                    <li>
+                                                                        <a href="/DashBoard">Trang quản lí</a>
+                                                                    </li>
+                                                                }
+                                                                <li>
+                                                                    <a href="/logout">Đăng xuất</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="c-sub-header-nav ">
-                <div class="c-sub-nav_wrap">
-					                        <div class="c-modal_item">
-                            <!-- Button trigger modal -->
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#form-login" class="btn-active-modal">Sign in</a>
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#form-sign-up" class="btn-active-modal">Sign up</a>
-                        </div>
-					                </div>
-
-				        </div>
+                                                </div>
+                                            </div>
+                                        }
+                                        
+ 				        </div>
 
 	 
 
-                                    <div class="c-togle__menu">
-                                        <button type="button" class="menu_icon__open">
-                                            <span></span> <span></span> <span></span>
-                                        </button>
-                                    </div>
+                                     <div class="c-togle__menu">
+                                         <button type="button" class="menu_icon__open">
+                                             <span></span> <span></span> <span></span>
+                                         </button>
+                                     </div>
 
-                                </div>
-                                </div>
+                                 </div>
+                                 </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
 
 			
-<div class="mobile-menu menu-collapse off-canvas">
-    <div class="close-nav">
-        <button class="menu_icon__close">
-            <span></span> <span></span>
-        </button>
-    </div>
+ <div class="mobile-menu menu-collapse off-canvas">
+     <div class="close-nav">
+         <button class="menu_icon__close">
+             <span></span> <span></span>
+         </button>
+     </div>
 
-	<div id="search-sidebar">
-		<form class="manga-search-form search-form ajax" id="blog-post-search" action="https://live.mangabooth.com/x/" method="get">
-			<input class="manga-search-field" type="text" placeholder="Search" name="s" value="">			
-			<button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
-			<div class="loader-inner line-scale">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
-			<input type="hidden" name="post_type" value="wp-manga"> 
-		</form>
-	</div>
+ 	<div id="search-sidebar">
+ 		<form class="manga-search-form search-form ajax" id="blog-post-search" action="https://live.mangabooth.com/x/" method="get">
+ 			<input class="manga-search-field" type="text" placeholder="Search" name="s" value="">			
+ 			<button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
+ 			<div class="loader-inner line-scale">
+ 				<div></div>
+ 				<div></div>
+ 				<div></div>
+ 				<div></div>
+ 				<div></div>
+ 			</div>
+ 			<input type="hidden" name="post_type" value="wp-manga"> 
+ 		</form>
+ 	</div>
 
-    <nav class="off-menu">
-		<ul id="menu-primary-menu-594" class="nav navbar-nav main-navbar"><li id="nav-menu-item-197" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-189 current_page_item"><a href="https://live.mangabooth.com/x/" class="menu-link  main-menu-link">Home </a></li>
-<li id="nav-menu-item-198" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://live.mangabooth.com/x/all-series/" class="menu-link  main-menu-link">All Series </a></li>
-<li id="nav-menu-item-199" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://live.mangabooth.com/x/calendar-2/" class="menu-link  main-menu-link">Calendar </a></li>
-</ul>    </nav>
+     <nav class="off-menu">
+ 		<ul id="menu-primary-menu-594" class="nav navbar-nav main-navbar"><li id="nav-menu-item-197" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-189 current_page_item"><a href="https://live.mangabooth.com/x/" class="menu-link  main-menu-link">Home </a></li>
+ <li id="nav-menu-item-198" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://live.mangabooth.com/x/all-series/" class="menu-link  main-menu-link">All Series </a></li>
+ <li id="nav-menu-item-199" class="main-menu-item menu-item-depth-0 menu-item menu-item-type-post_type menu-item-object-page"><a href="https://live.mangabooth.com/x/calendar-2/" class="menu-link  main-menu-link">Calendar </a></li>
+ </ul>    </nav>
 	
-	<div class="center">			<div class="section_adult off">
-				<a href="https://live.mangabooth.com/x/" target="_self" title="Family Safe">
-					<span class="dot"><!-- --></span><span>Family Safe</span>
-				</a>
-			</div>
-			</div>
-</div>
+ 	<div class="center">			<div class="section_adult off">
+ 				<a href="https://live.mangabooth.com/x/" target="_self" title="Family Safe">
+ 					<span class="dot"><!-- --></span><span>Family Safe</span>
+ 				</a>
+ 			</div>
+ 			</div>
+ </div>
 			
-        </header>
+         </header>
             @RenderBody()
         <footer class="site-footer">
 
@@ -249,6 +290,19 @@
             </div>
 
         </footer>
+    <div class="wp-manga-section">
+        <input type="hidden" name="bookmarking" value="0">
+        
+
+        <script type="text/javascript">
+            var gRecaptchas = document.getElementsByClassName('g-recaptcha');
+            for (let i = 0; i < gRecaptchas.length; i++) {
+                gRecaptchas[i].setAttribute('data-callback', 'wpMangaSubmitSwitch');
+                gRecaptchas[i].setAttribute('data-expired-callback', 'wpMangaSubmitSwitch');
+                gRecaptchas[i].setAttribute('data-error', 'wpMangaSubmitSwitch');
+            }
+        </script>
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

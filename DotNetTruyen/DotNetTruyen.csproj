@@ -4,9 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>e09e5a3d-ccff-4688-bdd4-539753f42e08</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.12">

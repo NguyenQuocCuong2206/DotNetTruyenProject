@@ -82,7 +82,6 @@ namespace DotNetTruyen.Data
                 entity.HasKey(x => new { x.UserIpHash, x.ComicId });
             });
 
-            
         }
         }
 }
