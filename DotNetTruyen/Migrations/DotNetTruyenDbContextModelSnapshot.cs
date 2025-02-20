@@ -440,9 +440,6 @@ namespace DotNetTruyen.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -450,19 +447,14 @@ namespace DotNetTruyen.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NameToDisplay")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -543,15 +535,15 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a5e8c0d6-9b7c-41ca-a8a3-21a997fe2ae1",
+                            Id = "4d320af3-6cd9-4153-bd28-51a92f98d40a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a2ca42aa-be5a-4169-bacd-4c3e8a8b567a",
-                            Name = "User",
-                            NormalizedName = "USER"
+                            Id = "c35916bb-0934-4b7b-a1d4-24b564289e76",
+                            Name = "Reader",
+                            NormalizedName = "READER"
                         });
                 });
 
@@ -661,19 +653,19 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e52c0bc6-ba54-42b4-877b-166090d0e6e0",
+                            Id = "0a62238f-a18a-4acc-85d1-4891045ad6f7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9c76cbdc-9434-463d-88bb-af4ac90f7613",
+                            ConcurrencyStamp = "2af26904-a474-4591-a6f7-c085eacf6eb9",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECtlwQEhbWgGkfSLMMqm07AZ581JUuyZzKUBRKsF8t7iWaeOyELp5AgyLfxZz2uzxw==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMZLjuk3x8Gg+67zcx485E6os1Qyc8L3Zdu6kH7kmwr0JYGSyQjdnVAdAG5fAItEtQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "57f56c14-f2cd-465c-be29-bd6ba0862543",
+                            SecurityStamp = "274403dc-4e3a-42cc-bfd7-6ed56ff62f39",
                             TwoFactorEnabled = false,
-                            UserName = "admin@example.com"
+                            UserName = "admin"
                         });
                 });
 
@@ -752,8 +744,8 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "e52c0bc6-ba54-42b4-877b-166090d0e6e0",
-                            RoleId = "a5e8c0d6-9b7c-41ca-a8a3-21a997fe2ae1"
+                            UserId = "0a62238f-a18a-4acc-85d1-4891045ad6f7",
+                            RoleId = "4d320af3-6cd9-4153-bd28-51a92f98d40a"
                         });
                 });
 
