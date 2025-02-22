@@ -76,6 +76,12 @@ namespace DotNetTruyen.Data
                 {
                    entity.HasKey(x => new { x.ChapterNumber, x.ComicId });
                 });
+
+            modelBuilder.Entity<Like>(entity =>
+            {
+                entity.HasKey(x => new { x.UserIpHash, x.ComicId });
+            });
+
         }
         }
 }
