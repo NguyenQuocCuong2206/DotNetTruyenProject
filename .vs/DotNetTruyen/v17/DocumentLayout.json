@@ -3,68 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\controllers\\admin\\genremanagement\\genrescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\controllers\\admin\\genremanagement\\genrescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\migrations\\20250220084311_initialinsqlserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\migrations\\20250220084311_initialinsqlserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\controllers\\admin\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\controllers\\admin\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\admin\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\admin\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\genres\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\genres\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\js\\dashboard_script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\js\\dashboard_script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\genres\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\genres\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\dashboard_style.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\dashboard_style.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\genres\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\genres\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\dashboard_style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\dashboard_style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\genres\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\genres\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\genres\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\genres\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\shared\\_dashboardlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\shared\\_dashboardlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\controllers\\admin\\genremanagement\\genrescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\controllers\\admin\\genremanagement\\genrescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\data\\dotnettruyendbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\data\\dotnettruyendbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\css\\style_1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\css\\style_1.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\images\\svg\\logo.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\images\\svg\\logo.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\wwwroot\\js\\script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\wwwroot\\js\\script.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|c:\\users\\admin\\documents\\tuanhoc-csharp\\dotnettruyenproject\\dotnettruyen\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{4803ECD0-DA1B-479F-933D-0BECB46423BD}|DotNetTruyen\\DotNetTruyen.csproj|solutionrelative:dotnettruyen\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -74,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 14,
+          "SelectedChildIndex": 13,
           "Children": [
             {
               "$type": "Bookmark",
@@ -129,201 +125,173 @@
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:55:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GenresController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
-              "RelativeToolTip": "DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T16:31:41.507Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "_ValidationScriptsPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "Title": "20250220084311_initialInSqlServer.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Migrations\\20250220084311_initialInSqlServer.cs",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Migrations\\20250220084311_initialInSqlServer.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Migrations\\20250220084311_initialInSqlServer.cs",
+              "RelativeToolTip": "DotNetTruyen\\Migrations\\20250220084311_initialInSqlServer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T15:28:02.221Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DashBoardController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Controllers\\Admin\\DashBoardController.cs",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Controllers\\Admin\\DashBoardController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Controllers\\Admin\\DashBoardController.cs",
-              "RelativeToolTip": "DotNetTruyen\\Controllers\\Admin\\DashBoardController.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAYwBEAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T13:52:25.828Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Admin\\DashBoard\\Index.cshtml",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Admin\\DashBoard\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Admin\\DashBoard\\Index.cshtml",
-              "RelativeToolTip": "DotNetTruyen\\Views\\Admin\\DashBoard\\Index.cshtml",
-              "ViewState": "AQIAAGwAAAAAAAAAAAAAAHYAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T13:55:45.622Z",
+              "WhenOpened": "2025-02-20T08:43:11.624Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "dashboard_style.min.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\dashboard_style.min.css",
-              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\dashboard_style.min.css",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\dashboard_style.min.css",
-              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\dashboard_style.min.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-15T14:47:37.808Z",
-              "EditorCaption": ""
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Details.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Genres\\Details.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Details.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Genres\\Details.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-20T08:38:15.069Z"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Index.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Genres\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Index.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Genres\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-20T08:38:12.568Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "dashboard_script.js",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\dashboard_script.js",
-              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\js\\dashboard_script.js",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\dashboard_script.js",
-              "RelativeToolTip": "DotNetTruyen\\wwwroot\\js\\dashboard_script.js",
-              "ViewState": "AQIAAO4AAAAAAAAAAIAwwPwAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-02-15T14:43:38.887Z",
-              "EditorCaption": ""
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Edit.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Genres\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Edit.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Genres\\Edit.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-20T08:38:10.194Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "dashboard_style.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\dashboard_style.css",
-              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\dashboard_style.css",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\dashboard_style.css",
-              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\dashboard_style.css",
-              "ViewState": "AQIAAPMDAAAAAAAAAAAcwP8DAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-15T14:43:56.808Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "_Layout.cshtml.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml.css",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml.css",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml.css",
-              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml.css",
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Delete.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Genres\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Delete.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Genres\\Delete.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-15T14:16:36.412Z",
-              "EditorCaption": ""
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-20T08:38:09.264Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAABoAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T03:26:57.082Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "style.css",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
-              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\style.css",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
-              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\style.css",
-              "ViewState": "AQIAALAnAAAA8MzMzMwNwLMnAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-02-15T09:41:50.864Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_DashBoardLayout.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
-              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
-              "ViewState": "AQIAAI8AAAAAAAAAAAAUwKQAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T14:19:30.238Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "DotNetTruyen\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAEcBAAAAAAAAAAAAAJIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-15T03:53:13.659Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Logo.svg",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Logo.svg",
-              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\images\\svg\\Logo.svg",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\images\\svg\\Logo.svg",
-              "RelativeToolTip": "DotNetTruyen\\wwwroot\\images\\svg\\Logo.svg",
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Create.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Genres\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Genres\\Create.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Genres\\Create.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQKSURBVDhPrVRbTCNVGP5OOzO9TKEWSrGUttpdpV2ua7ioaDa7ullcdVe8rHFNjPFBY4hGY0wIJprw5ItmCdEXL/FRE4MQsw9LiCthIcFFxA3hFiEsLQUKpaW03XZmOuOZaQsY9W2/5J/zz3/55j///OfgrkJRFFJQD9DX13elrq7uXVWnfk2KugpZlpHJZJBKpYa6u7u7gsFgWHP8HyjhHE2Sc7ncf4okSfLMzIw8NTUl9/f3/xgIBGoKqRr0hfUAHR0dXW1tbXaZFiQJccjpWyDJbyBsfQ9x46oW81dIRHNLG0wmk4/juOr19fVbUQrV9w9CrvVl4m9s7VpIG\u002BxL6\u002BMolb6EaesrSOFhgNRAVtyQIhMIbgPeB1ths9kYs9l8vKyszD0/P39jnyJPSAj4hy7YPE\u002B/\u002BUmJ0/NkS4DlzlRegXXzGmZWmvBT4j0sGy6jvvE85O05JEUeN6ZXMT09jUQioafEgdHR0R/i8XiYUfmMdees3ovvfPhEc/VbL9Qvm5vljxBdTGM81YMl33MICiZMLG8iJa7iRUct/I3HUA0HBEGAxWLB7OysVpcKnfpwdLzd3haoePVS7WRpS/oDsjeTwTrpRbqiE2wK4EUJnvuqcHM7h7HY/SAlHtjt5XA6nbBardDr9QdToBF6nZbOZ/1z5Q3i52RnSoS54TvUP9yJSyedeKXBjuTGNmycAYQ3YSrKYiejpVFQkiOjpULb8omK\u002BOOPWL81JVeM\u002BEL8GKFfWYjSn/Qn0GDQucsxKGd0YDkWK9tZxPYFVJUaVS7a/8MZVcFUORnu9YZr1ezaMrmu\u002B1ThW84Sn0IrKATlSRWIdwTaMxFZSYKk2jS36skTFkmZ0ILnYmzlZ8Nk8g1lzn0u99vEor6p0kwUeiLUIJVQTSR0MF202ka3BQ4Lp9nydHnCIhglEX5p67Yrez13GmJKYXgTq2v32clJFw\u002BrkUEiI2JyNYa1WFrNhNtmhoXaDzkOyVQwmVCmPZYy/DK\u002ByZzwMHFvpc9FhjfSGF7agkK3yHAMcpZyxHJm7EZ28ZSOgKVShFb/kQp10h4xne/JXg5v7ny2OLcSvb2xrwh8CeicgBx/AFmXFxF6h0QiUfiMEp6pqwSnL/7lf0Pf8xocp\u002B6N\u002BW6OL4x5nayYjIv\u002BRFLmQ5E9RHfiuBPdBbu/h9p7GLx/\u002BhjKeNo/erK02mhlhOpra2sYHBz8mp6asJ7O62R4E2cC3NYpV2Rs1lndaD776GN\u002BB5tDjZVBaxWPC7UOPN9UBSOrTVl\u002Bn4VdE52OEgYxNDSkEeatR9Db2zumXl\u002BiKBZEkEUhL/SoFSR7sKoxIyMjstvtblHzC588BG3w7wMDA\u002B0FXRP1Ui02vmgrigpa2R902dVe7i6AvwHcTSP/8z9AyQAAAABJRU5ErkJggg==",
-              "WhenOpened": "2025-02-15T15:03:47.921Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-20T08:38:08.595Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\appsettings.json",
               "RelativeDocumentMoniker": "DotNetTruyen\\appsettings.json",
               "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\appsettings.json",
               "RelativeToolTip": "DotNetTruyen\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-02-15T09:25:59Z"
             },
             {
               "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_DashBoardLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_DashBoardLayout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-20T08:38:05.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GenresController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
+              "RelativeToolTip": "DotNetTruyen\\Controllers\\Admin\\GenreManagement\\GenresController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T08:38:00.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DotNetTruyenDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Data\\DotNetTruyenDbContext.cs",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Data\\DotNetTruyenDbContext.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Data\\DotNetTruyenDbContext.cs",
+              "RelativeToolTip": "DotNetTruyen\\Data\\DotNetTruyenDbContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEkAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T08:37:45.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "style_1.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\style_1.css",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAAAAsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-15T14:58:56.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "style.css",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
+              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\css\\style.css",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\css\\style.css",
+              "RelativeToolTip": "DotNetTruyen\\wwwroot\\css\\style.css",
+              "ViewState": "AQIAAO8LAAAAAAAAAAAEwAwMAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-02-15T14:48:24.507Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-15T11:37:44.787Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "script.js",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\script.js",
-              "RelativeDocumentMoniker": "DotNetTruyen\\wwwroot\\js\\script.js",
-              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\wwwroot\\js\\script.js",
-              "RelativeToolTip": "DotNetTruyen\\wwwroot\\js\\script.js",
-              "ViewState": "AQIAAHUEAAAAAAAAAAAAwJUEAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-02-15T13:49:51.827Z"
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "DotNetTruyen\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Documents\\TuanHoc-CSharp\\DotNetTruyenProject\\DotNetTruyen\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "DotNetTruyen\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAC4IAAAAAAAAAAAAAG8IAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-02-15T03:53:13.659Z"
             },
             {
               "$type": "Document",

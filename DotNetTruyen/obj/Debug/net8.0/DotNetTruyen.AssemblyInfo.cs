@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotNetTruyen")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+86d4169e1a156abe3be0631b44e6ab9f7975df4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8ee34a06228c80d2e9ce8932a14103c005864e5")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotNetTruyen")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotNetTruyen")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
