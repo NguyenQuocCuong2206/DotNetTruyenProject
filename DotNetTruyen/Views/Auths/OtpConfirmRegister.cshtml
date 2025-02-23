@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = "_AuthsLayout.cshtml";
 }
 
@@ -12,26 +11,35 @@
                 <div class="modal-body">
                     <div id="reset" class="login">
                         <h3>
-                            <a href="javascript:void(0)" class="to-reset">Nhập email xác nhận?</a>
+                            <p>Nhập mã OTP</p>
                         </h3>
-                        @if (string.IsNullOrEmpty(ViewBag.ErrorEmailConfirmMessage))
+                        @if (string.IsNullOrEmpty(ViewBag.ErrorOtpConfirmMessage))
                         {
-                        <p>Vui lòng nhập địa chỉ email đã đăng kí với tài khoản của bạn.</p>
+                            <p>@ViewBag.ConfirmEmailMessage</p>
                         }
-                        else{
-                            <p class="text-danger">@ViewBag.ErrorEmailConfirmMessage</p>
+                        else
+                        {
+                            <p class="text-danger">@ViewBag.ErrorOtpConfirmMessage</p>
                         }
-                        <form asp-controller="Auths" asp-action="ForgotPassword" method="post">
+                        
+                        <form asp-controller="Auths" asp-action="OtpConfirmRegister" method="post">
                             <p>
                                 <label>
-                                    Địa chỉ email
+                                    Mã OTP
                                     <br>
-                                <input type="email" name="emailConfirm" class="input" value="@ViewBag.Email" size="20" required>
+                                <input type="text" name="otp" class="input" value="@ViewBag.Otp" size="20" required>
                                 </label>
                             </p>
                             <p class="submit">
                                 <input type="submit" name="wp-submit" class="button button-primary button-large wp-submit" value="Xác nhận" />
                             </p>
+                            <input type="hidden" name="emailConfirm" value="@ViewBag.Email" />
+                        </form>
+                        <form asp-controller="Auths" asp-action="ReSendOtp" method="post">
+                            <p class="submit">
+                            <input type="submit" name="wp-submit" class="button button-primary button-large wp-submit" value="Gửi lại mã Otp" style="margin-left:20px"/>
+                            </p>
+                            <input type="hidden" name="emailConfirm" value="@ViewBag.Email" />
                         </form>
                     </div>
                 </div>

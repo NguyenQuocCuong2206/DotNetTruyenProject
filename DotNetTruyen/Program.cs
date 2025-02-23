@@ -11,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<EmailService>();
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<OtpService>();
 builder.Services.AddDbContext<DotNetTruyenDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -29,9 +31,6 @@ builder.Services.Configure<IdentityOptions>(options => {
 
     // Cấu hình đăng nhập.
     options.SignIn.RequireConfirmedEmail = true;            // Cấu hình xác thực địa chỉ email (email phải tồn tại)
-    options.SignIn.RequireConfirmedPhoneNumber = false;     // Xác thực số điện thoại
-    options.SignIn.RequireConfirmedAccount = true;
-
 });
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -51,6 +50,7 @@ builder.Services.AddAuthentication(options =>
     options.ClientId = builder.Configuration["Authentication_Google:ClientId"];
     options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
 });
+
 
 var app = builder.Build();
 
