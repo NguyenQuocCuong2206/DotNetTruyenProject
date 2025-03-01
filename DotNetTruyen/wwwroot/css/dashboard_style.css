@@ -1027,7 +1027,7 @@ body {
 }
 
 .logo {
-    background-image: url(../images/256x256bb.jpg);
+    background-image: url(../images/svg/Logo.svg);
     width: 49px;
     height: 49px;
 }
@@ -2473,14 +2473,14 @@ label {
 .search-wrapper input {
   width: 271px;
   border-radius: 6px;
-  background-color: #eff0f6;
+  background-color: white;
   padding: 3px 8px 3px 42px;
   height: 40px;
   border-width: 0;
 }
 
 .search-wrapper input::-webkit-input-placeholder {
-  background-color: #eff0f6;
+  background-color: white;
   font-size: 14px;
   line-height: 2.43;
   color: #d6d7e3;
@@ -2489,7 +2489,7 @@ label {
 }
 
 .search-wrapper input::-moz-placeholder {
-  background-color: #eff0f6;
+  background-color: white;
   font-size: 14px;
   line-height: 2.43;
   color: #d6d7e3;
@@ -2498,7 +2498,7 @@ label {
 }
 
 .search-wrapper input:-ms-input-placeholder {
-  background-color: #eff0f6;
+  background-color: white;
   font-size: 14px;
   line-height: 2.43;
   color: #d6d7e3;
@@ -2507,7 +2507,7 @@ label {
 }
 
 .search-wrapper input::-ms-input-placeholder {
-  background-color: #eff0f6;
+  background-color: white;
   font-size: 14px;
   line-height: 2.43;
   color: #d6d7e3;
@@ -2516,7 +2516,7 @@ label {
 }
 
 .search-wrapper input::placeholder {
-  background-color: #eff0f6;
+  background-color: white;
   font-size: 14px;
   line-height: 2.43;
   color: #d6d7e3;

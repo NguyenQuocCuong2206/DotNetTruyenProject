@@ -1,0 +1,96 @@
+﻿@model DotNetTruyen.ViewModels.GenreDetailViewModel
+
+@{
+    ViewData["Title"] = "Chỉnh sửa thể loại";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<div class="container py-4">
+    <div class="card">
+        <div class="card-header">
+            <h4>Chỉnh sửa thể loại</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <!-- Tên thể loại -->
+                <div class="mb-3">
+                    <label class="form-label">Tên thể loại</label>
+                    <input asp-for="GenreName" class="form-control" placeholder="Nhập tên thể loại" />
+                </div>
+
+                <!-- Chọn truyện -->
+                <div class="mb-3">
+                    <label class="form-label">Chọn truyện (@Model.SelectedStoryIds.Count đã chọn)</label>
+                    <input type="text" id="searchQuery" class="form-control" placeholder="Tìm kiếm truyện..." />
+
+                    <div class="border rounded p-2 mt-2" id="storyList">
+                        @foreach (var story in Model.Comics)
+                        {
+                            <div class="form-check d-flex align-items-center p-2 border-bottom">
+                                <input type="checkbox" class="form-check-input me-2"
+                                       name="SelectedStoryIds" value="@story.Id"
+                                @(Model.SelectedStoryIds.Contains(story.Id) ? "checked" : "") />
+                                <img src="##" alt="@story.Title" class="rounded me-2" width="40" height="40" />
+                                <label class="form-check-label flex-grow-1">@story.Title</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Truyện đã chọn -->
+                @if (Model.SelectedStoryIds.Count > 0)
+                {
+                    <div class="mb-3">
+                        <label class="form-label">Truyện đã chọn</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var id in Model.SelectedStoryIds)
+                            {
+                                var story = Model.Comics.FirstOrDefault(s => s.Id == id);
+                                if (story != null)
+                                {
+                                    <div class="border p-2 rounded d-flex align-items-center">
+                                        <img src="##" class="rounded me-2" width="40" height="40" />
+                                        <span class="me-2">@story.Title</span>
+                                        <button type="button" class="btn btn-danger btn-sm remove-story" data-id="@story.Id">X</button>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+
+                <!-- Nút hành động -->
+                <div class="d-flex justify-content-end">
+                    <a asp-action="Index" class="btn btn-outline-secondary me-2">Hủy</a>
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Handle search functionality
+        document.getElementById("searchQuery").addEventListener("input", function () {
+            var searchQuery = this.value.toLowerCase();
+            var stories = document.querySelectorAll("#storyList .form-check");
+
+            stories.forEach(function (story) {
+                var title = story.querySelector("label").innerText.toLowerCase();
+                story.style.display = title.includes(searchQuery) ? "flex" : "none";
+            });
+        });
+
+        // Handle removal of selected stories
+        document.querySelectorAll(".remove-story").forEach(button => {
+            button.addEventListener("click", function () {
+                var id = this.getAttribute("data-id");
+                document.querySelector("input[value='" + id + "']").checked = false;
+                this.closest("div").remove();
+            });
+        });
+    </script>
+}

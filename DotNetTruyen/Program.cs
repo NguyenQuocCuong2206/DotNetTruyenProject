@@ -1,4 +1,5 @@
 ﻿using DotNetTruyen.Data;
+using DotNetTruyen.Hubs;
 using DotNetTruyen.Models;
 using DotNetTruyen.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<EmailService>();
@@ -70,7 +72,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapHub<GenreHub>("/genreHub");
 
 app.MapControllerRoute(
     name: "default",

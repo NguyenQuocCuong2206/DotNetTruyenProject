@@ -10,5 +10,6 @@
         public bool Status { get; set; }
         public ICollection<Like> Likes { get; set; }
         public ICollection<Chapter> Chapters { get; set; }
+        public ICollection<ComicGenre> ComicGenres { get; set; } = new List<ComicGenre>();
     }
 }
