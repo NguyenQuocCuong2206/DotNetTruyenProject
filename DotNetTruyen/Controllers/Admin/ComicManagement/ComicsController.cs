@@ -7,17 +7,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DotNetTruyen.Data;
 using DotNetTruyen.Models;
+using DotNetTruyen.ViewModels;
+using DotNetTruyen.Services;
 
 namespace DotNetTruyen.Controllers.Admin.ComicManagement
 {
     public class ComicsController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
+        private readonly IPhoToService _photoService;
 
-        public ComicsController(DotNetTruyenDbContext context)
+        public ComicsController(DotNetTruyenDbContext context, IPhoToService photoService)
         {
             _context = context;
+            _photoService = photoService;
         }
+
 
         // GET: Comics
         public async Task<IActionResult> Index()
@@ -46,7 +51,21 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         // GET: Comics/Create
         public IActionResult Create()
         {
-            return View();
+
+
+            var viewModel = new CreateComicViewModel
+            {
+                
+                Genres = _context.Genres.Select(g => new GenreViewModel
+                {
+                    Id = g.Id,
+                    GenreName = g.GenreName,
+                    TotalStories = g.ComicGenres.Count(),
+                    UpdatedAt = g.UpdatedAt
+                }).ToList()
+            };
+
+            return View("~/Views/Admin/Comics/Create.cshtml", viewModel);
         }
 
         // POST: Comics/Create
@@ -54,17 +73,68 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Description,CoverImage,Author,View,Status,Id,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] Comic comic)
+        public async Task<IActionResult> Create([Bind("Title,Description,Author,CoverImage,Status,GenreIds")] CreateComicViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                comic.Id = Guid.NewGuid();
-                _context.Add(comic);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                foreach (var state in ModelState)
+                {
+                    if (state.Value.Errors.Count > 0)
+                    {
+                        Console.WriteLine($"Error in {state.Key}: {state.Value.Errors[0].ErrorMessage}");
+                    }
+                }
+                // rest of your code...
             }
-            return View(comic);
+
+            var comic = new Comic
+            {
+                Id = Guid.NewGuid(),
+                Title = model.Title,
+                Description = model.Description,
+                Author = model.Author,
+                Status = model.Status,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                ComicGenres = new List<ComicGenre>()
+            };
+
+            if (model.CoverImage == null)
+            {
+                Console.WriteLine("CoverImage is null");
+            }
+
+            // Upload ảnh bìa lên Cloudinary
+            if (model.CoverImage != null)
+            {
+                var uploadResult = await _photoService.AddPhotoAsync(model.CoverImage);
+                if (uploadResult != null)
+                {
+                    comic.CoverImage = uploadResult.Url.ToString();
+                    Console.WriteLine("Image uploaded successfully: " + comic.CoverImage);
+                }
+                else
+                {
+                    Console.WriteLine("Image upload failed");
+                }
+            }
+
+            // Lưu thể loại
+            if (model.GenreIds != null && model.GenreIds.Any())
+            {
+                foreach (var genreId in model.GenreIds)
+                {
+                    comic.ComicGenres.Add(new ComicGenre { GenreId = genreId });
+                }
+            }
+
+            _context.Comics.Add(comic);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Truyện đã được tạo thành công!";
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: Comics/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -155,4 +225,11 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             return _context.Comics.Any(e => e.Id == id);
         }
     }
+
+    public class StepModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
 }

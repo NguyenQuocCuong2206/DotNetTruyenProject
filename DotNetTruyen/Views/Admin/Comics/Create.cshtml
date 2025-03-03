@@ -1,84 +1,83 @@
-﻿@model DotNetTruyen.Models.Comic
+﻿@model DotNetTruyen.ViewModels.CreateComicViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Comic";
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
 }
 
-<h1>Create</h1>
+<div class="container py-4">
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="mb-4">
+            <h2 class="h4 mb-3">Thông tin cơ bản</h2>
 
-<h4>Comic</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label  class="form-label">Ảnh bìa</label>
+                    <input asp-for="CoverImage" type="file"  class="form-control" />
+                    <span asp-validation-for="CoverImage" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label class="form-label">Tên truyện</label>
+                        <input asp-for="Title" class="form-control" placeholder="Nhập tên truyện" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mô tả</label>
+                        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+
+            <div class="row g-3 mt-3">
+                <div class="col-md-6">
+                    <label class="form-label">Trạng thái</label>
+                    <select asp-for="Status" class="form-select">
+                        <option value="false">Đang tiến hành</option>
+                        <option value="true">Hoàn thành</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Tác giả</label>
+                    <input asp-for="Author" class="form-control" placeholder="Tên tác giả" />
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CoverImage" class="control-label"></label>
-                <input asp-for="CoverImage" class="form-control" />
-                <span asp-validation-for="CoverImage" class="text-danger"></span>
+        </div>
+
+        <hr />
+        <h2 class="h4 mt-4">Thể loại</h2>
+        <div class="mb-3">
+            <div class="row">
+                @for (int i = 0; i < Model.Genres.Count; i++)
+                {
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input type="checkbox" name="GenreIds" class="form-check-input" value="@Model.Genres[i].Id" />
+                            <label class="form-check-label">@Model.Genres[i].GenreName</label>
+                        </div>
+                    </div>
+                }
             </div>
-            <div class="form-group">
-                <label asp-for="Author" class="control-label"></label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="View" class="control-label"></label>
-                <input asp-for="View" class="form-control" />
-                <span asp-validation-for="View" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
-                <span asp-validation-for="CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedBy" class="control-label"></label>
-                <input asp-for="UpdatedBy" class="form-control" />
-                <span asp-validation-for="UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedAt" class="control-label"></label>
-                <input asp-for="UpdatedAt" class="form-control" />
-                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeletedAt" class="control-label"></label>
-                <input asp-for="DeletedAt" class="form-control" />
-                <span asp-validation-for="DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+            <span asp-validation-for="GenreIds" class="text-danger"></span>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Đăng truyện</button>
+        </div>
+    </form>
+
+    <div class="d-flex flex-row-reverse mt-3">
+        <a asp-action="Index" class="btn btn-warning">Quay lại danh sách</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
