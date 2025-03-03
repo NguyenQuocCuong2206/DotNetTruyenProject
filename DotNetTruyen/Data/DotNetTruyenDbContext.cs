@@ -82,7 +82,35 @@ namespace DotNetTruyen.Data
                 entity.HasKey(x => new { x.UserIpHash, x.ComicId });
             });
 
+            }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.Entity is Genre entity)
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            entity.CreatedAt = DateTime.UtcNow;
+                            entity.UpdatedAt = DateTime.UtcNow; 
+                            break;
+
+                        case EntityState.Modified:
+                            entity.UpdatedAt = DateTime.UtcNow;
+                            break;
+
+                        case EntityState.Deleted:
+                            entry.State = EntityState.Modified; 
+                            entity.DeletedAt = DateTime.UtcNow; 
+                            break;
+                    }
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
-        }
+    }
 }
 

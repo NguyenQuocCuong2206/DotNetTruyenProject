@@ -1,6 +1,9 @@
-﻿using DotNetTruyen.Data;
+﻿using CloudinaryDotNet;
+using DotNetTruyen.Data;
+using DotNetTruyen.Hubs;
 using DotNetTruyen.Models;
 using DotNetTruyen.Service;
+using DotNetTruyen.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
@@ -8,11 +11,23 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<EmailService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<OtpService>();
+builder.Services.AddScoped<IPhoToService, PhotoService>();
+builder.Services.AddSingleton(provider =>
+{
+    var cloudinaryAccount = new Account(
+        builder.Configuration["CloudinarySettings:CloudName"],
+        builder.Configuration["CloudinarySettings:ApiKey"],
+        builder.Configuration["CloudinarySettings:ApiSecret"]
+                         );
+    var cloudinary = new Cloudinary(cloudinaryAccount);
+    return cloudinary;
+});
 builder.Services.AddDbContext<DotNetTruyenDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -52,6 +67,8 @@ builder.Services.AddAuthentication(options =>
 });
 
 
+
+
 var app = builder.Build();
 
 
@@ -70,7 +87,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapHub<GenreHub>("/genreHub");
 
 app.MapControllerRoute(
     name: "default",
