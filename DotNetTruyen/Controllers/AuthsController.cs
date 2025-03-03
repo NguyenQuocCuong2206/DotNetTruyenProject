@@ -315,10 +315,25 @@ namespace DotNetTruyen.Controllers
             return View();
         }
 
-        [HttpGet("/resetPassword")]
-        public async Task<IActionResult> ResetPassword()
+        [HttpGet("/reSendOtp")]
+        public async Task<IActionResult> ReSendOtp(string emailConfirm,string request)
         {
-            return View();
+            ViewBag.Email = emailConfirm;
+            if (!string.IsNullOrEmpty(emailConfirm))
+            {
+                var user = await _userManager.FindByEmailAsync(emailConfirm);
+                if (user == null)
+                {
+                    ViewBag.ErrorEmailConfirmMessage = "Email không tồn tại";
+                    return View();
+                }
+
+                string otp = _otpService.GenerateOtp(emailConfirm);
+                await _emailService.SendEmailAsync(emailConfirm, "Gửi lại mã OTP", $"Mã OTP mới của bạn là: <b>{otp}</b>");
+                return View(request);
+            }
+            ViewBag.ErrorEmailConfirmMessage = "Email không hợp lệ";
+            return View(request);
 
         }
 
