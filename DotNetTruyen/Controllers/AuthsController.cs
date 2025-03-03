@@ -2,39 +2,33 @@
 using DotNetTruyen.Service;
 using DotNetTruyen.ViewModels;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using System.Diagnostics;
 using System.Security.Claims;
-using System.Text.Encodings.Web;
-using System.Text;
-using static System.Net.WebRequestMethods;
 
 namespace DotNetTruyen.Controllers
 {
-    [Route("/Auths/[action]")]
+    
     public class AuthsController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly EmailService _emailService;
+        private readonly OtpService _otpService;
 
         public AuthsController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            EmailService emailService
+            EmailService emailService,
+            OtpService otpService
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
+            _otpService = otpService;
         }
 
         [HttpGet("/login/")]
@@ -52,7 +46,6 @@ namespace DotNetTruyen.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-
                 var result = await _signInManager.PasswordSignInAsync(model.UserNameOrEmail, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (!result.Succeeded)
                 {
@@ -70,6 +63,20 @@ namespace DotNetTruyen.Controllers
                         return LocalRedirect("/DashBoard");
                     }
                     return LocalRedirect("/Home");
+                }
+                if (result.IsNotAllowed)
+                {
+                    var email = model.UserNameOrEmail;
+                    if(await _userManager.FindByNameAsync(model.UserNameOrEmail) != null)
+                    {
+                        var user = await _userManager.FindByNameAsync(model.UserNameOrEmail);
+                        email = user.Email;
+                    }
+                    ViewBag.Email = email;
+                    ViewBag.ConfirmEmailMessage = "Tài khoản của bạn cần xác thực email. Nhập mã Otp được gửi đến email của bạn để xác thực.";
+                    string otp = _otpService.GenerateOtp(email);
+                    await _emailService.SendEmailAsync(email, "Mã OTP xác thực tài khoản", $"Mã OTP của bạn là: <b>{otp}</b>");
+                    return View("OtpConfirmRegister");
                 }
                 else
                 {
@@ -160,7 +167,7 @@ namespace DotNetTruyen.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.UserName, Email = model.Email };
+                var user = new User { UserName = model.UserName, Email = model.Email,NameToDisplay = model.UserName };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -172,25 +179,11 @@ namespace DotNetTruyen.Controllers
                         return View();
                     }
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-                    var callbackUrl = Url.ActionLink(
-                        action: nameof(ConfirmEmail),
-                        values:
-                            new
-                            {
-                                userId = user.Id,
-                                code = code
-                            },
-                        protocol: Request.Scheme);
-
-                    await _emailService.SendEmailAsync(model.Email,
-                        "Xác nhận địa chỉ email",
-                        @$"Bạn đã đăng ký tài khoản trên DotNetTruyen, 
-                           hãy <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>bấm vào đây</a> 
-                           để kích hoạt tài khoản.");
-                    ViewBag.SuccessRegisterMessage = "Hãy truy cập vào email để xác thực việc đăng ký tài khoản";
+                    string otp = _otpService.GenerateOtp(model.Email);
+                    await _emailService.SendEmailAsync(model.Email, "Mã OTP xác thực đăng ký tài khoản", $"Mã OTP của bạn là: <b>{otp}</b>");
+                    ViewBag.Email = model.Email;
+                    ViewBag.ConfirmEmailMessage = "Nhập mã Otp được gửi đến email của bạn để xác thực đăng ký.";
+                    return View("OtpConfirmRegister");
                 }
                 else
                 {
@@ -201,52 +194,147 @@ namespace DotNetTruyen.Controllers
             return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        [HttpPost("/otpConfirmRegister")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OtpConfirmRegister(string emailConfirm, string otp)
         {
-            
-            if (userId == null || code == null)
+            ViewBag.Email = emailConfirm;
+            ViewBag.Otp = otp;
+            if (!string.IsNullOrEmpty(emailConfirm) && !string.IsNullOrEmpty(otp))
             {
-                ViewBag.ErrorRegisterMessage = "Đăng ký không thành công do lỗi xác thực email";
-                return View("Register");
+                var user = await _userManager.FindByEmailAsync(emailConfirm);
+                if (user == null)
+                {
+                    ViewBag.ErrorOtpConfirmMessage = "Email không tồn tại";
+                    return View();
+                }
+                if (!_otpService.ValidateOtp(emailConfirm, otp))
+                {
+                    ViewBag.ErrorOtpConfirmMessage = "Mã OTP không hợp lệ hoặc đã hết hạn!";
+                    return View();
+                }
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var result = await _userManager.ConfirmEmailAsync(user, code);
+                if (result.Succeeded)
+                {
+                    ViewBag.SuccessMessage = "Đăng ký thành công, hãy đăng nhập ngay";
+                    return View("Login");
+                }
             }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                ViewBag.ErrorRegisterMessage = "Đăng ký không thành công do lỗi xác thực email";
-                return View("Register");
-            }
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            if (result.Succeeded)
-            {
-                ViewBag.SuccessRegisterMessage = "Đăng ký thành công, hãy đăng nhập ngay";
-                return View("Login");
-            }
-
-            ViewBag.ErrorRegisterMessage = "Đăng ký không thành công do lỗi xác thực email";
-            return View("Register");
+            ViewBag.ErrorOtpConfirmMessage = "Email không hợp lệ hoặc mã OTP không hợp lệ";
+            return View();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Confirm(string userId, string code)
-        {
 
-            ViewBag.ErrorRegisterMessage = "Đăng ký không thành công do lỗi xác thực email";
-            return View("Register");
-        }
-
-        [HttpGet("/forgotPassword/")]
+        [HttpGet("/forgotPassword")]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
-        [HttpPost("/forgotPassword/")]
-        public async Task<IActionResult> ForgotPassword(string emailReset)
+        [HttpPost("/forgotPassword")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(string emailConfirm)
         {
-            await _emailService.SendEmailAsync(emailReset, "Xin chao", "DotNetTruyen đây");
+            ViewBag.Email = emailConfirm;
+            if (!string.IsNullOrEmpty(emailConfirm))
+            {
+                var user = await _userManager.FindByEmailAsync(emailConfirm);
+                if (user == null)
+                {
+                    ViewBag.ErrorEmailConfirmMessage = "Email không tồn tại";
+                    return View();
+                }
+
+                string otp = _otpService.GenerateOtp(emailConfirm); 
+                await _emailService.SendEmailAsync(emailConfirm, "Mã OTP đặt lại mật khẩu", $"Mã OTP của bạn là: <b>{otp}</b>");
+                return View("OtpForgotPassword");
+            }
+            ViewBag.ErrorEmailConfirmMessage = "Email không hợp lệ";
             return View();
+        }
+
+        [HttpPost("/otpForgotPassword")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OtpForgotPassword(string emailConfirm, string otp)
+        {
+            ViewBag.Email = emailConfirm;
+            ViewBag.Otp = otp;
+            if (!string.IsNullOrEmpty(emailConfirm) && !string.IsNullOrEmpty(otp))
+            {
+                var user = await _userManager.FindByEmailAsync(emailConfirm);
+                if (user == null)
+                {
+                    ViewBag.ErrorOtpConfirmMessage = "Email không tồn tại";
+                    return View();
+                }
+                if (!_otpService.IsValidate(emailConfirm, otp))
+                {
+                    ViewBag.ErrorOtpConfirmMessage = "Mã OTP không hợp lệ hoặc đã hết hạn!";
+                    return View();
+                }
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var result = await _userManager.ConfirmEmailAsync(user, code);
+                if (result.Succeeded)
+                {
+                    return View("ResetPassword");
+                }
+            }
+            ViewBag.ErrorOtpConfirmMessage = "Email không hợp lệ hoặc mã OTP không hợp lệ";
+            return View();
+        }
+
+        [HttpPost("/resetPassword")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel,string email, string otp)
+        {
+            ViewBag.Email = email;
+            ViewBag.Otp = otp;
+            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(otp))
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user == null)
+                {
+                    ViewBag.ErrorResetMessage = "Email không tồn tại";
+                    return View();
+                }
+                if (!_otpService.IsValidate(email, otp))
+                {
+                    ViewBag.ErrorResetMessage = "Mã OTP không hợp lệ hoặc đã hết hạn!";
+                    return View();
+                }
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _userManager.ResetPasswordAsync(user, code,resetPasswordViewModel.NewPassword);
+                if (result.Succeeded)
+                {
+                    ViewBag.SuccessMessage = "Đặt lại mật khẩu thành công, hãy đăng nhập ngay";
+                    return View("Login");
+                }
+            }
+            ViewBag.ErrorResetMessage = "Email không hợp lệ hoặc mã OTP không hợp lệ";
+            return View();
+        }
+
+        [HttpGet("/reSendOtp")]
+        public async Task<IActionResult> ReSendOtp(string emailConfirm,string request)
+        {
+            ViewBag.Email = emailConfirm;
+            if (!string.IsNullOrEmpty(emailConfirm))
+            {
+                var user = await _userManager.FindByEmailAsync(emailConfirm);
+                if (user == null)
+                {
+                    ViewBag.ErrorEmailConfirmMessage = "Email không tồn tại";
+                    return View();
+                }
+
+                string otp = _otpService.GenerateOtp(emailConfirm);
+                await _emailService.SendEmailAsync(emailConfirm, "Gửi lại mã OTP", $"Mã OTP mới của bạn là: <b>{otp}</b>");
+                return View(request);
+            }
+            ViewBag.ErrorEmailConfirmMessage = "Email không hợp lệ";
+            return View(request);
+
         }
 
         [HttpGet("/logout")]
