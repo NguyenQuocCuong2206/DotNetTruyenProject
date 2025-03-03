@@ -27,7 +27,12 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         // GET: Comics
         public async Task<IActionResult> Index()
         {
-            return View("~/Views/Admin/Comics/Index.cshtml", await _context.Comics.ToListAsync());
+            var comics = await _context.Comics
+             .Include(c => c.Likes)     
+             .Include(c => c.Follows)   
+             .ToListAsync();
+
+            return View("~/Views/Admin/Comics/Index.cshtml", comics);
         }
 
         // GET: Comics/Details/5
@@ -144,12 +149,34 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 return NotFound();
             }
 
-            var comic = await _context.Comics.FindAsync(id);
+            var comic = await _context.Comics
+                .Include(c => c.ComicGenres)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (comic == null)
             {
                 return NotFound();
             }
-            return View(comic);
+
+            var viewModel = new EditComicViewModel
+            {
+                Id = comic.Id,
+                Title = comic.Title,
+                Description = comic.Description,
+                Author = comic.Author,
+                Status = comic.Status,
+                CoverImage = comic.CoverImage,
+                Genres = _context.Genres.Select(g => new GenreViewModel
+                {
+                    Id = g.Id,
+                    GenreName = g.GenreName,
+                    TotalStories = g.ComicGenres.Count(),
+                    UpdatedAt = g.UpdatedAt
+                }).ToList(),
+                SelectedGenres = comic.ComicGenres.Select(cg => cg.GenreId).ToList()
+            };
+
+            return View("~/Views/Admin/Comics/Edit.cshtml", viewModel);
         }
 
         // POST: Comics/Edit/5
@@ -157,34 +184,107 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Title,Description,CoverImage,Author,View,Status,Id,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] Comic comic)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Description,Author,Status,SelectedGenres,CoverImageFile,CoverImage")] EditComicViewModel model)
         {
-            if (id != comic.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
+                foreach (var state in ModelState)
                 {
-                    _context.Update(comic);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ComicExists(comic.Id))
+                    if (state.Value.Errors.Count > 0)
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
+                        Console.WriteLine($"Error in {state.Key}: {state.Value.Errors[0].ErrorMessage}");
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                // Reload all necessary data for the view
+                var comic = await _context.Comics
+                    .Include(c => c.ComicGenres)
+                    .FirstOrDefaultAsync(c => c.Id == id);
+
+                if (comic == null)
+                {
+                    return NotFound();
+                }
+
+                // Keep the user-entered values for these fields
+                // but ensure other properties are properly populated
+                model.CoverImage = comic.CoverImage; // Keep existing cover image
+
+                // Load all genres and mark selected ones
+                model.Genres = await _context.Genres.Select(g => new GenreViewModel
+                {
+                    Id = g.Id,
+                    GenreName = g.GenreName
+                }).ToListAsync();
+
+                // If SelectedGenres is null (which could happen during validation failure),
+                // reload it from the database
+                if (model.SelectedGenres == null)
+                {
+                    model.SelectedGenres = comic.ComicGenres.Select(cg => cg.GenreId).ToList();
+                }
+
+                return View("~/Views/Admin/Comics/Edit.cshtml", model);
             }
-            return View(comic);
+
+            var comicToUpdate = await _context.Comics
+                .Include(c => c.ComicGenres)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (comicToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            comicToUpdate.Title = model.Title;
+            comicToUpdate.Description = model.Description;
+            comicToUpdate.Author = model.Author;
+            comicToUpdate.Status = model.Status;
+            
+
+            // Kiểm tra nếu có ảnh mới được chọn thì mới upload
+            if (model.CoverImageFile != null && model.CoverImageFile.Length > 0)
+            {
+                var uploadResult = await _photoService.AddPhotoAsync(model.CoverImageFile);
+                if (uploadResult != null)
+                {
+                    comicToUpdate.CoverImage = uploadResult.Url.ToString();
+                }
+            }
+
+            // Cập nhật thể loại
+            comicToUpdate.ComicGenres.Clear();
+            if (model.SelectedGenres != null && model.SelectedGenres.Any())
+            {
+                foreach (var genreId in model.SelectedGenres)
+                {
+                    comicToUpdate.ComicGenres.Add(new ComicGenre { GenreId = genreId, ComicId = id });
+                }
+            }
+
+            try
+            {
+                _context.Update(comicToUpdate);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Comics.Any(e => e.Id == comicToUpdate.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            TempData["SuccessMessage"] = "Truyện đã được cập nhật thành công!";
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Comics/Delete/5
@@ -226,10 +326,5 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         }
     }
 
-    public class StepModel
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
+    
 }
