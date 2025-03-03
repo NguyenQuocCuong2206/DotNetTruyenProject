@@ -1,235 +1,100 @@
 ﻿@model IEnumerable<DotNetTruyen.Models.Comic>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách truyện";
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
 }
+<div class="container py-4">
+<h1>Danh sách truyện</h1>
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="d-flex justify-content-between align-items-center mb-2 mt-4">
+
+    <div class="search-wrapper">
+        <i data-feather="search" aria-hidden="true"></i>
+        <input type="text" placeholder="Enter keywords ..." required>
+    </div>
+
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm truyện mới
+        </a>
+</div>
+
 <div class="users-table table-wrapper">
     <table class="posts-table">
         <thead>
             <tr class="users-table-info">
                 <th>
                     <label class="users-table__checkbox ms-20">
-                        <input type="checkbox" class="check-all">Thumbnail
+                        <input type="checkbox" class="check-all">Ảnh bìa
                     </label>
                 </th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Action</th>
+                
+                <th>Tên truyện</th>
+                <th>Tác giả</th>
+                <th>Lượt thích</th>
+                <th>Lượt theo dõi</th>
+                <th>Lượt xem</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                            <picture><source srcset="./img/categories/01.webp" type="image/webp"><img src="./img/categories/01.jpg" alt="category"></picture>
-                        </div>
-                    </label>
-                </td>
-                <td>
-                    Starting your traveling blog with Vasco
-                </td>
-                <td>
-                    <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-04.webp" type="image/webp"><img src="./img/avatar/avatar-face-04.png" alt="User Name"></picture>
-                        Jenny Wilson
-                    </div>
-                </td>
-                <td><span class="badge-pending">Pending</span></td>
-                <td>17.04.2021</td>
-                <td>
-                    <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                            <div class="sr-only">More info</div>
-                            <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                            <li><a href="##">Edit</a></li>
-                            <li><a href="##">Quick edit</a></li>
-                            <li><a href="##">Trash</a></li>
-                        </ul>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                            <picture><source srcset="./img/categories/02.webp" type="image/webp"><img src="./img/categories/02.jpg" alt="category"></picture>
-                        </div>
-                    </label>
-                </td>
-                <td>
-                    Start a blog to reach your creative peak
-                </td>
-                <td>
-                    <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name"></picture>
-                        Annette Black
-                    </div>
-                </td>
-                <td><span class="badge-pending">Pending</span></td>
-                <td>23.04.2021</td>
-                <td>
-                    <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                            <div class="sr-only">More info</div>
-                            <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                            <li><a href="##">Edit</a></li>
-                            <li><a href="##">Quick edit</a></li>
-                            <li><a href="##">Trash</a></li>
-                        </ul>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                            <picture><source srcset="./img/categories/03.webp" type="image/webp"><img src="./img/categories/03.jpg" alt="category"></picture>
-                        </div>
-                    </label>
-                </td>
-                <td>
-                    Helping a local business reinvent itself
-                </td>
-                <td>
-                    <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-02.webp" type="image/webp"><img src="./img/avatar/avatar-face-02.png" alt="User Name"></picture>
-                        Kathryn Murphy
-                    </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                    <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                            <div class="sr-only">More info</div>
-                            <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                            <li><a href="##">Edit</a></li>
-                            <li><a href="##">Quick edit</a></li>
-                            <li><a href="##">Trash</a></li>
-                        </ul>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                            <picture><source srcset="./img/categories/04.webp" type="image/webp"><img src="./img/categories/04.jpg" alt="category"></picture>
-                        </div>
-                    </label>
-                </td>
-                <td>
-                    Caring is the new marketing
-                </td>
-                <td>
-                    <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-05.webp" type="image/webp"><img src="./img/avatar/avatar-face-05.png" alt="User Name"></picture>
-                        Guy Hawkins
-                    </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                    <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                            <div class="sr-only">More info</div>
-                            <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                            <li><a href="##">Edit</a></li>
-                            <li><a href="##">Quick edit</a></li>
-                            <li><a href="##">Trash</a></li>
-                        </ul>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                            <picture><source srcset="./img/categories/01.webp" type="image/webp"><img src="./img/categories/01.jpg" alt="category"></picture>
-                        </div>
-                    </label>
-                </td>
-                <td>
-                    How to build a loyal community online and offline
-                </td>
-                <td>
-                    <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name"></picture>
-                        Robert Fox
-                    </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                    <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                            <div class="sr-only">More info</div>
-                            <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                            <li><a href="##">Edit</a></li>
-                            <li><a href="##">Quick edit</a></li>
-                            <li><a href="##">Trash</a></li>
-                        </ul>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="users-table__checkbox">
-                        <input type="checkbox" class="check">
-                        <div class="categories-table-img">
-                            <picture><source srcset="./img/categories/03.webp" type="image/webp"><img src="./img/categories/03.jpg" alt="category"></picture>
-                        </div>
-                    </label>
-                </td>
-                <td>
-                    How to build a loyal community online and offline
-                </td>
-                <td>
-                    <div class="pages-table-img">
-                        <picture><source srcset="./img/avatar/avatar-face-03.webp" type="image/webp"><img src="./img/avatar/avatar-face-03.png" alt="User Name"></picture>
-                        Robert Fox
-                    </div>
-                </td>
-                <td><span class="badge-active">Active</span></td>
-                <td>17.04.2021</td>
-                <td>
-                    <span class="p-relative">
-                        <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                            <div class="sr-only">More info</div>
-                            <i data-feather="more-horizontal" aria-hidden="true"></i>
-                        </button>
-                        <ul class="users-item-dropdown dropdown">
-                            <li><a href="##">Edit</a></li>
-                            <li><a href="##">Quick edit</a></li>
-                            <li><a href="##">Trash</a></li>
-                        </ul>
-                    </span>
-                </td>
-            </tr>
+            @foreach (var comic in Model)
+            {
+                <tr>
+                    <td>
+                        <label class="users-table__checkbox">
+                            <input type="checkbox" class="check">
+                            <div class="categories-table-img">
+                                @if (!string.IsNullOrEmpty(comic.CoverImage))
+                                {
+                                    <img src="@comic.CoverImage" alt="@comic.Title" width="80" height="100">
+                                }
+                                else
+                                {
+                                    <img src="~/img/default-cover.jpg" alt="No Cover" width="80" height="100">
+                                }
+                            </div>
+                        </label>
+                        
+                    </td>
+                    <td>@comic.Title</td>
+                    <td>@comic.Author</td>
+                    <td>@comic.Likes.Count()</td>
+                    <td>@comic.Follows.Count()</td>
+                    <td>@comic.View</td>
+                    <td>
+                        @if (comic.Status)
+                        {
+                            <span class="badge-active">Hoàn thành</span>
+                        }
+                        else
+                        {
+                            <span class="badge-pending">Đang cập nhật</span>
+                        }
+                    </td>
+                    <td>
+                        <span class="p-relative">
+                            <button class="dropdown-btn transparent-btn" type="button" title="Thêm tùy chọn">
+                                <div class="sr-only">Thêm tùy chọn</div>
+                                <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                            <ul class="users-item-dropdown dropdown">
+                                    <li><a asp-action="Details" asp-route-id="@comic.Id">Xem chi tiết</a></li>
+                                <li><a asp-action="Edit" asp-route-id="@comic.Id">Chỉnh sửa</a></li>
+                                
+                                <li>
+                                    <form asp-action="Delete" asp-route-id="@comic.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                        <button type="submit" class="btn-link">Xóa</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </span>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
+    </div>
+</div>
