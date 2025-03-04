@@ -1,6 +1,6 @@
 ﻿using DotNetTruyen.Models;
 
-namespace DotNetTruyen.ViewModels
+namespace DotNetTruyen.ViewModels.Management
 {
     public class EditComicViewModel
     {
@@ -11,7 +11,7 @@ namespace DotNetTruyen.ViewModels
         //cho phep null
         public IFormFile? CoverImageFile { get; set; }
         public string Author { get; set; }
-        
+
         public bool Status { get; set; }
         public List<Guid> SelectedGenres { get; set; }
         public List<GenreViewModel>? Genres { get; set; }

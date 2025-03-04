@@ -1,85 +1,217 @@
-﻿@model DotNetTruyen.Models.Comic
+﻿@model DotNetTruyen.ViewModels.Management.ComicDetailViewModel
 
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="container py-5">
+    <!-- Back Button and Edit/Manage Buttons -->
+    <div class="d-flex justify-content-between mb-4">
+        <a href="/comics" class="btn btn-outline-primary rounded-pill px-4 py-2">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+        <div>
+            <a href="@Url.Action("Edit", "Comics", new { id = Model.Id })" class="btn btn-warning btn-sm rounded-pill px-4 py-2">
+                <i class="fas fa-pencil-alt"></i> Chỉnh sửa
+            </a>
+            <a href="@Url.Action("Index", "Chapters", new { comicId = Model.Id })" class="btn btn-success btn-sm rounded-pill px-4 py-2">
+                <i class="fas fa-book"></i> Quản lý Chapter
+            </a>
+        </div>
+    </div>
 
-<div>
-    <h4>Comic</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CoverImage)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CoverImage)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.View)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.View)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeletedAt)
-        </dd>
-    </dl>
+    <!-- Comic Title and Info -->
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-lg">
+                <img src="@Model.CoverImage" class="card-img-top rounded-lg" alt="@Model.Title">
+            </div>
+        </div>
+        <div class="d-flex flex-column col-md-8 gap-3">
+            <h2 class="font-weight-bold text-secondary mb-3">@Model.Title</h2>
+            <p><strong>Tác giả:</strong> @Model.Author</p>
+            <p>
+                <strong>Trạng thái:</strong>
+                @if (Model.Status)
+                {
+                    <span class="badge-pending">Đang tiến hành</span>
+                }
+                else
+                {
+                    <span class="badge-success">Hoàn thành</span>
+                }
+            </p>
+            <p><strong>Lượt xem:</strong> @Model.View</p>
+            <p><strong>Lượt thích:</strong> @Model.Likes</p>
+            <p><strong>Người theo dõi:</strong> @Model.Follows</p>
+            <p>
+                <strong>Thể loại:</strong>
+                @foreach (var genre in Model.Genres)
+                {
+                    <span class="badge-active me-2">@genre</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <!-- Comic Description -->
+    <div class="card mb-5 shadow-sm rounded-lg">
+        <div class="card-header bg-light">
+            <h4 class="mb-0">Mô tả</h4>
+        </div>
+        <div class="card-body">
+            <p>@Model.Description</p>
+        </div>
+    </div>
+
+    <!-- Recent Chapters -->
+    <div class="card mb-5 shadow-sm rounded-lg">
+        <div class="card-header d-flex justify-content-between align-items-center bg-light">
+            <h4 class="mb-0">Chapters gần đây</h4>
+            <a href="@Url.Action("Create", "Chapter", new { comicId = Model.Id })" class="btn btn-success btn-sm rounded-pill">
+                <i class="fas fa-plus-circle"></i> Thêm chapter
+            </a>
+        </div>
+        <div class="card-body">
+            @* Nếu có chapter, thì hiển thị, không thì thông báo "Chưa có chapter nào" *@
+            @* @if (Model.RecentChapters.Any())
+            {
+                <ul class="list-group">
+                    @foreach (var chapter in Model.RecentChapters)
+                    {
+                        <li class="list-group-item rounded-lg shadow-sm mb-3">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <strong>Chapter @chapter.Number:</strong> @chapter.Title
+                                </div>
+                                <div class="text-muted">
+                                    <i class="fas fa-clock"></i> @chapter.UpdatedAt.ToString("yyyy-MM-dd") <br>
+                                    <i class="fas fa-eye"></i> @chapter.Views
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">Chưa có chapter nào.</p>
+            } *@
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="card mb-5 shadow-sm rounded-lg">
+        <div class="card-header bg-light">
+            <h4 class="mb-0">Bình luận</h4>
+        </div>
+        <div class="card-body">
+            @* @* Hiện thị bình luận nếu có *@
+           @*  @if (Model.Comments.Any())
+            {
+                <ul class="list-group">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <li class="list-group-item rounded-lg shadow-sm mb-3">
+                            <div class="d-flex align-items-start">
+                                <img src="@comment.Avatar" alt="@comment.User" class="rounded-circle" width="40" height="40">
+                                <div class="ms-3">
+                                    <strong>@comment.User</strong>
+                                    <p class="text-muted">@comment.Time</p>
+                                    <p>@comment.Content</p>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted">Chưa có bình luận nào.</p>
+            } *@ 
+        </div>
+        <div class="card-footer">
+            <a href="@Url.Action("AllComments", "Comic", new { comicId = Model.Id })" class="btn btn-outline-secondary w-100 rounded-pill">
+                Xem tất cả bình luận
+            </a>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<!-- Custom CSS for enhancing the page appearance -->
+<style>
+    .card {
+        border: 1px solid #e0e0e0; /* Màu viền nhạt */
+        border-radius: 12px; /* Bo góc mềm mại cho card */
+        background-color: #ffffff; /* Nền trắng sáng */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow nhẹ cho card */
+        transition: box-shadow 0.3s ease; /* Hiệu ứng hover shadow */
+    }
+
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Shadow đậm hơn khi hover */
+        }
+
+    .card-header {
+        background-color: #f8f9fa; /* Màu nền nhẹ cho header */
+        border-top-left-radius: 12px; /* Bo góc trên trái */
+        border-top-right-radius: 12px; /* Bo góc trên phải */
+        padding: 1rem; /* Thêm padding để nội dung không bị sát viền */
+    }
+
+        .card-header h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0; /* Loại bỏ khoảng cách dưới */
+            color: #333; /* Màu chữ tối cho header */
+        }
+
+    .card-body {
+        padding: 1.5rem; /* Thêm padding cho phần thân card */
+    }
+
+        .card-body p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555; /* Màu chữ xám nhẹ */
+        }
+
+    .card-footer {
+        background-color: #f8f9fa;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        padding: 1rem;
+    }
+
+    
+
+    .list-group-item {
+        border: none;
+        background-color: #f8f9fa;
+    }
+
+    .btn-outline-secondary {
+        border: 1px solid #6c757d;
+    }
+
+    .btn-outline-primary, .btn-outline-warning, .btn-outline-success {
+        font-size: 0.875rem;
+    }
+
+    .btn-rounded-pill {
+        border-radius: 50px;
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    .font-weight-bold {
+        font-weight: 700;
+    }
+
+    .me-2 {
+        margin-right: 0.5rem;
+    }
+</style>

@@ -9,6 +9,7 @@ using DotNetTruyen.Data;
 using DotNetTruyen.Models;
 using DotNetTruyen.ViewModels;
 using DotNetTruyen.Services;
+using DotNetTruyen.ViewModels.Management;
 
 namespace DotNetTruyen.Controllers.Admin.ComicManagement
 {
@@ -38,19 +39,47 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         // GET: Comics/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var comic = _context.Comics
+                 .Where(c => c.Id == id)
+                 .Select(c => new ComicDetailViewModel
+                 {
+                     Id = c.Id,
+                     Title = c.Title,
+                     Description = c.Description,
+                     CoverImage = c.CoverImage,
+                     Author = c.Author,
+                     View = c.View,
+                     Status = c.Status,
+                     Likes = c.Likes.Count(),
+                     Follows = c.Follows.Count(),
+                     Genres = c.ComicGenres.Select(g => g.Genre.GenreName).ToList()
+                     //RecentChapters = c.Chapters.OrderByDescending(ch => ch.CreatedAt)
+                     //                           .Take(5)
+                     //                           .Select(ch => new ChapterViewModel
+                     //                           {
+                     //                               Number = ch.Number,
+                     //                               Title = ch.Title,
+                     //                               UpdatedAt = ch.UpdatedAt,
+                     //                               Views = ch.Views
+                     //                           }).ToList(),
+                     //Comments = c.Comments.OrderByDescending(cmt => cmt.CreatedAt)
+                     //                     .Take(5)
+                     //                     .Select(cmt => new CommentViewModel
+                     //                     {
+                     //                         User = cmt.User.Username,
+                     //                         Avatar = cmt.User.AvatarUrl,
+                     //                         Content = cmt.Content,
+                     //                         Time = cmt.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                     //                     }).ToList()
+                 })
+                 .FirstOrDefault();
 
-            var comic = await _context.Comics
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (comic == null)
             {
                 return NotFound();
             }
 
-            return View(comic);
+            return View("~/Views/Admin/Comics/Details.cshtml",comic);
         }
 
         // GET: Comics/Create
