@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DotNetTruyen.Data;
 using DotNetTruyen.Models;
+using DotNetTruyen.ViewModels.Management;
 
 namespace DotNetTruyen.Controllers.Admin.ChapterManagement
 {
@@ -20,10 +21,22 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
         }
 
         // GET: Chapters
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid? comicId)
         {
-            var dotNetTruyenDbContext = _context.Chapters.Include(c => c.Comic);
-            return View(await dotNetTruyenDbContext.ToListAsync());
+            var chapters = await _context.Chapters
+                .Where(c => c.Id == comicId)
+                .Select(c => new ChapterViewModel
+                {
+                    Id = c.Id,
+                    ChapterTitle = c.ChapterTitle,
+                    ChapterNumber = c.ChapterNumber,
+                    PublishedDate = c.PublishedDate,
+                    Views = c.Views,
+                    ComicId = c.ComicId
+                })
+                .ToListAsync();
+            
+            return View("~/Views/Admin/Chapters/Index.cshtml",chapters);
         }
 
         // GET: Chapters/Details/5

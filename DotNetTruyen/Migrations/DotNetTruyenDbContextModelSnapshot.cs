@@ -81,11 +81,20 @@ namespace DotNetTruyen.Migrations
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("PublishedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Views")
+                        .HasColumnType("int");
 
                     b.HasKey("ChapterNumber", "ComicId");
 
@@ -149,7 +158,6 @@ namespace DotNetTruyen.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CoverImage")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -670,13 +678,13 @@ namespace DotNetTruyen.Migrations
             modelBuilder.Entity("DotNetTruyen.Models.ComicGenre", b =>
                 {
                     b.HasOne("DotNetTruyen.Models.Comic", "Comic")
-                        .WithMany()
+                        .WithMany("ComicGenres")
                         .HasForeignKey("ComicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DotNetTruyen.Models.Genre", "Genre")
-                        .WithMany()
+                        .WithMany("ComicGenres")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -712,7 +720,7 @@ namespace DotNetTruyen.Migrations
             modelBuilder.Entity("DotNetTruyen.Models.Follow", b =>
                 {
                     b.HasOne("DotNetTruyen.Models.Comic", "Comic")
-                        .WithMany()
+                        .WithMany("Follows")
                         .HasForeignKey("ComicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -867,12 +875,21 @@ namespace DotNetTruyen.Migrations
                 {
                     b.Navigation("Chapters");
 
+                    b.Navigation("ComicGenres");
+
+                    b.Navigation("Follows");
+
                     b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("DotNetTruyen.Models.Comment", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("DotNetTruyen.Models.Genre", b =>
+                {
+                    b.Navigation("ComicGenres");
                 });
 
             modelBuilder.Entity("DotNetTruyen.Models.Rank", b =>

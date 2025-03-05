@@ -1,13 +1,16 @@
-﻿namespace DotNetTruyen.Models
+﻿using DotNetTruyen.Models;
+
+namespace DotNetTruyen.ViewModels.Management
 {
-    public class Chapter : BaseEnity<Guid>
+    public class ChapterViewModel
     {
+        public Guid Id { get; set; }
         public string ChapterTitle { get; set; }
         public int ChapterNumber { get; set; }
         public DateTime? PublishedDate { get; set; }
         public int Views { get; set; }
         public Guid ComicId { get; set; }
-        public Comic Comic { get; set; }
-        public ICollection<ChapterImage> Images { get; set; }
+        
+
     }
 }

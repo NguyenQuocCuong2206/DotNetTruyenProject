@@ -1,72 +1,67 @@
-﻿@model IEnumerable<DotNetTruyen.Models.Chapter>
+﻿@model IEnumerable<DotNetTruyen.ViewModels.Management.ChapterViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản lý Chương";
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container py-4">
+    <h1>Danh sách Chương</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ChapterTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeletedAt)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChapterTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comic.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeletedAt)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
+        <div class="search-wrapper">
+            <i data-feather="search" aria-hidden="true"></i>
+            <input type="text" placeholder="Nhập từ khóa ..." required>
+        </div>
+
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm Chương mới
+        </a>
+    </div>
+
+    <div class="users-table table-wrapper">
+        <table class="posts-table">
+            <thead>
+                <tr class="users-table-info">
+                    <th>STT</th>
+                    <th>Tên chương</th>
+                    <th>Số chương</th>
+            
+                    <th>Ngày đăng</th>
+                    <th>Lượt xem</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var chapter in Model.Select((value, index) => new { Value = value, Index = index + 1 }))
+                {
+                    <tr>
+                        <td>@chapter.Index</td>
+                        <td>@chapter.Value.ChapterTitle</td>
+                        <td>@chapter.Value.ChapterNumber</td>
+                        
+                        <td>@(chapter.Value.PublishedDate.HasValue ? chapter.Value.PublishedDate.Value.ToString("dd/MM/yyyy") : "Chưa đăng")</td>
+                        <td>@chapter.Value.Views</td>
+                        <td>
+                            <span class="p-relative">
+                                <button class="dropdown-btn transparent-btn" type="button" title="Thêm tùy chọn">
+                                    <div class="sr-only">Thêm tùy chọn</div>
+                                    <i data-feather="more-horizontal" aria-hidden="true"></i>
+                                </button>
+                                <ul class="users-item-dropdown dropdown">
+                                    <li><a asp-action="Details" asp-route-id="@chapter.Value.Id">Xem chi tiết</a></li>
+                                    <li><a asp-action="Edit" asp-route-id="@chapter.Value.Id">Chỉnh sửa</a></li>
+                                    <li>
+                                        <form asp-action="Delete" asp-route-id="@chapter.Value.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                            <button type="submit" class="text-danger btn-link">Xóa</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
