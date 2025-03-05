@@ -72,17 +72,80 @@ namespace DotNetTruyen.Data
                 {
                     entity.HasKey(x => new { x.UserId, x.RankId });
                 });
-                modelBuilder.Entity<Chapter>(entity =>
-                {
-                   entity.HasKey(x => new { x.ChapterNumber, x.ComicId });
-                });
 
             modelBuilder.Entity<Like>(entity =>
             {
                 entity.HasKey(x => new { x.UserIpHash, x.ComicId });
             });
 
+            // Tạo Role mặc định
+            var adminRoleId = Guid.NewGuid();
+            var userRoleId = Guid.NewGuid();
+
+            modelBuilder.Entity<IdentityRole<Guid>>().HasData(
+                new IdentityRole<Guid> { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole<Guid> { Id = userRoleId, Name = "Reader", NormalizedName = "READER" }
+            );
+
+            // Thêm tài khoản Admin
+            var adminId = Guid.NewGuid();
+            var adminEmail = "admin@example.com";
+            var adminPassword = "Admin@123"; // Đặt mật khẩu mạnh
+
+            var adminUser = new User
+            {
+                Id = adminId,
+                UserName = "admin",
+                Email = adminEmail,
+                NormalizedEmail = adminEmail.ToUpper(),
+                NormalizedUserName = adminEmail.ToUpper(),
+                EmailConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+
+            // Mã hóa mật khẩu (dùng PasswordHasher)
+            var passwordHasher = new PasswordHasher<User>();
+            adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, adminPassword);
+
+            modelBuilder.Entity<User>().HasData(adminUser);
+
+            // Gán tài khoản Admin vào Role "Admin"
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
+                new IdentityUserRole<Guid>
+                {
+                    UserId = adminId,
+                    RoleId = adminRoleId
+                }
+            );
         }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.Entity is Genre entity)
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            entity.CreatedAt = DateTime.UtcNow;
+                            entity.UpdatedAt = DateTime.UtcNow; 
+                            break;
+
+                        case EntityState.Modified:
+                            entity.UpdatedAt = DateTime.UtcNow;
+                            break;
+
+                        case EntityState.Deleted:
+                            entry.State = EntityState.Modified; 
+                            entity.DeletedAt = DateTime.UtcNow; 
+                            break;
+                    }
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
+    }
 }
 

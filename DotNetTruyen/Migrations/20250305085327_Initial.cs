@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace DotNetTruyen.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,7 +39,7 @@ namespace DotNetTruyen.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoverImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CoverImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     View = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
@@ -106,6 +108,7 @@ namespace DotNetTruyen.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     NameToDisplay = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -130,9 +133,12 @@ namespace DotNetTruyen.Migrations
                 name: "Chapters",
                 columns: table => new
                 {
-                    ChapterNumber = table.Column<int>(type: "int", nullable: false),
-                    ComicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ChapterTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChapterNumber = table.Column<int>(type: "int", nullable: false),
+                    PublishedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Views = table.Column<int>(type: "int", nullable: false),
+                    ComicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -141,7 +147,7 @@ namespace DotNetTruyen.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Chapters", x => new { x.ChapterNumber, x.ComicId });
+                    table.PrimaryKey("PK_Chapters", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Chapters_Comics_ComicId",
                         column: x => x.ComicId,
@@ -416,8 +422,6 @@ namespace DotNetTruyen.Migrations
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImageNumber = table.Column<int>(type: "int", nullable: false),
                     ChapterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ChapterNumber = table.Column<int>(type: "int", nullable: false),
-                    ChapterComicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -428,10 +432,10 @@ namespace DotNetTruyen.Migrations
                 {
                     table.PrimaryKey("PK_ChapterImages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ChapterImages_Chapters_ChapterNumber_ChapterComicId",
-                        columns: x => new { x.ChapterNumber, x.ChapterComicId },
+                        name: "FK_ChapterImages_Chapters_ChapterId",
+                        column: x => x.ChapterId,
                         principalTable: "Chapters",
-                        principalColumns: new[] { "ChapterNumber", "ComicId" },
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -443,18 +447,16 @@ namespace DotNetTruyen.Migrations
                     ChapterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ReadDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsRead = table.Column<bool>(type: "bit", nullable: false),
-                    ChapterNumber = table.Column<int>(type: "int", nullable: false),
-                    ChapterComicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IsRead = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ReadHistories", x => x.ReadHistoryId);
                     table.ForeignKey(
-                        name: "FK_ReadHistories_Chapters_ChapterNumber_ChapterComicId",
-                        columns: x => new { x.ChapterNumber, x.ChapterComicId },
+                        name: "FK_ReadHistories_Chapters_ChapterId",
+                        column: x => x.ChapterId,
                         principalTable: "Chapters",
-                        principalColumns: new[] { "ChapterNumber", "ComicId" },
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ReadHistories_Users_UserId",
@@ -489,10 +491,29 @@ namespace DotNetTruyen.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("3b1562e6-b0b9-4429-aaef-8f985bd7f03c"), null, "Reader", "READER" },
+                    { new Guid("8bc21234-ab5c-428f-b608-760e54b32a4a"), null, "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "ImageUrl", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("f02f08c0-f3a1-4938-8042-4fb26c3ce75c"), 0, "6ad12146-b0ae-402d-82c5-5f35222f51c7", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ75jy/oUUM+IlcBIfslg2bCIKi6g22yKo8fz+eIqba4Qc4kv955fGCXPGPbvzy4cQ==", null, false, "0a3c2eb9-4b42-409c-a9c0-7ebd04605f9b", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("8bc21234-ab5c-428f-b608-760e54b32a4a"), new Guid("f02f08c0-f3a1-4938-8042-4fb26c3ce75c") });
+
             migrationBuilder.CreateIndex(
-                name: "IX_ChapterImages_ChapterNumber_ChapterComicId",
+                name: "IX_ChapterImages_ChapterId",
                 table: "ChapterImages",
-                columns: new[] { "ChapterNumber", "ChapterComicId" });
+                column: "ChapterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Chapters_ComicId",
@@ -545,9 +566,9 @@ namespace DotNetTruyen.Migrations
                 column: "RankTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReadHistories_ChapterNumber_ChapterComicId",
+                name: "IX_ReadHistories_ChapterId",
                 table: "ReadHistories",
-                columns: new[] { "ChapterNumber", "ChapterComicId" });
+                column: "ChapterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReadHistories_UserId",

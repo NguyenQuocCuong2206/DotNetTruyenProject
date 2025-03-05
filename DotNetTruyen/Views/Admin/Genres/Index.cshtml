@@ -1,0 +1,222 @@
+﻿@model IEnumerable<DotNetTruyen.ViewModels.GenreViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+
+
+<h1 class="mb-4">Danh sách thể loại</h1>
+
+@* <p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus"></i> Thêm thể loại mới
+    </a>
+</p> *@
+
+<div class="container py-4">
+    <!-- Stats Cards -->
+    <div class="row stat-cards">
+        <div class="col-md-6 col-xl-4">
+            <article class="stat-cards-item">
+                <div class="stat-cards-icon primary">
+                    <i data-feather="bar-chart-2" aria-hidden="true"></i>
+                </div>
+                <div class="stat-cards-info">
+                    <p class="stat-cards-info__num">1478 286</p>
+                    <p class="stat-cards-info__title">Tổng thể loại</p>
+                    <p class="stat-cards-info__progress">
+                        <span class="stat-cards-info__profit success">
+                            <i data-feather="trending-up" aria-hidden="true"></i>4.07%
+                        </span>
+                        Last month
+                    </p>
+                </div>
+            </article>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <article class="stat-cards-item">
+                <div class="stat-cards-icon warning">
+                    <i data-feather="file" aria-hidden="true"></i>
+                </div>
+                <div class="stat-cards-info">
+                    <p class="stat-cards-info__num">1478 286</p>
+                    <p class="stat-cards-info__title">Tổng truyện tranh</p>
+                    <p class="stat-cards-info__progress">
+                        <span class="stat-cards-info__profit success">
+                            <i data-feather="trending-up" aria-hidden="true"></i>0.24%
+                        </span>
+                        Last month
+                    </p>
+                </div>
+            </article>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <article class="stat-cards-item">
+                <div class="stat-cards-icon purple">
+                    <i data-feather="file" aria-hidden="true"></i>
+                </div>
+                <div class="stat-cards-info">
+                    <p class="stat-cards-info__num">1478 286</p>
+                    <p class="stat-cards-info__title">Thể loại đang hoạt động</p>
+                    <p class="stat-cards-info__progress">
+                        <span class="stat-cards-info__profit danger">
+                            <i data-feather="trending-down" aria-hidden="true"></i>1.64%
+                        </span>
+                        Last month
+                    </p>
+                </div>
+            </article>
+        </div>
+        
+    </div>
+    
+
+    <!-- Search & Add -->
+    <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
+        
+            <div class="search-wrapper">
+                <i data-feather="search" aria-hidden="true"></i>
+                <input  type="text" placeholder="Enter keywords ..." required>
+            </div>
+        
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+            <i class="fas fa-plus"></i> Thêm thể loại mới
+        </button>
+    </div>
+
+    <!-- Categories Table -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <div class="users-table table-wrapper">
+                <table class="posts-table">
+                    <thead>
+                        <tr class="users-table-info">
+                            <th>
+                                <label class="users-table__checkbox ms-20">
+                                    <input type="checkbox" class="check-all">Tên thể loại
+                                </label>
+                            </th>
+
+                            <th>Số lượng truyện</th>
+                            <th>Cập nhật lần cuối</th>
+                            <th ">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <label class="users-table__checkbox">
+                                        <input type="checkbox" class="check">
+                                        <div class="categories-table-img">
+                                                @Html.DisplayFor(modelItem => item.GenreName)
+                                        </div>
+                                    </label>
+
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.TotalStories)</td>
+                                <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+                                
+                                <td>
+                                    <span class="p-relative">
+                                        <button class="dropdown-btn transparent-btn" type="button" title="Thêm tùy chọn">
+                                            <div class="sr-only">Thêm tùy chọn</div>
+                                            <i data-feather="more-horizontal" aria-hidden="true"></i>
+                                        </button>
+                                        <ul class="users-item-dropdown dropdown">
+                                            <li><a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a></li>
+                                            <li><a asp-action="Details" asp-route-id="@item.Id">Xem chi tiết</a></li>
+                                            <li>
+                                                <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                                    <button type="submit" class="btn-link">Xóa</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-end mt-3">
+        <button class="btn btn-outline-secondary btn-sm">Trước</button>
+        <button class="btn btn-outline-secondary btn-sm ms-2">Sau</button>
+    </div>
+</div>
+
+
+
+<!-- Add Category Modal -->
+<div class="modal fade @(ViewData["ShowModal"] as string == "true" ? "show d-block" : "")" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thêm thể loại mới</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="Create" asp-controller="Genres" method="post">
+                
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="genreName" class="form-label">Tên thể loại</label>
+                        <input type="text" class="form-control bg-light" id="genreName" name="GenreName" required>
+                        <span class="text-danger">@Html.ValidationMessage("GenreName")</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-secondary">Lưu thể loại</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        connection.on("ReceiveGenreCreated", function (genre) {
+            
+            let formattedDate = new Date(genre.updatedAt).toLocaleString("en-US", {
+                month: "numeric",
+                day: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                second: "numeric",
+                hour12: true
+            });
+
+            
+            var newRow = `
+                <tr id="genre-${genre.id}">
+                    <td>${genre.genreName}</td>
+                    <td>${genre.totalStories}</td>
+                    <td>${formattedDate}</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-secondary" href="/Genres/Edit/${genre.id}">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteGenre('${genre.id}')">
+                            <i class="fas fa-trash-alt"></i> Delete
+                        </button>
+                    </td>
+                </tr>`;
+
+            $("table tbody").append(newRow);
+        });
+
+    </script>
+
+}
+
+

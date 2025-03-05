@@ -62,7 +62,7 @@ namespace DotNetTruyen.Controllers
                     {
                         return LocalRedirect("/DashBoard");
                     }
-                    return LocalRedirect("/Home");
+                    return LocalRedirect(returnUrl);
                 }
                 if (result.IsNotAllowed)
                 {
@@ -156,6 +156,7 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpGet("/register")]
+        [Authorize]
         public IActionResult Register()
         {
             return View();
@@ -315,15 +316,29 @@ namespace DotNetTruyen.Controllers
             return View();
         }
 
-        [HttpGet("/resetPassword")]
-        public async Task<IActionResult> ResetPassword()
+        [HttpGet("/reSendOtp")]
+        public async Task<IActionResult> ReSendOtp(string emailConfirm,string request)
         {
-            return View();
+            ViewBag.Email = emailConfirm;
+            if (!string.IsNullOrEmpty(emailConfirm))
+            {
+                var user = await _userManager.FindByEmailAsync(emailConfirm);
+                if (user == null)
+                {
+                    ViewBag.ErrorEmailConfirmMessage = "Email không tồn tại";
+                    return View();
+                }
+
+                string otp = _otpService.GenerateOtp(emailConfirm);
+                await _emailService.SendEmailAsync(emailConfirm, "Gửi lại mã OTP", $"Mã OTP mới của bạn là: <b>{otp}</b>");
+                return View(request);
+            }
+            ViewBag.ErrorEmailConfirmMessage = "Email không hợp lệ";
+            return View(request);
 
         }
 
-        [HttpGet("/logout")]
-        [Authorize]
+        [HttpGet("/logout/")]
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync();
@@ -331,5 +346,12 @@ namespace DotNetTruyen.Controllers
             return RedirectToAction("Index", "Home");
 
         }
-    }
+
+		[HttpGet("/accessDenied")]
+		public IActionResult AccessDenied()
+		{
+			return View();
+
+		}
+	}
 }

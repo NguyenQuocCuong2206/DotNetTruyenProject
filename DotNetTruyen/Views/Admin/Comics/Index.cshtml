@@ -1,0 +1,100 @@
+﻿@model IEnumerable<DotNetTruyen.Models.Comic>
+
+@{
+    ViewData["Title"] = "Danh sách truyện";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<div class="container py-4">
+<h1>Danh sách truyện</h1>
+
+
+<div class="d-flex justify-content-between align-items-center mb-2 mt-4">
+
+    <div class="search-wrapper">
+        <i data-feather="search" aria-hidden="true"></i>
+        <input type="text" placeholder="Enter keywords ..." required>
+    </div>
+
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Thêm truyện mới
+        </a>
+</div>
+
+<div class="users-table table-wrapper">
+    <table class="posts-table">
+        <thead>
+            <tr class="users-table-info">
+                <th>
+                    <label class="users-table__checkbox ms-20">
+                        <input type="checkbox" class="check-all">Ảnh bìa
+                    </label>
+                </th>
+                
+                <th>Tên truyện</th>
+                <th>Tác giả</th>
+                <th>Lượt thích</th>
+                <th>Lượt theo dõi</th>
+                <th>Lượt xem</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comic in Model)
+            {
+                <tr>
+                    <td>
+                        <label class="users-table__checkbox">
+                            <input type="checkbox" class="check">
+                            <div class="categories-table-img">
+                                @if (!string.IsNullOrEmpty(comic.CoverImage))
+                                {
+                                    <img src="@comic.CoverImage" alt="@comic.Title" width="80" height="100">
+                                }
+                                else
+                                {
+                                    <img src="~/img/default-cover.jpg" alt="No Cover" width="80" height="100">
+                                }
+                            </div>
+                        </label>
+                        
+                    </td>
+                    <td>@comic.Title</td>
+                    <td>@comic.Author</td>
+                    <td>@comic.Likes.Count()</td>
+                    <td>@comic.Follows.Count()</td>
+                    <td>@comic.View</td>
+                    <td>
+                        @if (comic.Status)
+                        {
+                            <span class="badge-active">Hoàn thành</span>
+                        }
+                        else
+                        {
+                            <span class="badge-pending">Đang cập nhật</span>
+                        }
+                    </td>
+                    <td>
+                        <span class="p-relative">
+                            <button class="dropdown-btn transparent-btn" type="button" title="Thêm tùy chọn">
+                                <div class="sr-only">Thêm tùy chọn</div>
+                                <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                            <ul class="users-item-dropdown dropdown">
+                                    <li><a asp-action="Details" asp-route-id="@comic.Id">Xem chi tiết</a></li>
+                                <li><a asp-action="Edit" asp-route-id="@comic.Id">Chỉnh sửa</a></li>
+                                
+                                <li>
+                                    <form asp-action="Delete" asp-route-id="@comic.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+                                        <button type="submit" class="btn-link">Xóa</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
+</div>
