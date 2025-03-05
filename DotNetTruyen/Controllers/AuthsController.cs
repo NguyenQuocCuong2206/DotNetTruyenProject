@@ -62,7 +62,7 @@ namespace DotNetTruyen.Controllers
                     {
                         return LocalRedirect("/DashBoard");
                     }
-                    return LocalRedirect("/Home");
+                    return LocalRedirect(returnUrl);
                 }
                 if (result.IsNotAllowed)
                 {
@@ -156,6 +156,7 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpGet("/register")]
+        [Authorize]
         public IActionResult Register()
         {
             return View();
@@ -337,8 +338,7 @@ namespace DotNetTruyen.Controllers
 
         }
 
-        [HttpGet("/logout")]
-        [Authorize]
+        [HttpGet("/logout/")]
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync();
@@ -346,5 +346,12 @@ namespace DotNetTruyen.Controllers
             return RedirectToAction("Index", "Home");
 
         }
-    }
+
+		[HttpGet("/accessDenied")]
+		public IActionResult AccessDenied()
+		{
+			return View();
+
+		}
+	}
 }
