@@ -8,23 +8,30 @@ using Microsoft.EntityFrameworkCore;
 using DotNetTruyen.Data;
 using DotNetTruyen.Models;
 using DotNetTruyen.ViewModels.Management;
+using DotNetTruyen.Services;
 
 namespace DotNetTruyen.Controllers.Admin.ChapterManagement
 {
     public class ChaptersController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
+        private readonly IPhoToService _imageUploadService;
 
-        public ChaptersController(DotNetTruyenDbContext context)
+        public ChaptersController(DotNetTruyenDbContext context, IPhoToService imageUploadService)
         {
             _context = context;
+            _imageUploadService = imageUploadService;
         }
 
+
         // GET: Chapters
-        public async Task<IActionResult> Index(Guid? comicId)
+        public async Task<IActionResult> Index(Guid? comicId, string search, int page = 1, int pageSize = 10)
         {
-            var chapters = await _context.Chapters
-                .Where(c => c.Id == comicId)
+            if (comicId == null) return NotFound();
+
+            var query = _context.Chapters
+                .Where(c => c.ComicId == comicId)
+                .OrderBy(c => c.ChapterNumber)
                 .Select(c => new ChapterViewModel
                 {
                     Id = c.Id,
@@ -34,9 +41,22 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                     Views = c.Views,
                     ComicId = c.ComicId
                 })
-                .ToListAsync();
-            
-            return View("~/Views/Admin/Chapters/Index.cshtml",chapters);
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(c => c.ChapterTitle.Contains(search));
+            }
+
+            var totalItems = await query.CountAsync();
+            var chapters = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            ViewBag.CurrentPage = page;
+            ViewBag.Search = search;
+            ViewBag.ComicId = comicId;
+
+            return View("~/Views/Admin/Chapters/Index.cshtml", chapters);
         }
 
         // GET: Chapters/Details/5
@@ -59,27 +79,47 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
         }
 
         // GET: Chapters/Create
-        public IActionResult Create()
+        public IActionResult Create(Guid comicId)
         {
-            ViewData["ComicId"] = new SelectList(_context.Comics, "Id", "Id");
-            return View();
+            var model = new CreateChapterViewModel { ComicId = comicId };
+            return View("~/Views/Admin/Chapters/Create.cshtml",model);
         }
 
         // POST: Chapters/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ChapterTitle,ChapterNumber,ComicId,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] Chapter chapter)
+        public async Task<IActionResult> Create(CreateChapterViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var chapter = new Chapter
+                {
+                    Id = Guid.NewGuid(),
+                    ChapterTitle = model.ChapterTitle,
+                    ChapterNumber = model.ChapterNumber,
+                    PublishedDate = model.PublishedDate,
+                    Views = 0,
+                    ComicId = model.ComicId,
+                    Images = new List<ChapterImage>()
+                };
+
+                if (model.Images != null && model.Images.Count > 0)
+                {
+                    foreach (var image in model.Images)
+                    {
+                        var imageUrl = await _imageUploadService.AddPhotoAsync(image);
+                        if (!string.IsNullOrEmpty(imageUrl))
+                        {
+                            chapter.Images.Add(new ChapterImage { Id = Guid.NewGuid(), ChapterId = chapter.Id, ImageUrl = imageUrl });
+                        }
+                    }
+                }
+
                 _context.Add(chapter);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { comicId = model.ComicId });
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "Id", "Id", chapter.ComicId);
-            return View(chapter);
+            return View("~/Views/Admin/Chapters/Create.cshtml", model);
         }
 
         // GET: Chapters/Edit/5

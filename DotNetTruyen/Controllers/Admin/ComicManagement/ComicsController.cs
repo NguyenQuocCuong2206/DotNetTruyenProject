@@ -144,7 +144,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 var uploadResult = await _photoService.AddPhotoAsync(model.CoverImage);
                 if (uploadResult != null)
                 {
-                    comic.CoverImage = uploadResult.Url.ToString();
+                    comic.CoverImage = uploadResult;
                     Console.WriteLine("Image uploaded successfully: " + comic.CoverImage);
                 }
                 else
@@ -281,7 +281,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 var uploadResult = await _photoService.AddPhotoAsync(model.CoverImageFile);
                 if (uploadResult != null)
                 {
-                    comicToUpdate.CoverImage = uploadResult.Url.ToString();
+                    comicToUpdate.CoverImage = uploadResult;
                 }
             }
 

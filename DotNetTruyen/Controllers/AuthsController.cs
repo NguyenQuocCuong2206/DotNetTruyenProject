@@ -1,5 +1,5 @@
 ﻿using DotNetTruyen.Models;
-using DotNetTruyen.Service;
+using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace DotNetTruyen.Controllers
 {
-    
+
     public class AuthsController : Controller
     {
         private readonly UserManager<User> _userManager;

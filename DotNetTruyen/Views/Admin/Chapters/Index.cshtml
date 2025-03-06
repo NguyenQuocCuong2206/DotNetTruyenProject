@@ -9,59 +9,94 @@
     <h1>Danh sách Chương</h1>
 
     <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
-        <div class="search-wrapper">
-            <i data-feather="search" aria-hidden="true"></i>
-            <input type="text" placeholder="Nhập từ khóa ..." required>
-        </div>
+        <form method="get" class="d-flex gap-2">
+            <input type="hidden" name="comicId" value="@ViewBag.ComicId" />
+            <div class="search-wrapper">
+                <i data-feather="search" aria-hidden="true"></i>
+                <input type="text" name="search" value="@ViewBag.Search" placeholder="Nhập từ khóa ..." required>
+            </div>
+            
+            <button type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
+        </form>
 
-        <a asp-action="Create" class="btn btn-primary">
+        <a asp-action="Create" asp-route-comicId="@ViewBag.ComicId" class="btn btn-primary">
             <i class="fas fa-plus"></i> Thêm Chương mới
         </a>
     </div>
 
-    <div class="users-table table-wrapper">
-        <table class="posts-table">
+    <div class="table-responsive">
+        <table class="table table-bordered">
             <thead>
-                <tr class="users-table-info">
+                <tr class="table-primary">
                     <th>STT</th>
                     <th>Tên chương</th>
-                    <th>Số chương</th>
-            
+                    <th>Trạng thái</th>
                     <th>Ngày đăng</th>
                     <th>Lượt xem</th>
                     <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var chapter in Model.Select((value, index) => new { Value = value, Index = index + 1 }))
+                @if (Model.Any())
+                {
+                    @foreach (var chapter in Model.Select((value, index) => new { Value = value, Index = index + 1 }))
+                    {
+                        <tr>
+                            <td>@chapter.Index</td>
+                            <td>@chapter.Value.ChapterTitle</td>
+                            <td>
+                                @if (chapter.Value.PublishedDate.HasValue)
+                                {
+                                    if (chapter.Value.PublishedDate.Value > DateTime.Now)
+                                    {
+                                        <span class="badge bg-warning">Lên lịch</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Đã đăng</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Chưa đăng</span>
+                                }
+                            </td>
+                            <td>@(chapter.Value.PublishedDate?.ToString("dd/MM/yyyy") ?? "Chưa có")</td>
+                            <td>@chapter.Value.Views</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a asp-action="Details" asp-route-id="@chapter.Value.Id" class="btn btn-info btn-sm">Xem</a>
+                                    <a asp-action="Edit" asp-route-id="@chapter.Value.Id" class="btn btn-warning btn-sm">Sửa</a>
+                                    <form asp-action="Delete" asp-route-id="@chapter.Value.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>@chapter.Index</td>
-                        <td>@chapter.Value.ChapterTitle</td>
-                        <td>@chapter.Value.ChapterNumber</td>
-                        
-                        <td>@(chapter.Value.PublishedDate.HasValue ? chapter.Value.PublishedDate.Value.ToString("dd/MM/yyyy") : "Chưa đăng")</td>
-                        <td>@chapter.Value.Views</td>
-                        <td>
-                            <span class="p-relative">
-                                <button class="dropdown-btn transparent-btn" type="button" title="Thêm tùy chọn">
-                                    <div class="sr-only">Thêm tùy chọn</div>
-                                    <i data-feather="more-horizontal" aria-hidden="true"></i>
-                                </button>
-                                <ul class="users-item-dropdown dropdown">
-                                    <li><a asp-action="Details" asp-route-id="@chapter.Value.Id">Xem chi tiết</a></li>
-                                    <li><a asp-action="Edit" asp-route-id="@chapter.Value.Id">Chỉnh sửa</a></li>
-                                    <li>
-                                        <form asp-action="Delete" asp-route-id="@chapter.Value.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
-                                            <button type="submit" class="text-danger btn-link">Xóa</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </span>
-                        </td>
+                        <td colspan="6" class="text-center">Không có chương nào.</td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+
+    <!-- Pagination -->
+    @if (ViewBag.TotalPages > 1)
+    {
+        <nav>
+            <ul class="pagination justify-content-center">
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-comicId="@ViewBag.ComicId" asp-route-search="@ViewBag.Search" asp-route-page="@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    }
 </div>

@@ -1,5 +1,5 @@
 ﻿using DotNetTruyen.Models;
-using DotNetTruyen.Service;
+using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

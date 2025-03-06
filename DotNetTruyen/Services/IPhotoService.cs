@@ -4,7 +4,7 @@ namespace DotNetTruyen.Services
 {
     public interface IPhoToService
     {
-        Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
-        Task<List<ImageUploadResult>> AddListPhotoAsync(List<IFormFile> files);
+        Task<string> AddPhotoAsync(IFormFile file);
+        Task<List<string>> AddListPhotoAsync(List<IFormFile> files);
     }
 }
