@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DotNetTruyen.ViewModels
+namespace DotNetTruyen.ViewModels.Management
 {
     public class CreateComicViewModel
     {
@@ -15,7 +15,7 @@ namespace DotNetTruyen.ViewModels
 
         [Required]
         public IFormFile CoverImage { get; set; }
-        
+
         public List<Guid> GenreIds { get; set; }
 
         public bool Status { get; set; } = true;

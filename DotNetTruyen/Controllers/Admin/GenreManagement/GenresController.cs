@@ -11,6 +11,7 @@ using DotNetTruyen.ViewModels;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
+using DotNetTruyen.ViewModels.Management;
 
 namespace DotNetTruyen.Controllers.Admin.GenreManagement
 {

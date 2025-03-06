@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mail;
 
-namespace DotNetTruyen.Service
+namespace DotNetTruyen.Services
 {
 
     public class EmailService
@@ -14,7 +14,7 @@ namespace DotNetTruyen.Service
         }
 
         public async Task SendEmailAsync(string receptor, string subject, string body)
-        { 
+        {
             var displayName = configuration.GetValue<string>("EMAIL_CONFIGURATION:DISPLAYNAME");
             var email = configuration.GetValue<string>("EMAIL_CONFIGURATION:EMAIL");
             var password = configuration.GetValue<string>("EMAIL_CONFIGURATION:PASSWORD");
@@ -28,7 +28,7 @@ namespace DotNetTruyen.Service
             smtpClient.Credentials = new NetworkCredential(email, password);
 
             var message = new MailMessage();
-            message.From = new MailAddress(email!,displayName);
+            message.From = new MailAddress(email!, displayName);
             message.To.Add(receptor);
             message.Subject = subject;
             message.Body = body;

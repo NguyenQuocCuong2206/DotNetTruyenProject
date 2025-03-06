@@ -12,14 +12,14 @@ namespace DotNetTruyen.Services
             _cloudinary = cloudinary;
         }
 
-        public async Task<List<ImageUploadResult>> AddListPhotoAsync(List<IFormFile> files)
+        public async Task<List<string>> AddListPhotoAsync(List<IFormFile> files)
         {
             if (files == null || files.Count == 0)
             {
-                return null;
+                return new List<string>();
             }
 
-            var uploadResults = new List<ImageUploadResult>();
+            var imageUrls = new List<string>();
 
             foreach (var file in files)
             {
@@ -30,14 +30,17 @@ namespace DotNetTruyen.Services
                         File = new FileDescription(file.FileName, stream)
                     };
                     var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-                    uploadResults.Add(uploadResult);
+                    if (uploadResult != null && !string.IsNullOrEmpty(uploadResult.SecureUrl.ToString()))
+                    {
+                        imageUrls.Add(uploadResult.Url.ToString());
+                    }
                 }
             }
 
-            return uploadResults;
+            return imageUrls;
         }
 
-        public async Task<ImageUploadResult> AddPhotoAsync(IFormFile file)
+        public async Task<string> AddPhotoAsync(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
@@ -51,7 +54,7 @@ namespace DotNetTruyen.Services
                     File = new FileDescription(file.FileName, stream)
                 };
                 var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-                return uploadResult;
+                return uploadResult?.Url.ToString();
             }
         }
     }

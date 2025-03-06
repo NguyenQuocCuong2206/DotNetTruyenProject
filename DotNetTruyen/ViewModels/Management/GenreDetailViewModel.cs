@@ -1,6 +1,6 @@
 ﻿using DotNetTruyen.Models;
 
-namespace DotNetTruyen.ViewModels
+namespace DotNetTruyen.ViewModels.Management
 {
     public class GenreDetailViewModel
     {
@@ -10,6 +10,6 @@ namespace DotNetTruyen.ViewModels
 
         public List<Comic> Comics { get; set; } = new List<Comic>();
 
-        
+
     }
 }
