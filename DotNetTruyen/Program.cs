@@ -2,7 +2,6 @@
 using DotNetTruyen.Data;
 using DotNetTruyen.Hubs;
 using DotNetTruyen.Models;
-using DotNetTruyen.Service;
 using DotNetTruyen.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;

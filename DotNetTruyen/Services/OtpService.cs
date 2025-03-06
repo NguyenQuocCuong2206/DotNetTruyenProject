@@ -2,12 +2,12 @@
 using NuGet.Protocol;
 using System.Security.Cryptography;
 
-namespace DotNetTruyen.Service
+namespace DotNetTruyen.Services
 {
     public class OtpService
     {
         private readonly IMemoryCache _cache;
-        private readonly TimeSpan _expiry = TimeSpan.FromMinutes(5); 
+        private readonly TimeSpan _expiry = TimeSpan.FromMinutes(5);
 
         public OtpService(IMemoryCache cache)
         {
@@ -17,9 +17,9 @@ namespace DotNetTruyen.Service
         public string GenerateOtp(string email)
         {
             var rng = RandomNumberGenerator.Create();
-            byte[] bytes = new byte[4]; 
+            byte[] bytes = new byte[4];
             rng.GetBytes(bytes);
-            int value = BitConverter.ToInt32(bytes, 0) & int.MaxValue; 
+            int value = BitConverter.ToInt32(bytes, 0) & int.MaxValue;
             string otp = (value % 1000000).ToString("D6");
             _cache.Set(email, otp, _expiry);
             return otp;
@@ -42,7 +42,7 @@ namespace DotNetTruyen.Service
             {
                 if (cachedOtp == otp)
                 {
-                    _cache.Remove(email); 
+                    _cache.Remove(email);
                     return true;
                 }
             }

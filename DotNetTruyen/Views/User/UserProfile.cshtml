@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-@model ChangePasswordViewModel
+@model UpdateProfileViewModel
 @{
     ViewData["Title"] = "Thông tin tài khoản";
     var user = await UserManager.GetUserAsync(User);
@@ -114,10 +114,11 @@
                                                                                     <div class="form form-choose-avatar">
                                                                                         <div class="select-flie">
                                                                                             <!--Update Avatar -->
-                                                                                            <form>
+                                                                                            <form asp-controller="User" asp-action="UploadAvatar" method="post">
                                                                                                 Chỉ dành cho tệp .jpg .png hoặc .gif                        <label class="select-avata">
-                                                                                                    <input type="file" name="wp-manga-user-avatar">
+                                                                                                    <input asp-for="UploadAvatarViewModel.AvatarImage">
                                                                                                     <span class="file-name"></span>
+                                                                                                    <span asp-validation-for="UploadAvatarViewModel.AvatarImage" class="text-danger"></span>
                                                                                                 </label>
 
                                                                                                 <input type="submit" value="Thay đổi" name="wp-manga-upload-avatar" id="wp-manga-upload-avatar">
