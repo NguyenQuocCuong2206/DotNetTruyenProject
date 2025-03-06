@@ -1,0 +1,52 @@
+﻿@model DotNetTruyen.ViewModels.Management.CreateChapterViewModel
+
+@{
+    ViewData["Title"] = "Thêm Chương Mới";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<div class="container py-4">
+    <h1 class="mb-4 text-primary"><i class="fas fa-book"></i> Tạo Chương Mới</h1>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="shadow-lg p-4 bg-white rounded">
+        <input type="hidden" asp-for="ComicId" />
+
+        <div class="mb-3">
+            <label asp-for="ChapterNumber" class="form-label fw-bold"><i class="fas fa-sort-numeric-up"></i> Số Chương</label>
+            <input asp-for="ChapterNumber" class="form-control" placeholder="Nhập số chương..." required />
+            <span asp-validation-for="ChapterNumber" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ChapterTitle" class="form-label fw-bold"><i class="fas fa-heading"></i> Tiêu Đề Chương</label>
+            <input asp-for="ChapterTitle" class="form-control" placeholder="Nhập tiêu đề chương..." required />
+            <span asp-validation-for="ChapterTitle" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PublishedDate" class="form-label fw-bold"><i class="fas fa-calendar-alt"></i> Ngày Đăng (Không bắt buộc)</label>
+            <input asp-for="PublishedDate" type="datetime-local" class="form-control" />
+            <span asp-validation-for="PublishedDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold"><i class="fas fa-images"></i> Tải Ảnh Lên</label>
+            <div class="input-group">
+                <input asp-for="Images" type="file" class="form-control" multiple accept="image/*" required />
+                <label class="input-group-text" for="Images"><i class="fas fa-upload"></i></label>
+            </div>
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Lưu Chương</button>
+            <a asp-action="Index" asp-route-comicId="@Model.ComicId" class="btn btn-secondary"><i class="fas fa-times"></i> Hủy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

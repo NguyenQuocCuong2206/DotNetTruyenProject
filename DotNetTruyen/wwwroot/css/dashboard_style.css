@@ -1724,22 +1724,13 @@ button.disabled:focus {
 .badge-trashed,
 .badge-success,
 .badge-disabled {
-  padding: 1px;
+  padding: 5px 10px;
   width: 85px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 12px;
-  line-height: 1.67;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+  
+  
+ 
   border-radius: 100px;
   text-align: center;
 }

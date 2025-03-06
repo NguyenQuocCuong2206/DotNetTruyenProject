@@ -1,4 +1,4 @@
-﻿namespace DotNetTruyen.ViewModels
+﻿namespace DotNetTruyen.ViewModels.Management
 {
     public class CreateGenreViewModel
     {
