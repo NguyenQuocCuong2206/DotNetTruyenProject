@@ -81,9 +81,23 @@
                                                 <div class="c-user_item">
                                                     <h5>Xin chào, @user.NameToDisplay</h5>
                                                     <div class="c-user_avatar">
-                                                        <div class="c-user_avatar-image"><img alt='' src='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' decoding='async' /></div>
+                                                        @if (string.IsNullOrEmpty(user.ImageUrl))
+                                                        {
+                                                            <div class="c-user_avatar-image"><img alt='' src='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=50&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&#038;d=mm&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' decoding='async' /></div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="c-user_avatar-image"><img alt='' src='@user.ImageUrl' class='avatar avatar-50 photo' height='50' width='50' decoding='async' /></div>
+                                                        }
                                                         <ul class="c-user_menu">
-                                                            <li class="user-info"><img alt='' src='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=96&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=192&#038;d=mm&#038;r=g 2x' class='avatar avatar-96 photo' height='96' width='96' decoding='async' /><span class="info"><span class="user-email">@User.Identity.Name</span></span></li>
+                                                            @if (string.IsNullOrEmpty(user.ImageUrl))
+                                                            {
+                                                                <li class="user-info"><img alt='' src='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=96&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=192&#038;d=mm&#038;r=g 2x' class='avatar avatar-96 photo' height='96' width='96' decoding='async' /><span class="info"><span class="user-email">@user.NameToDisplay</span></span></li>
+                                                            }
+                                                            else
+                                                            {
+                                                                <li class="user-info"><img alt='' src='@user.ImageUrl' class='avatar avatar-96 photo' height='96' width='96' decoding='async' /><span class="info"><span class="user-email">@user.NameToDisplay</span></span></li>
+                                                            }
 
                                                             <li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-200"><a href="">Truyện đã theo dõi</a></li>
                                                             <li>
