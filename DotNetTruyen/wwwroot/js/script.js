@@ -1004,7 +1004,7 @@ jQuery(document).ready(function($){
 		};
 	});
 	
-	$('input[name="wp-manga-user-avatar"]').on('change', function(e){
+	$('input[name="user-avatar"]').on('change', function(e){
 		if( this.files.length ){
 			$('.file-name').html(this.files[0].name);
 		}else{
@@ -1012,51 +1012,51 @@ jQuery(document).ready(function($){
 		}
 	});
 
-	$(document).on( 'click', '#wp-manga-upload-avatar', function(e){
+	//$(document).on( 'click', '#wp-manga-upload-avatar', function(e){
 
-		e.preventDefault();
+	//	e.preventDefault();
 
-		var thisBtn = $(this),
-			chooseAvatar = $('.choose-avatar'),
-			userAvatarSection = $('.c-user-avatar');
+	//	var thisBtn = $(this),
+	//		chooseAvatar = $('.choose-avatar'),
+	//		userAvatarSection = $('.c-user-avatar');
 
-		var fd = new FormData();
-		var userAvatar = $('input[name="wp-manga-user-avatar"]')[0].files[0];
-		var userID = $('input[name="userID"]').val();
-		var _wpnonce = $('input[name="_wpnonce"]').val();
+	//	var fd = new FormData();
+	//	var userAvatar = $('input[name="wp-manga-user-avatar"]')[0].files[0];
+	//	var userID = $('input[name="userID"]').val();
+	//	var _wpnonce = $('input[name="_wpnonce"]').val();
 
-		fd.append( 'action', 'wp-manga-upload-avatar' );
-		fd.append( 'userAvatar', userAvatar );
-		fd.append( 'userID', userID );
-		fd.append( '_wpnonce', _wpnonce );
+	//	fd.append( 'action', 'wp-manga-upload-avatar' );
+	//	fd.append( 'userAvatar', userAvatar );
+	//	fd.append( 'userID', userID );
+	//	fd.append( '_wpnonce', _wpnonce );
 
-		jQuery.ajax({
-			url : manga.ajax_url,
-			type : 'POST',
-			enctype: 'multipart/form-data',
-			cache: false,
-			contentType: false,
-			processData: false,
-			data : fd,
-			beforeSend: function(){
-				thisBtn.attr('disabled', 'disabled');
-				chooseAvatar.addClass('uploading');
-			},
-			success: function( response ) {
-				if( response.success ) {
-					userAvatarSection.empty();
-					userAvatarSection.append( response.data );
-				} else {
-					alert( response.data.msg );
-				}
-			},
-			complete: function(response, xhr ){
-				thisBtn.removeAttr('disabled');
-				chooseAvatar.removeClass('uploading');
-			}
-		});
+	//	jQuery.ajax({
+	//		url : manga.ajax_url,
+	//		type : 'POST',
+	//		enctype: 'multipart/form-data',
+	//		cache: false,
+	//		contentType: false,
+	//		processData: false,
+	//		data : fd,
+	//		beforeSend: function(){
+	//			thisBtn.attr('disabled', 'disabled');
+	//			chooseAvatar.addClass('uploading');
+	//		},
+	//		success: function( response ) {
+	//			if( response.success ) {
+	//				userAvatarSection.empty();
+	//				userAvatarSection.append( response.data );
+	//			} else {
+	//				alert( response.data.msg );
+	//			}
+	//		},
+	//		complete: function(response, xhr ){
+	//			thisBtn.removeAttr('disabled');
+	//			chooseAvatar.removeClass('uploading');
+	//		}
+	//	});
 
-	});
+	//});
 
 	$(document).on( 'click', '.remove-manga-history', function(e){
 		e.preventDefault();

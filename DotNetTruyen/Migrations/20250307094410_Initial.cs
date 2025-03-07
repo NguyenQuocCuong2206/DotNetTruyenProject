@@ -496,19 +496,19 @@ namespace DotNetTruyen.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("3b1562e6-b0b9-4429-aaef-8f985bd7f03c"), null, "Reader", "READER" },
-                    { new Guid("8bc21234-ab5c-428f-b608-760e54b32a4a"), null, "Admin", "ADMIN" }
+                    { new Guid("53eecea1-eae3-4663-81a5-1dfe8d01a4a8"), null, "Admin", "ADMIN" },
+                    { new Guid("f97510a2-01d2-4022-a492-b0761db440c1"), null, "Reader", "READER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "ImageUrl", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("f02f08c0-f3a1-4938-8042-4fb26c3ce75c"), 0, "6ad12146-b0ae-402d-82c5-5f35222f51c7", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN@EXAMPLE.COM", "AQAAAAIAAYagAAAAEJ75jy/oUUM+IlcBIfslg2bCIKi6g22yKo8fz+eIqba4Qc4kv955fGCXPGPbvzy4cQ==", null, false, "0a3c2eb9-4b42-409c-a9c0-7ebd04605f9b", false, "admin" });
+                values: new object[] { new Guid("4a9ef10e-b5a2-4d52-aa47-cfbe47174290"), 0, "e65cfe87-928e-427f-bbef-7ddeb348de31", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAELGOlHft+ybIdcrf5QC97E1WJkw5Qzawp+DFDuuuuyN+P7eG5RARi6zYWi0HAxtVdA==", null, false, "d52ad158-0081-4857-a77a-424a8fbea604", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("8bc21234-ab5c-428f-b608-760e54b32a4a"), new Guid("f02f08c0-f3a1-4938-8042-4fb26c3ce75c") });
+                values: new object[] { new Guid("53eecea1-eae3-4663-81a5-1dfe8d01a4a8"), new Guid("4a9ef10e-b5a2-4d52-aa47-cfbe47174290") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChapterImages_ChapterId",

@@ -156,7 +156,6 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpGet("/register")]
-        [Authorize]
         public IActionResult Register()
         {
             return View();

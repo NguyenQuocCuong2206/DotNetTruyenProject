@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DotNetTruyen.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace DotNetTruyen.ViewModels
 {
@@ -45,7 +46,8 @@ namespace DotNetTruyen.ViewModels
 
     public class UploadAvatarViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng chọn một file")]
+        [FileValidation]
         public IFormFile AvatarImage { get; set; }
     }
 }

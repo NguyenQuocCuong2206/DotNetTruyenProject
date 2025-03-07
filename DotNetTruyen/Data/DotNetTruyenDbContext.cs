@@ -98,7 +98,7 @@ namespace DotNetTruyen.Data
                 UserName = "admin",
                 Email = adminEmail,
                 NormalizedEmail = adminEmail.ToUpper(),
-                NormalizedUserName = adminEmail.ToUpper(),
+                NormalizedUserName = "ADMIN",
                 EmailConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString(),
             };

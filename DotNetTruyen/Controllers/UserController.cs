@@ -172,7 +172,28 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadAvatar(UploadAvatarViewModel uploadAvatarViewModel)
         {
-            
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    if (uploadAvatarViewModel.AvatarImage != null)
+                    {
+                        var imageUrl = await _photoService.AddPhotoAsync(uploadAvatarViewModel.AvatarImage);
+                        if (imageUrl != null)
+                        {
+                            user.ImageUrl = imageUrl;
+                            var result = await _userManager.UpdateAsync(user);
+                            if (result.Succeeded)
+                            {
+                                ViewBag.UpdateSuccessMess = "Đã thay đổi ảnh đại diện thành công";
+                                return View("UserProfile");
+                            }
+                        }
+                    }
+                }
+            }
+            ViewBag.ErrorOtpChangeEmail = "Thay đổi ảnh đại diện không thành công";
             return View("UserProfile");
         }
     }
