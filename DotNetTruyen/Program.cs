@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Logging.ClearProviders(); // Nếu muốn loại bỏ các nhà cung cấp logging mặc định
+builder.Logging.AddConsole(); // Thêm log ra Console
+builder.Logging.AddDebug();
 builder.Services.AddSignalR();
 // Add services to the container.
 builder.Services.AddControllersWithViews();

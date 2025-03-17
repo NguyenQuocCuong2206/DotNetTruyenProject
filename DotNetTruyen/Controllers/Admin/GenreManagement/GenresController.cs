@@ -12,6 +12,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
 using DotNetTruyen.ViewModels.Management;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Text.Json;
 
 namespace DotNetTruyen.Controllers.Admin.GenreManagement
 {
@@ -19,15 +21,22 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IHubContext<GenreHub> _hubContext;
+        private readonly ILogger<GenresController> _logger;
 
-        public GenresController(DotNetTruyenDbContext context, IHubContext<GenreHub> hubContext)
+        public GenresController(DotNetTruyenDbContext context, IHubContext<GenreHub> hubContext, ILogger<GenresController> logger)
         {
             _context = context;
             _hubContext = hubContext;
+            _logger = logger;
         }
 
 
+        
+
+
         // GET: Genres
+
+
         public async Task<IActionResult> Index()
         {
             var comic = _context.Comics.ToList();
@@ -60,11 +69,6 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             return View(genre);
         }
 
-        // GET: Genres/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Genres/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -73,29 +77,46 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateGenreViewModel createdGenre)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                ViewData["ShowModal"] = "true"; // Giữ modal mở nếu có lỗi
-                return View("Index", createdGenre); // Quay lại Index với lỗi
+                if (!ModelState.IsValid)
+                {
+                    ViewData["ShowModal"] = "true";
+                    _logger.LogWarning("Invalid model state.");
+                    return View("Index", createdGenre);
+                }
+
+                var genre = new Genre
+                {
+                    GenreName = createdGenre.GenreName
+                };
+
+                _logger.LogWarning("Genre created successfully.");
+                _context.Add(genre);
+                await _context.SaveChangesAsync();
+
+                var genreViewModel = new GenreViewModel
+                {
+                    Id = genre.Id,
+                    GenreName = genre.GenreName,
+                    TotalStories = 0,
+                    UpdatedAt = DateTime.Now
+                };
+
+                await _hubContext.Clients.All.SendAsync("ReceiveGenreCreated", genreViewModel);
+                return RedirectToAction("Index");
             }
-
-            var genre = new Genre
+            catch (Exception ex)
             {
-                GenreName = createdGenre.GenreName
-            };
+       
+                _logger.LogError(ex, "Error occurred while creating genre.");
 
-            _context.Add(genre);
-            await _context.SaveChangesAsync();
-            var genreViewModel = new GenreViewModel
-            {
-                Id = genre.Id,
-                GenreName = genre.GenreName,
-                TotalStories = 0,
-                UpdatedAt = DateTime.Now
-            };
-            await _hubContext.Clients.All.SendAsync("ReceiveGenreCreated", genreViewModel);
-            return RedirectToAction("Index"); // Load lại trang sau khi thêm thành công
+               
+                ViewData["ErrorMessage"] = "An error occurred while processing your request. Please try again later.";
+                return View("Index", createdGenre);
+            }
         }
+
 
 
         // GET: Genres/Edit/5
@@ -128,9 +149,26 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             return View("~/Views/Admin/Genres/Edit.cshtml", viewModel);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> SearchStories(string query)
+        {
+            var comicsQuery = _context.Comics.AsQueryable();
+
+            if (!string.IsNullOrEmpty(query))
+            {
+                comicsQuery = comicsQuery.Where(c => c.Title.ToLower().Contains(query.ToLower()));
+            }
+
+            var comics = await comicsQuery
+                .Select(c => new { c.Id, c.Title, c.CoverImage })
+                .ToListAsync();
+
+            return Json(comics);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, GenreDetailViewModel model)
+        public async Task<IActionResult> Edit(Guid id, EditGenreViewModel model)
         {
             if (id != model.Id)
             {
@@ -149,12 +187,14 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 }
 
                 genre.GenreName = model.GenreName;
-
+                List<Guid>? selectedStoryIds = string.IsNullOrEmpty(model.SelectedStoryIds)
+            ? new List<Guid>()
+            : JsonSerializer.Deserialize<List<Guid>>(model.SelectedStoryIds);
                 // Remove old relationships
                 _context.ComicGenres.RemoveRange(genre.ComicGenres);
 
                 // Add new relationships
-                foreach (var comicId in model.SelectedStoryIds)
+                foreach (var comicId in selectedStoryIds)
                 {
                     var comicGenre = new ComicGenre
                     {
