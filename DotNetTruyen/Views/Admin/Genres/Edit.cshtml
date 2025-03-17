@@ -11,11 +11,12 @@
             <h4 class="fw-bold mb-0 text-dark">Chỉnh sửa thể loại</h4>
         </div>
         <div class="card-body p-4">
-            <form asp-action="Edit" method="post">
+            <form id="editForm" asp-action="Edit" method="post">
                 <input type="hidden" asp-for="Id" />
                 <input type="hidden" id="selectedStoryIdsInput" name="SelectedStoryIds" value="@Html.Raw(Json.Serialize(Model.SelectedStoryIds))" />
 
                 <!-- Tên thể loại -->
+                
                 <div class="mb-4">
                     <label class="form-label fw-medium text-dark">Tên thể loại</label>
                     <input asp-for="GenreName" class="form-control py-2 rounded-3 shadow-sm" placeholder="Nhập tên thể loại" />
@@ -25,12 +26,12 @@
                 <!-- Chọn truyện -->
                 <div class="mb-4">
                     <label class="form-label fw-medium text-dark">Chọn truyện <span class="badge bg-primary rounded-pill" id="selectedCount">@Model.SelectedStoryIds.Count đã chọn</span></label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text bg-white border-end-0">
-                            <i data-feather="search" class="text-muted"></i>
-                        </span>
-                        <input type="text" id="searchQuery" class="form-control py-2 rounded-end-0 " placeholder="Tìm kiếm truyện..." />
-                        <button type="button" id="searchButton" class="btn btn-primary px-4 py-2 rounded-end-3">Tìm kiếm</button>
+                    
+
+                    <div class="search-wrapper  mb-3 " >
+                        <i data-feather="search" aria-hidden="true"></i>
+                        <input type="text" id="searchQuery" class="" placeholder="Nhập tên thể loại" required>
+                        <button type="button" id="searchButton" class="btn btn-info px-2 py-2 rounded-end-3">Tìm kiếm</button>
                     </div>
                     <div class="border rounded-3 p-3 bg-white shadow-sm" id="storyList" style="max-height: 300px; overflow-y: auto;">
                         @foreach (var story in Model.Comics)
@@ -70,7 +71,7 @@
                 <!-- Nút hành động -->
                 <div class="d-flex justify-content-end gap-2">
                     <a asp-action="Index" class="btn btn-outline-secondary px-4 py-2 rounded-3">Hủy</a>
-                    <button type="submit" class="btn btn-primary px-4 py-2 rounded-3">Lưu thay đổi</button>
+                    <button id="submitButton" type="submit" class="btn btn-primary px-4 py-2 rounded-3">Lưu thay đổi</button>
                 </div>
             </form>
         </div>
@@ -123,10 +124,28 @@
             const searchButton = document.getElementById("searchButton");
             const selectedCountBadge = document.getElementById("selectedCount");
             const selectedStoryIdsInput = document.getElementById("selectedStoryIdsInput");
-
+            const submitButton = document.getElementById("submitButton");
+            const editForm = document.getElementById("editForm");
             // Danh sách truyện ban đầu được chọn
             let selectedStoryIds = @Html.Raw(Json.Serialize(Model.SelectedStoryIds));
+            submitButton.addEventListener("click", async function (e) {
+                e.preventDefault();
+                const result = await Swal.fire({
+                    title: 'Xác nhận',
+                    text: 'Bạn có chắc chắn muốn lưu thay đổi không?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Có',
+                    cancelButtonText: 'Không',
+                    reverseButtons: true
+                });
 
+                if (result.isConfirmed) {
+                    editForm.submit();
+                } else {
+                    notyf.error("Đã hủy lưu thay đổi!");
+                }
+            });
             // Cập nhật input ẩn
             function updateHiddenInput() {
                 selectedStoryIdsInput.value = JSON.stringify(selectedStoryIds);
