@@ -1,11 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DotNetTruyen.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace DotNetTruyen.ViewModels
 {
-    public class ChangePasswordViewModel
+    public class UpdateProfileViewModel
     {
         public UpdatePasswordViewModel UpdatePasswordViewModel { get; set; }
         public AddPasswordViewModel AddPasswordViewModel { get; set; }
+
+        public UploadAvatarViewModel UploadAvatarViewModel { get; set; }
     }
 
     public class AddPasswordViewModel
@@ -39,5 +42,12 @@ namespace DotNetTruyen.ViewModels
         [DataType(DataType.Password)]
         [Compare("NewPassword", ErrorMessage = "Mật khẩu lặp lại không trùng khớp")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class UploadAvatarViewModel
+    {
+        [Required(ErrorMessage = "Vui lòng chọn một file")]
+        [FileValidation]
+        public IFormFile AvatarImage { get; set; }
     }
 }
