@@ -121,27 +121,26 @@ namespace DotNetTruyen.Data
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in ChangeTracker.Entries())
+            foreach (var entry in ChangeTracker.Entries<BaseEnity<Guid>>())
             {
-                if (entry.Entity is Genre entity)
-                {
+                
                     switch (entry.State)
                     {
                         case EntityState.Added:
-                            entity.CreatedAt = DateTime.UtcNow;
-                            entity.UpdatedAt = DateTime.UtcNow; 
+                        entry.Entity.CreatedAt = DateTime.UtcNow;
+                        entry.Entity.UpdatedAt = DateTime.UtcNow; 
                             break;
 
                         case EntityState.Modified:
-                            entity.UpdatedAt = DateTime.UtcNow;
+                        entry.Entity.UpdatedAt = DateTime.UtcNow;
                             break;
 
                         case EntityState.Deleted:
-                            entry.State = EntityState.Modified; 
-                            entity.DeletedAt = DateTime.UtcNow; 
+                        entry.State = EntityState.Modified;
+                        entry.Entity.DeletedAt = DateTime.UtcNow; 
                             break;
                     }
-                }
+               
             }
 
             return base.SaveChangesAsync(cancellationToken);

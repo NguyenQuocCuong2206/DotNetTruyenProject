@@ -1,34 +1,50 @@
-﻿@model IEnumerable<DotNetTruyen.ViewModels.Management.ChapterViewModel>
+﻿@model DotNetTruyen.ViewModels.Management.ChapterIndexViewModel
 
 @{
     ViewData["Title"] = "Quản lý Chương";
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
 }
 
-<div class="container py-4">
+
     <h1>Danh sách Chương</h1>
 
-    <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
-        <form method="get" class="d-flex gap-2">
-            <input type="hidden" name="comicId" value="@ViewBag.ComicId" />
-            <div class="search-wrapper">
-                <i data-feather="search" aria-hidden="true"></i>
-                <input type="text" name="search" value="@ViewBag.Search" placeholder="Nhập từ khóa ..." required>
+<div class="d-flex justify-content-between align-items-center mb-2 mt-4">
+
+    <form method="get" asp-action="Index" class="d-flex align-items-center">
+        <input type="hidden" name="comicId" value="@Model.ComicId">
+        <div class="search-wrapper">
+            <i data-feather="search" aria-hidden="true"></i>
+            <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Nhập từ khóa ...">
+            <button type="submit" class="btn btn-primary ms-2">Tìm kiếm</button>
+        </div>
+    </form>
+
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Thêm chương mới
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        @if (Model.ChapterViewModels == null || !Model.ChapterViewModels.Any())
+        {
+            <div class="text-center mt-4">
+                <span class="badge bg-warning text-dark p-3">Không có chương nào được tìm thấy</span>
             </div>
+        }
+        else
+        {
             
-            <button type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
-        </form>
-
-        <a asp-action="Create" asp-route-comicId="@ViewBag.ComicId" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Thêm Chương mới
-        </a>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered">
+            <div class="users-table table-wrapper">
+                <table class="posts-table">
             <thead>
-                <tr class="table-primary">
-                    <th>STT</th>
+                <tr class="users-table-info">
+                     <th class="w-25">
+                          <label class="users-table__checkbox ms-20">
+                                <input type="checkbox" class="check-all">Thứ tự chương
+                          </label>
+                     </th>   
+                    
                     <th>Tên chương</th>
                     <th>Trạng thái</th>
                     <th>Ngày đăng</th>
@@ -37,66 +53,69 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.Any())
-                {
-                    @foreach (var chapter in Model.Select((value, index) => new { Value = value, Index = index + 1 }))
+                
+                    @foreach (var chapter in Model.ChapterViewModels)
                     {
                         <tr>
-                            <td>@chapter.Index</td>
-                            <td>@chapter.Value.ChapterTitle</td>
+                                <td>
+                                    <label class="users-table__checkbox">
+                                        <input type="checkbox" class="check">
+                                        <div class="categories-table-img">
+                                            @chapter.ChapterNumber
+                                        </div>
+                                    </label>
+                                </td>
+                            <td>@chapter.ChapterTitle</td>
                             <td>
-                                @if (chapter.Value.PublishedDate.HasValue)
+                                @if (chapter.PublishedDate.HasValue)
                                 {
-                                    if (chapter.Value.PublishedDate.Value > DateTime.Now)
+                                    if (chapter.PublishedDate.Value > DateTime.Now)
                                     {
-                                        <span class="badge bg-warning">Lên lịch</span>
+                                        <span class="badge-pending">Lên lịch</span>
                                     }
                                     else
                                     {
-                                        <span class="badge bg-success">Đã đăng</span>
+                                            <span class="badge-active">Đã đăng</span>
                                     }
                                 }
                                 else
                                 {
-                                    <span class="badge bg-secondary">Chưa đăng</span>
+                                    <span class="badge-secondary">Chưa đăng</span>
                                 }
                             </td>
-                            <td>@(chapter.Value.PublishedDate?.ToString("dd/MM/yyyy") ?? "Chưa có")</td>
-                            <td>@chapter.Value.Views</td>
+                            <td>@(chapter.PublishedDate?.ToString("dd/MM/yyyy") ?? "Chưa có")</td>
+                            <td>@chapter.Views</td>
                             <td>
-                                <div class="btn-group">
-                                    <a asp-action="Details" asp-route-id="@chapter.Value.Id" class="btn btn-info btn-sm">Xem</a>
-                                    <a asp-action="Edit" asp-route-id="@chapter.Value.Id" class="btn btn-warning btn-sm">Sửa</a>
-                                    <form asp-action="Delete" asp-route-id="@chapter.Value.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');" class="d-inline">
-                                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
-                                    </form>
-                                </div>
+                                <span class="p-relative">
+                                    <button class="dropdown-btn transparent-btn" type="button" title="Thêm tùy chọn">
+                                        <div class="sr-only">Thêm tùy chọn</div>
+                                        <i data-feather="more-horizontal" aria-hidden="true"></i>
+                                    </button>
+                                    <ul class="users-item-dropdown dropdown">
+                                        
+                                        <li><a asp-action="Edit" asp-route-id="@chapter.Id">Chỉnh sửa</a></li>
+                                        <li>
+                                            <form asp-action="Delete" asp-route-id="@chapter.Id" method="post" class="delete-form">
+                                                <button type="button" class="btn-link delete-btn" data-id="@chapter.Id">Xóa</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </span>
                             </td>
                         </tr>
                     }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="6" class="text-center">Không có chương nào.</td>
-                    </tr>
-                }
+                
+                
             </tbody>
         </table>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+            <a asp-action="Index" asp-route-searchQuery="@Model.SearchQuery" asp-route-page="@(Model.CurrentPage - 1)" class="btn btn-outline-secondary btn-sm @(Model.CurrentPage == 1 ? "disabled" : "")">Trước</a>
+            <span class="badge bg-light text-dark border mx-3 px-3 py-2">Trang @Model.CurrentPage / @Model.TotalPages</span>
+            <a asp-action="Index" asp-route-searchQuery="@Model.SearchQuery" asp-route-page="@(Model.CurrentPage + 1)" class="btn btn-outline-secondary btn-sm ms-2 @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">Sau</a>
+        </div>
+        }
     </div>
+    </div>
+    
 
-    <!-- Pagination -->
-    @if (ViewBag.TotalPages > 1)
-    {
-        <nav>
-            <ul class="pagination justify-content-center">
-                @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                {
-                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                        <a class="page-link" asp-action="Index" asp-route-comicId="@ViewBag.ComicId" asp-route-search="@ViewBag.Search" asp-route-page="@i">@i</a>
-                    </li>
-                }
-            </ul>
-        </nav>
-    }
-</div>
