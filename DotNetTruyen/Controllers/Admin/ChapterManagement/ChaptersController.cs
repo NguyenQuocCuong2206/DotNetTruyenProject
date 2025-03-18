@@ -90,36 +90,41 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateChapterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var chapter = new Chapter
-                {
-                    Id = Guid.NewGuid(),
-                    ChapterTitle = model.ChapterTitle,
-                    ChapterNumber = model.ChapterNumber,
-                    PublishedDate = model.PublishedDate,
-                    Views = 0,
-                    ComicId = model.ComicId,
-                    Images = new List<ChapterImage>()
-                };
-
-                if (model.Images != null && model.Images.Count > 0)
-                {
-                    foreach (var image in model.Images)
-                    {
-                        var imageUrl = await _imageUploadService.AddPhotoAsync(image);
-                        if (!string.IsNullOrEmpty(imageUrl))
-                        {
-                            chapter.Images.Add(new ChapterImage { Id = Guid.NewGuid(), ChapterId = chapter.Id, ImageUrl = imageUrl });
-                        }
-                    }
-                }
-
-                _context.Add(chapter);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { comicId = model.ComicId });
+                return View("~/Views/Admin/Chapters/Create.cshtml", model);
             }
-            return View("~/Views/Admin/Chapters/Create.cshtml", model);
+
+            var chapter = new Chapter
+            {
+                Id = Guid.NewGuid(),
+                ChapterTitle = model.ChapterTitle,
+                ChapterNumber = model.ChapterNumber,
+                PublishedDate = model.PublishedDate,
+                Views = 0,
+                ComicId = model.ComicId,
+                Images = new List<ChapterImage>()
+            };
+
+            
+            if (model.Images != null && model.Images.Count > 0)
+            {
+                var imageUrls = await _imageUploadService.AddListPhotoAsync(model.Images);
+                foreach (var imageUrl in imageUrls)
+                {
+                    chapter.Images.Add(new ChapterImage
+                    {
+                        Id = Guid.NewGuid(),
+                        ChapterId = chapter.Id,
+                        ImageUrl = imageUrl
+                    });
+                }
+            }
+
+            _context.Add(chapter);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { comicId = model.ComicId });
         }
 
         // GET: Chapters/Edit/5

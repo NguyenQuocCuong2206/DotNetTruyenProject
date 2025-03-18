@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DotNetTruyen.ViewModels.Management.GenreViewModel>
+﻿@model DotNetTruyen.ViewModels.Management.GenreIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -31,7 +31,7 @@
                             <i data-feather="trending-up" aria-hidden="true"></i>4.07%
                         </span>
                         Last month
-                    </p>
+                    </p> 
                 </div>
             </article>
         </div>
@@ -75,17 +75,23 @@
 
     <!-- Search & Add -->
     <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
-        
+
+        <form method="get" asp-action="Index" class="d-flex align-items-center">
             <div class="search-wrapper">
                 <i data-feather="search" aria-hidden="true"></i>
-                <input  type="text" placeholder="Enter keywords ..." required>
+                <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Enter keywords ..." required>
+                <button type="submit" class="btn btn-primary ms-2">Tìm kiếm</button>
             </div>
+        </form>
         
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
             <i class="fas fa-plus"></i> Thêm thể loại mới
         </button>
     </div>
-
+    <div>
+        @ViewData["ErrorMessage"]
+        @ViewData["ShowModal"]
+    </div>
     <!-- Categories Table -->
     <div class="card shadow-sm border-0">
         <div class="card-body">
@@ -105,7 +111,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.GenreViewModels)
                         {
                             <tr>
                                 <td>
@@ -128,7 +134,7 @@
                                         </button>
                                         <ul class="users-item-dropdown dropdown">
                                             <li><a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a></li>
-                                            <li><a asp-action="Details" asp-route-id="@item.Id">Xem chi tiết</a></li>
+                                            
                                             <li>
                                                 <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
                                                     <button type="submit" class="btn-link">Xóa</button>
@@ -147,9 +153,10 @@
     </div>
 
     <!-- Pagination -->
-    <div class="d-flex justify-content-end mt-3">
-        <button class="btn btn-outline-secondary btn-sm">Trước</button>
-        <button class="btn btn-outline-secondary btn-sm ms-2">Sau</button>
+    <div class="d-flex justify-content-end align-items-center mt-3">
+        <a asp-action="Index" asp-route-searchQuery="@Model.SearchQuery" asp-route-page="@(Model.CurrentPage - 1)" class="btn btn-outline-secondary btn-sm @(Model.CurrentPage == 1 ? "disabled" : "")">Trước</a>
+        <span class="badge bg-light text-dark border mx-3 px-3 py-2">Trang @Model.CurrentPage / @Model.TotalPages</span>     
+        <a asp-action="Index" asp-route-searchQuery="@Model.SearchQuery" asp-route-page="@(Model.CurrentPage + 1)" class="btn btn-outline-secondary btn-sm @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">Sau</a>
     </div>
 </div>
 
@@ -168,7 +175,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="genreName" class="form-label">Tên thể loại</label>
-                        <input type="text" class="form-control bg-light" id="genreName" name="GenreName" required>
+                        <input  type="text" class="form-control bg-light" id="genreName" name="GenreName" required>
                         <span class="text-danger">@Html.ValidationMessage("GenreName")</span>
                     </div>
                 </div>
@@ -184,7 +191,24 @@
 @section Scripts{
 
     <script>
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("/genreHub")
+            .withAutomaticReconnect() 
+            .build();
+
+        async function startConnection() {
+            try {
+                await connection.start();
+                console.log("✅ SignalR Connected! State:", connection.state);
+            } catch (err) {
+                console.error("❌ SignalR Connection Failed:", err);
+            }
+        }
+
+        
+        startConnection();
         connection.on("ReceiveGenreCreated", function (genre) {
+            console.log("📩 New Genre Received:", genre);
             
             let formattedDate = new Date(genre.updatedAt).toLocaleString("en-US", {
                 month: "numeric",

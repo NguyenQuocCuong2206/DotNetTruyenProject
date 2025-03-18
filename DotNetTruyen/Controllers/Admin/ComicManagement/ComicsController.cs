@@ -26,14 +26,37 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
 
 
         // GET: Comics
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = "", int page = 1)
         {
-            var comics = await _context.Comics
-             .Include(c => c.Likes)     
-             .Include(c => c.Follows)   
-             .ToListAsync();
+            int pageSize = 1;
 
-            return View("~/Views/Admin/Comics/Index.cshtml", comics);
+            var comicsQuery = _context.Comics
+                .Include(c => c.Likes)
+                .Include(c => c.Follows)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                comicsQuery = comicsQuery.Where(c => c.Title.Contains(searchQuery) || c.Author.Contains(searchQuery));
+            }
+
+            var totalComics = await comicsQuery.CountAsync();
+
+            var comics = await comicsQuery
+                .OrderBy(c => c.Title)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var viewModel = new ComicIndexViewModel
+            {
+                Comics = comics,
+                SearchQuery = searchQuery,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalComics / (double)pageSize)
+            };
+
+            return View("~/Views/Admin/Comics/Index.cshtml", viewModel);
         }
 
         // GET: Comics/Details/5
