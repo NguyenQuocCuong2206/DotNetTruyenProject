@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DotNetTruyen.Models.Comic>
+﻿@model DotNetTruyen.ViewModels.Management.ComicIndexViewModel
 
 @{
     ViewData["Title"] = "Danh sách truyện";
@@ -10,10 +10,13 @@
 
 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
 
-    <div class="search-wrapper">
-        <i data-feather="search" aria-hidden="true"></i>
-        <input type="text" placeholder="Enter keywords ..." required>
-    </div>
+        <form method="get" asp-action="Index" class="d-flex align-items-center">
+            <div class="search-wrapper">
+                <i data-feather="search" aria-hidden="true"></i>
+                <input type="text" name="searchQuery" value="@Model.SearchQuery" placeholder="Enter keywords ..." required>
+                <button type="submit" class="btn btn-primary ms-2">Tìm kiếm</button>
+            </div>
+        </form>
 
         <a asp-action="Create" class="btn btn-primary">
             <i class="fas fa-plus"></i> Thêm truyện mới
@@ -26,7 +29,7 @@
             <tr class="users-table-info">
                 <th>
                     <label class="users-table__checkbox ms-20">
-                        <input type="checkbox" class="check-all">Ảnh bìa
+                        <input name="searchQuery" value="@Model.SearchQuery" type="checkbox" class="check-all">Ảnh bìa
                     </label>
                 </th>
                 
@@ -40,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var comic in Model)
+            @foreach (var comic in Model.Comics)
             {
                 <tr>
                     <td>
@@ -96,5 +99,9 @@
             }
         </tbody>
     </table>
+    </div>
+    <div class="d-flex justify-content-end mt-3">
+        <a asp-action="Index" asp-route-searchQuery="@Model.SearchQuery" asp-route-page="@(Model.CurrentPage - 1)" class="btn btn-outline-secondary btn-sm @(Model.CurrentPage == 1 ? "disabled" : "")">Trước</a>
+        <a asp-action="Index" asp-route-searchQuery="@Model.SearchQuery" asp-route-page="@(Model.CurrentPage + 1)" class="btn btn-outline-secondary btn-sm ms-2 @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">Sau</a>
     </div>
 </div>

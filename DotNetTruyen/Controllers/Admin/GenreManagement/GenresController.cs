@@ -37,18 +37,42 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
         // GET: Genres
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = "", int page =1)
         {
-            var comic = _context.Comics.ToList();
-            var viewModel = _context.Genres.Select(g => new GenreViewModel
+            int pageSize = 1;
+            
+            var genreQuery = _context.Genres.AsQueryable();
+            if(!string.IsNullOrEmpty(searchQuery))
             {
-                Id = g.Id,
-                GenreName = g.GenreName,
-                TotalStories = g.ComicGenres.Count(),
-                UpdatedAt = DateTime.Now,
+                genreQuery = genreQuery.Where(g => g.GenreName.Contains(searchQuery));
+            }
+            var totalGenres = await genreQuery.CountAsync();
 
-            });
-            return View("~/Views/Admin/Genres/Index.cshtml", await viewModel.ToListAsync());
+            var genres = await genreQuery
+                .OrderBy(g => g.GenreName)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(g => new GenreViewModel
+                {
+                    Id = g.Id,
+                    GenreName = g.GenreName,
+                    TotalStories = g.ComicGenres.Count(),
+                    UpdatedAt = DateTime.Now,
+                })
+                .ToListAsync();
+
+
+            var viewModel = new GenreIndexViewModel
+            {
+                GenreViewModels = genres,
+                SearchQuery = searchQuery,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalGenres / (double)pageSize)
+            };
+            
+
+
+            return View("~/Views/Admin/Genres/Index.cshtml", viewModel);
         }
 
         // GET: Genres/Details/5
