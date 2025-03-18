@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace DotNetTruyen.Service
+namespace DotNetTruyen.Services
 {
     public class CustomIdentityErrorDescriber : IdentityErrorDescriber
     {
-        
+
         public override IdentityError DuplicateUserName(string userName)
         {
             return new IdentityError

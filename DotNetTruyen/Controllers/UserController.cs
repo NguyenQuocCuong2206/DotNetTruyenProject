@@ -1,5 +1,5 @@
 ﻿using DotNetTruyen.Models;
-using DotNetTruyen.Service;
+using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,18 +17,21 @@ namespace DotNetTruyen.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly EmailService _emailService;
         private readonly OtpService _otpService;
+        private readonly IPhoToService _photoService;
 
         public UserController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             EmailService emailService,
-            OtpService otpService
+            OtpService otpService,
+            IPhoToService photoService
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
             _otpService = otpService;
+            _photoService = photoService;
         }
 
         [HttpGet("/userProfile")]
@@ -58,7 +61,7 @@ namespace DotNetTruyen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel changePassword)
+        public async Task<IActionResult> ChangePassword(UpdateProfileViewModel changePassword)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
@@ -77,7 +80,7 @@ namespace DotNetTruyen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddPassword(ChangePasswordViewModel changePassword)
+        public async Task<IActionResult> AddPassword(UpdateProfileViewModel changePassword)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user != null && !await _userManager.HasPasswordAsync(user))
@@ -163,6 +166,35 @@ namespace DotNetTruyen.Controllers
             ViewBag.ErrorOtpChangeEmail = "Email không hợp lệ";
             return View("OtpChangeEmail");
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadAvatar(UploadAvatarViewModel uploadAvatarViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    if (uploadAvatarViewModel.AvatarImage != null)
+                    {
+                        var imageUrl = await _photoService.AddPhotoAsync(uploadAvatarViewModel.AvatarImage);
+                        if (imageUrl != null)
+                        {
+                            user.ImageUrl = imageUrl;
+                            var result = await _userManager.UpdateAsync(user);
+                            if (result.Succeeded)
+                            {
+                                ViewBag.UpdateSuccessMess = "Đã thay đổi ảnh đại diện thành công";
+                                return View("UserProfile");
+                            }
+                        }
+                    }
+                }
+            }
+            ViewBag.ErrorOtpChangeEmail = "Thay đổi ảnh đại diện không thành công";
+            return View("UserProfile");
         }
     }
 }

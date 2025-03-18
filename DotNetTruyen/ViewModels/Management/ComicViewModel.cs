@@ -1,6 +1,6 @@
 ﻿using DotNetTruyen.Models;
 
-namespace DotNetTruyen.ViewModels
+namespace DotNetTruyen.ViewModels.Management
 {
     public class ComicViewModel
     {

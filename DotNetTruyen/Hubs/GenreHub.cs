@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using DotNetTruyen.ViewModels;
+using DotNetTruyen.ViewModels.Management;
 
 namespace DotNetTruyen.Hubs
 {

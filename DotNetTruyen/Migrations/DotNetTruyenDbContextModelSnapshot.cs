@@ -498,17 +498,17 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f02f08c0-f3a1-4938-8042-4fb26c3ce75c"),
+                            Id = new Guid("4a9ef10e-b5a2-4d52-aa47-cfbe47174290"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6ad12146-b0ae-402d-82c5-5f35222f51c7",
+                            ConcurrencyStamp = "e65cfe87-928e-427f-bbef-7ddeb348de31",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJ75jy/oUUM+IlcBIfslg2bCIKi6g22yKo8fz+eIqba4Qc4kv955fGCXPGPbvzy4cQ==",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAELGOlHft+ybIdcrf5QC97E1WJkw5Qzawp+DFDuuuuyN+P7eG5RARi6zYWi0HAxtVdA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0a3c2eb9-4b42-409c-a9c0-7ebd04605f9b",
+                            SecurityStamp = "d52ad158-0081-4857-a77a-424a8fbea604",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -562,13 +562,13 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8bc21234-ab5c-428f-b608-760e54b32a4a"),
+                            Id = new Guid("53eecea1-eae3-4663-81a5-1dfe8d01a4a8"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("3b1562e6-b0b9-4429-aaef-8f985bd7f03c"),
+                            Id = new Guid("f97510a2-01d2-4022-a492-b0761db440c1"),
                             Name = "Reader",
                             NormalizedName = "READER"
                         });
@@ -660,8 +660,8 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("f02f08c0-f3a1-4938-8042-4fb26c3ce75c"),
-                            RoleId = new Guid("8bc21234-ab5c-428f-b608-760e54b32a4a")
+                            UserId = new Guid("4a9ef10e-b5a2-4d52-aa47-cfbe47174290"),
+                            RoleId = new Guid("53eecea1-eae3-4663-81a5-1dfe8d01a4a8")
                         });
                 });
 

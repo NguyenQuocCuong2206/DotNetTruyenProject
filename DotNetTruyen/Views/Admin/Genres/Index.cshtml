@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DotNetTruyen.ViewModels.GenreViewModel>
+﻿@model IEnumerable<DotNetTruyen.ViewModels.Management.GenreViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -31,7 +31,7 @@
                             <i data-feather="trending-up" aria-hidden="true"></i>4.07%
                         </span>
                         Last month
-                    </p>
+                    </p> 
                 </div>
             </article>
         </div>
@@ -85,7 +85,10 @@
             <i class="fas fa-plus"></i> Thêm thể loại mới
         </button>
     </div>
-
+    <div>
+        @ViewData["ErrorMessage"]
+        @ViewData["ShowModal"]
+    </div>
     <!-- Categories Table -->
     <div class="card shadow-sm border-0">
         <div class="card-body">
@@ -101,7 +104,7 @@
 
                             <th>Số lượng truyện</th>
                             <th>Cập nhật lần cuối</th>
-                            <th ">Hành động</th>
+                            <th >Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,7 +131,7 @@
                                         </button>
                                         <ul class="users-item-dropdown dropdown">
                                             <li><a asp-action="Edit" asp-route-id="@item.Id">Chỉnh sửa</a></li>
-                                            <li><a asp-action="Details" asp-route-id="@item.Id">Xem chi tiết</a></li>
+                                            
                                             <li>
                                                 <form asp-action="Delete" asp-route-id="@item.Id" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
                                                     <button type="submit" class="btn-link">Xóa</button>
@@ -168,7 +171,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="genreName" class="form-label">Tên thể loại</label>
-                        <input type="text" class="form-control bg-light" id="genreName" name="GenreName" required>
+                        <input  type="text" class="form-control bg-light" id="genreName" name="GenreName" required>
                         <span class="text-danger">@Html.ValidationMessage("GenreName")</span>
                     </div>
                 </div>
@@ -184,7 +187,24 @@
 @section Scripts{
 
     <script>
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl("/genreHub")
+            .withAutomaticReconnect() 
+            .build();
+
+        async function startConnection() {
+            try {
+                await connection.start();
+                console.log("✅ SignalR Connected! State:", connection.state);
+            } catch (err) {
+                console.error("❌ SignalR Connection Failed:", err);
+            }
+        }
+
+        
+        startConnection();
         connection.on("ReceiveGenreCreated", function (genre) {
+            console.log("📩 New Genre Received:", genre);
             
             let formattedDate = new Date(genre.updatedAt).toLocaleString("en-US", {
                 month: "numeric",

@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-@model ChangePasswordViewModel
+@model UpdateProfileViewModel
 @{
     ViewData["Title"] = "Thông tin tài khoản";
     var user = await UserManager.GetUserAsync(User);
@@ -22,7 +22,10 @@
 
                                 <div class="col-md-12 col-sm-12">
 
-                                    <div class="ad c-ads custom-code body-top-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/Build-The-Best-Manga-Site.jpg" /></a></div>
+                                    <!-- Quang cao
+                                        <div class="ad c-ads custom-code body-top-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/Build-The-Best-Manga-Site.jpg" /></a></div>
+                                    -->
+                                    
 
                                     <div class="main-col-inner">
 
@@ -108,23 +111,34 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="c-user-avatar">
-                                                                                            <img alt='' src='https://secure.gravatar.com/avatar/f4e15f26edec400f6317e5a94e418299?s=195&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f4e15f26edec400f6317e5a94e418299?s=390&#038;d=mm&#038;r=g 2x' class='avatar avatar-195 photo' height='195' width='195' />
+                                                                                            @if (string.IsNullOrEmpty(user.ImageUrl))
+                                                                                            {
+                                                                                                <img alt='' src='https://secure.gravatar.com/avatar/f4e15f26edec400f6317e5a94e418299?s=195&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/f4e15f26edec400f6317e5a94e418299?s=390&#038;d=mm&#038;r=g 2x' class='avatar avatar-195 photo' height='195' width='195' />
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <img alt='' src='@user.ImageUrl' class='avatar avatar-195 photo' height='195' width='195' />
+                                                                                            }
                                                                                         </div>
                                                                                     </div>
-                                                                                    <div class="form form-choose-avatar">
-                                                                                        <div class="select-flie">
+                                                                                    <form asp-controller="User" asp-action="UploadAvatar" method="post" enctype="multipart/form-data">
+                                                                                    <div class="form form-choose-avata">
+                                                                                        <div >
                                                                                             <!--Update Avatar -->
-                                                                                            <form>
-                                                                                                Chỉ dành cho tệp .jpg .png hoặc .gif                        <label class="select-avata">
-                                                                                                    <input type="file" name="wp-manga-user-avatar">
-                                                                                                    <span class="file-name"></span>
-                                                                                                </label>
-
-                                                                                                <input type="submit" value="Thay đổi" name="wp-manga-upload-avatar" id="wp-manga-upload-avatar">
-                                                                                            </form>
+                                                                                            
+                                                                                                <label>Chỉ dành cho tệp .jpg .png hoặc .jpeg</label>
+                                                                                                <div>
+                                                                                                    <input asp-for="UploadAvatarViewModel.AvatarImage">
+                                                                                                </div>
+                                                                                                <div>
+                                                                                                    <span asp-validation-for="UploadAvatarViewModel.AvatarImage" class="text-danger"></span>
+                                                                                                </div>
+                                                                                                <input type="submit" value="Thay đổi">
+                                                                                            
 
                                                                                         </div>
                                                                                     </div>
+                                                                                    </form>
                                                                                 </div>
                                                                                 <div class="tab-item">
 
@@ -272,7 +286,11 @@
 
                                         </div>
 
-                                        <div class="ad c-ads custom-code body-bottom-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/Build-The-Best-Manga-Site.jpg" /></a></div>
+                                        <!--
+                                            Quang cao
+                                            <div class="ad c-ads custom-code body-bottom-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/Build-The-Best-Manga-Site.jpg" /></a></div>
+                                        -->
+                                        
 
                                     </div>
 
@@ -289,8 +307,10 @@
 
 
 
-
-                <div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-left"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/1.jpg" /></a></div><div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-right"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/2.jpg" /></a></div>
+                    <!--
+                    <div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-left"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/1.jpg" /></a></div><div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-right"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="https://live.mangabooth.com/x/wp-content/uploads/2024/11/2.jpg" /></a></div>
+                    -->
+                
 
             </div> <!-- class="wrap" -->
         </div> <!-- class="body-wrap" -->
