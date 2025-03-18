@@ -54,6 +54,14 @@ namespace DotNetTruyen.Controllers
                     {
                         result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
                     }
+                    else
+                    {
+                        if (await _userManager.FindByNameAsync(model.UserNameOrEmail) == null)
+                        {
+                            ViewBag.ErrorMessage = "Tên đăng nhập không chính xác";
+                            return View();
+                        }
+                    }
                 }
 
                 if (result.Succeeded)
@@ -63,6 +71,11 @@ namespace DotNetTruyen.Controllers
                         return LocalRedirect("/DashBoard");
                     }
                     return LocalRedirect(returnUrl);
+                }
+                if (result.IsLockedOut)
+                {
+                    ViewBag.ErrorMessage = "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.";
+                    return View();
                 }
                 if (result.IsNotAllowed)
                 {
@@ -80,7 +93,7 @@ namespace DotNetTruyen.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                    ViewBag.ErrorMessage = "Mật khẩu không chính xác";
                     return View();
                 }
             }
@@ -149,6 +162,11 @@ namespace DotNetTruyen.Controllers
             }
             else
             {
+                if (existingUser.LockoutEnd != null && existingUser.LockoutEnd > DateTime.UtcNow)
+                {
+                    ViewBag.ErrorMessage = "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.";
+                    return View("Login");
+                }
                 await _signInManager.SignInAsync(existingUser, isPersistent: false);
                 return LocalRedirect(returnUrl);
             }

@@ -51,7 +51,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/login/";
     options.LogoutPath = "/logout/";
-    options.AccessDeniedPath = "/khongduoctruycap.html";
+    options.AccessDeniedPath = "/accessDenied";
 });
 
 builder.Services.AddAuthentication()

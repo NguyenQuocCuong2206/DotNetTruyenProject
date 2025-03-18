@@ -1,0 +1,117 @@
+﻿@model IEnumerable<DotNetTruyen.ViewModels.Management.UserViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+@if (TempData["TypeMessage"] != null && TempData["Message"] != null)
+{
+    <div id="autoDismissAlert" class="@TempData["TypeMessage"]" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+<h1 class="mb-4">Danh sách người dùng</h1>
+
+<!-- Search & Add -->
+<div class="d-flex justify-content-between align-items-center mb-2 mt-4">
+
+    <div class="search-wrapper">
+        <i data-feather="search" aria-hidden="true"></i>
+        <input type="text" placeholder="Enter keywords ..." required>
+    </div>
+
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+        <i class="fas fa-plus"></i> Thêm thể người dùng mới
+    </button>
+</div>
+
+<div class="users-table table-wrapper ">
+    <table class="posts-table">
+        <thead>
+            <tr class="users-table-info">
+                <th>Ảnh đại diện</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var user in Model)
+            {
+                <tr>
+                    <td>
+                        <label class="users-table__checkbox">
+                            <input type="checkbox" class="check">
+                            @if(user.ImageUrl == null)
+                            {
+                                <img src="https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&d=mm&r=g">
+                            }
+                            else
+                            {
+                                <img src="@user.ImageUrl">
+                            }
+                            
+                        </label>
+                    </td>
+                    <td>
+                        @user.NameToDisplay
+                    </td>
+                    <td>
+                        @user.Email
+                    </td>
+                    <td>
+                        @user.Role
+                    </td>
+                    @if(@user.Status != null)
+                    {
+                        <td><span class="badge-trashed">Đã bị khóa</span></td>
+                    }
+                    else
+                    {
+                        <td><span class="badge-active">Đang hoạt động</span></td>
+                    }
+                    
+                    <td>
+                        <span class="p-relative">
+                            <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                                <div class="sr-only">More info</div>
+                                <i data-feather="more-horizontal" aria-hidden="true"></i>
+                            </button>
+                            <ul class="users-item-dropdown dropdown">
+                                @if(user.Status == null)
+                                {
+                                    <li><a href="/blockUser?userId=@user.Id">Khóa</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/unblockUser?userId=@user.Id">Mở Khóa</a></li>
+                                }
+                                <li><a href="##">Đặt lại mật khẩu</a></li>
+                                <li><a href="##">Cài đặt vai trò</a></li>
+                            </ul>
+                        </span>
+                    </td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-end mt-3">
+        <button class="btn btn-outline-secondary btn-sm">Trước</button>
+        <button class="btn btn-outline-secondary btn-sm ms-2">Sau</button>
+    </div>
+</div>
+
+<script>
+    setTimeout(() => {
+      let alert = document.getElementById("autoDismissAlert");
+      if (alert) {
+        alert.style.display = "none";
+      }
+    }, 3000);
+</script>
