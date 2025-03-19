@@ -170,6 +170,35 @@
                                                                                     </form>
                                                                                 </div>
                                                                                 <div class="tab-item">
+
+                                                                                    <div class="settings-title">
+                                                                                        <h3>
+                                                                                            Thay đổi tên đăng nhập
+                                                                                        </h3>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label for="name-input" class="col-md-3">Tên đăng nhập hiện tại</label>
+                                                                                        <div class="col-md-9">
+                                                                                            <span class="show">@user.UserName</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <form asp-controller="User" asp-action="ChangeUserName" method="post">
+                                                                                        <div class="form-group row">
+                                                                                            <label for="name-input" class="col-md-3">Tên đăng nhập mới</label>
+                                                                                            <div class="col-md-9">
+                                                                                                <input class="form-control" type="text" name="newUserName" required>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="form-group row">
+                                                                                            <label for="name-input-submit" class="col-md-3"></label>
+                                                                                            <div class="col-md-9">
+                                                                                                <input class="form-control" type="submit" value="Xác nhận">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                                <div class="tab-item">
                                                                                     <div class="settings-title">
                                                                                         <h3>
                                                                                             Thay đổi địa chỉ email

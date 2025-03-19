@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -117,23 +122,7 @@
                         <li>
                             <a href="appearance.html"><span class="icon edit" aria-hidden="true"></span>Appearance</a>
                         </li>
-                        <li>
-                            <a class="show-cat-btn" href="##">
-                                <span class="icon category" aria-hidden="true"></span>Extentions
-                                <span class="category__btn transparent-btn" title="Open list">
-                                    <span class="sr-only">Open list</span>
-                                    <span class="icon arrow-down" aria-hidden="true"></span>
-                                </span>
-                            </a>
-                            <ul class="cat-sub-menu">
-                                <li>
-                                    <a href="extention-01.html">Extentions-01</a>
-                                </li>
-                                <li>
-                                    <a href="extention-02.html">Extentions-02</a>
-                                </li>
-                            </ul>
-                        </li>
+                        
                         <li>
                             <a class="show-cat-btn" href="##">
                                 <span class="icon user-3" aria-hidden="true"></span>Users
@@ -144,10 +133,27 @@
                             </a>
                             <ul class="cat-sub-menu">
                                 <li>
-                                    <a href="users-01.html">Users-01</a>
+                                    <a href="/userManagement">Tất cả người dùng</a>
                                 </li>
                                 <li>
-                                    <a href="users-02.html">Users-02</a>
+                                    <a href="users-02.html">Thêm ué</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="show-cat-btn" href="##">
+                                <span class="icon category" aria-hidden="true"></span>Vai trò
+                                <span class="category__btn transparent-btn" title="Open list">
+                                    <span class="sr-only">Open list</span>
+                                    <span class="icon arrow-down" aria-hidden="true"></span>
+                                </span>
+                            </a>
+                            <ul class="cat-sub-menu">
+                                <li>
+                                    <a href="/roleManagement">Tất cả vai trò</a>
+                                </li>
+                                <li>
+                                    <a href="extention-02.html">Extentions-02</a>
                                 </li>
                             </ul>
                         </li>
@@ -236,26 +242,33 @@
                             <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
                                 <span class="sr-only">My profile</span>
                                 <span class="nav-user-img">
-                                    <picture><source srcset="./images/avatar/avatar-illustrated-02.webp" type="image/webp"><img src="./images/avatar/avatar-illustrated-02.png" alt="User name"></picture>
+                                    @if (user.ImageUrl == null)
+                                    {
+                                        <img src="https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&d=mm&r=g">
+                                    }
+                                    else
+                                    {
+                                        <img src="@user.ImageUrl">
+                                    }
                                 </span>
                             </button>
                             <ul class="users-item-dropdown nav-user-dropdown dropdown">
                                 <li>
-                                    <a href="##">
-                                        <i data-feather="user" aria-hidden="true"></i>
-                                        <span>Profile</span>
+                                    <a href="/">
+                                        <i data-feather="home" aria-hidden="true"></i>
+                                        <span>Trang chủ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="##">
+                                    <a href="/userProfile">
                                         <i data-feather="settings" aria-hidden="true"></i>
-                                        <span>Account settings</span>
+                                        <span>Cài đặt tài khoản</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="danger" href="##">
+                                    <a class="danger" href="/Logout">
                                         <i data-feather="log-out" aria-hidden="true"></i>
-                                        <span>Log out</span>
+                                        <span>Đăng xuất</span>
                                     </a>
                                 </li>
                             </ul>
