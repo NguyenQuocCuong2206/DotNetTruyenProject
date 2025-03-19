@@ -46,6 +46,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                     ChapterTitle = c.ChapterTitle,
                     ChapterNumber = c.ChapterNumber,
                     PublishedDate = c.PublishedDate,
+                    IsPublished = c.IsPublished,
                     Views = c.Views,
                     ComicId = c.ComicId
                 })
@@ -145,6 +146,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 ChapterNumber = model.ChapterNumber,
                 PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.UtcNow,
                 Views = 0,
+                IsPublished = model.PublishedDate.HasValue ? true : false,
                 ComicId = model.ComicId
             };
 

@@ -11,7 +11,7 @@ namespace DotNetTruyen.Models
         public int Views { get; set; }
         public Guid ComicId { get; set; }
         public Comic Comic { get; set; }
-        
+        public bool IsPublished { get; set; }
         public ICollection<ChapterImage> Images { get; set; }
     }
 }

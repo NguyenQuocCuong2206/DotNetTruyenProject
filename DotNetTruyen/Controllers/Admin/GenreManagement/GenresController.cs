@@ -17,6 +17,7 @@ using System.Text.Json;
 
 namespace DotNetTruyen.Controllers.Admin.GenreManagement
 {
+    
     public class GenresController : Controller
     {
         private readonly DotNetTruyenDbContext _context;

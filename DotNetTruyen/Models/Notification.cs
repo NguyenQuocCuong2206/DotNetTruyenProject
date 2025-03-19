@@ -7,5 +7,6 @@
         public string Type { get; set; } 
         public string Icon { get; set; } 
         public string Link { get; set; }
+        public bool IsRead { get; set; }
     }
 }

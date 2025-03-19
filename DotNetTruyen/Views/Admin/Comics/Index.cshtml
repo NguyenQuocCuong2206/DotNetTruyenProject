@@ -38,7 +38,7 @@
                     <tr class="users-table-info">
                         <th>
                             <label class="users-table__checkbox ms-20">
-                                <input name="searchQuery" value="@Model.SearchQuery" type="checkbox" class="check-all">Ảnh bìa
+                               Ảnh bìa
                             </label>
                         </th>
                         <th>Tên truyện</th>
@@ -56,7 +56,7 @@
                         <tr id="comic-@comic.Id">
                             <td>
                                 <label class="users-table__checkbox">
-                                    <input type="checkbox" class="check">
+                                    
                                     <div class="categories-table-img">
                                         @if (!string.IsNullOrEmpty(comic.CoverImage))
                                         {
@@ -71,7 +71,7 @@
                             </td>
                             <td>@comic.Title</td>
                             <td>@comic.Author</td>
-                            <td>@comic.Likes.Count()</td>
+                            <td>@comic.Likes</td>
                             <td>@comic.Follows.Count()</td>
                             <td>@comic.View</td>
                             <td>

@@ -31,7 +31,6 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             int pageSize = 3;
 
             var comicsQuery = _context.Comics
-                .Include(c => c.Likes)
                 .Include(c => c.Follows)
                 .Where(c => c.DeletedAt == null)
                 .AsQueryable();
@@ -74,7 +73,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                      Author = c.Author,
                      View = c.View,
                      Status = c.Status,
-                     Likes = c.Likes.Count(),
+                     Likes = c.Likes,
                      Follows = c.Follows.Count(),
                      Genres = c.ComicGenres.Select(g => g.Genre.GenreName).ToList()
                      //RecentChapters = c.Chapters.OrderByDescending(ch => ch.CreatedAt)
@@ -364,7 +363,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var comic = await _context.Comics
-        .Include(c => c.Likes)
+        
         .Include(c => c.Chapters)
         .Include(c => c.ComicGenres)
         .Include(c => c.Follows)
@@ -376,10 +375,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 return RedirectToAction(nameof(Index));
             }
 
-            if (comic.Likes != null && comic.Likes.Any())
-            {
-                _context.Likes.RemoveRange(comic.Likes);
-            }
+            
 
             if (comic.Chapters != null && comic.Chapters.Any())
             {
