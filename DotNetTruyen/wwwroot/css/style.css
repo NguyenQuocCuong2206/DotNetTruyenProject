@@ -10320,3 +10320,67 @@ p.madara-unyson {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
 }
+
+/* Định dạng chung cho form */
+#search-page-form {
+    display: flex; /* Sử dụng flexbox để xếp ô input và nút submit cạnh nhau */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    max-width: 400px; /* Giới hạn chiều rộng form, bạn có thể điều chỉnh */
+    margin: 20px 0; /* Khoảng cách trên dưới */
+}
+
+/* Ẩn văn bản chỉ dành cho screen reader */
+.screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Định dạng ô nhập liệu */
+#search-page-form .search-field {
+    flex-grow: 1; /* Ô nhập liệu chiếm hết không gian còn lại */
+    height: 40px; /* Chiều cao */
+    padding: 0 15px; /* Khoảng cách bên trong */
+    background-color: #1a1a1a; /* Nền đen đậm */
+    border: 1px solid #444; /* Viền xám đậm */
+    border-right: none; /* Bỏ viền phải để nút submit liền mạch */
+    color: #fff; /* Màu chữ trắng */
+    font-size: 16px; /* Kích thước chữ */
+    border-radius: 5px 0 0 5px; /* Bo góc trái */
+}
+
+    /* Định dạng placeholder */
+    #search-page-form .search-field::placeholder {
+        color: #888; /* Màu chữ placeholder xám */
+        opacity: 1; /* Đảm bảo placeholder hiển thị rõ */
+    }
+
+    /* Xóa biểu tượng mặc định của input type="text" (nếu có) */
+    #search-page-form .search-field::-webkit-search-cancel-button,
+    #search-page-form .search-field::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+
+/* Định dạng nút submit */
+#search-page-form .search-submit {
+    height: 40px; /* Chiều cao khớp với ô input */
+    padding: 0 20px; /* Khoảng cách bên trong */
+    background-color: #e91e63; /* Màu hồng đậm giống trong hình */
+    border: none; /* Bỏ viền */
+    color: #fff; /* Chữ trắng */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: 500; /* Độ đậm chữ */
+    border-radius: 0 5px 5px 0; /* Bo góc phải */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+}
+
+    /* Hiệu ứng hover cho nút */
+    #search-page-form .search-submit:hover {
+        background-color: #d81b60; /* Màu hồng đậm hơn khi hover */
+    }

@@ -1,6 +1,7 @@
 ﻿using DotNetTruyen.Data;
 using DotNetTruyen.Models;
 using DotNetTruyen.ViewModels;
+using DotNetTruyen.ViewModels.Management;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -16,78 +17,80 @@ namespace DotNetTruyen.Controllers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public IActionResult Index(string keyword, string sortBy = "latest", string genre = null, string status = null, int page = 1)
+        [HttpGet]
+        public async Task<IActionResult> Index(string searchQuery = "", string genre = "", string status = "", int page = 1, int pageSize = 8)
         {
-            const int pageSize = 16;
-
             var query = _context.Comics
                 .Where(c => c.DeletedAt == null)
-                .Include(c => c.Chapters.Where(ch => ch.DeletedAt == null))
                 .Include(c => c.ComicGenres)
                 .ThenInclude(cg => cg.Genre)
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(keyword))
+            // Ưu tiên xử lý searchQuery nếu nó không rỗng
+            if (!string.IsNullOrEmpty(searchQuery))
             {
-                query = query.Where(c => c.Title.Contains(keyword) || c.Description.Contains(keyword));
+                query = query.Where(c => c.Title.Contains(searchQuery));
             }
 
+            // Chỉ áp dụng genre nếu có giá trị hợp lệ
             if (!string.IsNullOrEmpty(genre))
             {
-                query = query.Where(c => c.ComicGenres.Any(cg => cg.Genre.GenreName == genre));
+                genre = Uri.UnescapeDataString(genre);
+                Console.WriteLine($"Filtering by genre: {genre}");
+                query = query.Where(c => c.ComicGenres.Any(cg => cg.Genre.GenreName.ToLower() == genre.ToLower()));
             }
 
+            // Chỉ áp dụng status nếu có giá trị hợp lệ
             if (!string.IsNullOrEmpty(status))
             {
-                bool? statusValue = status.ToLower() == "completed" ? true : status.ToLower() == "ongoing" ? (bool?)false : null;
-                if (statusValue.HasValue)
+                bool? statusFilter = status.ToLower() switch
                 {
-                    query = query.Where(c => c.Status == statusValue.Value);
+                    "completed" => true,
+                    "ongoing" => false,
+                    _ => null
+                };
+                if (statusFilter.HasValue)
+                {
+                    query = query.Where(c => c.Status == statusFilter.Value);
                 }
             }
 
-            switch (sortBy?.ToLower())
-            {
-                case "alphabet":
-                    query = query.OrderBy(c => c.Title);
-                    break;
-                case "rating":
-                    query = query.OrderByDescending(c => c.View);
-                    break;
-                case "trending":
-                    query = query.OrderByDescending(c => c.View);
-                    break;
-                case "views":
-                    query = query.OrderByDescending(c => c.View);
-                    break;
-                case "new-manga":
-                    query = query.OrderByDescending(c => c.CreatedAt);
-                    break;
-                case "latest":
-                default:
-                    query = query.OrderByDescending(c => c.CreatedAt);
-                    break;
-            }
-
-            var totalItems = query.Count();
-            var comics = query
+            var totalItems = await query.CountAsync();
+            var comics = await query
+                .OrderByDescending(c => c.CreatedAt)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
-                .ToList();
+                .Select(c => new ViewModels.ComicViewModel
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Description = c.Description,
+                    CoverImage = c.CoverImage ?? "/images/default-cover.jpg",
+                    Author = c.Author,
+                    ViewCount = c.View,
+                    Status = c.Status ? "Completed" : "Ongoing",
+                    Genres = c.ComicGenres.Select(cg => cg.Genre.GenreName).ToList(),
+                    
+                    
+                })
+                .ToListAsync();
 
-            var viewModel = new SearchViewModel
-            {
-                Comics = comics,
-                TotalResults = totalItems,
-                Keyword = keyword,
-                SortBy = sortBy,
-                Status = status,
-                AllGenres = _context.Genres.Where(g => g.DeletedAt == null).ToList(),
-                Page = page,
-                GenreFilter = genre // Lưu giá trị bộ lọc thể loại
-            };
+            var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            var genres = await _context.Genres
+                .Where(g => g.DeletedAt == null)
+                .Select(g => g.GenreName)
+                .ToListAsync();
 
-            return View(viewModel);
+            ViewBag.SearchQuery = searchQuery;
+            ViewBag.Genre = genre;
+            ViewBag.Status = status;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalItems = totalItems;
+            ViewBag.Genres = genres;
+
+            return View(comics);
         }
     }
 }
+
