@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DotNetTruyen.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,6 +43,7 @@ namespace DotNetTruyen.Migrations
                     Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     View = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
+                    Likes = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -69,6 +70,28 @@ namespace DotNetTruyen.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Genres", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notification",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notification", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,11 +157,12 @@ namespace DotNetTruyen.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ChapterTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChapterTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ChapterNumber = table.Column<int>(type: "int", nullable: false),
                     PublishedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Views = table.Column<int>(type: "int", nullable: false),
                     ComicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsPublished = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -150,24 +174,6 @@ namespace DotNetTruyen.Migrations
                     table.PrimaryKey("PK_Chapters", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Chapters_Comics_ComicId",
-                        column: x => x.ComicId,
-                        principalTable: "Comics",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Likes",
-                columns: table => new
-                {
-                    UserIpHash = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ComicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Likes", x => new { x.UserIpHash, x.ComicId });
-                    table.ForeignKey(
-                        name: "FK_Likes_Comics_ComicId",
                         column: x => x.ComicId,
                         principalTable: "Comics",
                         principalColumn: "Id",
@@ -296,33 +302,6 @@ namespace DotNetTruyen.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Follows_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Notifies",
-                columns: table => new
-                {
-                    NotifyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ComicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Notifies", x => x.NotifyId);
-                    table.ForeignKey(
-                        name: "FK_Notifies_Comics_ComicId",
-                        column: x => x.ComicId,
-                        principalTable: "Comics",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Notifies_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -496,19 +475,19 @@ namespace DotNetTruyen.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("53eecea1-eae3-4663-81a5-1dfe8d01a4a8"), null, "Admin", "ADMIN" },
-                    { new Guid("f97510a2-01d2-4022-a492-b0761db440c1"), null, "Reader", "READER" }
+                    { new Guid("b266c1a7-e7ae-4375-b4ab-ad437617d208"), null, "Reader", "READER" },
+                    { new Guid("c508e70e-b0f7-430b-ab59-90817f690686"), null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "ImageUrl", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("4a9ef10e-b5a2-4d52-aa47-cfbe47174290"), 0, "e65cfe87-928e-427f-bbef-7ddeb348de31", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAELGOlHft+ybIdcrf5QC97E1WJkw5Qzawp+DFDuuuuyN+P7eG5RARi6zYWi0HAxtVdA==", null, false, "d52ad158-0081-4857-a77a-424a8fbea604", false, "admin" });
+                values: new object[] { new Guid("67d9df8e-a443-4fa5-a3cc-27cd687eba5c"), 0, "03b5cfa2-2cc2-4f94-8759-abb0353b0793", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAENS3g0fBWnSNj8ICJUIGe52tPiJaOIly1I1kjXdfho0LFQ9uoI/FhBBkuADA+QsKXw==", null, false, "bab023aa-32e1-4964-b011-f9845cb5890c", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("53eecea1-eae3-4663-81a5-1dfe8d01a4a8"), new Guid("4a9ef10e-b5a2-4d52-aa47-cfbe47174290") });
+                values: new object[] { new Guid("c508e70e-b0f7-430b-ab59-90817f690686"), new Guid("67d9df8e-a443-4fa5-a3cc-27cd687eba5c") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChapterImages_ChapterId",
@@ -543,21 +522,6 @@ namespace DotNetTruyen.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Follows_UserId",
                 table: "Follows",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Likes_ComicId",
-                table: "Likes",
-                column: "ComicId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notifies_ComicId",
-                table: "Notifies",
-                column: "ComicId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notifies_UserId",
-                table: "Notifies",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -639,10 +603,7 @@ namespace DotNetTruyen.Migrations
                 name: "Follows");
 
             migrationBuilder.DropTable(
-                name: "Likes");
-
-            migrationBuilder.DropTable(
-                name: "Notifies");
+                name: "Notification");
 
             migrationBuilder.DropTable(
                 name: "ReadHistories");

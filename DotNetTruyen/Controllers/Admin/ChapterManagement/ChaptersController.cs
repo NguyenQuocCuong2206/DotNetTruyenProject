@@ -25,12 +25,20 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
 
 
         // GET: Chapters
-        public async Task<IActionResult> Index(Guid? comicId, string search, int page = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(Guid? comicId, string searchQuery, int page = 1, int pageSize = 10)
         {
             if (comicId == null) return NotFound();
 
+            
+            var comicExists = await _context.Comics.AnyAsync(c => c.Id == comicId && c.DeletedAt == null);
+            if (!comicExists)
+            {
+                return NotFound();
+            }
+
+            
             var query = _context.Chapters
-                .Where(c => c.ComicId == comicId)
+                .Where(c => c.ComicId == comicId && c.DeletedAt == null)
                 .OrderBy(c => c.ChapterNumber)
                 .Select(c => new ChapterViewModel
                 {
@@ -38,25 +46,46 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                     ChapterTitle = c.ChapterTitle,
                     ChapterNumber = c.ChapterNumber,
                     PublishedDate = c.PublishedDate,
+                    IsPublished = c.IsPublished,
                     Views = c.Views,
                     ComicId = c.ComicId
                 })
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(search))
+
+            if (!string.IsNullOrEmpty(searchQuery))
             {
-                query = query.Where(c => c.ChapterTitle.Contains(search));
+                searchQuery = searchQuery.Trim().ToLower();
+                
+                if (int.TryParse(searchQuery, out int chapterNumber))
+                {
+                    query = query.Where(c => c.ChapterTitle.ToLower().Contains(searchQuery) || c.ChapterNumber == chapterNumber);
+                }
+                else
+                {
+                    query = query.Where(c => c.ChapterTitle.ToLower().Contains(searchQuery));
+                }
             }
 
+
             var totalItems = await query.CountAsync();
-            var chapters = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            var totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            var chapters = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
-            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
-            ViewBag.CurrentPage = page;
-            ViewBag.Search = search;
-            ViewBag.ComicId = comicId;
+            
+            var viewModel = new ChapterIndexViewModel
+            {
+                ChapterViewModels = chapters,
+                SearchQuery = searchQuery,
+                CurrentPage = page,
+                TotalPages = totalPages,
+                ComicId = comicId.Value
+            };
 
-            return View("~/Views/Admin/Chapters/Index.cshtml", chapters);
+            return View("~/Views/Admin/Chapters/Index.cshtml", viewModel);
         }
 
         // GET: Chapters/Details/5
@@ -90,36 +119,65 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateChapterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var chapter = new Chapter
-                {
-                    Id = Guid.NewGuid(),
-                    ChapterTitle = model.ChapterTitle,
-                    ChapterNumber = model.ChapterNumber,
-                    PublishedDate = model.PublishedDate,
-                    Views = 0,
-                    ComicId = model.ComicId,
-                    Images = new List<ChapterImage>()
-                };
+                return View("~/Views/Admin/Chapters/Create.cshtml", model);
+            }
 
-                if (model.Images != null && model.Images.Count > 0)
+            var comicExists = await _context.Comics.AnyAsync(c => c.Id == model.ComicId && c.DeletedAt == null);
+            if (!comicExists)
+            {
+                TempData["ErrorMessage"] = "Truyện không tồn tại hoặc đã bị xóa.";
+                return View("~/Views/Admin/Chapters/Create.cshtml", model);
+            }
+            var chapterExists = await _context.Chapters
+            .AnyAsync(c => c.ComicId == model.ComicId
+                    && c.ChapterNumber == model.ChapterNumber
+                    && c.DeletedAt == null);
+            if (chapterExists)
+            {
+                TempData["ErrorMessage"] = $"Chapter số {model.ChapterNumber} đã tồn tại trong truyện này. Vui lòng chọn số chapter khác.";
+                return View("~/Views/Admin/Chapters/Create.cshtml", model);
+            }
+            var chapter = new Chapter
+            {
+                Id = Guid.NewGuid(),
+                ChapterTitle = model.ChapterTitle,
+                ChapterNumber = model.ChapterNumber,
+                PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.UtcNow,
+                Views = 0,
+                IsPublished = model.PublishedDate.HasValue ? true : false,
+                ComicId = model.ComicId
+            };
+
+            _context.Chapters.Add(chapter);
+            await _context.SaveChangesAsync(); 
+
+            if (model.Images != null && model.Images.Count > 0)
+            {
+                var imageUrls = await _imageUploadService.AddListPhotoAsync(model.Images);
+                var orders = !string.IsNullOrEmpty(model.ImageOrders)
+                    ? model.ImageOrders.Split(',').Select(int.Parse).ToList()
+                    : Enumerable.Range(0, imageUrls.Count).ToList();
+
+                var chapterImages = new List<ChapterImage>();
+                for (int i = 0; i < imageUrls.Count; i++)
                 {
-                    foreach (var image in model.Images)
+                    chapterImages.Add(new ChapterImage
                     {
-                        var imageUrl = await _imageUploadService.AddPhotoAsync(image);
-                        if (!string.IsNullOrEmpty(imageUrl))
-                        {
-                            chapter.Images.Add(new ChapterImage { Id = Guid.NewGuid(), ChapterId = chapter.Id, ImageUrl = imageUrl });
-                        }
-                    }
+                        Id = Guid.NewGuid(),
+                        ChapterId = chapter.Id,
+                        ImageUrl = imageUrls[i],
+                        ImageNumber = orders[i] 
+                    });
                 }
 
-                _context.Add(chapter);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { comicId = model.ComicId });
+                _context.ChapterImages.AddRange(chapterImages);
+                await _context.SaveChangesAsync(); 
             }
-            return View("~/Views/Admin/Chapters/Create.cshtml", model);
+
+            TempData["SuccessMessage"] = "Chương đã được tạo thành công!";
+            return RedirectToAction("Index", new { comicId = model.ComicId });
         }
 
         // GET: Chapters/Edit/5
