@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetTruyen.Controllers.Admin
 {
+    //[Authorize(Policy = "CanAccessDashboard")]
     public class DashBoardController : Controller
     {
         // GET: DashBoardController

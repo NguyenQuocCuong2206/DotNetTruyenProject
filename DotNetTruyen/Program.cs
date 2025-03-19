@@ -55,7 +55,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/login/";
     options.LogoutPath = "/logout/";
-    options.AccessDeniedPath = "/khongduoctruycap.html";
+    options.AccessDeniedPath = "/accessDenied";
 });
 
 builder.Services.AddAuthentication()
@@ -65,6 +65,17 @@ builder.Services.AddAuthentication()
     options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanAccessDashboard", policy =>
+        policy.RequireClaim("Permission", "Vào bảng điều khiển"));
+
+    options.AddPolicy("CanManageUser", policy =>
+        policy.RequireClaim("Permission", "Quản lý người dùng"));
+
+    options.AddPolicy("CanManageRole", policy =>
+        policy.RequireClaim("Permission", "Quản lý vai trò"));
+});
 
 
 

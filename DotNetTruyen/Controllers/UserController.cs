@@ -61,6 +61,32 @@ namespace DotNetTruyen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeUserName(string newUserName)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                var existingUser = await _userManager.FindByNameAsync(newUserName);
+                if (existingUser != null)
+                {
+                    ViewBag.UpdateErrorMess = "Tên đăng nhập đã tồn tại.";
+                    return View("UserProfile");
+                }
+
+                var result = await _userManager.SetUserNameAsync(user, newUserName);
+                if (result.Succeeded)
+                {
+                    await _signInManager.RefreshSignInAsync(user);
+                    ViewBag.UpdateSuccessMess = "Thay đổi tên đăng nhập thành công";
+                    return View("UserProfile");
+                }
+            }
+            ViewBag.UpdateErrorMess = "Lỗi khi cập nhật tên đăng nhập.";
+            return View("UserProfile");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(UpdateProfileViewModel changePassword)
         {
             var user = await _userManager.GetUserAsync(User);
