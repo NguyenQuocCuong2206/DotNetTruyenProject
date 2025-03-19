@@ -17,6 +17,7 @@ using System.Text.Json;
 
 namespace DotNetTruyen.Controllers.Admin.GenreManagement
 {
+    
     public class GenresController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
@@ -39,7 +40,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
 
         public async Task<IActionResult> Index(string searchQuery = "", int page =1)
         {
-            int pageSize = 1;
+            int pageSize = 8;
             
             var genreQuery = _context.Genres.AsQueryable();
             if(!string.IsNullOrEmpty(searchQuery))
@@ -152,9 +153,9 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             }
 
             var genre = await _context.Genres
-                .Include(g => g.ComicGenres) 
-                .ThenInclude(cg => cg.Comic) 
-                .FirstOrDefaultAsync(g => g.Id == id);
+                .Include(g => g.ComicGenres)
+                .ThenInclude(cg => cg.Comic)
+                .FirstOrDefaultAsync(g => g.Id == id && g.DeletedAt == null);
 
             if (genre == null)
             {
@@ -180,7 +181,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
 
             if (!string.IsNullOrEmpty(query))
             {
-                comicsQuery = comicsQuery.Where(c => c.Title.ToLower().Contains(query.ToLower()));
+                comicsQuery = comicsQuery.Where(c => c.Title.ToLower().Contains(query.ToLower()) && c.DeletedAt == null);
             }
 
             var comics = await comicsQuery
@@ -203,7 +204,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             {
                 var genre = await _context.Genres
                     .Include(g => g.ComicGenres)
-                    .FirstOrDefaultAsync(g => g.Id == id);
+                    .FirstOrDefaultAsync(g => g.Id == id && g.DeletedAt == null);
 
                 if (genre == null)
                 {
@@ -230,10 +231,11 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
 
                 await _context.SaveChangesAsync();
                 await _hubContext.Clients.All.SendAsync("ReceiveGenreUpdated", genre.GenreName);
+                TempData["SuccessMessage"] = "Thể loại đã được cập nhật thành công!";
                 return RedirectToAction(nameof(Index));
             }
 
-            // Reload comics in case of error
+            
             model.Comics = await _context.Comics.ToListAsync();
             return View(model);
         }
@@ -263,19 +265,35 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var genre = await _context.Genres.FindAsync(id);
-            if (genre != null)
+            if (genre == null)
             {
-                _context.Genres.Remove(genre);
-                await _hubContext.Clients.All.SendAsync("ReceiveGenreDeleted", genre.GenreName);
+                TempData["ErrorMessage"] = "Không tìm thấy thể loại để xóa.";
+                return RedirectToAction(nameof(Index));
             }
 
+            
+            var hasComics = await _context.ComicGenres
+                .AnyAsync(cg => cg.GenreId == id && cg.Comic.DeletedAt == null);
+
+            if (hasComics)
+            {
+                TempData["ErrorMessage"] = "Không thể xóa thể loại này vì vẫn còn truyện liên kết với nó.";
+                return RedirectToAction(nameof(Index));
+            }   
+
+            
+            genre.DeletedAt = DateTime.UtcNow;
+            _context.Update(genre);
             await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.SendAsync("ReceiveGenreDeleted", genre.Id.ToString());
+            TempData["SuccessMessage"] = "Thể loại đã được xóa thành công!";
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool GenreExists(Guid id)
         {
-            return _context.Genres.Any(e => e.Id == id);
+            return _context.Genres.Any(e => e.Id == id && e.DeletedAt == null);
         }
     }
 }

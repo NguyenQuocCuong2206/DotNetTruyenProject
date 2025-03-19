@@ -28,11 +28,11 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         // GET: Comics
         public async Task<IActionResult> Index(string searchQuery = "", int page = 1)
         {
-            int pageSize = 1;
+            int pageSize = 3;
 
             var comicsQuery = _context.Comics
-                .Include(c => c.Likes)
                 .Include(c => c.Follows)
+                .Where(c => c.DeletedAt == null)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(searchQuery))
@@ -73,7 +73,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                      Author = c.Author,
                      View = c.View,
                      Status = c.Status,
-                     Likes = c.Likes.Count(),
+                     Likes = c.Likes,
                      Follows = c.Follows.Count(),
                      Genres = c.ComicGenres.Select(g => g.Genre.GenreName).ToList()
                      //RecentChapters = c.Chapters.OrderByDescending(ch => ch.CreatedAt)
@@ -362,19 +362,58 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var comic = await _context.Comics.FindAsync(id);
-            if (comic != null)
+            var comic = await _context.Comics
+        
+        .Include(c => c.Chapters)
+        .Include(c => c.ComicGenres)
+        .Include(c => c.Follows)
+        .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (comic == null)
             {
-                _context.Comics.Remove(comic);
+                TempData["ErrorMessage"] = "Không tìm thấy truyện để xóa.";
+                return RedirectToAction(nameof(Index));
             }
 
+            
+
+            if (comic.Chapters != null && comic.Chapters.Any())
+            {
+                foreach (var chapter in comic.Chapters)
+                {
+                    chapter.DeletedAt = DateTime.UtcNow;
+                }
+                _context.Chapters.UpdateRange(comic.Chapters);
+            }
+
+
+            if (comic.ComicGenres != null && comic.ComicGenres.Any())
+            {
+                _context.ComicGenres.RemoveRange(comic.ComicGenres);
+            }
+
+
+            if (comic.Follows != null && comic.Follows.Any())
+            {
+                _context.Follows.RemoveRange(comic.Follows);
+            }
+
+  
+            comic.DeletedAt = DateTime.UtcNow;
+            _context.Update(comic);
+
+
+ 
+
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Truyện đã được xóa và các liên kết đã được gỡ thành công!";
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool ComicExists(Guid id)
         {
-            return _context.Comics.Any(e => e.Id == id);
+            return _context.Comics.Any(e => e.Id == id && e.DeletedAt == null);
         }
     }
 

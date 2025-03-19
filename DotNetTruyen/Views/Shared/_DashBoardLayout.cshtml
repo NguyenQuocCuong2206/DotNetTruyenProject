@@ -110,9 +110,9 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="comments.html">
+                            <a href="/ManageNotifications">
                                 <span class="icon message" aria-hidden="true"></span>
-                                Comments
+                                Notifications
                             </a>
                             <span class="msg-counter">7</span>
                         </li>
@@ -277,7 +277,7 @@
                 </div>
             </nav>
             <!-- ! Main -->
-            <div class="p-5">
+            <div class="p-5 mb-5">
                 @RenderBody()
             </div>
             <!-- ! Footer -->
@@ -285,7 +285,7 @@
                 <div class="container footer--flex">
                     <div class="footer-start">
                         <p>
-                            2021 © Elegant Dashboard - <a href="elegant-dashboard.com" target="_blank"
+                            2025 © DotNetTruyen Dashboard - <a href="##" target="_blank"
                                                           rel="noopener noreferrer">elegant-dashboard.com</a>
                         </p>
                     </div>
@@ -317,9 +317,13 @@
         });
         
 
-        @if (TempData["Message"] != null)
+        @if (TempData["SuccessMessage"] != null)
         {
-            @:notyf["@TempData["MessageType"]"]("@TempData["Message"]");
+            @:notyf.success("@TempData["SuccessMessage"]");
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            @:notyf.error("@TempData["ErrorMessage"]");
         }
     </script>
     @await RenderSectionAsync("Scripts", required: false)

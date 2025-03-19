@@ -66,13 +66,13 @@ builder.Services.AddAuthentication()
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("CanAccessDashboard", policy =>
-        policy.RequireClaim("Permission", "AccessDashboard"));
+        policy.RequireClaim("Permission", "Vào bảng điều khiển"));
 
     options.AddPolicy("CanManageUser", policy =>
-        policy.RequireClaim("Permission", "ManageUser"));
+        policy.RequireClaim("Permission", "Quản lý người dùng"));
 
     options.AddPolicy("CanManageRole", policy =>
-        policy.RequireClaim("Permission", "ManageRole"));
+        policy.RequireClaim("Permission", "Quản lý vai trò"));
 });
 
 

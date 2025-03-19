@@ -77,7 +77,7 @@ namespace DotNetTruyen.Controllers
                         if (role != null)
                         {
                             var roleClaims = await _roleManager.GetClaimsAsync(role);
-                            if (roleClaims.Any(c => c.Type == "Permission" && c.Value == "AccessDashboard"))
+                            if (roleClaims.Any(c => c.Type == "Permission" && c.Value == "Vào bảng điều khiển"))
                             {
                                 return LocalRedirect("/DashBoard");
                             }

@@ -26,14 +26,14 @@ namespace DotNetTruyen.Data
             public DbSet<Chapter> Chapters { get; set; }
             public DbSet<ChapterImage> ChapterImages { get; set; }
             public DbSet<Follow> Follows { get; set; }
-            public DbSet<Like> Likes { get; set; }
-            public DbSet<Notify> Notifies { get; set; }
+            
             public DbSet<Rank> Ranks { get; set; }
             public DbSet<RankType> RankTypes { get; set; }
             public DbSet<ReadHistory> ReadHistories { get; set; }
             public DbSet<UserRank> UserRanks { get; set; }
+            public DbSet<Notification> Notifications { get; set; }
 
-            public DotNetTruyenDbContext(DbContextOptions<DotNetTruyenDbContext> options) : base(options)
+        public DotNetTruyenDbContext(DbContextOptions<DotNetTruyenDbContext> options) : base(options)
             {
             }
 
@@ -73,10 +73,7 @@ namespace DotNetTruyen.Data
                     entity.HasKey(x => new { x.UserId, x.RankId });
                 });
 
-            modelBuilder.Entity<Like>(entity =>
-            {
-                entity.HasKey(x => new { x.UserIpHash, x.ComicId });
-            });
+            
 
             // Tạo Role mặc định
             var adminRoleId = Guid.NewGuid();
@@ -121,31 +118,31 @@ namespace DotNetTruyen.Data
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            foreach (var entry in ChangeTracker.Entries())
+            foreach (var entry in ChangeTracker.Entries<BaseEnity<Guid>>())
             {
-                if (entry.Entity is Genre entity)
-                {
+                
                     switch (entry.State)
                     {
                         case EntityState.Added:
-                            entity.CreatedAt = DateTime.UtcNow;
-                            entity.UpdatedAt = DateTime.UtcNow; 
+                        entry.Entity.CreatedAt = DateTime.UtcNow;
+                        entry.Entity.UpdatedAt = DateTime.UtcNow; 
                             break;
 
                         case EntityState.Modified:
-                            entity.UpdatedAt = DateTime.UtcNow;
+                        entry.Entity.UpdatedAt = DateTime.UtcNow;
                             break;
 
                         case EntityState.Deleted:
-                            entry.State = EntityState.Modified; 
-                            entity.DeletedAt = DateTime.UtcNow; 
+                        entry.State = EntityState.Modified;
+                        entry.Entity.DeletedAt = DateTime.UtcNow; 
                             break;
                     }
-                }
+               
             }
 
             return base.SaveChangesAsync(cancellationToken);
         }
+            public DbSet<DotNetTruyen.Models.Notification> Notification { get; set; } = default!;
     }
 }
 
