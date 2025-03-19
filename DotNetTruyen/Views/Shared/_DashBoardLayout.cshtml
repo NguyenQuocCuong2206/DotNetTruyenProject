@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/dashboard_style.css" asp-append-version="true">
+
+	<link href="~/lib/notyf/notyf.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="layer"></div>
@@ -103,9 +105,9 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="comments.html">
+                            <a href="/ManageNotifications">
                                 <span class="icon message" aria-hidden="true"></span>
-                                Comments
+                                Notifications
                             </a>
                             <span class="msg-counter">7</span>
                         </li>
@@ -262,7 +264,7 @@
                 </div>
             </nav>
             <!-- ! Main -->
-            <div class="p-5">
+            <div class="p-5 mb-5">
                 @RenderBody()
             </div>
             <!-- ! Footer -->
@@ -270,7 +272,7 @@
                 <div class="container footer--flex">
                     <div class="footer-start">
                         <p>
-                            2021 © Elegant Dashboard - <a href="elegant-dashboard.com" target="_blank"
+                            2025 © DotNetTruyen Dashboard - <a href="##" target="_blank"
                                                           rel="noopener noreferrer">elegant-dashboard.com</a>
                         </p>
                     </div>
@@ -290,8 +292,27 @@
     <script src ="~/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+	<script src="~/lib/notyf/notyf.min.js"></script>
+	<script src="~/lib/sweetalert2/sweetalert2@11.js"></script>
     <script src="~/js/dashboard_script.js" asp-append-version="true"></script>
+    <script>
+        
+        const notyf = new Notyf({
+            duration: 4000,
+            position: { x: 'center', y: 'top' },
+            ripple: true
+        });
+        
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            @:notyf.success("@TempData["SuccessMessage"]");
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            @:notyf.error("@TempData["ErrorMessage"]");
+        }
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await RenderSectionAsync("Styles", required: false)
     
