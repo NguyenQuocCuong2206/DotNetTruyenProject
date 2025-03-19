@@ -326,17 +326,17 @@ var madara = {"ajaxurl":"https:\/\/live.mangabooth.com\/x\/wp-admin\/admin-ajax.
                                     <div class="nav-links">
                                         @if (ViewBag.CurrentPage > 1)
                                         {
-                                            <div class="nav-previous float-left">
+                                            <div class=" float-left">
                                                 <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=@ViewBag.Status&page=@(ViewBag.CurrentPage - 1)">
-                                                    <span class="icon ion-md-arrow-back meta-nav"></span> Older Posts
+                                                    <span class="icon ion ion-md-arrow-back"></span> Trước
                                                 </a>
                                             </div>
                                         }
                                         @if (ViewBag.CurrentPage < ViewBag.TotalPages)
                                         {
-                                            <div class="nav-next float-right">
+                                            <div class=" float-right">
                                                 <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=@ViewBag.Status&page=@(ViewBag.CurrentPage + 1)">
-                                                    Newer Posts <span class="icon ion-md-arrow-forward meta-nav"></span>
+                                                    Sau <span class="icon ion ion-md-arrow-forward"></span>
                                                 </a>
                                             </div>
                                         }
