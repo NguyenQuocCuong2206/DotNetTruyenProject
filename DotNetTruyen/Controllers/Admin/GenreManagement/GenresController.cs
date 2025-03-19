@@ -21,10 +21,10 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
     public class GenresController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
-        private readonly IHubContext<GenreHub> _hubContext;
+       
         private readonly ILogger<GenresController> _logger;
-
-        public GenresController(DotNetTruyenDbContext context, IHubContext<GenreHub> hubContext, ILogger<GenresController> logger)
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public GenresController(DotNetTruyenDbContext context, IHubContext<NotificationHub> hubContext, ILogger<GenresController> logger)
         {
             _context = context;
             _hubContext = hubContext;
@@ -128,7 +128,8 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                     UpdatedAt = DateTime.Now
                 };
 
-                await _hubContext.Clients.All.SendAsync("ReceiveGenreCreated", genreViewModel);
+                
+
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -229,8 +230,27 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                     _context.ComicGenres.Add(comicGenre);
                 }
 
+                var notification = new Notification
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Cập nhật thể loại",
+                    Message = $"Thể loại '{model.GenreName}' đã được cập nhật.",
+                    Type = "info",
+                    Icon = "info-circle",
+                    Link = $"/Genres",
+                    IsRead = false,
+                    
+                };
+                _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
-                await _hubContext.Clients.All.SendAsync("ReceiveGenreUpdated", genre.GenreName);
+                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                {
+                    title = notification.Title,
+                    message = notification.Message,
+                    type = notification.Type,
+                    icon = notification.Icon,
+                    link = notification.Link
+                });
                 TempData["SuccessMessage"] = "Thể loại đã được cập nhật thành công!";
                 return RedirectToAction(nameof(Index));
             }
@@ -285,7 +305,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             genre.DeletedAt = DateTime.UtcNow;
             _context.Update(genre);
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.All.SendAsync("ReceiveGenreDeleted", genre.Id.ToString());
+            
             TempData["SuccessMessage"] = "Thể loại đã được xóa thành công!";
 
             return RedirectToAction(nameof(Index));
