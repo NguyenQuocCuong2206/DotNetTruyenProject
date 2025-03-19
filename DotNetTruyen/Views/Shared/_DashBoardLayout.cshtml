@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject DotNetTruyen.Services.INotificationService NotificationService
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -109,7 +111,10 @@
                                 <span class="icon message" aria-hidden="true"></span>
                                 Notifications
                             </a>
-                            <span class="msg-counter">7</span>
+                            @{
+                                int unreadCount = await NotificationService.GetUnreadNotificationCountAsync();
+                            }
+                            <span class="msg-counter">@unreadCount</span>
                         </li>
                     </ul>
                     <span class="system-menu__title">system</span>
@@ -180,9 +185,9 @@
                     </div>
                     <div class="main-nav-end">
                         
-                        
+                        @await Component.InvokeAsync("RecentNotifications")
         
-                        <div class="notification-wrapper">
+                        @* <div class="notification-wrapper">
                             <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
                                 <span class="sr-only">To messages</span>
                                 <span class="icon notification active" aria-hidden="true"></span>
@@ -231,7 +236,7 @@
                                     <a class="link-to-page" href="##">Go to Notifications page</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> *@
                         <div class="nav-user-wrapper">
                             <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
                                 <span class="sr-only">My profile</span>
@@ -312,6 +317,98 @@
         {
             @:notyf.error("@TempData["ErrorMessage"]");
         }
+
+
+                const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/notificationHub")
+            .withAutomaticReconnect()
+            .build();
+
+        connection.on("ReceiveNotification", function (notification) {
+            // Tạo chuỗi HTML cho thông báo mới
+            const notificationHtml = `
+                <li id="notification-${notification.id}" class="unread">
+                    <a href="${notification.link}" class="notification-link" data-id="${notification.id}">
+                        <div class="notification-dropdown-icon ${notification.type}">
+                            <i class="fas fa-${notification.icon}" aria-hidden="true"></i>
+                        </div>
+                        <div class="notification-dropdown-text">
+                            <span class="notification-dropdown__title">${notification.title}</span>
+                            <span class="notification-dropdown__subtitle">${notification.message}</span>
+                        </div>
+                    </a>
+                </li>`;
+
+            // Chuyển chuỗi HTML thành phần tử DOM bằng vanilla JavaScript
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(notificationHtml, 'text/html');
+            const li = doc.querySelector('li');
+
+            // Thêm thông báo mới vào đầu danh sách
+            const dropdown = document.querySelector('.notification-dropdown');
+            const goToPageLink = dropdown.querySelector('.link-to-page');
+            dropdown.insertBefore(li, dropdown.firstChild);
+
+            // Cập nhật số lượng thông báo chưa đọc trên sidebar
+            const msgCounter = document.querySelector('.msg-counter');
+            let currentCount = parseInt(msgCounter.textContent) || 0;
+            msgCounter.textContent = currentCount + 1;
+            msgCounter.style.display = (currentCount + 1 > 0) ? 'inline-block' : 'none';
+
+            // Cập nhật trạng thái active của icon notification
+            const notificationIcon = document.querySelector('.icon.notification');
+            if (currentCount + 1 > 0) {
+                notificationIcon.classList.add('active');
+            }
+
+            // Hiển thị thông báo Notyf
+            notyf.success(`${notification.title}: ${notification.message}`);
+
+            // Gắn sự kiện click cho notification-link mới
+            const newLink = li.querySelector('.notification-link');
+            newLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                const notificationId = this.getAttribute('data-id');
+                const href = this.getAttribute('href');
+
+                fetch('/ManageNotifications/MarkAsRead', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ id: notificationId })
+                })
+                    
+                window.location.href = href;
+
+            });
+        });
+        connection.on("UpdateUnreadCount", function (unreadCount) {
+            // Cập nhật số lượng thông báo chưa đọc trên sidebar
+            const msgCounter = document.querySelector('.msg-counter');
+            msgCounter.textContent = unreadCount;
+            // msgCounter.style.display = (unreadCount > 0) ? 'inline-block' : 'none';
+
+            // Cập nhật trạng thái active của icon notification
+            const notificationIcon = document.querySelector('.icon.notification');
+            if (unreadCount > 0) {
+                notificationIcon.classList.add('active');
+            } else {
+                notificationIcon.classList.remove('active');
+            }
+        });
+
+        connection.on("MarkNotificationAsRead", function (notificationId) {
+            // Tìm và xóa class unread của thông báo
+            const notificationElement = document.querySelector(`#notification-${notificationId}`);
+            if (notificationElement) {
+                notificationElement.classList.remove('unread');
+            }
+        });
+        connection.start()
+            .then(() => console.log("SignalR Connected"))
+            .catch(err => console.error("SignalR Connection Error: ", err));
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await RenderSectionAsync("Styles", required: false)

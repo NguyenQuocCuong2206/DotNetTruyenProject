@@ -124,17 +124,17 @@ namespace DotNetTruyen.Data
                     switch (entry.State)
                     {
                         case EntityState.Added:
-                        entry.Entity.CreatedAt = DateTime.UtcNow;
-                        entry.Entity.UpdatedAt = DateTime.UtcNow; 
+                        entry.Entity.CreatedAt = DateTime.Now;
+                        entry.Entity.UpdatedAt = DateTime.Now; 
                             break;
 
                         case EntityState.Modified:
-                        entry.Entity.UpdatedAt = DateTime.UtcNow;
+                        entry.Entity.UpdatedAt = DateTime.Now;
                             break;
 
                         case EntityState.Deleted:
                         entry.State = EntityState.Modified;
-                        entry.Entity.DeletedAt = DateTime.UtcNow; 
+                        entry.Entity.DeletedAt = DateTime.Now; 
                             break;
                     }
                
