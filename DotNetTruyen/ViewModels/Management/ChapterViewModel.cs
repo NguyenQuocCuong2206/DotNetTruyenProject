@@ -8,6 +8,7 @@ namespace DotNetTruyen.ViewModels.Management
         public string ChapterTitle { get; set; }
         public int ChapterNumber { get; set; }
         public DateTime? PublishedDate { get; set; }
+        public bool IsPublished { get; set; }
         public int Views { get; set; }
         public Guid ComicId { get; set; }
         

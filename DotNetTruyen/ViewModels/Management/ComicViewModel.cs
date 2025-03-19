@@ -12,7 +12,7 @@ namespace DotNetTruyen.ViewModels.Management
         public int View { get; set; }
         public bool Status { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public ICollection<Like> Likes { get; set; }
+        public int Likes { get; set; }
         public ICollection<Chapter> Chapters { get; set; }
         public ICollection<Follow> Follows { get; set; } = new List<Follow>();
     }

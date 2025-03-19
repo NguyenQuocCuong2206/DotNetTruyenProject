@@ -6,7 +6,7 @@ namespace DotNetTruyen.Models
     public class Comment
     {
 
-        [Key]
+        
         public Guid Id { get; set; }
         public string Content { get; set; }
         public DateTime Date { get; set; }
