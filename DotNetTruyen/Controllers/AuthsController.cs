@@ -15,18 +15,21 @@ namespace DotNetTruyen.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly EmailService _emailService;
         private readonly OtpService _otpService;
 
         public AuthsController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
+            RoleManager<IdentityRole<Guid>> roleManager,
             EmailService emailService,
             OtpService otpService
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _emailService = emailService;
             _otpService = otpService;
         }
@@ -66,9 +69,19 @@ namespace DotNetTruyen.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (User.IsInRole("Admin"))
+                    var userRoles = await _userManager.GetRolesAsync(await _userManager.GetUserAsync(User));
+
+                    foreach (var roleName in userRoles)
                     {
-                        return LocalRedirect("/DashBoard");
+                        var role = await _roleManager.FindByNameAsync(roleName);
+                        if (role != null)
+                        {
+                            var roleClaims = await _roleManager.GetClaimsAsync(role);
+                            if (roleClaims.Any(c => c.Type == "Permission" && c.Value == "AccessDashboard"))
+                            {
+                                return LocalRedirect("/DashBoard");
+                            }
+                        }
                     }
                     return LocalRedirect(returnUrl);
                 }

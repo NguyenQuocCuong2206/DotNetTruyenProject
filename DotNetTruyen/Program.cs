@@ -63,6 +63,17 @@ builder.Services.AddAuthentication()
     options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanAccessDashboard", policy =>
+        policy.RequireClaim("Permission", "AccessDashboard"));
+
+    options.AddPolicy("CanManageUser", policy =>
+        policy.RequireClaim("Permission", "ManageUser"));
+
+    options.AddPolicy("CanManageRole", policy =>
+        policy.RequireClaim("Permission", "ManageRole"));
+});
 
 
 

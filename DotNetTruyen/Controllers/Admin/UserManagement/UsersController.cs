@@ -11,10 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 using DotNetTruyen.ViewModels.Management;
 using Microsoft.AspNetCore.Identity;
 using DotNetTruyen.Services;
+using System.Drawing.Printing;
 
 namespace DotNetTruyen.Controllers.Admin.UserManagement
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "CanManageUser")]
     public class UsersController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
@@ -39,8 +40,9 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
 
         [HttpGet("/userManagement")]
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery = "", int page = 1)
         {
+            int pageSize = 5;
             var adminUserIds = _context.UserRoles
                 .Where(ur => _context.Roles.Any(r => r.Id == ur.RoleId && r.Name == "Admin"))
                 .Select(ur => ur.UserId)
@@ -63,7 +65,28 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
                 Status = u.LockoutEnd,
 
             });
-            return View("~/Views/Admin/Users/Index.cshtml", await viewModel.ToListAsync());
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                viewModel = viewModel.Where(u => u.NameToDisplay.Contains(searchQuery) || u.Email.Contains(searchQuery));
+            }
+
+            var totalUsers = await viewModel.CountAsync();
+
+            var users = await viewModel
+            .OrderBy(u => u.NameToDisplay)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var userViewModel = new UserIndexViewModel
+            {
+                Users = users,
+                SearchQuery = searchQuery,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalUsers / (double)pageSize)
+            };
+            return View("~/Views/Admin/Users/Index.cshtml", userViewModel);
         }
 
         [HttpGet("/blockUser")]

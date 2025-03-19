@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetTruyen.Controllers.Admin
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "CanAccessDashboard")]
     public class DashBoardController : Controller
     {
         // GET: DashBoardController
