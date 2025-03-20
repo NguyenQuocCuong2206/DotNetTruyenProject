@@ -1,4 +1,6 @@
 ﻿@model DotNetTruyen.ViewModels.Management.UserIndexViewModel
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
@@ -23,10 +25,14 @@
             <button type="submit" class="btn btn-primary ms-2">Tìm kiếm</button>
         </div>
     </form>
+    <div>
+        <a class="btn btn-primary" asp-action="ExportUsersToExcel" asp-route-searchQuery="@Model.SearchQuery"> <i class="fas fa-file-excel"></i> Xuất ra file Excel</a>
+        <button type="submit" class="btn btn-secondary" id="uploadBtn"><i class="fas fa-plus"></i> Nhập dữ liệu file Excel</button>
+        <form asp-action="ImportUsersFromExcel"  method="post" enctype="multipart/form-data" id="uploadForm">
+            <input type="file" name="file" accept=".xlsx" required style="display: none" id="fileInput" />
+        </form>
+    </div>
 
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-        <i class="fas fa-plus"></i> Thêm thể người dùng mới
-    </button>
 </div>
 
 <div class="users-table table-wrapper ">
@@ -42,13 +48,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var user in Model.Users)
+            @foreach (var user in Model.Users)
             {
                 <tr>
                     <td>
                         <label class="users-table__checkbox">
-                            <input type="checkbox" class="check">
-                            @if(user.ImageUrl == null)
+                            @if (user.ImageUrl == null)
                             {
                                 <img src="https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&d=mm&r=g">
                             }
@@ -56,7 +61,7 @@
                             {
                                 <img src="@user.ImageUrl">
                             }
-                            
+
                         </label>
                     </td>
                     <td>
@@ -68,7 +73,7 @@
                     <td>
                         @user.Role
                     </td>
-                    @if(@user.Status != null)
+                    @if (@user.Status != null)
                     {
                         <td><span class="badge-trashed">Đã bị khóa</span></td>
                     }
@@ -76,30 +81,40 @@
                     {
                         <td><span class="badge-active">Đang hoạt động</span></td>
                     }
-                    
-                    <td>
-                        <span class="p-relative">
-                            <button class="dropdown-btn transparent-btn" type="button" title="More info">
-                                <div class="sr-only">More info</div>
-                                <i data-feather="more-horizontal" aria-hidden="true"></i>
-                            </button>
-                            <ul class="users-item-dropdown dropdown">
-                                @if(user.Status == null)
-                                {
-                                    <li><a href="/blockUser?userId=@user.Id">Khóa</a></li>
-                                }
-                                else
-                                {
-                                    <li><a href="/unblockUser?userId=@user.Id">Mở Khóa</a></li>
-                                }
-                                <li><a href="##">Đặt lại mật khẩu</a></li>
-                                <li><a href="##">Cài đặt vai trò</a></li>
-                            </ul>
-                        </span>
-                    </td>
+
+                    @if (user.Role != "Admin")
+                    {
+                        <td>
+                            <span class="p-relative">
+                                <button class="dropdown-btn transparent-btn" type="button" title="More info">
+                                    <div class="sr-only">More info</div>
+                                    <i data-feather="more-horizontal" aria-hidden="true"></i>
+                                </button>
+                                <ul class="users-item-dropdown dropdown">
+                                    @if (user.Status == null)
+                                    {
+                                        <li><a href="/blockUser?userId=@user.Id" class="action-link" name="khóa">Khóa</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/unblockUser?userId=@user.Id" class="action-link" name="mở khóa">Mở Khóa</a></li>
+                                    }
+                                    <li><a href="/resetPassword?userId=@user.Id" class="action-link" name="đặt lại mật khẩu cho">Đặt lại mật khẩu</a></li>
+                                    <li>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#addRoleForUser" data-user-id="@user.Id"
+                                           data-user-name="@user.NameToDisplay" data-user-roles="@user.Role">Cài đặt vai trò</a>
+                                    </li>
+                                </ul>
+                            </span>
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
                 </tr>
             }
-            
+
         </tbody>
     </table>
 
@@ -111,11 +126,95 @@
     </div>
 </div>
 
+<!-- Add Role For User Modal -->
+<div class="modal fade @(ViewData["ShowModal"] as string == "true" ? "show d-block" : "")" id="addRoleForUser" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chọn vai trò cho <span id="modalUserName"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="EditRoles" asp-controller="Users" method="post" id="updateRolesForm">
+                <input type="hidden" id="modalUserId" name="userId">
+                <div class="modal-body">
+                    @foreach (var role in Model.Roles)
+                    {
+                        <div class="mb-3">
+                            <input type="checkbox" name="SelectedRoles" value="@role" class="role-checkbox" />
+                            <label>@role</label>
+                        </div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-secondary">Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
-    setTimeout(() => {
-      let alert = document.getElementById("autoDismissAlert");
-      if (alert) {
-        alert.style.display = "none";
-      }
-    }, 3000);
+    document.addEventListener("DOMContentLoaded", function () {
+        var resetPasswordModal = document.getElementById('addRoleForUser');
+        var updateRolesForm = document.getElementById('updateRolesForm');
+
+        resetPasswordModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget; // Thẻ <a> đã kích hoạt modal
+            var userId = button.getAttribute('data-user-id');
+            var userName = button.getAttribute('data-user-name');
+
+            // Gán giá trị vào modal
+            document.getElementById('modalUserId').value = userId;
+            document.getElementById('modalUserName').textContent = userName;
+            var userRoles = button.getAttribute('data-user-roles').split(',').map(role => role.trim());
+
+            // Cập nhật trạng thái checkbox
+            document.querySelectorAll(".role-checkbox").forEach(function (checkbox) {
+                checkbox.checked = userRoles.includes(checkbox.value);
+            });
+        });
+
+        // Ngăn form submit nếu không có checkbox nào được chọn
+        updateRolesForm.addEventListener("submit", function (event) {
+            var isChecked = Array.from(document.querySelectorAll(".role-checkbox")).some(checkbox => checkbox.checked);
+            if (!isChecked) {
+                event.preventDefault(); // Ngăn form gửi đi
+                notyf.error("Vui lòng chọn ít nhất một quyền trước khi lưu!"); // Hiển thị cảnh báo
+            }
+        });
+
+        // Xác nhận hành động
+                    document.querySelectorAll(".action-link").forEach(link => {
+                    link.addEventListener("click", async function(event) {
+                        event.preventDefault();
+                        const itemName = this.getAttribute("name");
+                        const result = await Swal.fire({
+                            title: 'Xác nhận',
+                            text: 'Bạn có chắc chắn muốn ' + itemName + ' người dùng này không?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Có',
+                            cancelButtonText: 'Không',
+                            reverseButtons: true
+                        });
+
+                        if (result.isConfirmed) {
+                            window.location.href = this.href;
+                        } else {
+                            notyf.error("Đã hủy !");
+                        }
+                    });
+                });
+
+            document.getElementById("uploadBtn").addEventListener("click", function () {
+                document.getElementById("fileInput").click();
+            });
+
+            document.getElementById("fileInput").addEventListener("change", function () {
+            if (this.files.length > 0) {
+                document.getElementById("uploadForm").submit();
+            }
+        });
+     });
 </script>

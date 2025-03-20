@@ -8,5 +8,6 @@ namespace DotNetTruyen.ViewModels.Management
         public string SearchQuery { get; set; }
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
+        public List<string> Roles { get; set; } = default!;
     }
 }

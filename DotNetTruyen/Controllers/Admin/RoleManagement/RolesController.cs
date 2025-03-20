@@ -130,7 +130,7 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
                 return NotFound();
             }
 
-            if (role.Name == "Admin")
+            if (role.Name == "Admin" || role.Name == "Reader")
             {
                 return RedirectToAction("Index");
             }
@@ -174,7 +174,7 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
                 return NotFound();
             }
 
-            if (role.Name == "Admin")
+            if (role.Name == "Admin" || role.Name == "Reader")
             {
                 return RedirectToAction("Index");
             }
@@ -223,6 +223,13 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
             {
                 return NotFound();
             }
+
+            if (role.Name == "Admin" || role.Name == "Reader")
+            {
+                TempData["ErrorMessage"] = "Xóa vai trò không thành công";
+                return RedirectToAction("Index");
+            }
+
             var existingClaims = await _roleManager.GetClaimsAsync(role);
 
 
