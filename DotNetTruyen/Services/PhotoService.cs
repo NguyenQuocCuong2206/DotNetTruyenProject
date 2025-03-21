@@ -57,5 +57,21 @@ namespace DotNetTruyen.Services
                 return uploadResult?.Url.ToString();
             }
         }
+
+        public async Task DeletePhotoAsync(string imageUrl)
+        {
+            if (string.IsNullOrEmpty(imageUrl))
+            {
+                return;
+            }
+
+
+            var uri = new Uri(imageUrl);
+            var segments = uri.Segments;
+            var lastSegment = segments.Last(); 
+            var publicId = Path.GetFileNameWithoutExtension(lastSegment); 
+            var deletionParams = new DeletionParams(publicId);
+            await _cloudinary.DestroyAsync(deletionParams);
+        }
     }
 }

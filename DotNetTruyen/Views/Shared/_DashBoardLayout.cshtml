@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject DotNetTruyen.Services.INotificationService NotificationService
+@inject UserManager<User> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -109,7 +116,10 @@
                                 <span class="icon message" aria-hidden="true"></span>
                                 Notifications
                             </a>
-                            <span class="msg-counter">7</span>
+                            @{
+                                int unreadCount = await NotificationService.GetUnreadNotificationCountAsync();
+                            }
+                            <span class="msg-counter">@unreadCount</span>
                         </li>
                     </ul>
                     <span class="system-menu__title">system</span>
@@ -117,23 +127,7 @@
                         <li>
                             <a href="appearance.html"><span class="icon edit" aria-hidden="true"></span>Appearance</a>
                         </li>
-                        <li>
-                            <a class="show-cat-btn" href="##">
-                                <span class="icon category" aria-hidden="true"></span>Extentions
-                                <span class="category__btn transparent-btn" title="Open list">
-                                    <span class="sr-only">Open list</span>
-                                    <span class="icon arrow-down" aria-hidden="true"></span>
-                                </span>
-                            </a>
-                            <ul class="cat-sub-menu">
-                                <li>
-                                    <a href="extention-01.html">Extentions-01</a>
-                                </li>
-                                <li>
-                                    <a href="extention-02.html">Extentions-02</a>
-                                </li>
-                            </ul>
-                        </li>
+                        
                         <li>
                             <a class="show-cat-btn" href="##">
                                 <span class="icon user-3" aria-hidden="true"></span>Users
@@ -144,10 +138,24 @@
                             </a>
                             <ul class="cat-sub-menu">
                                 <li>
-                                    <a href="users-01.html">Users-01</a>
+                                    <a href="/userManagement">Tất cả người dùng</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="show-cat-btn" href="##">
+                                <span class="icon category" aria-hidden="true"></span>Vai trò
+                                <span class="category__btn transparent-btn" title="Open list">
+                                    <span class="sr-only">Open list</span>
+                                    <span class="icon arrow-down" aria-hidden="true"></span>
+                                </span>
+                            </a>
+                            <ul class="cat-sub-menu">
+                                <li>
+                                    <a href="/roleManagement">Tất cả vai trò</a>
                                 </li>
                                 <li>
-                                    <a href="users-02.html">Users-02</a>
+                                    <a href="Roles/Create">Thêm vai trò</a>
                                 </li>
                             </ul>
                         </li>
@@ -157,17 +165,7 @@
                     </ul>
                 </div>
             </div>
-            @* <div class="sidebar-footer">
-                <a href="##" class="sidebar-user">
-                    <span class="sidebar-user-img">
-                        <picture><source srcset="./images/avatar/avatar-illustrated-01.webp" type="image/webp"><img src="./images/avatar/avatar-illustrated-01.png" alt="User name"></picture>
-                    </span>
-                    <div class="sidebar-user-info">
-                        <span class="sidebar-user__title">Nafisa Sh.</span>
-                        <span class="sidebar-user__subtitle">Support manager</span>
-                    </div>
-                </a>
-            </div> *@
+            
         </aside>
         <div class="main-wrapper">
             <!-- ! Main nav -->
@@ -180,82 +178,40 @@
                     </div>
                     <div class="main-nav-end">
                         
-                        
+                        @await Component.InvokeAsync("RecentNotifications")
         
-                        <div class="notification-wrapper">
-                            <button class="gray-circle-btn dropdown-btn" title="To messages" type="button">
-                                <span class="sr-only">To messages</span>
-                                <span class="icon notification active" aria-hidden="true"></span>
-                            </button>
-                            <ul class="users-item-dropdown notification-dropdown dropdown">
-                                <li>
-                                    <a href="##">
-                                        <div class="notification-dropdown-icon info">
-                                            <i data-feather="check"></i>
-                                        </div>
-                                        <div class="notification-dropdown-text">
-                                            <span class="notification-dropdown__title">System just updated</span>
-                                            <span class="notification-dropdown__subtitle">
-                                                The system has been successfully upgraded. Read more
-                                                here.
-                                            </span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="##">
-                                        <div class="notification-dropdown-icon danger">
-                                            <i data-feather="info" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="notification-dropdown-text">
-                                            <span class="notification-dropdown__title">The cache is full!</span>
-                                            <span class="notification-dropdown__subtitle">
-                                                Unnecessary caches take up a lot of memory space and
-                                                interfere ...
-                                            </span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="##">
-                                        <div class="notification-dropdown-icon info">
-                                            <i data-feather="check" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="notification-dropdown-text">
-                                            <span class="notification-dropdown__title">New Subscriber here!</span>
-                                            <span class="notification-dropdown__subtitle">A new subscriber has subscribed.</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="link-to-page" href="##">Go to Notifications page</a>
-                                </li>
-                            </ul>
-                        </div>
+                        
                         <div class="nav-user-wrapper">
                             <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
                                 <span class="sr-only">My profile</span>
-                                <span class="nav-user-img">
-                                    <picture><source srcset="./images/avatar/avatar-illustrated-02.webp" type="image/webp"><img src="./images/avatar/avatar-illustrated-02.png" alt="User name"></picture>
-                                </span>
+                                @* <span class="nav-user-img">
+                                    @if (user.ImageUrl == null)
+                                    {
+                                        <img src="https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&d=mm&r=g">
+                                    }
+                                    else
+                                    {
+                                        <img src="@user.ImageUrl">
+                                    }
+                                </span> *@
                             </button>
                             <ul class="users-item-dropdown nav-user-dropdown dropdown">
                                 <li>
-                                    <a href="##">
-                                        <i data-feather="user" aria-hidden="true"></i>
-                                        <span>Profile</span>
+                                    <a href="/">
+                                        <i data-feather="home" aria-hidden="true"></i>
+                                        <span>Trang chủ</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="##">
+                                    <a href="/userProfile">
                                         <i data-feather="settings" aria-hidden="true"></i>
-                                        <span>Account settings</span>
+                                        <span>Cài đặt tài khoản</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="danger" href="##">
+                                    <a class="danger" href="/Logout">
                                         <i data-feather="log-out" aria-hidden="true"></i>
-                                        <span>Log out</span>
+                                        <span>Đăng xuất</span>
                                     </a>
                                 </li>
                             </ul>
@@ -312,6 +268,97 @@
         {
             @:notyf.error("@TempData["ErrorMessage"]");
         }
+
+
+                const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/notificationHub")
+            .withAutomaticReconnect()
+            .build();
+
+        connection.on("ReceiveNotification", function (notification) {
+            // Tạo chuỗi HTML cho thông báo mới
+            const notificationHtml = `
+                <li id="notification-${notification.id}" class="unread">
+                    <a href="${notification.link}" class="notification-link" data-id="${notification.id}">
+                        <div class="notification-dropdown-icon ${notification.type}">
+                            <i class="fas fa-${notification.icon}" aria-hidden="true"></i>
+                        </div>
+                        <div class="notification-dropdown-text">
+                            <span class="notification-dropdown__title">${notification.title}</span>
+                            <span class="notification-dropdown__subtitle">${notification.message}</span>
+                        </div>
+                    </a>
+                </li>`;
+
+            
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(notificationHtml, 'text/html');
+            const li = doc.querySelector('li');
+
+            
+            const dropdown = document.querySelector('.notification-dropdown');
+            const goToPageLink = dropdown.querySelector('.link-to-page');
+            dropdown.insertBefore(li, dropdown.firstChild);
+
+            const msgCounter = document.querySelector('.msg-counter');
+            let currentCount = parseInt(msgCounter.textContent) || 0;
+            msgCounter.textContent = currentCount + 1;
+            msgCounter.style.display = (currentCount + 1 > 0) ? 'inline-block' : 'none';
+
+            // Cập nhật trạng thái active của icon notification
+            const notificationIcon = document.querySelector('.icon.notification');
+            if (currentCount + 1 > 0) {
+                notificationIcon.classList.add('active');
+            }
+
+            // Hiển thị thông báo Notyf
+            notyf.success(`${notification.title}: ${notification.message}`);
+
+            // Gắn sự kiện click cho notification-link mới
+            const newLink = li.querySelector('.notification-link');
+            newLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                const notificationId = this.getAttribute('data-id');
+                const href = this.getAttribute('href');
+
+                fetch('/ManageNotifications/MarkAsRead', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ id: notificationId })
+                })
+                    
+                window.location.href = href;
+
+            });
+        });
+        connection.on("UpdateUnreadCount", function (unreadCount) {
+            // Cập nhật số lượng thông báo chưa đọc trên sidebar
+            const msgCounter = document.querySelector('.msg-counter');
+            msgCounter.textContent = unreadCount;
+            // msgCounter.style.display = (unreadCount > 0) ? 'inline-block' : 'none';
+
+            // Cập nhật trạng thái active của icon notification
+            const notificationIcon = document.querySelector('.icon.notification');
+            if (unreadCount > 0) {
+                notificationIcon.classList.add('active');
+            } else {
+                notificationIcon.classList.remove('active');
+            }
+        });
+
+        connection.on("MarkNotificationAsRead", function (notificationId) {
+            // Tìm và xóa class unread của thông báo
+            const notificationElement = document.querySelector(`#notification-${notificationId}`);
+            if (notificationElement) {
+                notificationElement.classList.remove('unread');
+            }
+        });
+        connection.start()
+            .then(() => console.log("SignalR Connected"))
+            .catch(err => console.error("SignalR Connection Error: ", err));
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await RenderSectionAsync("Styles", required: false)

@@ -16,12 +16,15 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IPhoToService _imageUploadService;
+        private readonly ILogger<ChaptersController> _logger;
 
-        public ChaptersController(DotNetTruyenDbContext context, IPhoToService imageUploadService)
+        public ChaptersController(DotNetTruyenDbContext context, IPhoToService imageUploadService, ILogger<ChaptersController> logger)
         {
             _context = context;
             _imageUploadService = imageUploadService;
+            _logger = logger;
         }
+
 
 
         // GET: Chapters
@@ -181,20 +184,29 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
         }
 
         // GET: Chapters/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var chapter = await _context.Chapters
+                .Include(c => c.Images)
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-            var chapter = await _context.Chapters.FindAsync(id);
             if (chapter == null)
             {
                 return NotFound();
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "Id", "Id", chapter.ComicId);
-            return View(chapter);
+
+            var viewModel = new EditChapterViewModel
+            {
+                Id = chapter.Id,
+                ComicId = chapter.ComicId,
+                ChapterTitle = chapter.ChapterTitle,
+                ChapterNumber = chapter.ChapterNumber,
+                PublishedDate = chapter.PublishedDate,
+                ExistingImages = chapter.Images?.Select(i => i.ImageUrl).ToList() ?? new List<string>()
+            };
+
+            return View("~/Views/Admin/Chapters/Edit.cshtml", viewModel);
         }
 
         // POST: Chapters/Edit/5
@@ -202,35 +214,133 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ChapterTitle,ChapterNumber,ComicId,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] Chapter chapter)
+        public async Task<IActionResult> Edit(EditChapterViewModel model, string imageOrders)
         {
-            if (id != chapter.ChapterNumber)
+            if (!ModelState.IsValid)
+            {
+                _logger.LogInformation("ModelState is invalid");
+                foreach (var modelStateKey in ModelState.Keys)
+                {
+                    var modelStateVal = ModelState[modelStateKey];
+                    foreach (var error in modelStateVal.Errors)
+                    {
+                        _logger.LogError($"ModelState Error: {modelStateKey} - {error.ErrorMessage}");
+                    }
+                }
+                return View("~/Views/Admin/Chapters/Edit.cshtml", model);
+            }
+
+            var chapter = await _context.Chapters
+                .Include(c => c.Images)
+                .FirstOrDefaultAsync(c => c.Id == model.Id);
+
+            if (chapter == null)
             {
                 return NotFound();
             }
+                
+         
+            chapter.ChapterTitle = model.ChapterTitle;
+            chapter.ChapterNumber = model.ChapterNumber;
+            chapter.PublishedDate = model.PublishedDate;
+            
 
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(model.DeletedImages))
             {
-                try
+                var deletedImageUrls = model.DeletedImages.Split(',').ToList();
+                var imagesToDelete = chapter.Images
+                    .Where(i => deletedImageUrls.Contains(i.ImageUrl))
+                    .ToList();
+
+                foreach (var image in imagesToDelete)
                 {
-                    _context.Update(chapter);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ChapterExists(chapter.ChapterNumber))
+                    chapter.Images.Remove(image);
+                    
+                    try
                     {
-                        return NotFound();
+                        await _imageUploadService.DeletePhotoAsync(image.ImageUrl);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        throw;
+                        
+                        ModelState.AddModelError("", $"Lỗi khi xóa ảnh: {ex.Message}");
+                        return View("~/Views/Chapters/Edit.cshtml", model);
                     }
+                    chapter.Images.Remove(image);
+                    _context.ChapterImages.Remove(image);
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["ComicId"] = new SelectList(_context.Comics, "Id", "Id", chapter.ComicId);
-            return View(chapter);
+
+            // Xử lý thêm ảnh mới
+            if (model.Images != null && model.Images.Any())
+            {
+                foreach (var image in model.Images)
+                {
+                    if (image != null && image.Length > 0)
+                    {
+                        try
+                        {
+                            var uploadResult = await _imageUploadService.AddPhotoAsync(image);
+                            if (!string.IsNullOrEmpty(uploadResult))
+                            {
+                                chapter.Images.Add(new ChapterImage
+                                {
+                                    ImageUrl = uploadResult,
+                                    ImageNumber = 0 
+                                });
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            
+                            ModelState.AddModelError("", $"Lỗi khi upload ảnh: {ex.Message}");
+                            return View("~/Views/Chapters/Edit.cshtml", model);
+                        }
+                    }
+                }
+            }
+
+            
+            if (!string.IsNullOrEmpty(imageOrders))
+            {
+                var orderList = imageOrders.Split(',')
+                    .Select((value, index) => new { Order = index, OriginalIndex = int.Parse(value) })
+                    .OrderBy(x => x.OriginalIndex)
+                    .Select(x => x.Order)
+                    .ToList();
+
+
+                if (orderList.Count == chapter.Images.Count)
+                {
+                    var sortedImages = chapter.Images.OrderBy(img => img.ImageNumber).ToList();
+
+
+                    for (int i = 0; i < sortedImages.Count; i++)
+                    {
+                        sortedImages[i].ImageNumber = orderList[i];
+                    }
+
+ 
+                    chapter.Images.Clear();
+                    foreach (var image in sortedImages)
+                    {
+                        chapter.Images.Add(image);
+                    }
+                }
+            }
+
+            // Lưu thay đổi vào database
+            try
+            {
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Chapter đã được cập nhật thành công!";
+                return RedirectToAction("Index", new { comicId = model.ComicId });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Lỗi khi lưu chapter: {ex.Message}");
+                return View("~/Views/Chapters/Edit.cshtml", model);
+            }
         }
 
         // GET: Chapters/Delete/5

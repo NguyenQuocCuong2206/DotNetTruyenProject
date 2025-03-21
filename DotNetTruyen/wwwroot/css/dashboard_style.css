@@ -1,4 +1,4 @@
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+﻿/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
    ========================================================================== */
@@ -1128,6 +1128,21 @@ body {
   width: 40px;
   height: 40px;
 }
+.notification-dropdown li.unread {
+    background-color: #F0F2FA; 
+}
+
+.notification-dropdown li.unread a {
+    color: #333333; 
+}
+
+.notification-dropdown li.unread .notification-dropdown-icon {
+    opacity: 0.8; 
+}
+
+.notification-dropdown li.unread .notification-dropdown-text {
+    font-weight: bold; 
+}
 
 .notification {
   background-image: url(../images/svg/Bulk/Notification-gray.svg);
@@ -1946,8 +1961,8 @@ label {
 }
 
 .users-table img {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   margin-right: 7px;
 }

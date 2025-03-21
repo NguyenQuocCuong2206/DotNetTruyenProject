@@ -17,33 +17,26 @@ using System.Text.Json;
 
 namespace DotNetTruyen.Controllers.Admin.GenreManagement
 {
-    
     public class GenresController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
-        private readonly IHubContext<GenreHub> _hubContext;
         private readonly ILogger<GenresController> _logger;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public GenresController(DotNetTruyenDbContext context, IHubContext<GenreHub> hubContext, ILogger<GenresController> logger)
+        public GenresController(DotNetTruyenDbContext context, IHubContext<NotificationHub> hubContext, ILogger<GenresController> logger)
         {
             _context = context;
             _hubContext = hubContext;
             _logger = logger;
         }
 
-
-        
-
-
         // GET: Genres
-
-
-        public async Task<IActionResult> Index(string searchQuery = "", int page =1)
+        public async Task<IActionResult> Index(string searchQuery = "", int page = 1)
         {
             int pageSize = 8;
-            
+
             var genreQuery = _context.Genres.AsQueryable();
-            if(!string.IsNullOrEmpty(searchQuery))
+            if (!string.IsNullOrEmpty(searchQuery))
             {
                 genreQuery = genreQuery.Where(g => g.GenreName.Contains(searchQuery));
             }
@@ -62,7 +55,6 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 })
                 .ToListAsync();
 
-
             var viewModel = new GenreIndexViewModel
             {
                 GenreViewModels = genres,
@@ -70,8 +62,6 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 CurrentPage = page,
                 TotalPages = (int)Math.Ceiling(totalGenres / (double)pageSize)
             };
-            
-
 
             return View("~/Views/Admin/Genres/Index.cshtml", viewModel);
         }
@@ -94,10 +84,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             return View(genre);
         }
 
-
         // POST: Genres/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateGenreViewModel createdGenre)
@@ -116,33 +103,46 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                     GenreName = createdGenre.GenreName
                 };
 
-                _logger.LogWarning("Genre created successfully.");
                 _context.Add(genre);
                 await _context.SaveChangesAsync();
 
-                var genreViewModel = new GenreViewModel
+                // Tạo thông báo khi thể loại được tạo thành công
+                var notification = new Notification
                 {
-                    Id = genre.Id,
-                    GenreName = genre.GenreName,
-                    TotalStories = 0,
-                    UpdatedAt = DateTime.Now
+                    Id = Guid.NewGuid(),
+                    Title = "Thể loại mới",
+                    Message = $"Thể loại '{genre.GenreName}' đã được tạo thành công.",
+                    Type = "success",
+                    Icon = "check-circle",
+                    Link = $"/Genres",
+                    IsRead = false,
+                    
                 };
+                _context.Notifications.Add(notification);
+                await _context.SaveChangesAsync();
 
-                await _hubContext.Clients.All.SendAsync("ReceiveGenreCreated", genreViewModel);
+                // Gửi thông báo qua SignalR
+                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                {
+                    id = notification.Id,
+                    title = notification.Title,
+                    message = notification.Message,
+                    type = notification.Type,
+                    icon = notification.Icon,
+                    link = notification.Link
+                });
+
+                _logger.LogInformation("Genre created successfully: {GenreName}", genre.GenreName);
+                TempData["SuccessMessage"] = "Thể loại đã được tạo thành công!";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-       
                 _logger.LogError(ex, "Error occurred while creating genre.");
-
-               
                 ViewData["ErrorMessage"] = "An error occurred while processing your request. Please try again later.";
                 return View("Index", createdGenre);
             }
         }
-
-
 
         // GET: Genres/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -213,8 +213,9 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
 
                 genre.GenreName = model.GenreName;
                 List<Guid>? selectedStoryIds = string.IsNullOrEmpty(model.SelectedStoryIds)
-            ? new List<Guid>()
-            : JsonSerializer.Deserialize<List<Guid>>(model.SelectedStoryIds);
+                    ? new List<Guid>()
+                    : JsonSerializer.Deserialize<List<Guid>>(model.SelectedStoryIds);
+
                 // Remove old relationships
                 _context.ComicGenres.RemoveRange(genre.ComicGenres);
 
@@ -229,17 +230,40 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                     _context.ComicGenres.Add(comicGenre);
                 }
 
+                // Tạo thông báo khi thể loại được cập nhật
+                var notification = new Notification
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Cập nhật thể loại",
+                    Message = $"Thể loại '{model.GenreName}' đã được cập nhật.",
+                    Type = "info",
+                    Icon = "info-circle",
+                    Link = $"/Genres",
+                    IsRead = false,
+                    
+                };
+                _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
-                await _hubContext.Clients.All.SendAsync("ReceiveGenreUpdated", genre.GenreName);
+
+                // Gửi thông báo qua SignalR
+                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                {
+                    id = notification.Id,
+                    title = notification.Title,
+                    message = notification.Message,
+                    type = notification.Type,
+                    icon = notification.Icon,
+                    link = notification.Link
+                });
+
+                _logger.LogInformation("Genre updated successfully: {GenreName}", model.GenreName);
                 TempData["SuccessMessage"] = "Thể loại đã được cập nhật thành công!";
                 return RedirectToAction(nameof(Index));
             }
 
-            
             model.Comics = await _context.Comics.ToListAsync();
             return View(model);
         }
-
 
         // GET: Genres/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
@@ -271,7 +295,6 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 return RedirectToAction(nameof(Index));
             }
 
-            
             var hasComics = await _context.ComicGenres
                 .AnyAsync(cg => cg.GenreId == id && cg.Comic.DeletedAt == null);
 
@@ -279,15 +302,40 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             {
                 TempData["ErrorMessage"] = "Không thể xóa thể loại này vì vẫn còn truyện liên kết với nó.";
                 return RedirectToAction(nameof(Index));
-            }   
+            }
 
-            
             genre.DeletedAt = DateTime.UtcNow;
             _context.Update(genre);
             await _context.SaveChangesAsync();
-            await _hubContext.Clients.All.SendAsync("ReceiveGenreDeleted", genre.Id.ToString());
-            TempData["SuccessMessage"] = "Thể loại đã được xóa thành công!";
 
+            // Tạo thông báo khi thể loại được xóa
+            var notification = new Notification
+            {
+                Id = Guid.NewGuid(),
+                Title = "Xóa thể loại",
+                Message = $"Thể loại '{genre.GenreName}' đã được xóa.",
+                Type = "warning",
+                Icon = "exclamation-circle",
+                Link = $"/Genres",
+                IsRead = false,
+                
+            };
+            _context.Notifications.Add(notification);
+            await _context.SaveChangesAsync();
+
+            // Gửi thông báo qua SignalR
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            {
+                id = notification.Id,
+                title = notification.Title,
+                message = notification.Message,
+                type = notification.Type,
+                icon = notification.Icon,
+                link = notification.Link
+            });
+
+            _logger.LogInformation("Genre deleted successfully: {GenreName}", genre.GenreName);
+            TempData["SuccessMessage"] = "Thể loại đã được xóa thành công!";
             return RedirectToAction(nameof(Index));
         }
 

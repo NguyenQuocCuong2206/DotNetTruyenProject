@@ -36,6 +36,70 @@ window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15
 		padding: 0 !important;
 	}
 </style>
+<style>
+    /* Định dạng chung cho form */
+    #search-page-form {
+        display: flex; /* Sử dụng flexbox để xếp ô input và nút submit cạnh nhau */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        max-width: 400px; /* Giới hạn chiều rộng form, bạn có thể điều chỉnh */
+        margin: 20px 0; /* Khoảng cách trên dưới */
+    }
+
+    .screen-reader-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+    }
+
+    /* Định dạng ô nhập liệu */
+    #search-page-form .search-field {
+        flex-grow: 1; /* Ô nhập liệu chiếm hết không gian còn lại */
+        height: 40px; /* Chiều cao */
+        padding: 0 15px; /* Khoảng cách bên trong */
+        background-color: #1a1a1a; /* Nền đen đậm */
+        border: 1px solid #444; /* Viền xám đậm */
+        border-right: none; /* Bỏ viền phải để nút submit liền mạch */
+        color: #fff; /* Màu chữ trắng */
+        font-size: 16px; /* Kích thước chữ */
+        border-radius: 5px 0 0 5px; /* Bo góc trái */
+    }
+
+    /* Định dạng placeholder */
+    #search-page-form .search-field::placeholder {
+        color: #888; /* Màu chữ placeholder xám */
+        opacity: 1; /* Đảm bảo placeholder hiển thị rõ */
+    }
+
+    /* Xóa biểu tượng mặc định của input type="text" (nếu có) */
+    #search-page-form .search-field::-webkit-search-cancel-button,
+    #search-page-form .search-field::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+
+    /* Định dạng nút submit */
+    #search-page-form .search-submit {
+        height: 40px; /* Chiều cao khớp với ô input */
+        padding: 0 20px; /* Khoảng cách bên trong */
+        background-color: #e91e63; /* Màu hồng đậm giống trong hình */
+        border: none; /* Bỏ viền */
+        color: #fff; /* Chữ trắng */
+        font-size: 16px; /* Kích thước chữ */
+        font-weight: 500; /* Độ đậm chữ */
+        border-radius: 0 5px 5px 0; /* Bo góc phải */
+        cursor: pointer; /* Con trỏ chuột khi hover */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển màu khi hover */
+    }
+
+    /* Hiệu ứng hover cho nút */
+    #search-page-form .search-submit:hover {
+        background-color: #d81b60; /* Màu hồng đậm hơn khi hover */
+    }
+</style>
 <link rel="stylesheet" id="wp-block-library-css" href="css/style.min.css" type="text/css" media="all">
 <style id="wp-block-library-theme-inline-css" type="text/css">
 .wp-block-audio :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio :where(figcaption){color:#ffffffa6}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed :where(figcaption){color:#ffffffa6}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:#ffffffa6}:root :where(.wp-block-image figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme :root :where(.wp-block-image figcaption){color:#ffffffa6}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote:where(.has-text-align-right){border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote:where(.has-text-align-center){border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote:where(.is-style-plain){border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table :where(figcaption){color:#ffffffa6}.wp-block-video :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video :where(figcaption){color:#ffffffa6}.wp-block-video{margin:0 0 1em}:root :where(.wp-block-template-part.has-background){margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
@@ -126,656 +190,166 @@ var madara = {"ajaxurl":"https:\/\/live.mangabooth.com\/x\/wp-admin\/admin-ajax.
 
 
 <div class="wrap">
-    <div class="body-wrap">
+    < <div class="body-wrap">
+            <partial name="_HeaderPartial" />
 			
 				        <div class="site-content">
         <script src="js/jquery.slim.min.js" crossorigin="anonymous"></script>
 <script src="js/popper.min.js" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min_1.js" crossorigin="anonymous"></script>
     <!--<header class="site-header">-->
-    <div class="c-search-header__wrapper">
-        <div class="container">
+    
+  
 
-            <div class="search-content">
-                <form role="search" method="get" class="search-form manga-search-form ajax" action="https://live.mangabooth.com/x/">
-						<span class="screen-reader-text">Search for:</span>
-                        <input type="text" class="search-field manga-search-field" placeholder="Search..." value="" name="s">
-						<input type="submit" class="search-submit" value="Search">
-						<div class="loader-inner line-scale">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
+@{
+    ViewData["Title"] = "Search Results";
+    var genres = ViewBag.Genres as List<string> ?? new List<string>(); // Ép kiểu genres từ ViewBag
+}
+
+<div class="c-search-header__wrapper">
+    <div class="container">
+        <div class="search-content">
+
+ <form method="get" id="search-page-form" action="/Search/Index">
+    <span class="screen-reader-text">Search for:</span>
+    <input type="text" class="search-field manga-search-field" placeholder="Tìm Kiếm..." value="@ViewBag.SearchQuery" name="searchQuery">
+    <input type="hidden" name="genre" value="@ViewBag.Genre">
+    <input type="hidden" name="status" value="@ViewBag.Status">
+    <input type="hidden" name="page" value="@ViewBag.CurrentPage">
+    <input type="submit" class="search-submit" value="Tìm Kiếm">
+</form>
+
+
+
+        </div>
+        <div class="search-filters">
+            <!-- Bộ lọc Genre -->
+            <div class="genres-filter">
+                <p class="filter-title">Thể Loại</p>
+                <div class="options">
+                    @foreach (var genre in genres.Take(3))
+                    {
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@genre" class="btn btn-outline-secondary @(ViewBag.Genre == genre ? "active" : "")">@genre</a>
+                    }
+                    @if (genres.Count > 3)
+                    {
+                        <div class="dropdown more-genres-dropdown">
+                            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Xem Thêm
+                            </button>
+                            <div class="dropdown-menu">
+                                @foreach (var genre in genres.Skip(3))
+                                {
+                                    <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@genre" class="dropdown-item btn btn-outline-secondary @(ViewBag.Genre == genre ? "active" : "")">@genre</a>
+                                }
+                            </div>
                         </div>
-                        <input type="hidden" name="post_type" value="wp-manga">
-                        <script>
-							jQuery(document).ready(function ($) {
-								$('form.search-form input.search-field[name="s"]').keyup(function () {
-									var s = $('form.search-form input.search-field[name="s"]').val();
-									$('form.search-advanced-form input[name="s"]').val(s);
-								});
-
-								$('.search-form').on('submit', function(e){
-									console.log('click')
-									e.preventDefault();
-									$('.search-advanced-form').submit();
-							});
-
-							});
-
-                        </script>
-                </form>
-            </div>
-			<div class="search-filters">
-				<div class="type-filter">
-					<p class="filter-title">Type </p>
-					<div class="options">
-						<a class="btn " href="/x/?s&post_type=wp-manga&type=manga">Comic</a>
-						<a class="btn " href="/x/?s&post_type=wp-manga&type=text">Novel</a>
-					</div>
-				</div>
-				<span class="vertical divider"></span>
-				<div class="genres-filter">
-					<p class="filter-title"> Genres</p>
-					<div class="options">
-						<a href="/x/?s&post_type=wp-manga&genre=action" class="btn btn-outline-secondary">action</a><a href="/x/?s&post_type=wp-manga&genre=adventure" class="btn btn-outline-secondary">adventure</a><a href="/x/?s&post_type=wp-manga&genre=boys" class="btn btn-outline-secondary">boys</a>								<div class="dropdown more-genres-dropdown">
-									<button class="btn dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-										Show more
-									</button>
-									<div class="dropdown-menu">
-										<a href="/x/?s&post_type=wp-manga&genre=chinese" class="dropdown-item btn btn-outline-secondary">chinese</a><a href="/x/?s&post_type=wp-manga&genre=drama" class="dropdown-item btn btn-outline-secondary">drama</a><a href="/x/?s&post_type=wp-manga&genre=ecchi" class="dropdown-item btn btn-outline-secondary">ecchi</a><a href="/x/?s&post_type=wp-manga&genre=fighting" class="dropdown-item btn btn-outline-secondary">fighting</a><a href="/x/?s&post_type=wp-manga&genre=fun" class="dropdown-item btn btn-outline-secondary">fun</a><a href="/x/?s&post_type=wp-manga&genre=girl" class="dropdown-item btn btn-outline-secondary">girl</a><a href="/x/?s&post_type=wp-manga&genre=horrow" class="dropdown-item btn btn-outline-secondary">horrow</a><a href="/x/?s&post_type=wp-manga&genre=manhwa" class="dropdown-item btn btn-outline-secondary">manhwa</a>									</div>
-								</div>
-													</div>
-				</div>
-				<span class="vertical divider"></span>
-				<div class="sort-by">
-					<p class="filter-title">Sort by</p>
-					<div class="dropdown options">
-						<button class="btn dropdown-toggle " type="button" data-toggle="dropdown" aria-expanded="false">
-							Sort by						</button>
-						<div class="dropdown-menu">
-							<a href="/x/?s&post_type=wp-manga&m_orderby" class="dropdown-item btn btn-outline-secondary">Relevance</a>
-							<a href="/x/?s&post_type=wp-manga&m_orderby=latest" class="dropdown-item btn btn-outline-secondary">Latest</a>
-							<a href="/x/?s&post_type=wp-manga&m_orderby=alphabet" class="dropdown-item btn btn-outline-secondary">A-Z</a>
-							<a href="/x/?s&post_type=wp-manga&m_orderby=rating" class="dropdown-item btn btn-outline-secondary">Rating</a>
-							<a href="/x/?s&post_type=wp-manga&m_orderby=trending;" class="dropdown-item btn btn-outline-secondary">Trending</a>
-							<a href="/x/?s&post_type=wp-manga&m_orderby=views" class="dropdown-item btn btn-outline-secondary">Most Views</a>
-							<a href="/x/?s&post_type=wp-manga&m_orderby=new-manga" class="dropdown-item btn btn-outline-secondary">New</a>
-						</div>
-					</div>
-				</div>
-				<span class="vertical divider"></span>
-				<div class="filter-status">
-					<p class="filter-title">Status</p>
-					<div class="dropdown options">
-												<button class="btn dropdown-toggle " type="button" data-toggle="dropdown" aria-expanded="false">
-							Status						</button>
-						<div class="dropdown-menu">
-																<a data-value="on-going" href="/x/?s&post_type=wp-manga&status=on-going" class="dropdown-item btn btn-outline-secondary">OnGoing</a>
-																	<a data-value="end" href="/x/?s&post_type=wp-manga&status=end" class="dropdown-item btn btn-outline-secondary">Completed</a>
-																	<a data-value="canceled" href="/x/?s&post_type=wp-manga&status=canceled" class="dropdown-item btn btn-outline-secondary">Canceled</a>
-																	<a data-value="on-hold" href="/x/?s&post_type=wp-manga&status=on-hold" class="dropdown-item btn btn-outline-secondary">On Hold</a>
-																	<a data-value="upcoming" href="/x/?s&post_type=wp-manga&status=upcoming" class="dropdown-item btn btn-outline-secondary">Upcoming</a>
-														</div>
-					</div>
-				</div>
-			</div>
-			<div class="reset-filter"><button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i> Reset filter </button></div>
-    </div><!--</header>-->
-    <script type="text/javascript">
-		var manga_args = {"s":"","orderby":"","paged":"1","template":"search","meta_query":{"relation":"AND"}};
-    </script>
-    <div class="c-page-content">
-        <div class="content-area">
-            <div class="container">
-                <div class="row">
-                    <div class="main-col col-md-12 sidebar-hidden">
-
-						<div class="ad c-ads custom-code body-top-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/Build-The-Best-Manga-Site.jpg"></a></div>
-
-                        <!-- container & no-sidebar-->
-                        <div class="main-col-inner">
-							                                    <div class="search-wrap">
-										<h3 class="h4">
-											<i class="icon ion-ios-star"></i> 38 results for ""										</h3>
-                                            <div class="search-lists">
-													<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-17-2/">
-					<img width="110" height="150" src="images/thumb-4-249-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-4-249-110x150.jpg 110w, images/thumb-4-249-175x238.jpg 175w, images/thumb-4-249-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-17-2/">
-						Magokoro Scramble! ~What lies in your heart?~					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-16-2/">
-					<img width="110" height="150" src="images/thumb-5-231-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-5-231-110x150.jpg 110w, images/thumb-5-231-175x238.jpg 175w, images/thumb-5-231-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-16-2/">
-						Shiba Inu Rooms					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-15-2/">
-					<img width="110" height="150" src="images/thumb-4-243-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-4-243-110x150.jpg 110w, images/thumb-4-243-175x238.jpg 175w, images/thumb-4-243-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-15-2/">
-						The Days of Diamond					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-14-2/">
-					<img width="110" height="150" src="images/thumb-1-207-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-1-207-110x150.jpg 110w, images/thumb-1-207-175x238.jpg 175w, images/thumb-1-207-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-14-2/">
-						Jinrui-Shoku: Blight of Man					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>Why do we use it?<br>
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-13-2/">
-					<img width="110" height="150" src="images/thumb-3-237-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-3-237-110x150.jpg 110w, images/thumb-3-237-175x238.jpg 175w, images/thumb-3-237-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-13-2/">
-						Hunter x Hunter					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-12-2/">
-					<img width="110" height="150" src="images/thumb-2-234-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-2-234-110x150.jpg 110w, images/thumb-2-234-175x238.jpg 175w, images/thumb-2-234-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-12-2/">
-						SAKAMOTO DAYS					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-11-2/">
-					<img width="110" height="150" src="images/thumb-5-231-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-5-231-110x150.jpg 110w, images/thumb-5-231-175x238.jpg 175w, images/thumb-5-231-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-11-2/">
-						Red Cat Ramen					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-10-2/">
-					<img width="110" height="150" src="images/thumb-2-228-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-2-228-110x150.jpg 110w, images/thumb-2-228-175x238.jpg 175w, images/thumb-2-228-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-10-2/">
-						The World of SKK Girls					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-9-2/">
-					<img width="110" height="150" src="images/thumb-3-225-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-3-225-110x150.jpg 110w, images/thumb-3-225-175x238.jpg 175w, images/thumb-3-225-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-9-2/">
-						Taro Miyao Becomes A Cat Parent?!					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-8-2/">
-					<img width="110" height="150" src="images/thumb-2-222-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-2-222-110x150.jpg 110w, images/thumb-2-222-175x238.jpg 175w, images/thumb-2-222-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-8-2/">
-						Sachi’s Records 〜Sachi’s Book of Revelation〜					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-7-2/">
-					<img width="110" height="150" src="images/thumb-4-219-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-4-219-110x150.jpg 110w, images/thumb-4-219-175x238.jpg 175w, images/thumb-4-219-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-7-2/">
-						Show-ha Shoten!					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-6-2/">
-					<img width="110" height="150" src="images/thumb-3-216-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-3-216-110x150.jpg 110w, images/thumb-3-216-175x238.jpg 175w, images/thumb-3-216-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-6-2/">
-						Astro Royale					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-5-2/">
-					<img width="110" height="150" src="images/thumb-4-213-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-4-213-110x150.jpg 110w, images/thumb-4-213-175x238.jpg 175w, images/thumb-4-213-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-5-2/">
-						Manga 5					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-4-2/">
-					<img width="110" height="150" src="images/thumb-3-210-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-3-210-110x150.jpg 110w, images/thumb-3-210-175x238.jpg 175w, images/thumb-3-210-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-4-2/">
-						Manga 4					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-3-2/">
-					<img width="110" height="150" src="images/thumb-1-207-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-1-207-110x150.jpg 110w, images/thumb-1-207-175x238.jpg 175w, images/thumb-1-207-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-3-2/">
-						Manga 3					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="manga__item ">
-			<div class="manga__thumb">
-			<div class="manga__thumb_item">
-				<a href="https://live.mangabooth.com/x/manga/manga-2-2/">
-					<img width="110" height="150" src="images/thumb-4-204-110x150.jpg" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="" decoding="async" srcset="images/thumb-4-204-110x150.jpg 110w, images/thumb-4-204-175x238.jpg 175w, images/thumb-4-204-350x476.jpg 350w" sizes="(max-width: 110px) 100vw, 110px">				</a>
-			</div>
-		</div>
-	
-	<div class="manga__content">
-		<div class="manga__content_item">
-			<div class="post-title font-title">
-
-				<h2>
-					<a href="https://live.mangabooth.com/x/manga/manga-2-2/">
-						Manga 2					</a>
-				</h2>
-				<div class="manga-excerpt">            
-					<p>What is Lorem Ipsum?<br>
-					Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-<p>					Why do we use it?<br>
-					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-				</div>
-				<div class="manga-info">
-										<span class="total">4 Chapters</span>
-				</div>
-				<span class="manga-genres">
-					<span class="genre-item"><i class="fas fa-circle"></i><a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a></span><span class="genre-item"><i class="fas fa-circle"></i> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a></span>				</span>
-			</div>
-		</div>
-	</div>
-</div>
-                                            </div>
-											            <nav class="navigation paging-navigation">
-                <div class="col-12 col-md-12">
-                    <h4 class="screen-reader-text">
-						Posts navigation                    </h4>
-
-                    <div class="nav-links">
-                        <!--Previous-->
-						                            <div class="nav-previous float-left">
-								<a href="https://live.mangabooth.com/x/page/2/?s&post_type=wp-manga"><span class="icon ion-md-arrow-back meta-nav"></span> Older Posts</a>                            </div>
-
-						
-                        <!--Next-->
-						
-                    </div>
-                    <!-- .nav-links -->
+                    }
                 </div>
-            </nav><!-- .navigation -->
+            </div>
+            <span class="vertical divider"></span>
+            <!-- Bộ lọc Status -->
+            <div class="filter-status">
+                <p class="filter-title">Trạng Thái</p>
+                <div class="dropdown options">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        @(string.IsNullOrEmpty(ViewBag.Status) ? "Trạng Thái" : ViewBag.Status)
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=ongoing" class="dropdown-item btn btn-outline-secondary @(ViewBag.Status == "ongoing" ? "active" : "")">Ongoing</a>
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=completed" class="dropdown-item btn btn-outline-secondary @(ViewBag.Status == "completed" ? "active" : "")">Completed</a>
+                    </div>
+                </div>
+            </div>
+            <span class="vertical divider"></span>
+            <!-- Nút Reset Filter -->
+            <div class="reset-filter">
+                <a href="/Search/Index" class="btn btn-outline-danger"><i class="fas fa-times"></i> Đặt lại bộ lọc</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-			                                    </div>
-									                        </div>
+<div class="c-page-content">
+    <div class="content-area">
+        <div class="container">
+            <div class="row">
+                <div class="main-col col-md-12 sidebar-hidden">
+                    <div class="main-col-inner">
+                        <div class="search-wrap">
+                            <h3 class="h4">
+                                <i class="icon ion-ios-star"></i> @ViewBag.TotalItems kết quả được tìm thấy 
+                            </h3>
+                            <div class="search-lists">
+                                @foreach (var comic in Model)
+                                {
+                                    <div class="manga__item">
+                                        <div class="manga__thumb">
+                                            <div class="manga__thumb_item">
+                                                <a href="/Comic/Detail/@comic.Id">
+                                                    <img width="110" height="150" src="@comic.CoverImage" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="@comic.Title">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="manga__content">
+                                            <div class="manga__content_item">
+                                                <div class="post-title font-title">
+                                                    <h2>
+                                                        <a href="/Comic/Detail/@comic.Id">@comic.Title</a>
+                                                    </h2>
+                                                    <div class="manga-excerpt">
+                                                        <p>@comic.Description</p>
+                                                    </div>
+                                                    <div class="manga-info">
+                                                        <span class="total">@comic.ViewCount View</span>
+                                                    </div>
+                                                    <span class="manga-genres">
+                                                        @foreach (var genre in comic.Genres)
+                                                        {
+                                                            <span class="genre-item">
+                                                                <i class="fas fa-circle"></i>
+                                                                <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@genre">@genre</a>
+                                                            </span>
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
 
-						<div class="ad c-ads custom-code body-bottom-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/Build-The-Best-Manga-Site.jpg"></a></div>
-
+                            <!-- Phân trang -->
+                            <nav class="navigation paging-navigation">
+                                <div class="col-12 col-md-12">
+                                    <h4 class="screen-reader-text">Posts navigation</h4>
+                                    <div class="nav-links">
+                                        @if (ViewBag.CurrentPage > 1)
+                                        {
+                                            <div class=" float-left">
+                                                <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=@ViewBag.Status&page=@(ViewBag.CurrentPage - 1)">
+                                                    <span class="icon ion ion-md-arrow-back"></span> Trước
+                                                </a>
+                                            </div>
+                                        }
+                                        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                                        {
+                                            <div class=" float-right">
+                                                <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=@ViewBag.Status&page=@(ViewBag.CurrentPage + 1)">
+                                                    Sau <span class="icon ion ion-md-arrow-forward"></span>
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        </div><!-- <div class="site-content"> -->
-
-		
-			
-		
-       
-		<div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-left"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/1.jpg"></a></div><div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-right"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/2.jpg"></a></div>
-		
-        </div> <!-- class="wrap" --></div> <!-- class="body-wrap" -->
-
-	
+</div>
 
 <!-- Modal -->
 <div class="wp-manga-section">
@@ -785,7 +359,8 @@ It is a long established fact that a reader will be distracted by the readable c
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"> </span></button>
+                        <span aria-hidden="true"> </span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div id="login" class="login">
@@ -793,25 +368,26 @@ It is a long established fact that a reader will be distracted by the readable c
                             <a href="https://live.mangabooth.com/x/" title="Madara Child X Theme" tabindex="-1">Sign in</a>
                         </h3>
                         <p class="message login"></p>
-						<meta name="robots" content="noindex, follow, max-image-preview:large">
-												                        <form name="loginform" id="loginform" method="post">
+                        <meta name="robots" content="noindex, follow, max-image-preview:large">
+                        <form name="loginform" id="loginform" method="post">
                             <p>
-                                <label>Username or Email Address *                                    <br> <input type="text" name="log" class="input user_login" value="" size="20">
+                                <label>Username or Email Address *<br> <input type="text" name="log" class="input user_login" value="" size="20">
                                 </label>
                             </p>
                             <p>
-                                <label>Password *                                    <br> <input type="password" autocomplete="" name="pwd" class="input user_pass" value="" size="20">
+                                <label>Password *<br> <input type="password" autocomplete="" name="pwd" class="input user_pass" value="" size="20">
                                 </label>
                             </p>
                             <p>
-								                                
                             </p>
                             <p class="forgetmenot">
                                 <label>
-                                    <input name="rememberme" type="checkbox" id="rememberme" value="forever">Remember Me                                 </label>
+                                    <input name="rememberme" type="checkbox" id="rememberme" value="forever">Remember Me
+                                </label>
                             </p>
                             <p class="submit">
-								<input type="submit" name="wp-submit" class="button button-primary button-large wp-submit" value="Log In">                                <input type="hidden" name="redirect_to" value="https://live.mangabooth.com/x/wp-admin/">
+                                <input type="submit" name="wp-submit" class="button button-primary button-large wp-submit" value="Log In">
+                                <input type="hidden" name="redirect_to" value="https://live.mangabooth.com/x/wp-admin/">
                                 <input type="hidden" name="testcookie" value="1">
                             </p>
                         </form>
@@ -833,7 +409,8 @@ It is a long established fact that a reader will be distracted by the readable c
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"> </span></button>
+                        <span aria-hidden="true"> </span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div id="sign-up" class="login">
@@ -843,12 +420,12 @@ It is a long established fact that a reader will be distracted by the readable c
                         <p class="message register">Register For This Site.</p>
                         <form name="registerform" id="registerform" novalidate="novalidate">
                             <p>
-                                <label>Username *                                    <br>
+                                <label>Username *<br>
                                     <input type="text" name="user_sign-up" class="input user_login" value="" size="20">
                                 </label>
                             </p>
                             <p>
-                                <label>Email Address *                                    <br>
+                                <label>Email Address *<br>
                                     <input type="email" name="email_sign-up" class="input user_email" value="" size="20">
                                 </label>
                             </p>
@@ -858,7 +435,7 @@ It is a long established fact that a reader will be distracted by the readable c
                                 </label>
                             </p>
                             <p class="action">
-								                            </p>
+                            </p>
 
                             <input type="hidden" name="redirect_to" value="">
                             <p class="submit">
@@ -885,7 +462,8 @@ It is a long established fact that a reader will be distracted by the readable c
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"> </span></button>
+                        <span aria-hidden="true"> </span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div id="reset" class="login">
@@ -895,11 +473,11 @@ It is a long established fact that a reader will be distracted by the readable c
                         <p class="message reset">Please enter your username or email address. You will receive a link to create a new password via email.</p>
                         <form name="resetform" id="resetform" method="post">
                             <p>
-                                <label>Username or Email Address                                    <br>
+                                <label>Username or Email Address<br>
                                     <input type="text" name="user_reset" id="user_reset" class="input" value="" size="20">
                                 </label>
                             </p>
-                                                        <p class="submit">
+                            <p class="submit">
                                 <input type="submit" name="wp-submit" class="button button-primary button-large wp-submit" value="Get New Password">
                                 <input type="hidden" name="testcookie" value="1">
                             </p>
@@ -915,37 +493,44 @@ It is a long established fact that a reader will be distracted by the readable c
     </div>
 
     <script type="text/javascript">
-                                    var gRecaptchas = document.getElementsByClassName('g-recaptcha');
-                                    for (let i = 0; i < gRecaptchas.length; i++) {
-                                        gRecaptchas[i].setAttribute('data-callback', 'wpMangaSubmitSwitch');
-                                        gRecaptchas[i].setAttribute('data-expired-callback', 'wpMangaSubmitSwitch');
-                                        gRecaptchas[i].setAttribute('data-error', 'wpMangaSubmitSwitch');
-                                    }
-                                </script>
+        var gRecaptchas = document.getElementsByClassName('g-recaptcha');
+        for (let i = 0; i < gRecaptchas.length; i++) {
+            gRecaptchas[i].setAttribute('data-callback', 'wpMangaSubmitSwitch');
+            gRecaptchas[i].setAttribute('data-expired-callback', 'wpMangaSubmitSwitch');
+            gRecaptchas[i].setAttribute('data-error', 'wpMangaSubmitSwitch');
+        }
+    </script>
 </div>
+
 <div class="modal fade" id="frm-wp-manga-buy-coin" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true"> </span></button>
-			</div>
-			<div class="modal-body">
-				<input type="hidden" name="wp-manga-coin-nonce" value="a9262ffa18">
-				<input type="hidden" name="wp-manga-chapter" value="">
-				<h3>
-					Premium Chapter				</h3>
-								<p class="message-login">You are required to login first</p>
-							</div>
-			<div class="modal-footer">
-								<button class="button button-secondary button-large btn-cancel">Cancel</button>
-			</div>
-		</div>
-	</div>
-</div>            <div class="go-to-top active">
-                <i class="icon ion-md-arrow-up"></i>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"> </span>
+                </button>
             </div>
-			<script type="text/javascript" src="js/widgetopts.resize.js" id="widgetopts-resize-script-js"></script>
+            <div class="modal-body">
+                <input type="hidden" name="wp-manga-coin-nonce" value="a9262ffa18">
+                <input type="hidden" name="wp-manga-chapter" value="">
+                <h3>
+                    Premium Chapter
+                </h3>
+                <p class="message-login">You are required to login first</p>
+            </div>
+            <div class="modal-footer">
+                <button class="button button-secondary button-large btn-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="go-to-top active">
+    <i class="icon ion-md-arrow-up"></i>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script type="text/javascript" src="js/widgetopts.resize.js" id="widgetopts-resize-script-js"></script>
 <script type="text/javascript" src="js/frontend.js" id="wp-manga-chapter-thumbnail-frontend-js"></script>
 <script type="text/javascript" src="js/lightbox.min.js" id="lightbox-js"></script>
 <script type="text/javascript" src="js/core.js" id="madara-core-js"></script>
@@ -964,6 +549,7 @@ var wpMangaLogin = {"admin_ajax":"https:\/\/live.mangabooth.com\/x\/wp-admin\/ad
 <script type="text/javascript" src="js/manga-search.js" id="wp-manga-search-js"></script>
 <script type="text/javascript" src="js/slick.min_1.js" id="slick-js"></script>
 <script type="text/javascript" src="js/ct-shortcodes.js" id="ct-shortcode-js-js"></script>
+
 
 
 
