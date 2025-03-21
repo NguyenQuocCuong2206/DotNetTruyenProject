@@ -19,12 +19,15 @@ namespace DotNetTruyen.Controllers
                 .Include(c => c.Chapters)
                 .Include(c => c.ComicGenres)
                     .ThenInclude(cg => cg.Genre)
-                .Include(c => c.Likes)
                 .Include(c => c.Follows)
                 .FirstOrDefault(c => c.Id == id);
 
             if (comic == null)
                 return NotFound();
+
+            // Tăng lượt xem
+            comic.View += 1;
+            _context.SaveChanges(); // Lưu thay đổi vào database
 
             var comments = _context.Comments
                 .Include(c => c.User)

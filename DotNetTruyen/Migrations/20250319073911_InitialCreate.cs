@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DotNetTruyen.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -475,19 +475,19 @@ namespace DotNetTruyen.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("b266c1a7-e7ae-4375-b4ab-ad437617d208"), null, "Reader", "READER" },
-                    { new Guid("c508e70e-b0f7-430b-ab59-90817f690686"), null, "Admin", "ADMIN" }
+                    { new Guid("c0107e47-2558-40db-9eed-f665c3ec7b31"), null, "Reader", "READER" },
+                    { new Guid("d6fae85c-b84a-4a90-b0d8-d3837fd4290b"), null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "ImageUrl", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("67d9df8e-a443-4fa5-a3cc-27cd687eba5c"), 0, "03b5cfa2-2cc2-4f94-8759-abb0353b0793", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAENS3g0fBWnSNj8ICJUIGe52tPiJaOIly1I1kjXdfho0LFQ9uoI/FhBBkuADA+QsKXw==", null, false, "bab023aa-32e1-4964-b011-f9845cb5890c", false, "admin" });
+                values: new object[] { new Guid("c8a2d5de-3294-4f70-b873-c597b968e2a1"), 0, "644f49c2-6386-4c77-a30e-9d9076d737de", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAECgi51rZf4gwxD73K70QyDafDjsmcsjcVgmuVqYmSckZq9iLmpKIe7NoCVBGPyxdjA==", null, false, "a77cdddd-779d-48cf-9c0e-144bb54078d7", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { new Guid("c508e70e-b0f7-430b-ab59-90817f690686"), new Guid("67d9df8e-a443-4fa5-a3cc-27cd687eba5c") });
+                values: new object[] { new Guid("d6fae85c-b84a-4a90-b0d8-d3837fd4290b"), new Guid("c8a2d5de-3294-4f70-b873-c597b968e2a1") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChapterImages_ChapterId",
