@@ -91,8 +91,14 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
             var role = await _context.Roles
                 .FirstOrDefaultAsync(g => g.Name == model.Name);
 
+            if (model.SelectedPermission == null)
+            {
+                model.SelectedPermission = new();
+            }
+
             if (role != null)
             {
+                TempData["ErrorMessage"] = "Vai trò đã tồn tại";
                 return View("~/Views/Admin/Roles/Create.cshtml", model);
             }
 
@@ -108,7 +114,12 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
                         await _roleManager.AddClaimAsync(newRole, new Claim("Permission", claim));
                     }
                 }
+                TempData["SuccessMessage"] = "Tạo vai trò mới thành công";
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Tạo vai trò mới không thành công";
             }
 
             return View("~/Views/Admin/Roles/Edit.cshtml", model);
@@ -130,7 +141,7 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
                 return NotFound();
             }
 
-            if (role.Name == "Admin")
+            if (role.Name == "Admin" || role.Name == "Reader")
             {
                 return RedirectToAction("Index");
             }
@@ -174,7 +185,7 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
                 return NotFound();
             }
 
-            if (role.Name == "Admin")
+            if (role.Name == "Admin" || role.Name == "Reader")
             {
                 return RedirectToAction("Index");
             }
@@ -204,7 +215,12 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
                         await _roleManager.AddClaimAsync(role, new Claim("Permission", claim));
                     }
                 }
+                TempData["SuccessMessage"] = "Thay đổi vai trò thành công";
                 return RedirectToAction(nameof(Index));
+            }
+            else 
+            {
+                TempData["ErrorMessage"] = "Thay đổi vai trò không thành công";
             }
             return View("~/Views/Admin/Roles/Edit.cshtml", model);
         }
@@ -223,6 +239,13 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
             {
                 return NotFound();
             }
+
+            if (role.Name == "Admin" || role.Name == "Reader")
+            {
+                TempData["ErrorMessage"] = "Xóa vai trò không thành công";
+                return RedirectToAction("Index");
+            }
+
             var existingClaims = await _roleManager.GetClaimsAsync(role);
 
 
@@ -231,6 +254,7 @@ namespace DotNetTruyen.Controllers.Admin.RoleManagement
                 await _roleManager.RemoveClaimAsync(role, claim);
             }
             await _roleManager.DeleteAsync(role);
+            TempData["SuccessMessage"] = "Xóa vai trò thành công";
             return RedirectToAction("Index");
         }
     }

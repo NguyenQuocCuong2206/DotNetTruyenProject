@@ -84,3 +84,28 @@
         }
     </style>
 }
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const submitButton = document.getElementById("submitButton");
+        const editForm = document.getElementById("editForm");
+        submitButton.addEventListener("click", async function (e) {
+            e.preventDefault();
+            const result = await Swal.fire({
+                title: 'Xác nhận',
+                text: 'Bạn có chắc chắn muốn lưu thay đổi không?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                reverseButtons: true
+            });
+
+            if (result.isConfirmed) {
+                editForm.submit();
+            } else {
+                notyf.error("Đã hủy lưu thay đổi!");
+            }
+        });
+    });
+</script>
