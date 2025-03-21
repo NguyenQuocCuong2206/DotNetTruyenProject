@@ -6,5 +6,6 @@ namespace DotNetTruyen.Services
     {
         Task<string> AddPhotoAsync(IFormFile file);
         Task<List<string>> AddListPhotoAsync(List<IFormFile> files);
+        Task DeletePhotoAsync(string imageUrl);
     }
 }

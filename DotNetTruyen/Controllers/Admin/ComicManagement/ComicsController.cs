@@ -10,6 +10,8 @@ using DotNetTruyen.Models;
 using DotNetTruyen.ViewModels;
 using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels.Management;
+using Microsoft.AspNetCore.SignalR;
+using DotNetTruyen.Hubs;
 
 namespace DotNetTruyen.Controllers.Admin.ComicManagement
 {
@@ -17,12 +19,15 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IPhoToService _photoService;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
-        public ComicsController(DotNetTruyenDbContext context, IPhoToService photoService)
+        public ComicsController(DotNetTruyenDbContext context, IPhoToService photoService, IHubContext<NotificationHub> hubContext)
         {
             _context = context;
             _photoService = photoService;
+            _hubContext = hubContext;
         }
+
 
 
         // GET: Comics
@@ -186,7 +191,29 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             }
 
             _context.Comics.Add(comic);
+            var notification = new Notification
+            {
+                Id = Guid.NewGuid(),
+                Title = "Truyện mới",
+                Message = $"Truyện '{comic.Title}' đã được tạo thành công.",
+                Type = "success",
+                Icon = "check-circle",
+                Link = $"/Comics/Details/{comic.Id}",
+                IsRead = false,
+                
+            };
+            _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
+
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            {
+                id = notification.Id,
+                title = notification.Title,
+                message = notification.Message,
+                type = notification.Type,
+                icon = notification.Icon,
+                link = notification.Link
+            });
 
             TempData["SuccessMessage"] = "Truyện đã được tạo thành công!";
             return RedirectToAction(nameof(Index));
@@ -321,7 +348,29 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             try
             {
                 _context.Update(comicToUpdate);
+                var notification = new Notification
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Cập nhật truyện",
+                    Message = $"Truyện '{comicToUpdate.Title}' đã được cập nhật.",
+                    Type = "info",
+                    Icon = "info-circle",
+                    Link = $"/Comics/Details/{comicToUpdate.Id}",
+                    IsRead = false,
+                    
+                };
+                _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
+
+                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                {
+                    id = notification.Id,
+                    title = notification.Title,
+                    message = notification.Message,
+                    type = notification.Type,
+                    icon = notification.Icon,
+                    link = notification.Link
+                });
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -403,9 +452,29 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             _context.Update(comic);
 
 
- 
+            var notification = new Notification
+            {
+                Id = Guid.NewGuid(),
+                Title = "Xóa truyện",
+                Message = $"Truyện '{comic.Title}' đã được xóa.",
+                Type = "warning",
+                Icon = "exclamation-circle",
+                Link = $"/Comics",
+                IsRead = false,
 
+            };
+            _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
+
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            {
+                id = notification.Id,
+                title = notification.Title,
+                message = notification.Message,
+                type = notification.Type,
+                icon = notification.Icon,
+                link = notification.Link
+            });
             TempData["SuccessMessage"] = "Truyện đã được xóa và các liên kết đã được gỡ thành công!";
 
             return RedirectToAction(nameof(Index));
