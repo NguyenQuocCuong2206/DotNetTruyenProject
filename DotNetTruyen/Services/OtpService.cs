@@ -48,5 +48,15 @@ namespace DotNetTruyen.Services
             }
             return false;
         }
+
+        public string RandomOtp()
+        {
+            var rng = RandomNumberGenerator.Create();
+            byte[] bytes = new byte[4];
+            rng.GetBytes(bytes);
+            int value = BitConverter.ToInt32(bytes, 0) & int.MaxValue;
+            string otp = (value % 1000000).ToString("D6");
+            return otp;
+        }
     }
 }
