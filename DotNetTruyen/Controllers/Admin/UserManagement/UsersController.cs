@@ -207,10 +207,10 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
                         string roleString = string.Join(", ", roles);
 
                         worksheet.Cells[row, 1].Value = user.Id;
-                        worksheet.Cells[row, 2].Value = user.NameToDisplay ?? "N/A";
+                        worksheet.Cells[row, 2].Value = user.NameToDisplay;
                         worksheet.Cells[row, 3].Value = user.UserName;
                         worksheet.Cells[row, 4].Value = user.Email;
-                        worksheet.Cells[row, 5].Value = roleString ?? "N/A";
+                        worksheet.Cells[row, 5].Value = roleString;
                         worksheet.Cells[row, 6].Value = (user.LockoutEnd == null) ? "Hoạt động" : "Khóa";
 
                         row++;
@@ -226,7 +226,6 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
 
                     string fileName = "Users.xlsx";
                     string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    TempData["SuccessMessage"] = "Đã xuất file thành công";
                     return File(stream, contentType, fileName);
                 }
             }
@@ -244,7 +243,7 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
             if (file == null || file.Length == 0)
             {
                 TempData["ErrorMessage"] = "Vui lòng chọn một file Excel hợp lệ.";
-                return BadRequest();
+                return RedirectToAction("Index");
             }
 
             try
@@ -271,6 +270,7 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
                             var existingUser = await _userManager.FindByEmailAsync(email);
                             if (existingUser != null)
                             {
+                                TempData["SuccessMessage"] = "Các người dùng đã có trong hệ thống sẽ không được thêm vào";
                                 continue; // Bỏ qua nếu user đã tồn tại
                             }
 

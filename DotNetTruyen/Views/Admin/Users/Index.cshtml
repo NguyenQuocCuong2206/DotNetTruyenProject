@@ -27,10 +27,8 @@
     </form>
     <div>
         <a class="btn btn-primary" asp-action="ExportUsersToExcel" asp-route-searchQuery="@Model.SearchQuery"> <i class="fas fa-file-excel"></i> Xuất ra file Excel</a>
-        <button type="submit" class="btn btn-secondary" id="uploadBtn"><i class="fas fa-plus"></i> Nhập dữ liệu file Excel</button>
-        <form asp-action="ImportUsersFromExcel"  method="post" enctype="multipart/form-data" id="uploadForm">
-            <input type="file" name="file" accept=".xlsx" required style="display: none" id="fileInput" />
-        </form>
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#importUsers"><i class="fas fa-plus"></i> Nhập dữ liệu file Excel</button>
+        
     </div>
 
 </div>
@@ -126,6 +124,8 @@
     </div>
 </div>
 
+
+
 <!-- Add Role For User Modal -->
 <div class="modal fade @(ViewData["ShowModal"] as string == "true" ? "show d-block" : "")" id="addRoleForUser" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -154,12 +154,33 @@
     </div>
 </div>
 
+
+<!-- Ipmort Users Modal -->
+<div class="modal fade @(ViewData["ShowModal"] as string == "true" ? "show d-block" : "")" id="importUsers" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chọn file</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-action="ImportUsersFromExcel" method="post" enctype="multipart/form-data" id="uploadForm">
+                <div class="modal-body">
+                    <input type="file" name="file" accept=".xlsx" required />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-secondary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var resetPasswordModal = document.getElementById('addRoleForUser');
+        var addRoleForUserModal = document.getElementById('addRoleForUser');
         var updateRolesForm = document.getElementById('updateRolesForm');
 
-        resetPasswordModal.addEventListener('show.bs.modal', function (event) {
+        addRoleForUserModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget; // Thẻ <a> đã kích hoạt modal
             var userId = button.getAttribute('data-user-id');
             var userName = button.getAttribute('data-user-name');
@@ -206,15 +227,5 @@
                         }
                     });
                 });
-
-            document.getElementById("uploadBtn").addEventListener("click", function () {
-                document.getElementById("fileInput").click();
-            });
-
-            document.getElementById("fileInput").addEventListener("change", function () {
-            if (this.files.length > 0) {
-                document.getElementById("uploadForm").submit();
-            }
-        });
      });
 </script>
