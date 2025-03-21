@@ -5,7 +5,7 @@
 
 <body class="home page-template page-template-page-templates page-template-front-page page-template-page-templatesfront-page-php page page-id-189 wp-embed-responsive header-style-1 sticky-enabled sticky-style-1 text-ui-light minimal-reading-layout">
 <div id="pageloader" class="spinners">
-			<div class="spinner"><div class="c-pre-loading-logo"><a class="logo" href="https://live.mangabooth.com/x/" title="Madara Child X Theme"><img class="for-original" src="images/logo.png" alt="Madara Child X Theme"></a></div><div class="loader-inner ball-grid-pulse">
+			<div class="spinner"><div class="c-pre-loading-logo"><a class="logo" href="" title="Madara Child X Theme"><img class="for-original" src="~/images/svg/bulk/images.jpg" alt="Madara Child X Theme"></a></div><div class="loader-inner ball-grid-pulse">
     <div></div>
     <div></div>
     <div></div>
@@ -94,7 +94,7 @@
         <div class="entry-content_wrap">
 			
 
-
+@* 
 <div id="c-post-slider-598" class="manga-slider style-2" data-style="style-2" data-count="3">
     <div class="slider__container" role="toolbar">
         @foreach (var comic in Model.Take(5).Where(c => c.View > 1000)) 
@@ -127,29 +127,26 @@
             </div>
         }
     </div>
-</div>
+</div> *@
 			
 
 
 						
 
-<div class="x-heading"><h2 style="color:">Slider</h2><div class="sub-links"><a style="color:" href="https://live.mangabooth.com/x/manga/">See All</a><a style="color:" href=""> | </a></div></div>
+<div class="x-heading"><h2 style="color:">Truyện hay</h2><div class="sub-links"><a style="color:" href="https://live.mangabooth.com/x/manga/"></a><a style="color:" href=""> | </a></div></div>
 <div style="height:18px" aria-hidden="true" class="wp-block-spacer"></div>
 
 <div id="c-post-slider-139" class="manga-slider style-1 no-padding" data-style="style-1" data-count="5">
     <div class="slider__container_custom" role="toolbar">
-        @foreach (var comic in Model.Take(6)) // Lấy 6 truyện đầu tiên
+        @foreach (var comic in Model.Where(m => m.View > 100).OrderByDescending(m => m.View)) 
         {
             <div class="slider__item">
                 <div class="slider__thumb">
-                    @if (comic.View > 1000) // Ví dụ: Hiển thị "trending" nếu lượt xem > 1000
+                    @if (comic.View > 100) //  Hiển thị "trending" nếu lượt xem > 1000
                     {
                         <span class="manga-title-badges custom trending">trending</span>
                     }
-                    else if (comic.Status) // Ví dụ: Hiển thị "HOT" nếu Status = true (hoàn thành)
-                    {
-                        <span class="manga-title-badges hot">HOT</span>
-                    }
+                   
                     <div class="slider__thumb_item">
                         <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
                             <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
@@ -166,9 +163,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="slider__meta">
-                    <span class="manga-chapter-type">Comic</span>
-                </div>
+               @*  <div class="slider__meta">
+                    <span class="manga-chapter-type">Truyện</span>
+                </div> *@
             </div>
         }
     </div>
@@ -186,12 +183,12 @@
 						
 					
 
-<div class="x-heading"><h2 style="color:">Another Slider</h2><div class="sub-links"><a style="color:" href="">See All</a><a style="color:" href=""> | </a></div></div>
+<div class="x-heading"><h2 style="color:">Truyện mới nhất</h2><div class="sub-links"><a style="color:" href=""></a><a style="color:" href=""> | </a></div></div>
 <div style="height:0px" aria-hidden="true" class="wp-block-spacer"></div>
 
 <div id="c-post-slider-714" class="manga-slider style-3" data-style="style-3" data-count="3">
     <div class="slider__container" role="toolbar">
-        @foreach (var comic in Model.Take(8)) // Lấy 8 truyện đầu tiên
+        @foreach (var comic in Model.OrderByDescending(m => m.CreatedAt)) 
         {
             <div class="slider__item">
                 <div class="slider__thumb">
@@ -206,7 +203,7 @@
                     <div class="slider__content_item">
                         <div class="post-title font-title">
                             <h4>
-                                @if (comic.View > 1000) // Ví dụ: Hiển thị "trending" nếu lượt xem > 1000
+                                @if (comic.View > 100) // Ví dụ: Hiển thị "trending" nếu lượt xem > 1000
                                 {
                                     <span class="manga-title-badges custom trending">trending</span>
                                 }
@@ -220,9 +217,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="slider__meta">
-                    <span class="manga-chapter-type">Comic</span>
-                </div>
+                @* <div class="slider__meta">
+                    <span class="manga-chapter-type">Truyện</span>
+                </div> *@
             </div>
         }
     </div>
@@ -241,7 +238,7 @@
 						
 
 						
-						<div class="x-heading"><h2 style="color:">Latest Releases</h2><div class="sub-links"><a style="color:" href="">See All</a><a style="color:" href=""> | </a></div></div>
+						<div class="x-heading"><h2 style="color:">Danh sách tất cả các truyện</h2><div class="sub-links"><a style="color:" href=""></a><a style="color:" href=""> | </a></div></div>
 
 						
 						
@@ -337,7 +334,7 @@
                 <td class="time">
                     <span class="post-on font-meta">${comic.createdAt ?? "N/A"}</span>
                     <span style="font-weight: 900;"> • </span>
-                    <span class="post-on font-meta type">Comic</span>
+                   @*  <span class="post-on font-meta type">Comic</span> *@
                 </td>
             `;
             comicList.appendChild(tr);

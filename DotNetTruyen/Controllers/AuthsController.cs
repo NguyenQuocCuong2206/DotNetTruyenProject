@@ -15,18 +15,21 @@ namespace DotNetTruyen.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly EmailService _emailService;
         private readonly OtpService _otpService;
 
         public AuthsController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
+            RoleManager<IdentityRole<Guid>> roleManager,
             EmailService emailService,
             OtpService otpService
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _emailService = emailService;
             _otpService = otpService;
         }
@@ -54,15 +57,38 @@ namespace DotNetTruyen.Controllers
                     {
                         result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);
                     }
+                    else
+                    {
+                        if (await _userManager.FindByNameAsync(model.UserNameOrEmail) == null)
+                        {
+                            ViewBag.ErrorMessage = "Tên đăng nhập không chính xác";
+                            return View();
+                        }
+                    }
                 }
 
                 if (result.Succeeded)
                 {
-                    if (User.IsInRole("Admin"))
+                    var userRoles = await _userManager.GetRolesAsync(await _userManager.GetUserAsync(User));
+
+                    foreach (var roleName in userRoles)
                     {
-                        return LocalRedirect("/DashBoard");
+                        var role = await _roleManager.FindByNameAsync(roleName);
+                        if (role != null)
+                        {
+                            var roleClaims = await _roleManager.GetClaimsAsync(role);
+                            if (roleClaims.Any(c => c.Type == "Permission" && c.Value == "Vào bảng điều khiển"))
+                            {
+                                return LocalRedirect("/DashBoard");
+                            }
+                        }
                     }
                     return LocalRedirect(returnUrl);
+                }
+                if (result.IsLockedOut)
+                {
+                    ViewBag.ErrorMessage = "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.";
+                    return View();
                 }
                 if (result.IsNotAllowed)
                 {
@@ -80,7 +106,7 @@ namespace DotNetTruyen.Controllers
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                    ViewBag.ErrorMessage = "Mật khẩu không chính xác";
                     return View();
                 }
             }
@@ -149,6 +175,11 @@ namespace DotNetTruyen.Controllers
             }
             else
             {
+                if (existingUser.LockoutEnd != null && existingUser.LockoutEnd > DateTime.UtcNow)
+                {
+                    ViewBag.ErrorMessage = "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên.";
+                    return View("Login");
+                }
                 await _signInManager.SignInAsync(existingUser, isPersistent: false);
                 return LocalRedirect(returnUrl);
             }
