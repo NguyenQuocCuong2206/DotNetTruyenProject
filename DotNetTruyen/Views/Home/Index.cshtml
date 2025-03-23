@@ -1,6 +1,12 @@
 ﻿@model List<DotNetTruyen.Models.Comic>
 @{
     ViewData["Title"] = "DotNetTruyen";
+    var advertisements = ViewBag.Advertisements as List<DotNetTruyen.Models.Advertisement>;
+    var leftAd = advertisements?.FirstOrDefault(a => a.Title == "left");
+    var rightAd = advertisements?.FirstOrDefault(a => a.Title == "right");
+    var topAd = advertisements?.FirstOrDefault(a => a.Title == "top");
+    var botAd = advertisements?.FirstOrDefault(a => a.Title == "bot");
+
 }
 
 <body class="home page-template page-template-page-templates page-template-front-page page-template-page-templatesfront-page-php page page-id-189 wp-embed-responsive header-style-1 sticky-enabled sticky-style-1 text-ui-light minimal-reading-layout">
@@ -78,7 +84,11 @@
 
                     <div class="col-md-12 col-sm-12">
 
-						<div class="ad c-ads custom-code body-top-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/Build-The-Best-Manga-Site.jpg"></a></div>
+						<div class="ad c-ads custom-code body-top-ads" style="text-align: center;">
+                           <a href="@(topAd != null ? topAd.LinkTo : "https://mangabooth.com/product/wp-manga-theme-madara/")">
+                              <img src="@(topAd != null ? topAd.ImageUrl : "images/Build-The-Best-Manga-Site.jpg")" alt="Top Ad" style="display: inline-block;">
+                            </a>
+            </div>
 
                         <div class="main-col-inner">
 
@@ -409,8 +419,11 @@
 								
                         </div>
 
-						<div class="ad c-ads custom-code body-bottom-ads"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/Build-The-Best-Manga-Site.jpg"></a></div>
-
+							<div class="ad c-ads custom-code body-bottom-ads" style="margin-bottom: 0px;" style="text-align: center;">
+                           <a href="@(botAd != null ? botAd.LinkTo : "https://mangabooth.com/product/wp-manga-theme-madara/")">
+                              <img src="@(botAd != null ? botAd.ImageUrl : "images/Build-The-Best-Manga-Site.jpg")" alt="Top Ad" style="display: inline-block;">
+                            </a>
+            </div>
                     </div>
 
 					
@@ -423,8 +436,16 @@
 
         </div><!-- <div class="site-content"> -->
   
-		<div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-left"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/1.jpg"></a></div><div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-right"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/2.jpg"></a></div>
-		
+		<div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-left">
+                <a href="@(leftAd != null ? leftAd.LinkTo : "https://mangabooth.com/product/wp-manga-theme-madara/")">
+                    <img src="@(leftAd != null ? leftAd.ImageUrl : "")" alt="Left Ad">
+                </a>
+            </div>
+            <div data-scrolltop="210" data-maxtop="510" class="ad c-ads custom-code wall-ads-control wall-ads-right">
+                <a href="@(rightAd != null ? rightAd.LinkTo : "https://mangabooth.com/product/wp-manga-theme-madara/")">
+                    <img src="@(rightAd != null ? rightAd.ImageUrl : "")" alt="Right Ad">
+                </a>
+            </div>
         </div> <!-- class="wrap" --></div> <!-- class="body-wrap" -->
 
 	
