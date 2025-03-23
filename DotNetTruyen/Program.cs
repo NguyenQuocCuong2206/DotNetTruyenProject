@@ -19,6 +19,8 @@ builder.Services.AddTransient<EmailService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<OtpService>();
 builder.Services.AddScoped<IPhoToService, PhotoService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+
 builder.Services.AddSingleton(provider =>
 {
     var cloudinaryAccount = new Account(
@@ -53,7 +55,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/login/";
     options.LogoutPath = "/logout/";
-    options.AccessDeniedPath = "/khongduoctruycap.html";
+    options.AccessDeniedPath = "/accessDenied";
 });
 
 builder.Services.AddAuthentication()
@@ -63,6 +65,17 @@ builder.Services.AddAuthentication()
     options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CanAccessDashboard", policy =>
+        policy.RequireClaim("Permission", "Vào bảng điều khiển"));
+
+    options.AddPolicy("CanManageUser", policy =>
+        policy.RequireClaim("Permission", "Quản lý người dùng"));
+
+    options.AddPolicy("CanManageRole", policy =>
+        policy.RequireClaim("Permission", "Quản lý vai trò"));
+});
 
 
 
@@ -85,7 +98,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapHub<GenreHub>("/genreHub");
-
+app.MapHub<NotificationHub>("/notificationHub");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

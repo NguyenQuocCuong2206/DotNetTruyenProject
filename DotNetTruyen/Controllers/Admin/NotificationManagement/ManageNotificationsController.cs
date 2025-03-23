@@ -7,115 +7,164 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DotNetTruyen.Data;
 using DotNetTruyen.Models;
+using Microsoft.AspNetCore.SignalR;
+using DotNetTruyen.Hubs;
 
 namespace DotNetTruyen.Controllers.Admin.NotificationManagement
 {
     public class ManageNotificationsController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
-
-        public ManageNotificationsController(DotNetTruyenDbContext context)
+        private readonly IHubContext<NotificationHub> _hubContext;
+        private const int PageSize = 10;
+        public ManageNotificationsController(DotNetTruyenDbContext context, IHubContext<NotificationHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
-        // GET: ManageNotifications
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View("~/Views/Admin/ManageNotifications/Index.cshtml", await _context.Notification.ToListAsync());
+            // Tính số lượng thông báo chưa đọc
+            int unreadCount = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+            ViewBag.UnreadCount = unreadCount;
+
+            // Tính tổng số thông báo
+            int totalNotifications = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null);
+
+            // Tính số trang
+            int totalPages = (int)Math.Ceiling((double)totalNotifications / PageSize);
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = page;
+
+            // Lấy danh sách thông báo cho trang hiện tại
+            var notifications = await _context.Notifications
+                .Where(n => n.DeletedAt == null)
+                .OrderByDescending(n => n.CreatedAt)
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize)
+                .ToListAsync();
+
+            return View("~/Views/Admin/ManageNotifications/Index.cshtml", notifications);
         }
 
-        // GET: ManageNotifications/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+
+
+        [HttpPost]
+        public async Task<IActionResult> MarkAsRead([FromBody] MarkAsReadRequest request)
         {
-            if (id == null)
+            if (request == null || request.Id == Guid.Empty)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Invalid notification ID." });
             }
 
-            var notification = await _context.Notification
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (notification == null)
+            var notification = await _context.Notifications.FindAsync(request.Id);
+            if (notification == null || notification.DeletedAt != null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Notification not found." });
             }
 
-            return View(notification);
+            if (notification.IsRead)
+            {
+                return Json(new { success = true, message = "Notification already marked as read." });
+            }
+
+            notification.IsRead = true;
+            notification.UpdatedAt = DateTime.UtcNow;
+            _context.Update(notification);
+            await _context.SaveChangesAsync();
+
+            
+            int unreadCount = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+
+            
+            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+
+            
+            await _hubContext.Clients.All.SendAsync("MarkNotificationAsRead", request.Id.ToString());
+
+            return Json(new { success = true, unreadCount });
         }
 
-        // GET: ManageNotifications/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: ManageNotifications/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Message,Type,Icon,Link,Id,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] Notification notification)
+        public async Task<IActionResult> MarkAllAsRead()
         {
-            if (ModelState.IsValid)
+            var unreadNotifications = await _context.Notifications
+                .Where(n => n.DeletedAt == null && !n.IsRead)
+                .ToListAsync();
+
+            if (!unreadNotifications.Any())
             {
-                notification.Id = Guid.NewGuid();
-                _context.Add(notification);
-                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Không có thông báo chưa đọc nào để đánh dấu.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(notification);
-        }
 
-        // GET: ManageNotifications/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
-        {
-            if (id == null)
+            foreach (var notification in unreadNotifications)
             {
-                return NotFound();
+                notification.IsRead = true;
+                notification.UpdatedAt = DateTime.UtcNow;
+                _context.Update(notification);
             }
 
-            var notification = await _context.Notification.FindAsync(id);
-            if (notification == null)
+            await _context.SaveChangesAsync();
+
+            int unreadCount = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+
+            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+            foreach (var notification in unreadNotifications)
             {
-                return NotFound();
+                await _hubContext.Clients.All.SendAsync("MarkNotificationAsRead", notification.Id.ToString());
             }
-            return View(notification);
+
+            TempData["SuccessMessage"] = "Tất cả thông báo được đánh dấu là đã đọc.";
+            return RedirectToAction(nameof(Index));
         }
 
-        // POST: ManageNotifications/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Title,Message,Type,Icon,Link,Id,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] Notification notification)
+        public async Task<IActionResult> ClearAll()
         {
-            if (id != notification.Id)
-            {
-                return NotFound();
-            }
+            var notifications = await _context.Notifications
+                .Where(n => n.DeletedAt == null)
+                .ToListAsync();
 
-            if (ModelState.IsValid)
+            if (!notifications.Any())
             {
-                try
-                {
-                    _context.Update(notification);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NotificationExists(notification.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                TempData["SuccessMessage"] = "Không có thông báo nào cần xóa.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(notification);
+
+            foreach (var notification in notifications)
+            {
+                notification.DeletedAt = DateTime.UtcNow;
+                _context.Update(notification);
+            }
+
+            await _context.SaveChangesAsync();
+
+            int unreadCount = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+
+            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+
+            TempData["SuccessMessage"] = "Đã xóa tất cả thông báo.";
+            return RedirectToAction(nameof(Index));
         }
+
+        public class MarkAsReadRequest
+        {
+            public Guid Id { get; set; }
+        }
+
+
+
+        
 
         // GET: ManageNotifications/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
@@ -135,24 +184,51 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
             return View(notification);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Dismiss(Guid id)
+        {
+            var notification = await _context.Notifications.FindAsync(id);
+            if (notification == null || notification.DeletedAt != null)
+            {
+                return Json(new { success = false, message = "Notification not found." });
+            }
+
+            notification.DeletedAt = DateTime.UtcNow;
+            _context.Update(notification);
+            await _context.SaveChangesAsync();
+
+            int unreadCount = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+
+            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+
+            return Json(new { success = true });
+        }
+
         // POST: ManageNotifications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var notification = await _context.Notification.FindAsync(id);
+            var notification = await _context.Notifications.FindAsync(id);
             if (notification != null)
             {
-                _context.Notification.Remove(notification);
+                notification.DeletedAt = DateTime.UtcNow;
+                _context.Update(notification);
+                await _context.SaveChangesAsync();
+
+                int unreadCount = await _context.Notifications
+                    .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+
+                await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool NotificationExists(Guid id)
         {
-            return _context.Notification.Any(e => e.Id == id);
+            return _context.Notifications.Any(e => e.Id == id && e.DeletedAt == null);
         }
     }
 }

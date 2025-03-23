@@ -13,7 +13,7 @@
         <div class="chapter-body">
             
             <form asp-action="Create" method="post" enctype="multipart/form-data">
-                <input asp-for="ComicId" type="hidden" />
+                <input asp-for="@Model.ComicId" type="hidden" value="@Model.ComicId" />
                 <input type="hidden" name="ImageOrders" id="imageOrders" />
                 <!-- Thông tin Chapter -->
                 <div class="chapter-section">

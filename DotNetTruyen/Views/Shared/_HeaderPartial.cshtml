@@ -1,8 +1,26 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject RoleManager<IdentityRole<Guid>> RoleManager
 @{
     var user = await UserManager.GetUserAsync(User);
+    var canAccessDashboard = false;
+    if(user != null)
+    {
+        var userRoles = await UserManager.GetRolesAsync(user);
+        foreach (var roleName in userRoles)
+        {
+            var role = await RoleManager.FindByNameAsync(roleName);
+            if (role != null)
+            {
+                var roleClaims = await RoleManager.GetClaimsAsync(role);
+                if (roleClaims.Any(c => c.Type == "Permission" && c.Value == "Vào bảng điều khiển"))
+                {
+                    canAccessDashboard = true;
+                }
+            }
+        }
+    }
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
     var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
     var isSearchPage = currentController == "Search" && currentAction == "Index";
@@ -107,7 +125,7 @@
                                                             <li>
                                                                 <a href="/userProfile">Cài đặt thông tin người dùng</a>
                                                             </li>
-                                                            @if (User.IsInRole("Admin"))
+                                                            @if (canAccessDashboard)
                                                             {
                                                                 <li>
                                                                     <a href="/DashBoard">Trang quản lí</a>
