@@ -15,7 +15,7 @@
                 <input asp-for="Id" type="hidden" />
                 <input asp-for="ComicId" type="hidden" />
                 <input type="hidden" name="ImageOrders" id="imageOrders" />
-                <input type="hidden" name="DeletedImages" id="deletedImages" /> <!-- Input để lưu danh sách ảnh bị xóa -->
+
                 <!-- Thông tin Chapter -->
                 <div class="chapter-section">
                     <h4 class="section-title"><i class="fas fa-info-circle me-2"></i> Thông tin Chapter</h4>
@@ -44,23 +44,19 @@
                     <div class="row g-4">
                         <div class="col-12">
                             <label class="upload-label" for="Images">
-                                <i class="fas fa-cloud-upload-alt me-2"></i> Chọn hình ảnh mới
+                                <i class="fas fa-cloud-upload-alt me-2"></i> Chọn hình ảnh mới (Sẽ thay thế toàn bộ ảnh cũ)
                             </label>
                             <input asp-for="Images" type="file" class="form-control d-none" id="Images" multiple accept="image/*" />
                             <span asp-validation-for="Images" class="text-danger"></span>
-                            <span asp-validation-for="DeletedImages"></span>
                             <div class="image-preview mt-3" id="imagePreview">
                                 <!-- Hiển thị hình ảnh hiện tại -->
                                 @if (Model.ExistingImages != null && Model.ExistingImages.Any())
                                 {
-                                    @foreach (var image in Model.ExistingImages.Select((value, index) => new { value, index }))
+                                    @foreach (var image in Model.ExistingImages.Select((img, index) => new { img.ImageUrl, img.ImageNumber, index }))
                                     {
-                                        <div class="preview-container" data-order="@image.index" data-url="@image.value">
-                                            <img src="@image.value" class="preview-img" alt="Image @(image.index + 1)" />
-                                            <span class="file-name">Hình ảnh hiện tại @(image.index + 1)</span>
-                                            <button type="button" class="delete-btn" onclick="deleteImage(this)">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
+                                        <div class="preview-container" data-order="@image.ImageNumber">
+                                            <img src="@image.ImageUrl" class="preview-img" alt="Image @image.ImageNumber" />
+                                            <span class="file-name">Thứ tự: @image.ImageNumber</span>
                                         </div>
                                     }
                                 }
@@ -84,55 +80,47 @@
 </div>
 
 @section Scripts {
+    <!-- jQuery UI Sortable yêu cầu jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script>
- 
-        let deletedImages = [];
-
+        // Xem trước và sắp xếp hình ảnh khi upload ảnh mới
         document.getElementById("Images").addEventListener("change", function (event) {
             const files = event.target.files;
             const previewContainer = document.getElementById("imagePreview");
+            previewContainer.innerHTML = ""; // Xóa các ảnh cũ
+
             if (files && files.length > 0) {
-                const existingCount = previewContainer.querySelectorAll(".preview-container").length;
                 Array.from(files).forEach((file, index) => {
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         const imgContainer = document.createElement("div");
                         imgContainer.classList.add("preview-container");
-                        imgContainer.setAttribute("data-order", existingCount + index); 
+                        imgContainer.setAttribute("data-order", index); // Gán thứ tự ban đầu
 
                         const img = document.createElement("img");
                         img.src = e.target.result;
                         img.classList.add("preview-img");
-                        img.alt = `Image ${existingCount + index + 1}`;
+                        img.alt = `Image ${index}`;
 
                         const fileName = document.createElement("span");
-                        fileName.textContent = file.name;
+                        fileName.textContent = `Thứ tự: ${index}`;
                         fileName.classList.add("file-name");
-
-
-                        const deleteButton = document.createElement("button");
-                        deleteButton.type = "button";
-                        deleteButton.classList.add("delete-btn");
-                        deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
-                        deleteButton.onclick = function () {
-                            deleteImage(this);
-                        };
 
                         imgContainer.appendChild(img);
                         imgContainer.appendChild(fileName);
-                        imgContainer.appendChild(deleteButton); 
                         previewContainer.appendChild(imgContainer);
                     };
                     reader.readAsDataURL(file);
                 });
 
-
+                // Kích hoạt sortable sau khi thêm ảnh
                 setTimeout(() => {
                     $("#imagePreview").sortable({
                         placeholder: "sortable-placeholder",
                         update: function (event, ui) {
                             updateImageOrders();
+                            updateImageLabels(); // Cập nhật nhãn thứ tự sau khi kéo thả
                         }
                     });
                     $("#imagePreview").disableSelection();
@@ -140,24 +128,20 @@
             }
         });
 
-
-        function deleteImage(button) {
-            const container = button.parentElement;
-            const imageUrl = container.getAttribute("data-url"); 
-            if (imageUrl) {
-                deletedImages.push(imageUrl); 
-                document.getElementById("deletedImages").value = deletedImages.join(",");
-            }
-            container.remove(); 
-            updateImageOrders(); 
-        }
-
-
+        // Cập nhật thứ tự hình ảnh vào hidden input
         function updateImageOrders() {
             const orderData = $("#imagePreview .preview-container").map(function () {
                 return $(this).attr("data-order");
             }).get();
             $("#imageOrders").val(orderData.join(","));
+        }
+
+        // Cập nhật nhãn thứ tự trên giao diện
+        function updateImageLabels() {
+            $("#imagePreview .preview-container").each(function (index) {
+                const fileName = $(this).find(".file-name");
+                fileName.text(`Thứ tự: ${index}`);
+            });
         }
 
         // Kích hoạt sortable cho hình ảnh hiện tại khi tải trang
@@ -166,9 +150,11 @@
                 placeholder: "sortable-placeholder",
                 update: function (event, ui) {
                     updateImageOrders();
+                    updateImageLabels(); // Cập nhật nhãn sau khi kéo thả
                 }
             });
             $("#imagePreview").disableSelection();
+            updateImageOrders(); // Cập nhật thứ tự ban đầu
         });
 
         // Cập nhật thứ tự trước khi submit form
@@ -259,7 +245,7 @@
         .preview-container {
             position: relative;
             text-align: center;
-            cursor: move; /* Con trỏ khi kéo */
+            cursor: move;
         }
 
         .preview-img {
@@ -285,33 +271,8 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-weight: 500;
         }
-
-        /* Nút xóa ảnh */
-        .delete-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #dc3545;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-            .delete-btn:hover {
-                background: #c82333;
-            }
-
-            .delete-btn i {
-                font-size: 12px;
-            }
 
         /* Sortable Placeholder */
         .sortable-placeholder {
@@ -336,6 +297,7 @@
             border-radius: 50px;
             font-weight: 500;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
             .btn-outline-custom:hover {
