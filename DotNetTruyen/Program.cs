@@ -99,6 +99,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapHub<GenreHub>("/genreHub");
 app.MapHub<NotificationHub>("/notificationHub");
+app.MapHub<CommentHub>("/commentHub");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

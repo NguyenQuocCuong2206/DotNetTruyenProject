@@ -1,0 +1,51 @@
+﻿@using System.Security.Claims
+@model List<Comment>
+
+<ul class="space-y-4">
+    @foreach (var comment in Model)
+    {
+        <li class="comment" data-comment-id="@comment.Id">
+            <div class="bg-dark-400 rounded-lg p-4 border border-gray-800">
+                <div class="flex items-center space-x-3 mb-2">
+                    <div>
+                        <p class="font-bold">@comment.User.UserName</p>
+                        <p class="text-sm text-gray-400">
+                            <i class="far fa-clock mr-1"></i>
+                            @comment.Date.ToString("dd/MM/yyyy HH:mm")
+                        </p>
+                    </div>
+                </div>
+                <p class="text-gray-300 pl-11 comment-content">@comment.Content</p>
+                <div class="text-right mt-2 space-x-2">
+                    <!-- Reply and View Replies buttons -->
+                    <button class="reply-btn text-primary hover:underline text-sm" data-comment-id="@comment.Id">
+                        <i class="fas fa-reply mr-1"></i>Phản hồi
+                    </button>
+                    @if (comment.ReplyCount > 0)
+                    {
+                        <button class="view-replies-btn text-primary hover:underline text-sm" data-comment-id="@comment.Id">
+                            Xem phản hồi 
+                        </button>
+                        <span style="color:#007bff!important">(@comment.ReplyCount)</span>
+                    }
+                    <!-- Edit and Delete buttons (visible only to the comment's author or admin) -->
+                    @{
+                        var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        var isAdmin = User.IsInRole("Admin");
+                        if (comment.UserId.ToString() == currentUserId || isAdmin)
+                        {
+                            <button class="edit-btn text-yellow-500 hover:underline text-sm" data-comment-id="@comment.Id">
+                                <i class="fas fa-edit mr-1"></i>Sửa
+                            </button>
+                            <button class="delete-btn text-red-500 hover:underline text-sm" data-comment-id="@comment.Id">
+                                <i class="fas fa-trash-alt mr-1"></i>Xóa
+                            </button>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="ml-6 mt-4 replies-container hiddenReply"></div>
+        </li>
+    }
+
+</ul>

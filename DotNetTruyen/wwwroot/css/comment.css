@@ -1,0 +1,34 @@
+﻿/* Ensure nested comments are indented */
+.hiddenReply {
+    display: none;
+}
+
+.ml-6 {
+    margin-left: 1.5rem; /* Adjust as needed for indentation */
+}
+
+/* Style the reply form */
+.reply-form textarea {
+    width: 100%;
+    resize: none;
+}
+
+.reply-form button {
+    transition: background-color 0.3s;
+}
+
+.reply-btn i {
+    margin-right: 0.25rem;
+}
+
+.replies-container {
+    /* Add any additional styling if needed */
+}
+.edit-form textarea {
+    width: 100%;
+    resize: none;
+}
+
+.edit-form button {
+    transition: background-color 0.3s;
+}
