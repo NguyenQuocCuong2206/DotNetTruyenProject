@@ -27,10 +27,10 @@ namespace DotNetTruyen.Data
             public DbSet<ChapterImage> ChapterImages { get; set; }
             public DbSet<Follow> Follows { get; set; }
             
-            public DbSet<Rank> Ranks { get; set; }
-            public DbSet<RankType> RankTypes { get; set; }
+            public DbSet<Level> Levels { get; set; }
+            
             public DbSet<ReadHistory> ReadHistories { get; set; }
-            public DbSet<UserRank> UserRanks { get; set; }
+            public DbSet<Like> Likes { get; set; }
             public DbSet<Notification> Notifications { get; set; }
 
         public DotNetTruyenDbContext(DbContextOptions<DotNetTruyenDbContext> options) : base(options)
@@ -68,9 +68,9 @@ namespace DotNetTruyen.Data
                     entity.HasKey(x => new { x.ComicId, x.UserId });
                 });
 
-                modelBuilder.Entity<UserRank>(entity =>
+                modelBuilder.Entity<Like>(entity =>
                 {
-                    entity.HasKey(x => new { x.UserId, x.RankId });
+                    entity.HasKey(x => new { x.UserId, x.ComicId });
                 });
 
             
