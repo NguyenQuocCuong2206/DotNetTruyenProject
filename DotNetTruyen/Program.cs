@@ -58,12 +58,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/accessDenied";
 });
 
-builder.Services.AddAuthentication()
-.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
-{
-    options.ClientId = builder.Configuration["Authentication_Google:ClientId"];
-    options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
-});
+//builder.Services.AddAuthentication()
+//.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+//{
+//    options.ClientId = builder.Configuration["Authentication_Google:ClientId"];
+//    options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
+//});
 
 builder.Services.AddAuthorization(options =>
 {
@@ -80,7 +80,11 @@ builder.Services.AddAuthorization(options =>
 
 
 var app = builder.Build();
-
+app.MapControllerRoute(
+    name: "comicDetail",
+    pattern: "Comic/Detail/{id}",
+    defaults: new { controller = "Detail", action = "Index" }
+);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
