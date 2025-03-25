@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DotNetTruyen.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -456,33 +456,19 @@ namespace DotNetTruyen.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:DotNetTruyen/Migrations/20250323173037_InitialCreate.cs
-                    { new Guid("1fdf5594-22e3-4a13-b457-d92dff0a08c0"), null, "Admin", "ADMIN" },
-                    { new Guid("b340edc2-893d-41b8-a458-28ecd679a909"), null, "Reader", "READER" }
-========
-                    { new Guid("32c5d877-8aa7-45ed-9743-d5ebebfafb7c"), null, "Reader", "READER" },
-                    { new Guid("79491644-7f47-4b93-b371-94f68d541a87"), null, "Admin", "ADMIN" }
->>>>>>>> main:DotNetTruyen/Migrations/20250324101311_initial.cs
+                    { new Guid("b71b3b60-d0fa-4fa4-85ca-e49379694f2b"), null, "Admin", "ADMIN" },
+                    { new Guid("fb034148-e4a7-443c-b58a-bd8be0293c16"), null, "Reader", "READER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-<<<<<<<< HEAD:DotNetTruyen/Migrations/20250323173037_InitialCreate.cs
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "ImageUrl", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("f39eb75c-0585-4eab-9aa8-fb857ad82eac"), 0, "4c356410-9483-4214-89ea-83f2ac81e81b", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEHxYcxj5OefsWSxzYMkSkxAJ+reC2r8GmF2k5Vq4tUgh9deAWePj64mntJtgPKBIkg==", null, false, "f9a94369-5865-4899-bdd3-014bf8dc431a", false, "admin" });
-========
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Exp", "ImageUrl", "LevelId", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("15ebab70-267a-47ba-9a6d-3e7e8c288a68"), 0, "ed80c5a7-3530-41ba-8037-8d6a25bcc542", "admin@example.com", true, 0, null, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAECcpVUJbiORWf5CjZwZXiuiZXPvmtY+yeZyZ953MUNtqWHnEaOGSsjkcDcC4ED4qQg==", null, false, "44cf38c9-6988-493f-8a1d-df2c3327c423", false, "admin" });
->>>>>>>> main:DotNetTruyen/Migrations/20250324101311_initial.cs
+                values: new object[] { new Guid("5c667204-9e17-43cb-94f3-31f1da0262eb"), 0, "f881c756-fe43-44fa-9979-fafa5c088679", "admin@example.com", true, 0, null, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEMIHKZbbQsxjvzFifm4+x43QXxz3cr/736st8wHTIU5XxbEdVT6Pi6LMyRHIushDzw==", null, false, "8947a027-318e-4cb8-95d2-f422e5f7f0bf", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "RoleId", "UserId" },
-<<<<<<<< HEAD:DotNetTruyen/Migrations/20250323173037_InitialCreate.cs
-                values: new object[] { new Guid("1fdf5594-22e3-4a13-b457-d92dff0a08c0"), new Guid("f39eb75c-0585-4eab-9aa8-fb857ad82eac") });
-========
-                values: new object[] { new Guid("79491644-7f47-4b93-b371-94f68d541a87"), new Guid("15ebab70-267a-47ba-9a6d-3e7e8c288a68") });
->>>>>>>> main:DotNetTruyen/Migrations/20250324101311_initial.cs
+                values: new object[] { new Guid("b71b3b60-d0fa-4fa4-85ca-e49379694f2b"), new Guid("5c667204-9e17-43cb-94f3-31f1da0262eb") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChapterImages_ChapterId",
@@ -641,5 +627,3 @@ namespace DotNetTruyen.Migrations
         }
     }
 }
-
-
