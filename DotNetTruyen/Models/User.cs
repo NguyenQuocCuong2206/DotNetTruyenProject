@@ -6,5 +6,8 @@ namespace DotNetTruyen.Models
     {
         public string? NameToDisplay { get; set; }
         public string? ImageUrl { get; set; }
+        public int Exp { get; set; }
+        public Guid? LevelId { get; set; }
+        public Level Level { get; set; }
     }
 }

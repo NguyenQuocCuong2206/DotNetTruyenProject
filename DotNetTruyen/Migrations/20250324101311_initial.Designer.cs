@@ -4,6 +4,7 @@ using DotNetTruyen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetTruyen.Migrations
 {
     [DbContext(typeof(DotNetTruyenDbContext))]
-    partial class DotNetTruyenDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250324101311_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,62 +288,6 @@ namespace DotNetTruyen.Migrations
                 b.ToTable("Genres");
             });
 
-            modelBuilder.Entity("DotNetTruyen.Models.Level", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-            modelBuilder.Entity("DotNetTruyen.Models.Notification", b =>
-            {
-                b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("uniqueidentifier");
-
-                b.Property<DateTime?>("CreatedAt")
-                    .HasColumnType("datetime2");
-
-                b.Property<string>("CreatedBy")
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<DateTime?>("DeletedAt")
-                    .HasColumnType("datetime2");
-
-                    b.Property<int>("ExpRequired")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LevelNumber")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                b.Property<string>("UpdatedBy")
-                    .HasColumnType("nvarchar(max)");
-
-                b.HasKey("Id");
-
-                    b.ToTable("Levels");
-                });
-
-            modelBuilder.Entity("DotNetTruyen.Models.Like", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ComicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "ComicId");
-
-                    b.HasIndex("ComicId");
-
-                    b.ToTable("Likes");
-                });
-
             modelBuilder.Entity("DotNetTruyen.Models.Notification", b =>
                 {
                     b.Property<Guid>("Id")
@@ -379,6 +326,77 @@ namespace DotNetTruyen.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                b.Property<string>("UpdatedBy")
+                    .HasColumnType("nvarchar(max)");
+
+                b.HasKey("Id");
+
+                    b.ToTable("Notification");
+                });
+
+            modelBuilder.Entity("DotNetTruyen.Models.Rank", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                b.Property<DateTime?>("CreatedAt")
+                    .HasColumnType("datetime2");
+
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("nvarchar(max)");
+
+                b.Property<DateTime?>("DeletedAt")
+                    .HasColumnType("datetime2");
+
+                    b.Property<int>("ExpRequired")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RankTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RankTypeId");
+
+                    b.ToTable("Ranks");
+                });
+
+            modelBuilder.Entity("DotNetTruyen.Models.RankType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                 b.Property<DateTime?>("UpdatedAt")
                     .HasColumnType("datetime2");
 
@@ -387,7 +405,7 @@ namespace DotNetTruyen.Migrations
 
                 b.HasKey("Id");
 
-                    b.ToTable("Notification");
+                    b.ToTable("RankTypes");
                 });
 
             modelBuilder.Entity("DotNetTruyen.Models.ReadHistory", b =>
@@ -437,14 +455,8 @@ namespace DotNetTruyen.Migrations
                 b.Property<bool>("EmailConfirmed")
                     .HasColumnType("bit");
 
-                    b.Property<int>("Exp")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("LevelId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -484,8 +496,6 @@ namespace DotNetTruyen.Migrations
 
                 b.HasKey("Id");
 
-                    b.HasIndex("LevelId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -499,21 +509,38 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("15ebab70-267a-47ba-9a6d-3e7e8c288a68"),
+                            Id = new Guid("b6b72342-5016-4c6a-829c-b3b4f8c317ab"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ed80c5a7-3530-41ba-8037-8d6a25bcc542",
+                            ConcurrencyStamp = "220bb9d3-653a-4777-a837-ca62871deda7",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
-                            Exp = 0,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAECcpVUJbiORWf5CjZwZXiuiZXPvmtY+yeZyZ953MUNtqWHnEaOGSsjkcDcC4ED4qQg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBWRf2LM/CyAUIURYdJRRaRl9jGNVfiQ+IX3gVvbEY0SUwO3/Cju5Gi8Y5pnpGNApw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "44cf38c9-6988-493f-8a1d-df2c3327c423",
+                            SecurityStamp = "2ae36440-2771-4c20-ac5a-0b98040a937b",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
+                });
+
+            modelBuilder.Entity("DotNetTruyen.Models.UserRank", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RankId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Exp")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RankId");
+
+                    b.HasIndex("RankId");
+
+                    b.ToTable("UserRanks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -546,13 +573,13 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("79491644-7f47-4b93-b371-94f68d541a87"),
+                            Id = new Guid("0d193d65-6228-4327-b269-b6d94c8f92e1"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("32c5d877-8aa7-45ed-9743-d5ebebfafb7c"),
+                            Id = new Guid("eaf063f9-3500-4b3a-a533-a54f6baa3f94"),
                             Name = "Reader",
                             NormalizedName = "READER"
                         });
@@ -644,8 +671,8 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("15ebab70-267a-47ba-9a6d-3e7e8c288a68"),
-                            RoleId = new Guid("79491644-7f47-4b93-b371-94f68d541a87")
+                            UserId = new Guid("b6b72342-5016-4c6a-829c-b3b4f8c317ab"),
+                            RoleId = new Guid("0d193d65-6228-4327-b269-b6d94c8f92e1")
                         });
                 });
 
@@ -751,23 +778,15 @@ namespace DotNetTruyen.Migrations
                 b.Navigation("User");
             });
 
-            modelBuilder.Entity("DotNetTruyen.Models.Like", b =>
+            modelBuilder.Entity("DotNetTruyen.Models.Rank", b =>
                 {
-                    b.HasOne("DotNetTruyen.Models.Comic", "Comic")
-                        .WithMany("Likes")
-                        .HasForeignKey("ComicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DotNetTruyen.Models.User", "User")
+                    b.HasOne("DotNetTruyen.Models.RankType", "RankType")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("RankTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Comic");
-
-                    b.Navigation("User");
+                    b.Navigation("RankType");
                 });
 
             modelBuilder.Entity("DotNetTruyen.Models.ReadHistory", b =>
@@ -789,13 +808,23 @@ namespace DotNetTruyen.Migrations
                 b.Navigation("User");
             });
 
-            modelBuilder.Entity("DotNetTruyen.Models.User", b =>
+            modelBuilder.Entity("DotNetTruyen.Models.UserRank", b =>
                 {
-                    b.HasOne("DotNetTruyen.Models.Level", "Level")
-                        .WithMany("Users")
-                        .HasForeignKey("LevelId");
+                    b.HasOne("DotNetTruyen.Models.Rank", "Rank")
+                        .WithMany("UserRanks")
+                        .HasForeignKey("RankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Level");
+                    b.HasOne("DotNetTruyen.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rank");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -861,8 +890,6 @@ namespace DotNetTruyen.Migrations
                 b.Navigation("ComicGenres");
 
                     b.Navigation("Follows");
-
-                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("DotNetTruyen.Models.Comment", b =>
@@ -875,9 +902,9 @@ namespace DotNetTruyen.Migrations
                 b.Navigation("ComicGenres");
             });
 
-            modelBuilder.Entity("DotNetTruyen.Models.Level", b =>
+            modelBuilder.Entity("DotNetTruyen.Models.Rank", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("UserRanks");
                 });
 #pragma warning restore 612, 618
         }
