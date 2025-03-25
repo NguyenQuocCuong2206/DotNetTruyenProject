@@ -475,32 +475,19 @@ namespace DotNetTruyen.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:DotNetTruyen/Migrations/20250319073911_InitialCreate.cs
-                    { new Guid("c0107e47-2558-40db-9eed-f665c3ec7b31"), null, "Reader", "READER" },
-                    { new Guid("d6fae85c-b84a-4a90-b0d8-d3837fd4290b"), null, "Admin", "ADMIN" }
-========
-                    { new Guid("0d193d65-6228-4327-b269-b6d94c8f92e1"), null, "Admin", "ADMIN" },
-                    { new Guid("eaf063f9-3500-4b3a-a533-a54f6baa3f94"), null, "Reader", "READER" }
->>>>>>>> main:DotNetTruyen/Migrations/20250319153016_InitialCreate.cs
+                    { new Guid("1fdf5594-22e3-4a13-b457-d92dff0a08c0"), null, "Admin", "ADMIN" },
+                    { new Guid("b340edc2-893d-41b8-a458-28ecd679a909"), null, "Reader", "READER" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "ImageUrl", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-<<<<<<<< HEAD:DotNetTruyen/Migrations/20250319073911_InitialCreate.cs
-                values: new object[] { new Guid("c8a2d5de-3294-4f70-b873-c597b968e2a1"), 0, "644f49c2-6386-4c77-a30e-9d9076d737de", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAECgi51rZf4gwxD73K70QyDafDjsmcsjcVgmuVqYmSckZq9iLmpKIe7NoCVBGPyxdjA==", null, false, "a77cdddd-779d-48cf-9c0e-144bb54078d7", false, "admin" });
-========
-                values: new object[] { new Guid("b6b72342-5016-4c6a-829c-b3b4f8c317ab"), 0, "220bb9d3-653a-4777-a837-ca62871deda7", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEBWRf2LM/CyAUIURYdJRRaRl9jGNVfiQ+IX3gVvbEY0SUwO3/Cju5Gi8Y5pnpGNApw==", null, false, "2ae36440-2771-4c20-ac5a-0b98040a937b", false, "admin" });
->>>>>>>> main:DotNetTruyen/Migrations/20250319153016_InitialCreate.cs
+                values: new object[] { new Guid("f39eb75c-0585-4eab-9aa8-fb857ad82eac"), 0, "4c356410-9483-4214-89ea-83f2ac81e81b", "admin@example.com", true, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAEHxYcxj5OefsWSxzYMkSkxAJ+reC2r8GmF2k5Vq4tUgh9deAWePj64mntJtgPKBIkg==", null, false, "f9a94369-5865-4899-bdd3-014bf8dc431a", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "RoleId", "UserId" },
-<<<<<<<< HEAD:DotNetTruyen/Migrations/20250319073911_InitialCreate.cs
-                values: new object[] { new Guid("d6fae85c-b84a-4a90-b0d8-d3837fd4290b"), new Guid("c8a2d5de-3294-4f70-b873-c597b968e2a1") });
-========
-                values: new object[] { new Guid("0d193d65-6228-4327-b269-b6d94c8f92e1"), new Guid("b6b72342-5016-4c6a-829c-b3b4f8c317ab") });
->>>>>>>> main:DotNetTruyen/Migrations/20250319153016_InitialCreate.cs
+                values: new object[] { new Guid("1fdf5594-22e3-4a13-b457-d92dff0a08c0"), new Guid("f39eb75c-0585-4eab-9aa8-fb857ad82eac") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChapterImages_ChapterId",

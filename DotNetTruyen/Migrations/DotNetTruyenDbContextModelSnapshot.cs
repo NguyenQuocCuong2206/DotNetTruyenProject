@@ -509,29 +509,17 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("c8a2d5de-3294-4f70-b873-c597b968e2a1"),
+                            Id = new Guid("f39eb75c-0585-4eab-9aa8-fb857ad82eac"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "644f49c2-6386-4c77-a30e-9d9076d737de",
-=======
-                            Id = new Guid("b6b72342-5016-4c6a-829c-b3b4f8c317ab"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "220bb9d3-653a-4777-a837-ca62871deda7",
->>>>>>> main
+                            ConcurrencyStamp = "4c356410-9483-4214-89ea-83f2ac81e81b",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-<<<<<<< HEAD
-                            PasswordHash = "AQAAAAIAAYagAAAAECgi51rZf4gwxD73K70QyDafDjsmcsjcVgmuVqYmSckZq9iLmpKIe7NoCVBGPyxdjA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHxYcxj5OefsWSxzYMkSkxAJ+reC2r8GmF2k5Vq4tUgh9deAWePj64mntJtgPKBIkg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a77cdddd-779d-48cf-9c0e-144bb54078d7",
-=======
-                            PasswordHash = "AQAAAAIAAYagAAAAEBWRf2LM/CyAUIURYdJRRaRl9jGNVfiQ+IX3gVvbEY0SUwO3/Cju5Gi8Y5pnpGNApw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "2ae36440-2771-4c20-ac5a-0b98040a937b",
->>>>>>> main
+                            SecurityStamp = "f9a94369-5865-4899-bdd3-014bf8dc431a",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -585,21 +573,13 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("d6fae85c-b84a-4a90-b0d8-d3837fd4290b"),
-=======
-                            Id = new Guid("0d193d65-6228-4327-b269-b6d94c8f92e1"),
->>>>>>> main
+                            Id = new Guid("1fdf5594-22e3-4a13-b457-d92dff0a08c0"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("c0107e47-2558-40db-9eed-f665c3ec7b31"),
-=======
-                            Id = new Guid("eaf063f9-3500-4b3a-a533-a54f6baa3f94"),
->>>>>>> main
+                            Id = new Guid("b340edc2-893d-41b8-a458-28ecd679a909"),
                             Name = "Reader",
                             NormalizedName = "READER"
                         });
@@ -691,13 +671,8 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            UserId = new Guid("c8a2d5de-3294-4f70-b873-c597b968e2a1"),
-                            RoleId = new Guid("d6fae85c-b84a-4a90-b0d8-d3837fd4290b")
-=======
-                            UserId = new Guid("b6b72342-5016-4c6a-829c-b3b4f8c317ab"),
-                            RoleId = new Guid("0d193d65-6228-4327-b269-b6d94c8f92e1")
->>>>>>> main
+                            UserId = new Guid("f39eb75c-0585-4eab-9aa8-fb857ad82eac"),
+                            RoleId = new Guid("1fdf5594-22e3-4a13-b457-d92dff0a08c0")
                         });
                 });
 
