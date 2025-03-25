@@ -2,6 +2,7 @@
 using DotNetTruyen.Data;
 using DotNetTruyen.Hubs;
 using DotNetTruyen.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -93,6 +94,7 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Comment(Guid comicId, string content, Guid? parentId)
         {
             if (!User.Identity.IsAuthenticated)
@@ -154,6 +156,7 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditComment(Guid commentId, string content)
         {
             if (!User.Identity.IsAuthenticated)
@@ -189,6 +192,7 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteComment(Guid commentId)
         {
             if (!User.Identity.IsAuthenticated)
