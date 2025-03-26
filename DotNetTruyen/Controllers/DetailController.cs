@@ -325,7 +325,7 @@ namespace DotNetTruyen.Controllers
                 var likeCount = _context.Likes.Count(l => l.ComicId == request.Id);
 
                 
-                await _hubContext.Clients.All.SendAsync("ReceiveComicUpdate", request.Id, followCount, likeCount);
+                await _hubContext.Clients.All.SendAsync("ReceiveComicUpdate", request.Id, followCount, likeCount,!wasFollowing,null);
 
                 return Json(new
                 {
@@ -391,7 +391,7 @@ namespace DotNetTruyen.Controllers
                 var likeCount = _context.Likes.Count(l => l.ComicId == request.Id);
 
 
-                await _hubContext.Clients.All.SendAsync("ReceiveComicUpdate", request.Id, followCount, likeCount);
+                await _hubContext.Clients.All.SendAsync("ReceiveComicUpdate", request.Id, followCount, likeCount,null,!wasLiked);
                 return Json(new
                 {
                     success = true,

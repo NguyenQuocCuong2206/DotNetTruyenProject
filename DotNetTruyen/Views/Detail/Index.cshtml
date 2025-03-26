@@ -542,13 +542,26 @@
             // Reload comments from the beginning
         });
 
-        connection.on("ReceiveComicUpdate", function (comicId, followCount, likeCount) {
+        connection.on("ReceiveComicUpdate", function (comicId, followCount, likeCount, isFollowing, isLiked) {
             const currentComicId = "@Model.Id";
             if (comicId === currentComicId) {
                 document.getElementById("followCount").textContent = followCount;
                 document.getElementById("likeCount").textContent = likeCount;
+                if (isFollowing !== null) {
+                    const followButton = document.getElementById("followButton");
+                    const followText = document.getElementById("followText");
+                    followButton.classList.toggle("bg-primary", isFollowing);
+                    followButton.classList.toggle("bg-dark-300", !isFollowing);
+                    followText.textContent = isFollowing ? "Đang theo dõi" : "Theo dõi";
+                }
+                if (isLiked !== null) {
+                    const likeButton = document.getElementById("likeButton");
+                    const likeText = document.getElementById("likeText");
+                    likeButton.classList.toggle("liked", isLiked);
+                    likeText.textContent = isLiked ? "Đã thích" : "Thích";
+                }
             }
-        }); 
+        });
 
         // Function to reload comments
         function reloadComments(skip) {
@@ -879,8 +892,8 @@
                     console.log("Response từ server:", data);
 
                     if (data.success) {
-                        followButton.classList.toggle("bg-primary", data.isFollowing);
-                        followButton.classList.toggle("bg-dark-300", !data.isFollowing);
+                        followButton.classList.toggle("btn-primary", data.isFollowing);
+                        followButton.classList.toggle("btn-outline-dark", !data.isFollowing);
                         followText.textContent = data.isFollowing ? "Đang theo dõi" : "Theo dõi";
                     } else {
                         alert(data.message);
@@ -929,7 +942,8 @@
                     console.log("Response từ server:", data);
 
                     if (data.success) {
-                        likeButton.classList.toggle("liked", data.isLiked);
+                        likeButton.classList.toggle("btn-primary", data.isLiked);
+                        likeButton.classList.toggle("btn-outline-primary", !data.isLiked);
                         likeText.textContent = data.isLiked ? "Đã thích" : "Thích";
                         // Nếu muốn hiển thị số lượt thích, có thể thêm:
                         // likeButton.querySelector(".like-count").textContent = data.likeCount;
