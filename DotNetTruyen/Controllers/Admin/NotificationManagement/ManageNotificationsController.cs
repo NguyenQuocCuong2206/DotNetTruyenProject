@@ -17,6 +17,7 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
         private readonly DotNetTruyenDbContext _context;
         private readonly IHubContext<NotificationHub> _hubContext;
         private const int PageSize = 10;
+
         public ManageNotificationsController(DotNetTruyenDbContext context, IHubContext<NotificationHub> hubContext)
         {
             _context = context;
@@ -25,23 +26,22 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            // Tính số lượng thông báo chưa đọc
+
             int unreadCount = await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
             ViewBag.UnreadCount = unreadCount;
 
-            // Tính tổng số thông báo
-            int totalNotifications = await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null);
 
-            // Tính số trang
+            int totalNotifications = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && n.UserId == null);
+
             int totalPages = (int)Math.Ceiling((double)totalNotifications / PageSize);
             ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = page;
 
-            // Lấy danh sách thông báo cho trang hiện tại
+
             var notifications = await _context.Notifications
-                .Where(n => n.DeletedAt == null)
+                .Where(n => n.DeletedAt == null && n.UserId == null)
                 .OrderByDescending(n => n.CreatedAt)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize)
@@ -49,8 +49,6 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
 
             return View("~/Views/Admin/ManageNotifications/Index.cshtml", notifications);
         }
-
-
 
         [HttpPost]
         public async Task<IActionResult> MarkAsRead([FromBody] MarkAsReadRequest request)
@@ -61,9 +59,9 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
             }
 
             var notification = await _context.Notifications.FindAsync(request.Id);
-            if (notification == null || notification.DeletedAt != null)
+            if (notification == null || notification.DeletedAt != null || notification.UserId != null)
             {
-                return Json(new { success = false, message = "Notification not found." });
+                return Json(new { success = false, message = "Notification not found or not accessible." });
             }
 
             if (notification.IsRead)
@@ -76,26 +74,24 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
             _context.Update(notification);
             await _context.SaveChangesAsync();
 
-            
+
             int unreadCount = await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
 
-            
-            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
 
-            
-            await _hubContext.Clients.All.SendAsync("MarkNotificationAsRead", request.Id.ToString());
+            await _hubContext.Clients.Group("Admins").SendAsync("UpdateUnreadCount", unreadCount);
+            await _hubContext.Clients.Group("Admins").SendAsync("MarkNotificationAsRead", request.Id.ToString());
 
             return Json(new { success = true, unreadCount });
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MarkAllAsRead()
         {
+
             var unreadNotifications = await _context.Notifications
-                .Where(n => n.DeletedAt == null && !n.IsRead)
+                .Where(n => n.DeletedAt == null && !n.IsRead && n.UserId == null)
                 .ToListAsync();
 
             if (!unreadNotifications.Any())
@@ -113,13 +109,15 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
 
             await _context.SaveChangesAsync();
 
-            int unreadCount = await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
 
-            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+            int unreadCount = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
+
+
+            await _hubContext.Clients.Group("Admins").SendAsync("UpdateUnreadCount", unreadCount);
             foreach (var notification in unreadNotifications)
             {
-                await _hubContext.Clients.All.SendAsync("MarkNotificationAsRead", notification.Id.ToString());
+                await _hubContext.Clients.Group("Admins").SendAsync("MarkNotificationAsRead", notification.Id.ToString());
             }
 
             TempData["SuccessMessage"] = "Tất cả thông báo được đánh dấu là đã đọc.";
@@ -130,8 +128,9 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ClearAll()
         {
+
             var notifications = await _context.Notifications
-                .Where(n => n.DeletedAt == null)
+                .Where(n => n.DeletedAt == null && n.UserId == null)
                 .ToListAsync();
 
             if (!notifications.Any())
@@ -149,22 +148,14 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
             await _context.SaveChangesAsync();
 
             int unreadCount = await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
 
-            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+
+            await _hubContext.Clients.Group("Admins").SendAsync("UpdateUnreadCount", unreadCount);
 
             TempData["SuccessMessage"] = "Đã xóa tất cả thông báo.";
             return RedirectToAction(nameof(Index));
         }
-
-        public class MarkAsReadRequest
-        {
-            public Guid Id { get; set; }
-        }
-
-
-
-        
 
         // GET: ManageNotifications/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
@@ -175,7 +166,7 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
             }
 
             var notification = await _context.Notifications
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id && m.UserId == null);
             if (notification == null)
             {
                 return NotFound();
@@ -188,19 +179,21 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
         public async Task<IActionResult> Dismiss(Guid id)
         {
             var notification = await _context.Notifications.FindAsync(id);
-            if (notification == null || notification.DeletedAt != null)
+            if (notification == null || notification.DeletedAt != null || notification.UserId != null)
             {
-                return Json(new { success = false, message = "Notification not found." });
+                return Json(new { success = false, message = "Notification not found or not accessible." });
             }
 
-            notification.DeletedAt = DateTime.UtcNow;
+            notification.DeletedAt = DateTime.Now;
             _context.Update(notification);
             await _context.SaveChangesAsync();
 
-            int unreadCount = await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
 
-            await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+            int unreadCount = await _context.Notifications
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
+
+
+            await _hubContext.Clients.Group("Admins").SendAsync("UpdateUnreadCount", unreadCount);
 
             return Json(new { success = true });
         }
@@ -211,16 +204,18 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var notification = await _context.Notifications.FindAsync(id);
-            if (notification != null)
+            if (notification != null && notification.UserId == null)
             {
-                notification.DeletedAt = DateTime.UtcNow;
+                notification.DeletedAt = DateTime.Now;
                 _context.Update(notification);
                 await _context.SaveChangesAsync();
 
-                int unreadCount = await _context.Notifications
-                    .CountAsync(n => n.DeletedAt == null && !n.IsRead);
 
-                await _hubContext.Clients.All.SendAsync("UpdateUnreadCount", unreadCount);
+                int unreadCount = await _context.Notifications
+                    .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
+
+ 
+                await _hubContext.Clients.Group("Admins").SendAsync("UpdateUnreadCount", unreadCount);
             }
 
             return RedirectToAction(nameof(Index));
@@ -228,7 +223,12 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
 
         private bool NotificationExists(Guid id)
         {
-            return _context.Notifications.Any(e => e.Id == id && e.DeletedAt == null);
+            return _context.Notifications.Any(e => e.Id == id && e.DeletedAt == null && e.UserId == null);
+        }
+
+        public class MarkAsReadRequest
+        {
+            public Guid Id { get; set; }
         }
     }
 }

@@ -104,11 +104,9 @@
                             </a>
                             <ul class="cat-sub-menu">
                                 <li>
-                                    <a href="/Ranks">Quản lý Level</a>
+                                    <a href="/Levels">Quản lý Level</a>
                                 </li>
-                                <li>
-                                    <a href="/RankTypes">Thể loại Level</a>
-                                </li>
+                                
                             </ul>
                         </li>
                         <li>
@@ -117,7 +115,7 @@
                                 Notifications
                             </a>
                             @{
-                                int unreadCount = await NotificationService.GetUnreadNotificationCountAsync();
+                                int unreadCount = await NotificationService.GetUnreadNotificationCountAsync(isAdmin:true);
                             }
                             <span class="msg-counter">@unreadCount</span>
                         </li>
@@ -335,7 +333,7 @@
             });
         });
         connection.on("UpdateUnreadCount", function (unreadCount) {
-            // Cập nhật số lượng thông báo chưa đọc trên sidebar
+            
             const msgCounter = document.querySelector('.msg-counter');
             msgCounter.textContent = unreadCount;
             // msgCounter.style.display = (unreadCount > 0) ? 'inline-block' : 'none';

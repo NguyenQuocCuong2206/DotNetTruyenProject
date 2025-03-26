@@ -114,6 +114,16 @@ namespace DotNetTruyen.Data
                     RoleId = adminRoleId
                 }
             );
+            modelBuilder.Entity<Level>().HasData(
+                new Level
+                {
+                    Id = Guid.NewGuid(),
+                    LevelNumber = 0,
+                    Name = "Level 0",
+                    ExpRequired = 0,
+                    UpdatedAt = DateTime.Now
+                }
+            );
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

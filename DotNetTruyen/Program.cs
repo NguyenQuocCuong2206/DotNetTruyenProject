@@ -13,11 +13,15 @@ builder.Logging.ClearProviders(); // Nếu muốn loại bỏ các nhà cung c�
 builder.Logging.AddConsole(); // Thêm log ra Console
 builder.Logging.AddDebug();
 builder.Services.AddSignalR();
+
+builder.Services.AddHostedService<ChapterPublishWorker>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<EmailService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<OtpService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<UserLevelService>();
 builder.Services.AddScoped<IPhoToService, PhotoService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
@@ -35,6 +39,7 @@ builder.Services.AddDbContext<DotNetTruyenDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<DotNetTruyenDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityErrorDescriber>();
 
@@ -97,7 +102,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapHub<GenreHub>("/genreHub");
+
 app.MapHub<NotificationHub>("/notificationHub");
 app.MapControllerRoute(
     name: "default",
