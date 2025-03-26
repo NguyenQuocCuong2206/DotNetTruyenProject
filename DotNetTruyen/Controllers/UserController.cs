@@ -1,4 +1,5 @@
-﻿using DotNetTruyen.Models;
+﻿
+using DotNetTruyen.Models;
 using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -37,6 +38,7 @@ namespace DotNetTruyen.Controllers
         [HttpGet("/userProfile")]
         public IActionResult UserProfile()
         {
+            ViewBag.ProfileTab = "active";
             return View();
         }
 
@@ -44,6 +46,7 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangeDisplayName(string newDisplayName)
         {
+            ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
@@ -63,6 +66,7 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangeUserName(string newUserName)
         {
+            ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
@@ -89,6 +93,7 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(UpdateProfileViewModel changePassword)
         {
+            ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
@@ -108,6 +113,7 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPassword(UpdateProfileViewModel changePassword)
         {
+            ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
             if (user != null && !await _userManager.HasPasswordAsync(user))
             {
@@ -127,6 +133,7 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangeEmail(string newEmail)
         {
+            ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
@@ -144,6 +151,7 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OtpChangeEmail(string newEmail, string otp)
         {
+            ViewBag.ProfileTab = "active";
             ViewBag.Email = newEmail;
             ViewBag.Otp = otp;
             if (!string.IsNullOrEmpty(newEmail) && !string.IsNullOrEmpty(otp))
@@ -198,6 +206,7 @@ namespace DotNetTruyen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UploadAvatar(UploadAvatarViewModel uploadAvatarViewModel)
         {
+            ViewBag.ProfileTab = "active";
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);

@@ -58,12 +58,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/accessDenied";
 });
 
-//builder.Services.AddAuthentication()
-//.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
-//{
-//    options.ClientId = builder.Configuration["Authentication_Google:ClientId"];
-//    options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
-//});
+builder.Services.AddAuthentication()
+.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+{
+    options.ClientId = builder.Configuration["Authentication_Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
+});
 
 builder.Services.AddAuthorization(options =>
 {
@@ -100,11 +100,21 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/signin-google" && context.Request.Query.ContainsKey("error"))
+    {
+        context.Response.Redirect("/");
+        return;
+    }
+    await next();
+});
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapHub<GenreHub>("/genreHub");
 app.MapHub<NotificationHub>("/notificationHub");
+app.MapHub<ComicHub>("/comicHub");
+app.MapHub<CommentHub>("/commentHub");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

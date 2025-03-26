@@ -205,22 +205,17 @@ var madara = {"ajaxurl":"https:\/\/live.mangabooth.com\/x\/wp-admin\/admin-ajax.
     ViewData["Title"] = "Search Results";
     var genres = ViewBag.Genres as List<string> ?? new List<string>(); // Ép kiểu genres từ ViewBag
 }
-
 <div class="c-search-header__wrapper">
     <div class="container">
         <div class="search-content">
-
- <form method="get" id="search-page-form" action="/Search/Index">
-    <span class="screen-reader-text">Search for:</span>
-    <input type="text" class="search-field manga-search-field" placeholder="Tìm Kiếm..." value="@ViewBag.SearchQuery" name="searchQuery">
-    <input type="hidden" name="genre" value="@ViewBag.Genre">
-    <input type="hidden" name="status" value="@ViewBag.Status">
-    <input type="hidden" name="page" value="@ViewBag.CurrentPage">
-    <input type="submit" class="search-submit" value="Tìm Kiếm">
-</form>
-
-
-
+            <form method="get" id="search-page-form" action="/Search/Index">
+                <span class="screen-reader-text">Tìm kiếm:</span>
+                <input type="text" class="search-field manga-search-field" placeholder="Tìm Kiếm..." value="@ViewBag.SearchQuery" name="searchQuery">
+                <input type="hidden" name="genre" value="@ViewBag.Genre">
+                <input type="hidden" name="status" value="@ViewBag.Status">
+                <input type="hidden" name="page" value="@ViewBag.CurrentPage">
+                <input type="submit" class="search-submit" value="Tìm Kiếm">
+            </form>
         </div>
         <div class="search-filters">
             <!-- Bộ lọc Genre -->
@@ -229,7 +224,7 @@ var madara = {"ajaxurl":"https:\/\/live.mangabooth.com\/x\/wp-admin\/admin-ajax.
                 <div class="options">
                     @foreach (var genre in genres.Take(3))
                     {
-                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@genre" class="btn btn-outline-secondary @(ViewBag.Genre == genre ? "active" : "")">@genre</a>
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@genre&sort=@ViewBag.Sort" class="btn btn-outline-secondary @(ViewBag.Genre == genre ? "active" : "")">@genre</a>
                     }
                     @if (genres.Count > 3)
                     {
@@ -240,7 +235,7 @@ var madara = {"ajaxurl":"https:\/\/live.mangabooth.com\/x\/wp-admin\/admin-ajax.
                             <div class="dropdown-menu">
                                 @foreach (var genre in genres.Skip(3))
                                 {
-                                    <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@genre" class="dropdown-item btn btn-outline-secondary @(ViewBag.Genre == genre ? "active" : "")">@genre</a>
+                                    <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@genre&sort=@ViewBag.Sort" class="dropdown-item btn btn-outline-secondary @(ViewBag.Genre == genre ? "active" : "")">@genre</a>
                                 }
                             </div>
                         </div>
@@ -248,7 +243,7 @@ var madara = {"ajaxurl":"https:\/\/live.mangabooth.com\/x\/wp-admin\/admin-ajax.
                 </div>
             </div>
             <span class="vertical divider"></span>
-            <!-- Bộ lọc Status -->
+            <!-- Bộ lọc Status (dùng tiếng Việt) -->
             <div class="filter-status">
                 <p class="filter-title">Trạng Thái</p>
                 <div class="dropdown options">
@@ -256,8 +251,28 @@ var madara = {"ajaxurl":"https:\/\/live.mangabooth.com\/x\/wp-admin\/admin-ajax.
                         @(string.IsNullOrEmpty(ViewBag.Status) ? "Trạng Thái" : ViewBag.Status)
                     </button>
                     <div class="dropdown-menu">
-                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=ongoing" class="dropdown-item btn btn-outline-secondary @(ViewBag.Status == "ongoing" ? "active" : "")">Ongoing</a>
-                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=completed" class="dropdown-item btn btn-outline-secondary @(ViewBag.Status == "completed" ? "active" : "")">Completed</a>
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=đang tiến hành&sort=@ViewBag.Sort" class="dropdown-item btn btn-outline-secondary @(ViewBag.Status == "đang tiến hành" ? "active" : "")">Đang tiến hành</a>
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=hoàn thành&sort=@ViewBag.Sort" class="dropdown-item btn btn-outline-secondary @(ViewBag.Status == "hoàn thành" ? "active" : "")">Hoàn thành</a>
+                    </div>
+                </div>
+            </div>
+            <span class="vertical divider"></span>
+            <!-- Bộ lọc Sort -->
+            <div class="filter-sort">
+                <p class="filter-title">Sắp Xếp</p>
+                <div class="dropdown options">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        @(ViewBag.Sort switch
+                        {
+                            "a-z" => "A-Z",
+                            "z-a" => "Z-A",
+                            _ => "Mặc định"
+                        })
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=@ViewBag.Status&sort=default" class="dropdown-item btn btn-outline-secondary @(ViewBag.Sort == "default" ? "active" : "")">Mặc định</a>
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=@ViewBag.Status&sort=a-z" class="dropdown-item btn btn-outline-secondary @(ViewBag.Sort == "a-z" ? "active" : "")">A-Z</a>
+                        <a href="/Search/Index?searchQuery=@ViewBag.SearchQuery&genre=@ViewBag.Genre&status=@ViewBag.Status&sort=z-a" class="dropdown-item btn btn-outline-secondary @(ViewBag.Sort == "z-a" ? "active" : "")">Z-A</a>
                     </div>
                 </div>
             </div>

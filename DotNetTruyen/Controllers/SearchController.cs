@@ -18,7 +18,7 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string searchQuery = "", string genre = "", string status = "", int page = 1, int pageSize = 2)
+        public async Task<IActionResult> Index(string searchQuery = "", string genre = "", string status = "", string sort = "default", int page = 1, int pageSize = 6)
         {
             var query = _context.Comics
                 .Where(c => c.DeletedAt == null)
@@ -26,27 +26,26 @@ namespace DotNetTruyen.Controllers
                 .ThenInclude(cg => cg.Genre)
                 .AsQueryable();
 
-            // Ưu tiên xử lý searchQuery nếu nó không rỗng
+            // Xử lý tìm kiếm
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 query = query.Where(c => c.Title.Contains(searchQuery));
             }
 
-            // Chỉ áp dụng genre nếu có giá trị hợp lệ
+            // Xử lý thể loại
             if (!string.IsNullOrEmpty(genre))
             {
                 genre = Uri.UnescapeDataString(genre);
-                Console.WriteLine($"Filtering by genre: {genre}");
                 query = query.Where(c => c.ComicGenres.Any(cg => cg.Genre.GenreName.ToLower() == genre.ToLower()));
             }
 
-            // Chỉ áp dụng status nếu có giá trị hợp lệ
+            // Xử lý trạng thái
             if (!string.IsNullOrEmpty(status))
             {
                 bool? statusFilter = status.ToLower() switch
                 {
-                    "completed" => true,
-                    "ongoing" => false,
+                    "đang tiến hành" => false,
+                    "hoàn thành" => true,
                     _ => null
                 };
                 if (statusFilter.HasValue)
@@ -55,9 +54,16 @@ namespace DotNetTruyen.Controllers
                 }
             }
 
+            // Xử lý sắp xếp
+            query = sort.ToLower() switch
+            {
+                "a-z" => query.OrderBy(c => c.Title),
+                "z-a" => query.OrderByDescending(c => c.Title),
+                _ => query.OrderByDescending(c => c.CreatedAt) // Mặc định sắp xếp theo ngày tạo
+            };
+
             var totalItems = await query.CountAsync();
             var comics = await query
-                .OrderByDescending(c => c.CreatedAt)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .Select(c => new ViewModels.ComicViewModel
@@ -68,10 +74,8 @@ namespace DotNetTruyen.Controllers
                     CoverImage = c.CoverImage ?? "/images/default-cover.jpg",
                     Author = c.Author,
                     ViewCount = c.View,
-                    Status = c.Status ? "Completed" : "Ongoing",
+                    Status = c.Status ? "Hoàn thành" : "Đang tiến hành",
                     Genres = c.ComicGenres.Select(cg => cg.Genre.GenreName).ToList(),
-                    
-                    
                 })
                 .ToListAsync();
 
@@ -84,6 +88,7 @@ namespace DotNetTruyen.Controllers
             ViewBag.SearchQuery = searchQuery;
             ViewBag.Genre = genre;
             ViewBag.Status = status;
+            ViewBag.Sort = sort; // Lưu giá trị sort để hiển thị trên giao diện
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;
             ViewBag.TotalItems = totalItems;
