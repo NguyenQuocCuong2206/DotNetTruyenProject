@@ -1094,27 +1094,25 @@
                                                 <p class="text-lg">@Model.View</p>
                                             </div>
                                         </div>
-                                        <div class="d-flex align-items-center">
+                                       <div class="d-flex align-items-center">
+    <div class="summary-heading">
+        <i class="fas fa-heart text-primary"></i>
+        <span>Lượt Thích:</span>
+    </div>
+    <div class="summary-content">
+        <p class="text-lg" id="likeCount">@(Model.Likes?.Count() ?? 0)</p>
+    </div>
+</div>
 
-                                            <div class="summary-heading">
-                                                <i class="fas fa-heart text-primary"></i>
-                                                <span>Lượt Thích:</span>
-                                            </div>
-                                            <div class="summary-content">
-                                                <p class="text-lg">@(Model.Likes?.Count() ?? 0)</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex align-items-center">
-
-                                            <div class="summary-heading">
-                                                <i class="fas fa-bookmark text-primary"></i>
-                                                <span>Theo Dõi:</span>
-                                            </div>
-                                            <div class="summary-content">
-                                                <p class="text-lg">@(Model.Follows?.Count() ?? 0)</p>
-                                            </div>
-                                        </div>
+<div class="d-flex align-items-center">
+    <div class="summary-heading">
+        <i class="fas fa-bookmark text-primary"></i>
+        <span>Theo Dõi:</span>
+    </div>
+    <div class="summary-content">
+        <p class="text-lg" id="followCount">@(Model.Follows?.Count() ?? 0)</p>
+    </div>
+</div>
                                         <div class="d-flex align-items-center">
                                             <div class="summary-heading">
                                                 <i class="fas fa-bookmark text-primary"></i>
@@ -1736,13 +1734,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert(data.message);
             }
         } catch (error) {
-            console.error("Lỗi khi gửi request:", error);
+            console.error("Lỗi khi gửi request:", error)
             alert("Có lỗi xảy ra: " + error.message);
         }
     });
 });
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/comicHub")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        connection.on("ReceiveComicUpdate", function (comicId, followCount, likeCount) {
+            const currentComicId = "@Model.Id";
+            if (comicId === currentComicId) {
+                document.getElementById("followCount").textContent = followCount;
+                document.getElementById("likeCount").textContent = likeCount;
+            }
+        });
+
+        connection.start().then(function () {
+            console.log("SignalR Connected!");
+        }).catch(function (err) {
+            console.error(err.toString());
+        });
+    });
+</script>
 
 
 

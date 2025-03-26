@@ -1,6 +1,8 @@
 ﻿using DotNetTruyen.Data;
+using DotNetTruyen.Hubs;
 using DotNetTruyen.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -9,11 +11,13 @@ namespace DotNetTruyen.Controllers
 	public class DetailController : Controller
 	{
 		private readonly DotNetTruyenDbContext _context;
+        private readonly IHubContext<ComicHub> _hubContext;
 
-		public DetailController(DotNetTruyenDbContext context)
+        public DetailController(DotNetTruyenDbContext context, IHubContext<ComicHub> hubContext)
 		{
 			_context = context;
-		}
+            _hubContext = hubContext;
+        }
 		public IList<Comic> Comics { get; set; }
 		public IActionResult Index(Guid id)
 		{
@@ -30,7 +34,7 @@ namespace DotNetTruyen.Controllers
 
 			// Tăng lượt xem
 			comic.View += 1;
-			_context.SaveChanges(); // Lưu thay đổi vào database
+			_context.SaveChanges(); 
 
 			var comments = _context.Comments
 				.Include(c => c.User)
@@ -63,7 +67,7 @@ namespace DotNetTruyen.Controllers
 		}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ToggleFollow([FromBody] FollowRequestModel request)
+        public async Task<IActionResult> ToggleFollow([FromBody] FollowRequestModel request)
         {
             try
             {
@@ -110,6 +114,11 @@ namespace DotNetTruyen.Controllers
                 _context.SaveChanges();
 
                 var followCount = _context.Follows.Count(f => f.ComicId == request.Id);
+                var likeCount = _context.Likes.Count(l => l.ComicId == request.Id);
+
+                
+                await _hubContext.Clients.All.SendAsync("ReceiveComicUpdate", request.Id, followCount, likeCount);
+
                 return Json(new
                 {
                     success = true,
@@ -125,7 +134,7 @@ namespace DotNetTruyen.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ToggleLike([FromBody] LikeRequestModel request)
+        public async Task<IActionResult> ToggleLike([FromBody] LikeRequestModel request)
         {
             try
             {
@@ -170,7 +179,11 @@ namespace DotNetTruyen.Controllers
 
                 _context.SaveChanges();
 
+                var followCount = _context.Follows.Count(f => f.ComicId == request.Id);
                 var likeCount = _context.Likes.Count(l => l.ComicId == request.Id);
+
+
+                await _hubContext.Clients.All.SendAsync("ReceiveComicUpdate", request.Id, followCount, likeCount);
                 return Json(new
                 {
                     success = true,

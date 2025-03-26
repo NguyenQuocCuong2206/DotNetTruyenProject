@@ -15,7 +15,7 @@ namespace DotNetTruyen.Controllers
             _context = context;
         }
 
-        public IActionResult Index(int page = 1, int pageSize = 8)
+        public IActionResult Index(int page = 1, int pageSize = 4)
         {
             if (!User.Identity.IsAuthenticated)
             {

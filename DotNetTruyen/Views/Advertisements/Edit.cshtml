@@ -29,18 +29,29 @@
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="ImageUrl" class="form-label fw-bold">Chọn ảnh:</label>
+                    <label class="form-label fw-bold">Ảnh quảng cáo:</label>
+                    @if (!string.IsNullOrEmpty(Model.ImageUrlPath))
+                    {
+                        <div class="mb-2">
+                            <img src="@Model.ImageUrlPath" alt="Ảnh hiện tại" class="img-fluid" style="max-width: 200px;" />
+                            
+                        </div>
+                    }
+                    <label asp-for="ImageUrl" class="form-label">Chọn ảnh mới (nếu muốn thay đổi):</label>
                     <div class="input-group">
-                        <input type="file" asp-for="ImageUrl" class="form-control" accept="image/*" />
+                        <input type="file" asp-for="ImageUrl" class="form-control" accept="image/*" optional />
                         <span class="input-group-text">
                             <i class="fas fa-upload"></i>
                         </span>
                     </div>
                     <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                    <small class="form-text text-muted">Chọn file ảnh (jpg, png, gif)</small>
+                    <small class="form-text text-muted">Chọn file ảnh (jpg, png, gif) nếu muốn thay đổi ảnh cũ</small>
                 </div>
 
+                <input type="hidden" asp-for="ImageUrlPath"/>
                 <input type="hidden" asp-for="Id" />
+                
+               
 
                 <div class="d-flex justify-content-between align-items-center">
                     <a asp-action="Index" class="btn btn-outline-secondary">
@@ -60,7 +71,6 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
-        // Bootstrap* Bootstrap validation
         (function () {
             'use strict'
             var forms = document.querySelectorAll('.needs-validation')
@@ -75,5 +85,13 @@
                     }, false)
                 })
         })()
+        document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.querySelector('input[type="file"]');
+    fileInput.addEventListener("change", function () {
+        if (this.files.length === 0) {
+            this.removeAttribute("required");
+        }
+    });
+});
     </script>
 }

@@ -64,6 +64,8 @@ namespace DotNetTruyen.Controllers.Admin.Advertisement
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,LinkTo,ImageUrl,Id,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] AdvertisementsViewModel model)
         {
+            
+
             if (!ModelState.IsValid)
             {
                 foreach (var state in ModelState)
@@ -73,7 +75,7 @@ namespace DotNetTruyen.Controllers.Admin.Advertisement
                         Console.WriteLine($"Error in {state.Key}: {state.Value.Errors[0].ErrorMessage}");
                     }
                 }
-                // rest of your code...
+                
             }
 
             var advertisement = new DotNetTruyen.Models.Advertisement
@@ -91,7 +93,7 @@ namespace DotNetTruyen.Controllers.Admin.Advertisement
                 Console.WriteLine("CoverImage is null");
             }
 
-            // Upload ảnh bìa lên Cloudinary
+            
             if (model.ImageUrl != null)
             {
                 var uploadResult = await _photoService.AddPhotoAsync(model.ImageUrl);
@@ -135,7 +137,6 @@ namespace DotNetTruyen.Controllers.Admin.Advertisement
             {
                 Id = advertisenments.Id,
                 Title = advertisenments.Title,
-               
                 ImageUrlPath = advertisenments.ImageUrl,
                 LinkTo = advertisenments.LinkTo
 
@@ -149,7 +150,7 @@ namespace DotNetTruyen.Controllers.Admin.Advertisement
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Title,LinkTo,ImageUrl,Id,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] AdvertisementsViewModel model)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Title,LinkTo,ImageUrl,ImageUrlPath,Id,CreatedBy,CreatedAt,UpdatedBy,UpdatedAt,DeletedAt")] AdvertisementsViewModel model)
         {
             if (id != model.Id)
             {
@@ -167,19 +168,29 @@ namespace DotNetTruyen.Controllers.Admin.Advertisement
                 return NotFound();
             }
 
-            // Cập nhật thông tin
+            
             advertisement.Title = model.Title;
             advertisement.LinkTo = model.LinkTo;
             advertisement.UpdatedAt = DateTime.UtcNow;
 
-            // Kiểm tra nếu có ảnh mới được tải lên
+            
             if (model.ImageUrl != null && model.ImageUrl.Length > 0)
             {
                 var uploadResult = await _photoService.AddPhotoAsync(model.ImageUrl);
                 if (uploadResult != null)
                 {
-                    advertisement.ImageUrl = uploadResult; // Lưu đường dẫn ảnh vào DB
+                    advertisement.ImageUrl = uploadResult; 
+                    Console.WriteLine("Image uploaded successfully: " + uploadResult);
                 }
+                else
+                {
+                    Console.WriteLine("Image upload failed");
+                }
+            }
+            else
+            {
+                
+                advertisement.ImageUrl = model.ImageUrlPath;  
             }
 
             _context.Update(advertisement);
