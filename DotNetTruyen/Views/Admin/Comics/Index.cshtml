@@ -190,27 +190,21 @@
 
 @section Scripts {
     <script>
-        var connection = new signalR.HubConnectionBuilder()
-            .withUrl("/genreHub")
-            .withAutomaticReconnect()
-            .build();
+        
 
-        async function startConnection() {
-            try {
-                await connection.start();
-                console.log("✅ SignalR Connected! State:", connection.state);
-            } catch (err) {
-                console.error("❌ SignalR Connection Failed:", err);
-            }
-        }
-
-        startConnection();
 
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".delete-btn").forEach(button => {
                 button.addEventListener("click", function (e) {
                     e.preventDefault();
                     const form = this.closest(".delete-form");
+
+                    console.log(form); 
+
+                    if (!form) {
+                        console.error("❌ Không tìm thấy form để submit!");
+                        return;
+                    }
 
                     Swal.fire({
                         title: "Bạn có chắc chắn?",
@@ -223,11 +217,13 @@
                         confirmButtonText: "Xóa"
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            console.log("✅ Form đang được submit...");
                             form.submit();
                         }
                     });
                 });
             });
         });
+
     </script>
 }
