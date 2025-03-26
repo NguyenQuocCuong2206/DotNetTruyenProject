@@ -58,12 +58,12 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/accessDenied";
 });
 
-//builder.Services.AddAuthentication()
-//.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
-//{
-//    options.ClientId = builder.Configuration["Authentication_Google:ClientId"];
-//    options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
-//});
+builder.Services.AddAuthentication()
+.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+{
+    options.ClientId = builder.Configuration["Authentication_Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication_Google:ClientSecret"];
+});
 
 builder.Services.AddAuthorization(options =>
 {
