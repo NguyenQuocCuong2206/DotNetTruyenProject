@@ -1,5 +1,6 @@
 ﻿using DotNetTruyen.Data;
 using DotNetTruyen.Models;
+using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,12 @@ namespace DotNetTruyen.Controllers
     public class ReadChapterController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
+        private readonly UserService _userService;
 
-        public ReadChapterController(DotNetTruyenDbContext context)
+        public ReadChapterController(DotNetTruyenDbContext context, UserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         // Get chapter by ID
@@ -128,10 +131,15 @@ namespace DotNetTruyen.Controllers
 					// Tăng lượt xem
 					chapter.Views += 1;
 					chapter.Comic.View += 1;
-					// Thêm vào lịch sử đọc của user (nếu user đã đăng nhập)
-					if (User.Identity.IsAuthenticated)
+                    
+
+                    
+                    // Thêm vào lịch sử đọc của user (nếu user đã đăng nhập)
+                    if (User.Identity.IsAuthenticated)
 					{
-						var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        _userService.IncreaseExpAsync(_context, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+                        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
 						var readHistory = await _context.ReadHistories.FirstOrDefaultAsync(r => r.UserId.ToString() == userId && r.ChapterId == chapterId);
 						if (readHistory != null) 
 						{

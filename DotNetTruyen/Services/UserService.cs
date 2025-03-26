@@ -35,7 +35,7 @@ namespace DotNetTruyen.Services
             if (user.Level == null)
             {
                 _logger.LogInformation("User {UserId} has no level, creating Level 0.", userId);
-                user.Level = await GetOrCreateLevel0Async(context);
+                user.Level = await GetLevel0Async(context);
                 user.LevelId = user.Level.Id;
                 await context.SaveChangesAsync();
                 _logger.LogInformation("Level 0 created and saved for User {UserId}.", userId);
@@ -66,7 +66,7 @@ namespace DotNetTruyen.Services
                 if (level == null)
                 {
                     _logger.LogWarning("No level found for User {UserId} with Exp {Exp}, falling back to Level 0.", userId, user.Exp);
-                    level = await GetOrCreateLevel0Async(context);
+                    level = await GetLevel0Async(context);
                 }
 
                 user.LevelId = level.Id;
@@ -125,7 +125,7 @@ namespace DotNetTruyen.Services
                     Message = $"Bạn đã lên cấp {newLevel.LevelNumber} - {newLevel.Name}!",
                     Type = "success",
                     Icon = "star",
-                    Link = "/user-settings/?tab=account-settings",
+                    Link = "/userProfile",
                     IsRead = false,
                     UserId = userId
                 };
@@ -143,15 +143,7 @@ namespace DotNetTruyen.Services
                     link = userNotification.Link
                 });
 
-                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
-                {
-                    levelNumber = newLevel.LevelNumber,
-                    rankName = newLevel.Name ?? "Unknown Level",
-                    exp = user.Exp,
-                    expRequiredForNextLevel = expRequiredForNextLevel,
-                    message = $"Chúc mừng! Bạn đã lên cấp {newLevel.LevelNumber} - {newLevel.Name}!"
-                });
-
+                
                 int userUnreadCount = await context.Notifications
                     .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == userId);
                 await _hubContext.Clients.Group(userId.ToString()).SendAsync("UpdateUnreadCount", userUnreadCount);
@@ -163,32 +155,21 @@ namespace DotNetTruyen.Services
             }
         }
 
-        private async Task<Level> GetOrCreateLevel0Async(DotNetTruyenDbContext context)
+        private async Task<Level> GetLevel0Async(DotNetTruyenDbContext context)
         {
             var level = await context.Levels
                 .AsNoTracking()
-                .Where(l => l.LevelNumber == 0 && l.DeletedAt == null)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(l => l.LevelNumber == 0 && l.DeletedAt == null);
 
             if (level == null)
             {
-                level = new Level
-                {
-                    Id = Guid.NewGuid(),
-                    LevelNumber = 0,
-                    Name = "Level 0",
-                    ExpRequired = 0,
-                    UpdatedAt = DateTime.Now
-                };
-                context.Levels.Add(level);
-                await context.SaveChangesAsync();
-                _logger.LogInformation("Created new Level 0 in database.");
+                throw new Exception("Level 0 not found in the database. Please ensure it exists.");
             }
 
             return level;
         }
 
-        
+
 
         public async Task AddLevelAsync(DotNetTruyenDbContext context, int levelNumber, string name, int expRequired)
         {

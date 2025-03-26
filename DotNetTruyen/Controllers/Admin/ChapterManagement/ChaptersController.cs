@@ -210,7 +210,56 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 link = notification.Link
             });
 
-            
+            if(chapter.IsPublished)
+            {
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        var followers = await _context.Follows
+                            .Where(f => f.ComicId == model.ComicId)
+                            .Select(f => f.UserId)
+                            .ToListAsync();
+
+                        var userNotifications = followers.Select(userId => new Notification
+                        {
+                            Id = Guid.NewGuid(),
+                            UserId = userId,
+                            Title = "Chương mới",
+                            Message = $"Chương mới '{chapter.ChapterTitle}' của truyện '{comic.Title}' đã được đăng!",
+                            Type = "success",
+                            Icon = "check-circle",
+                            Link = $"/ReadChapter/Index/{chapter.Id}",
+                            IsRead = false,
+                            CreatedAt = DateTime.UtcNow
+                        }).ToList();
+
+                        if (userNotifications.Any())
+                        {
+                            _context.Notifications.AddRange(userNotifications);
+                            await _context.SaveChangesAsync();
+
+                            
+                            foreach (var notification in userNotifications)
+                            {
+                                await _hubContext.Clients.User(notification.UserId.ToString()).SendAsync("ReceiveNotification", new
+                                {
+                                    id = notification.Id,
+                                    title = notification.Title,
+                                    message = notification.Message,
+                                    type = notification.Type,
+                                    icon = notification.Icon,
+                                    link = notification.Link
+                                });
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error sending notifications to followers for chapter {ChapterId}", chapter.Id);
+                    }
+                });
+            }
             TempData["SuccessMessage"] = "Chương đã được tạo thành công!";
             return RedirectToAction("Index", new { comicId = model.ComicId });
         }

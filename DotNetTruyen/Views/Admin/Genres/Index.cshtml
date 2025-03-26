@@ -193,22 +193,7 @@
 @section Scripts{
 
     <script>
-        var connection = new signalR.HubConnectionBuilder()
-            .withUrl("/genreHub")
-            .withAutomaticReconnect() 
-            .build();
-
-        async function startConnection() {
-            try {
-                await connection.start();
-                console.log("✅ SignalR Connected! State:", connection.state);
-            } catch (err) {
-                console.error("❌ SignalR Connection Failed:", err);
-            }
-        }
-
         
-        startConnection();
         connection.on("ReceiveGenreCreated", function (genre) {
             console.log("📩 New Genre Received:", genre);
             

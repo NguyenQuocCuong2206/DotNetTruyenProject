@@ -68,7 +68,7 @@ namespace DotNetTruyen.Controllers.Admin.LevelManagement
                     LevelNumber = l.LevelNumber,
                     ExpRequired = l.ExpRequired,
                     Name = l.Name,
-                    UserCount = _context.Users.Count(u => u.LevelId == l.Id),
+                    UserCount = _context.Users.Count(u => u.Id == l.Id),
                     UpdatedAt = l.UpdatedAt
                 })
                 .ToListAsync();
