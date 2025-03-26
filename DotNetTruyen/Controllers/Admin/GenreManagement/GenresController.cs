@@ -133,7 +133,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 await _context.SaveChangesAsync();
 
                 // Gửi thông báo qua SignalR
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -257,7 +257,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 await _context.SaveChangesAsync();
 
                 // Gửi thông báo qua SignalR
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -335,7 +335,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             await _context.SaveChangesAsync();
 
             // Gửi thông báo qua SignalR
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,

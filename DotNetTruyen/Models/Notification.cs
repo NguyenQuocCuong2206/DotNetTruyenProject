@@ -8,5 +8,6 @@
         public string Icon { get; set; } 
         public string Link { get; set; }
         public bool IsRead { get; set; }
+        public Guid? UserId { get; set; }
     }
 }
