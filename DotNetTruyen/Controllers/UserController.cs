@@ -180,7 +180,7 @@ namespace DotNetTruyen.Controllers
             return View("UserProfile");
         }
 
-        [HttpGet("/reSendOtp")]
+        [HttpPost("/reSendOtpSetting")]
         public async Task<IActionResult> ReSendOtp(string newEmail)
         {
             ViewBag.Email = newEmail;

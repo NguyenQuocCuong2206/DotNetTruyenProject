@@ -104,6 +104,8 @@ app.MapControllerRoute(
     defaults: new { controller = "Detail", action = "Index" }
 );
 
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

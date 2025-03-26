@@ -31,8 +31,8 @@
                                         <div class="left">
 
                                             <div id="init-links" class="nav-links">
-                                                <a href="@Url.Action("ReadLastChapter", "ReadChapter", new { comicId = Model.Id })" id="btn-read-last" class="c-btn c-btn_style-1">Đọc Mới Nhất</a>
-                                                <a href="@Url.Action("ReadFromBeginning", "ReadChapter", new { comicId = Model.Id })" id="btn-read-first" class="c-btn c-btn_style-1">Đọc Từ Đầu</a>
+                                                <a href="@Url.Action("ReadLastChapter", "ReadChapter", new { comicId = Model.Id })"  class="c-btn c-btn_style-1">Đọc Mới Nhất</a>
+                                                <a href="@Url.Action("ReadFromBeginning", "ReadChapter", new { comicId = Model.Id })" class="c-btn c-btn_style-1">Đọc Từ Đầu</a>
                                                 <form method="post">
                                                     @Html.AntiForgeryToken()
                                                     <div class="d-flex flex-column gap-3 mt-3">
@@ -61,21 +61,6 @@
 
                                         </div>
                                     </div>
-                                    <div class="sidebar-col">
-                                        <div id="main-sidebar" class="main-sidebar" role="complementary">
-                                            <div class="row">
-                                                <div id="text-2" class="widget col-12 col-md-12   default  no-icon heading-style-1 widget_text">
-                                                    <div class="widget__inner widget_text__inner c-widget-wrap">
-                                                        <div class="widget-heading font-nav"><h5 class="heading">Sidebar Widget</h5></div><div class="widget-content">
-                                                            <div class="textwidget">
-                                                                <p><a href="https://mangabooth.com/product/madara-child-x/" title="Buy Madara Child X"><img decoding="async" src="images/ads-square.jpg"></a></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="right col-12 col-sm-12 col-md-8">
                                     <div class="post-title">
@@ -88,7 +73,19 @@
                                         <div class="post-content_item">
                                             <div class="summary-content">
                                                 <div class="genres-content">
-                                                    <a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a> <a href="https://live.mangabooth.com/x/manga-genre/chinese/" rel="tag">chinese</a> <a href="https://live.mangabooth.com/x/manga-genre/drama/" rel="tag">drama</a> <a href="https://live.mangabooth.com/x/manga-genre/ecchi/" rel="tag">ecchi</a> <a href="https://live.mangabooth.com/x/manga-genre/fighting/" rel="tag">fighting</a> <a href="https://live.mangabooth.com/x/manga-genre/fun/" rel="tag">fun</a> <a href="https://live.mangabooth.com/x/manga-genre/girl/" rel="tag">girl</a> <a href="https://live.mangabooth.com/x/manga-genre/horrow/" rel="tag">horrow</a> <a href="https://live.mangabooth.com/x/manga-genre/manhwa/" rel="tag">manhwa</a>
+                                                    @if (Model.ComicGenres != null && Model.ComicGenres.Any())
+                                                    {
+                                                        @foreach (var comicGenre in Model.ComicGenres)
+                                                        {
+                                                            <a href="@Url.Action("Index", "Genre", new { genre = comicGenre.Genre.GenreName.ToLower() })" rel="tag">
+                                                                @comicGenre.Genre.GenreName.ToLower()
+                                                            </a>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Không có thể loại nào được xác định.</span>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -105,7 +102,7 @@
 
                                             <div class="post-content_item">
                                                 <div class="summary-heading">
-                                                    <i class="fas fa-user text-primary me-2"></i>
+                                                    <i class="fas fa-user text-white me-2"></i>
                                                     <span class="fw-semibold">Tác Giả:</span>
                                                 </div>
                                                 <div class="summary-content">
@@ -119,7 +116,7 @@
 
                                         <div class="status manga-info-row">
                                             <div class="summary-heading">
-                                                <i class="fa fa-rss text-primary me-2"></i>
+                                                <i class="fa fa-rss text-white me-2"></i>
                                                 <span>Tình trạng</span>
                                             </div>
                                             <div class="summary-content">
@@ -130,7 +127,7 @@
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="summary-heading">
-                                                <i class="fas fa-eye text-primary "></i>
+                                                <i class="fas fa-eye text-white me-2 "></i>
                                                 <span>Lượt Xem:</span>
                                             </div>
                                             <div class="summary-content">
@@ -139,7 +136,7 @@
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="summary-heading">
-                                                <i class="fas fa-heart text-primary"></i>
+                                                <i class="fas fa-heart text-white me-2"></i>
                                                 <span>Lượt Thích:</span>
                                             </div>
                                             <div class="summary-content">
@@ -149,7 +146,7 @@
 
                                         <div class="d-flex align-items-center">
                                             <div class="summary-heading">
-                                                <i class="fas fa-bookmark text-primary"></i>
+                                                <i class="fas fa-plus text-white me-2"></i>
                                                 <span>Theo Dõi:</span>
                                             </div>
                                             <div class="summary-content">
@@ -158,7 +155,7 @@
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="summary-heading">
-                                                <i class="fas fa-bookmark text-primary"></i>
+                                                <i class="fas fa-bookmark text-white me-2"></i>
                                                 <span>Số Chương:</span>
                                             </div>
                                             <div class="summary-content">
@@ -168,35 +165,37 @@
                                         </div>
                                     </div>
 
-
+                                    <br />
                                     <div class="release-time author-row">
                                         <!-- Chapters List -->
-                                        <div class="bg-dark-300 rounded-lg p-4 border border-gray-800">
-                                            <div class="flex justify-between items-center mb-4">
-                                                <h3 class="font-bold text-lg text-white">Danh sách chương</h3>
-                                                <div class="flex space-x-2">
-                                                    <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
+                                        <div class="bg-dark rounded-lg p-4 border border-secondary">
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <h3 class="font-weight-bold text-white h5">Danh sách chương</h3>
+                                                <div class="d-flex gap-2">
+                                                    <button onclick="sortChapters('desc')"
+                                                            class="btn btn-secondary rounded @((ViewBag.SortOrder == "desc") ? "btn-primary" : "")">
                                                         <i class="fas fa-sort-amount-down"></i>
                                                     </button>
-                                                    <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
+                                                    <button onclick="sortChapters('asc')"
+                                                            class="btn btn-secondary rounded @((ViewBag.SortOrder == "asc") ? "btn-primary" : "")">
                                                         <i class="fas fa-sort-amount-up"></i>
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="space-y-2 max-h-[500px] overflow-y-auto pr-2">
-                                                @if (Model.Chapters != null && Model.Chapters.Where(c => c.IsPublished && c.DeletedAt == null).Any())
+                                            <div class="overflow-y-auto" style="max-height: 500px;">
+                                                @if (Model.Chapters != null && Model.Chapters.Any())
                                                 {
-                                                    @foreach (var chapter in Model.Chapters.Where(c => c.IsPublished && c.DeletedAt == null).OrderByDescending(c => c.ChapterNumber))
+                                                    @foreach (var chapter in Model.Chapters)
                                                     {
                                                         <a href="@Url.Action("Index", "ReadChapter", new { id = chapter.Id })"
-                                                           class="flex justify-between items-center p-3 bg-dark-400 hover:bg-dark-200 rounded-lg transition border border-gray-800">
-                                                            <div class="flex items-center space-x-3">
-                                                                <span class="text-primary font-medium">Chapter @chapter.ChapterNumber</span>
-                                                                <span class="text-gray-300">@chapter.ChapterTitle</span>
+                                                           class="d-flex justify-content-between align-items-center p-3 bg-dark text-white rounded-lg mb-2 text-decoration-none border border-secondary ">
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <span class="text-light font-weight-medium">Chapter @chapter.ChapterNumber</span>
+                                                                <span class="text-light">@chapter.ChapterTitle</span>
                                                             </div>
-                                                            <div class="flex items-center space-x-4">
-                                                                <span class="text-gray-400 text-sm">
-                                                                    <i class="far fa-clock mr-1"></i>
+                                                            <div class="d-flex align-items-center gap-3">
+                                                                <span class="text-justify small">
+                                                                    <i class="far fa-clock me-1"></i>
                                                                     @(chapter.PublishedDate?.ToString("dd/MM/yyyy") ?? chapter.CreatedAt?.ToString("dd/MM/yyyy"))
                                                                 </span>
                                                             </div>
@@ -205,41 +204,97 @@
                                                 }
                                                 else
                                                 {
-                                                    <div class="text-center py-8 text-gray-400">
-                                                        <i class="fas fa-book-open text-4xl mb-2"></i>
+                                                    <div class="text-center py-5 text-muted">
+                                                        <i class="fas fa-book-open fa-2x mb-2"></i>
                                                         <p>Chưa có chương nào được xuất bản</p>
                                                     </div>
                                                 }
                                             </div>
+
+                                            <!-- Pagination -->
+                                            @if (ViewBag.TotalPages > 1)
+                                            {
+                                                <div class="d-flex justify-content-center mt-4">
+                                                    <nav aria-label="Page navigation">
+                                                        <ul class="pagination">
+                                                            <!-- Previous Button -->
+                                                            @if (ViewBag.CurrentPage > 1)
+                                                            {
+                                                                <li class="page-item">
+                                                                    <a href="@Url.Action("Index", new { id = Model.Id, page = ViewBag.CurrentPage - 1, sortOrder = ViewBag.SortOrder })"
+                                                                       class="page-link bg-secondary text-white border-secondary">
+                                                                        <i class="fas fa-chevron-left"></i>
+                                                                    </a>
+                                                                </li>
+                                                            }
+
+                                                            <!-- Page Numbers -->
+                                                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                                            {
+                                                                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                                                    <a href="@Url.Action("Index", new { id = Model.Id, page = i, sortOrder = ViewBag.SortOrder })"
+                                                                       class="page-link @(i == ViewBag.CurrentPage ? "bg-primary border-primary" : "bg-secondary text-white border-secondary")">
+                                                                        @i
+                                                                    </a>
+                                                                </li>
+                                                            }
+
+                                                            <!-- Next Button -->
+                                                            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                                                            {
+                                                                <li class="page-item">
+                                                                    <a href="@Url.Action("Index", new { id = Model.Id, page = ViewBag.CurrentPage + 1, sortOrder = ViewBag.SortOrder })"
+                                                                       class="page-link bg-secondary text-white border-secondary">
+                                                                        <i class="fas fa-chevron-right"></i>
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
+
+                                    <script>
+                                        function sortChapters(order) {
+                                            window.location.href = '@Url.Action("Index", new { id = Model.Id, page = 1 })' + '&sortOrder=' + order;
+                                        }
+                                    </script>
                                 </div>
                             </div>
+
+
+                            <div class="post-title">
                             <h1> Truyện khác</h1>
+                        </div>
                             <br />
                             <div id="c-post-slider-234" class="manga-x-slider no-full-width style-3" data-style="style-3" data-count="4">
                                 <div class="slider_container_custom" role="toolbar">
-                                    @foreach (var comic in ViewBag.Comics as List<Comic>) // Ép kiểu để tránh lỗi
+                                    @if (ViewBag.Comics is List<Comic> comics)
                                     {
-                                        <div class="slider_item">
-                                            <div class="slider_thumb">
-                                                @if (comic.View > 1000)
-                                                {
-                                                    <span class="manga-title-badges custom trending">trending</span>
-                                                }
-                                                else if (comic.Status)
-                                                {
-                                                    <span class="manga-title-badges hot">HOT</span>
-                                                }
+                                        @foreach (var comic in comics.Take(5))
+                                        {
+                                            <div class="slider_item">
+                                                <div class="slider_thumb">
+                                                    @if (comic.View > 1000)
+                                                    {
+                                                        <span class="manga-title-badges custom trending">Trending</span>
+                                                    }
+                                                    else if (comic.Status)
+                                                    {
+                                                        <span class="manga-title-badges hot">HOT</span>
+                                                    }
 
-                                                <div class="slider_thumb-item">
-                                                    <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
-                                                        <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
-                                                    </a>
-                                                    <div class="slider-overlay"></div>
+                                                    <div class="slider_thumb-item">
+                                                        <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
+                                                            <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
+                                                        </a>
+                                                        <div class="slider-overlay"></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
                                 </div>
                             </div>
@@ -356,130 +411,7 @@
 
 
 
-                    <footer class="site-footer">
-
-                        <div class="ad c-ads custom-code footer-ads col-md-12"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/Build-The-Best-Manga-Site.jpg"></a></div>
-
-                        <div class="c-footer-sidebar">
-                            <div class="container">
-                                <div class="row c-row">
-                                    <div id="manga-genres-id-3" class="widget col-12 col-md-12   default no-icon  manga-genres-class-name">
-                                        <div class="widget__inner manga-genres-class-name__inner c-widget-wrap">
-                                            <div class="genres_wrap">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="widget-heading font-nav"><h5 class="heading">All Genres</h5></div><div class="widget-content">
-                                                            <div class="genres__collapse" style="display:block;">
-                                                                <div class="row genres">
-                                                                    <ul class="list-unstyled">
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/action/">
-                                                                                action                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/adventure/">
-                                                                                adventure                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/boys/">
-                                                                                boys                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/chinese/">
-                                                                                chinese                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/drama/">
-                                                                                drama                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/ecchi/">
-                                                                                ecchi                                                                                                    <span class="count">
-                                                                                    (38)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/fighting/">
-                                                                                fighting                                                                                                    <span class="count">
-                                                                                    (38)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/fun/">
-                                                                                fun                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/girl/">
-                                                                                girl                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/horrow/">
-                                                                                horrow                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
-                                                                            <a href="https://live.mangabooth.com/x/manga-genre/manhwa/">
-                                                                                manhwa                                                                                                    <span class="count">
-                                                                                    (37)
-                                                                                </span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bottom-footer">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-
-                                        <div class="copyright">
-                                            <h3>Manta</h3>
-                                            <p>Madara WordPress Theme by Mangabooth.com</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </footer>
+                    
 
 
                 </div> <!-- class="wrap" -->
@@ -491,6 +423,21 @@
             <i class="icon ion-md-arrow-up"></i>
         </div>
     </div>
+    <style>
+        .slider_container_custom {
+            display: flex;
+            flex-wrap: nowrap; /* Đảm bảo các item không bị xuống hàng */
+            gap: 10px; /* Khoảng cách giữa các truyện */
+            overflow-x: auto; /* Thêm thanh cuộn ngang nếu quá nhiều item */
+            padding: 10px 0;
+        }
+
+        .slider_item {
+            flex: 0 0 auto; /* Giữ nguyên kích thước của từng item */
+            width: 250px; /* Độ rộng cố định */
+        }
+
+    </style>
     <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
     <script src="~/lib/sweetalert2/sweetalert2@11.js"></script>
     <script>
