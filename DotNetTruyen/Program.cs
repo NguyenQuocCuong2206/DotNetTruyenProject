@@ -75,6 +75,24 @@ builder.Services.AddAuthorization(options =>
 
     options.AddPolicy("CanManageRole", policy =>
         policy.RequireClaim("Permission", "Quản lý vai trò"));
+
+    options.AddPolicy("CanManageComic", policy =>
+        policy.RequireClaim("Permission", "Quản lý truyện"));
+
+    options.AddPolicy("CanManageChapter", policy =>
+        policy.RequireClaim("Permission", "Quản lý chương"));
+
+    options.AddPolicy("CanManageGenre", policy =>
+        policy.RequireClaim("Permission", "Quản lý thể loại"));
+
+    options.AddPolicy("CanManageNotification", policy =>
+        policy.RequireClaim("Permission", "Quản lý thông báo"));
+
+    options.AddPolicy("CanManageAdvertise", policy =>
+        policy.RequireClaim("Permission", "Quản lý quảng cáo"));
+
+    options.AddPolicy("CanManageRank", policy =>
+        policy.RequireClaim("Permission", "Quản lý xếp hạng"));
 });
 
 
