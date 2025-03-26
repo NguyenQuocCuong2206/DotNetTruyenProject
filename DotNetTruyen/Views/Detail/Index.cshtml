@@ -33,10 +33,29 @@
                                             <div id="init-links" class="nav-links">
                                                 <a href="@Url.Action("ReadLastChapter", "ReadChapter", new { comicId = Model.Id })" id="btn-read-last" class="c-btn c-btn_style-1">Đọc Mới Nhất</a>
                                                 <a href="@Url.Action("ReadFromBeginning", "ReadChapter", new { comicId = Model.Id })" id="btn-read-first" class="c-btn c-btn_style-1">Đọc Từ Đầu</a>
-                                                <button class="c-btn c-btn_style-1">
-                                                    <i class="fas fa-bookmark"></i>
-                                                    <span>Theo dõi</span>
-                                                </button>
+                                                <form method="post">
+                                                    @Html.AntiForgeryToken()
+                                                    <div class="d-flex flex-column gap-3 mt-3">
+                                                        <button id="likeButton"
+                                                                class="btn @(ViewBag.IsLiked ? "btn-primary" : "btn-outline-primary")"
+                                                                data-comic-id="@Model.Id">
+                                                            <i class="fas fa-heart"></i>
+                                                            <span id="likeText">@(ViewBag.IsLiked ? "Đã thích" : "Thích")</span>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                                <form method="post">
+                                                    @Html.AntiForgeryToken()
+                                                    <div class="d-flex flex-column gap-3 mt-3">
+                                                        <button id="followButton"
+                                                                class="btn d-flex align-items-center justify-content-center gap-2 w-100 @(ViewBag.IsFollowing ? "btn-primary" : "btn-outline-dark")"
+                                                                data-comic-id="@Model.Id">
+                                                            <i class="fas fa-bookmark"></i>
+                                                            <span id="followText">@(ViewBag.IsFollowing ? "Đang theo dõi" : "Theo dõi")</span>
+                                                        </button>
+                                                    </div>
+                                                </form>
+
                                             </div>
 
 
@@ -119,24 +138,22 @@
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
-
                                             <div class="summary-heading">
                                                 <i class="fas fa-heart text-primary"></i>
                                                 <span>Lượt Thích:</span>
                                             </div>
                                             <div class="summary-content">
-                                                <p class="text-lg">@(Model.Likes)</p>
+                                                <p class="text-lg" id="likeCount">@(Model.Likes?.Count() ?? 0)</p>
                                             </div>
                                         </div>
 
                                         <div class="d-flex align-items-center">
-
                                             <div class="summary-heading">
                                                 <i class="fas fa-bookmark text-primary"></i>
                                                 <span>Theo Dõi:</span>
                                             </div>
                                             <div class="summary-content">
-                                                <p class="text-lg">@(Model.Follows?.Count() ?? 0)</p>
+                                                <p class="text-lg" id="followCount">@(Model.Follows?.Count() ?? 0)</p>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -228,7 +245,7 @@
                             </div>
 
                             <!-- Comments Section -->
-                            
+
                             <div class="mt-5 scroll-container">
                                 <div class="card bg-dark text-white border-secondary rounded-3 p-4">
                                     <h3 class="fw-bold fs-4">Bình luận</h3>
@@ -463,112 +480,222 @@
                         </div>
 
                     </footer>
-                    
+
 
                 </div> <!-- class="wrap" -->
             </div> <!-- class="body-wrap" -->
-            
+
 
         </div>
         <div class="go-to-top active">
             <i class="icon ion-md-arrow-up"></i>
         </div>
     </div>
-        <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
-        <script src="~/lib/sweetalert2/sweetalert2@11.js"></script>
-        <script>
-            // Back to Top Button
-            const backToTop = document.getElementById('back-to-top');
+    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/lib/sweetalert2/sweetalert2@11.js"></script>
+    <script>
+        // Back to Top Button
+        const backToTop = document.getElementById('back-to-top');
 
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTop.classList.remove('opacity-0', 'invisible');
-                    backToTop.classList.add('opacity-100', 'visible');
-                } else {
-                    backToTop.classList.add('opacity-0', 'invisible');
-                    backToTop.classList.remove('opacity-100', 'visible');
-                }
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        });
 
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+        // Chapter Sort Buttons
+        const chapterList = document.querySelector('.max-h-\\[500px\\]');
+        const sortButtons = document.querySelectorAll('.bg-dark-400.rounded');
+
+        sortButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const chapters = Array.from(chapterList.children);
+                chapters.reverse();
+                chapters.forEach(chapter => chapterList.appendChild(chapter));
             });
+        });
+    </script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/commentHub")
+            .withAutomaticReconnect()
+            .build();
 
-            // Chapter Sort Buttons
-            const chapterList = document.querySelector('.max-h-\\[500px\\]');
-            const sortButtons = document.querySelectorAll('.bg-dark-400.rounded');
+        connection.start().then(() => {
+            connection.invoke("JoinComicGroup", "@Model.Id").catch(err => console.error(err));
+        }).catch(err => console.error(err));
 
-            sortButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const chapters = Array.from(chapterList.children);
-                    chapters.reverse();
-                    chapters.forEach(chapter => chapterList.appendChild(chapter));
-                });
-            });
-        </script>
-        <script>
-            const connection = new signalR.HubConnectionBuilder()
-                .withUrl("/commentHub")
-                .withAutomaticReconnect()
-                .build();
+        // Listen for the ReloadComments message
+        connection.on("ReloadComments", (comicId) => {
+            setTimeout(() => reloadComments(0), 300);
+            // Reload comments from the beginning
+        });
 
-            connection.start().then(() => {
-                connection.invoke("JoinComicGroup", "@Model.Id").catch(err => console.error(err));
-            }).catch(err => console.error(err));
+        connection.on("ReceiveComicUpdate", function (comicId, followCount, likeCount) {
+            const currentComicId = "@Model.Id";
+            if (comicId === currentComicId) {
+                document.getElementById("followCount").textContent = followCount;
+                document.getElementById("likeCount").textContent = likeCount;
+            }
+        }); 
 
-            // Listen for the ReloadComments message
-            connection.on("ReloadComments", (comicId) => {
-                setTimeout(() => reloadComments(0), 300);
-                // Reload comments from the beginning
-            });
+        // Function to reload comments
+        function reloadComments(skip) {
+            const comicId = "@Model.Id";
+            fetch(`/Detail/GetComments?comicId=${comicId}&skip=${skip}`)
+                .then(response => response.json())
+                .then(data => {
+                    const commentsContainer = document.getElementById('comments-container');
+                    commentsContainer.innerHTML = data.html.result;;
 
-            // Function to reload comments
-            function reloadComments(skip) {
-                const comicId = "@Model.Id";
-                fetch(`/Detail/GetComments?comicId=${comicId}&skip=${skip}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const commentsContainer = document.getElementById('comments-container');
-                        commentsContainer.innerHTML = data.html.result;;
+                    const viewMoreBtn = document.getElementById('view-more-btn');
+                    console.log(viewMoreBtn);
+                    if (viewMoreBtn) {
+                        viewMoreBtn.setAttribute('data-total', data.totalComments);
+                        viewMoreBtn.setAttribute('data-skip', skip + 5);
 
-                        const viewMoreBtn = document.getElementById('view-more-btn');
-                        console.log(viewMoreBtn);
-                        if (viewMoreBtn) {
-                            viewMoreBtn.setAttribute('data-total', data.totalComments);
-                            viewMoreBtn.setAttribute('data-skip', skip + 5);
-
-                            if (skip + 5 >= data.totalComments) {
-                                viewMoreBtn.style.display = 'none';
-                            } else {
-                                viewMoreBtn.style.display = 'inline-block';
-                            }
+                        if (skip + 5 >= data.totalComments) {
+                            viewMoreBtn.style.display = 'none';
+                        } else {
+                            viewMoreBtn.style.display = 'inline-block';
                         }
+                    }
 
-                        // Re-attach event listeners
-                        attachReplyListeners();
-                        attachViewRepliesListeners();
-                        attachEditListeners();
-                        attachDeleteListeners();
+                    // Re-attach event listeners
+                    attachReplyListeners();
+                    attachViewRepliesListeners();
+                    attachEditListeners();
+                    attachDeleteListeners();
+                })
+                .catch(error => console.error('Error reloading comments:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle top-level comment form submission
+            const topLevelCommentForm = document.getElementById('top-level-comment-form');
+            if (topLevelCommentForm) {
+                topLevelCommentForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(topLevelCommentForm);
+                    const content = formData.get('content');
+                    const comicId = formData.get('comicId');
+                    const parentId = formData.get('parentId') || null;
+
+                    if (!content.trim()) {
+                        alert('Vui lòng nhập nội dung bình luận.');
+                        return;
+                    }
+
+                    fetch(`/Detail/Comment`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `comicId=${comicId}&content=${encodeURIComponent(content)}&parentId=${parentId}`
                     })
-                    .catch(error => console.error('Error reloading comments:', error));
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.success) {
+                                alert(data.message || 'Có lỗi xảy ra khi gửi bình luận.');
+                                return;
+                            }
+
+                            // Clear the form
+                            topLevelCommentForm.reset();
+                        })
+                        .catch(error => console.error('Error submitting comment:', error));
+                });
             }
 
-            document.addEventListener('DOMContentLoaded', () => {
-                // Handle top-level comment form submission
-                const topLevelCommentForm = document.getElementById('top-level-comment-form');
-                if (topLevelCommentForm) {
-                    topLevelCommentForm.addEventListener('submit', (e) => {
+            // Handle "View More" button click
+            const viewMoreBtn = document.getElementById('view-more-btn');
+            if (viewMoreBtn) {
+                viewMoreBtn.addEventListener('click', () => {
+                    const skip = parseInt(viewMoreBtn.getAttribute('data-skip'));
+                    const comicId = viewMoreBtn.getAttribute('data-comic-id');
+                    const totalComments = parseInt(viewMoreBtn.getAttribute('data-total'));
+                    const pageSize = parseInt(viewMoreBtn.getAttribute('data-page-size'));
+
+                    fetch(`/Detail/GetMoreComments?comicId=${comicId}&skip=${skip}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            const commentsContainer = document.getElementById('comments-container');
+                            commentsContainer.insertAdjacentHTML('beforeend', html);
+
+                            const newSkip = skip + pageSize;
+                            viewMoreBtn.setAttribute('data-skip', newSkip);
+
+                            if (newSkip >= totalComments) {
+                                viewMoreBtn.style.display = 'none';
+                            }
+
+                            attachReplyListeners();
+                            attachViewRepliesListeners();
+                            attachEditListeners();
+                            attachDeleteListeners();
+                        })
+                        .catch(error => console.error('Error loading more comments:', error));
+                });
+            }
+
+            // Attach event listeners for existing comments
+            attachViewRepliesListeners();
+            attachReplyListeners();
+            attachEditListeners();
+            attachDeleteListeners();
+        });
+
+        function attachReplyListeners() {
+            const replyButtons = document.querySelectorAll('.reply-btn');
+            const replyFormTemplate = document.querySelector('.reply-form-template').children[0];
+
+            replyButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const existingForm = button.closest('.comment').querySelector('.reply-form');
+                    if (existingForm) {
+                        existingForm.remove();
+                    }
+
+                    const replyForm = replyFormTemplate.cloneNode(true);
+                    replyForm.style.display = 'block';
+
+                    const parentId = button.getAttribute('data-comment-id');
+                    replyForm.querySelector('.parent-id').value = parentId;
+
+                    const comment = button.closest('.comment');
+                    comment.appendChild(replyForm);
+
+                    // Handle cancel button
+                    const cancelButton = replyForm.querySelector('.cancel-reply');
+                    if (cancelButton) {
+                        cancelButton.addEventListener('click', () => {
+                            replyForm.remove();
+                        });
+                    }
+
+                    // Handle reply form submission
+                    replyForm.addEventListener('submit', (e) => {
                         e.preventDefault();
-                        const formData = new FormData(topLevelCommentForm);
+                        const formData = new FormData(replyForm);
                         const content = formData.get('content');
                         const comicId = formData.get('comicId');
-                        const parentId = formData.get('parentId') || null;
+                        const parentId = formData.get('parentId');
 
                         if (!content.trim()) {
-                            alert('Vui lòng nhập nội dung bình luận.');
+                            alert('Vui lòng nhập nội dung phản hồi.');
                             return;
                         }
 
@@ -579,243 +706,243 @@
                             },
                             body: `comicId=${comicId}&content=${encodeURIComponent(content)}&parentId=${parentId}`
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (!data.success) {
-                                    alert(data.message || 'Có lỗi xảy ra khi gửi bình luận.');
-                                    return;
-                                }
-
-                                // Clear the form
-                                topLevelCommentForm.reset();
-                            })
-                            .catch(error => console.error('Error submitting comment:', error));
-                    });
-                }
-
-                // Handle "View More" button click
-                const viewMoreBtn = document.getElementById('view-more-btn');
-                if (viewMoreBtn) {
-                    viewMoreBtn.addEventListener('click', () => {
-                        const skip = parseInt(viewMoreBtn.getAttribute('data-skip'));
-                        const comicId = viewMoreBtn.getAttribute('data-comic-id');
-                        const totalComments = parseInt(viewMoreBtn.getAttribute('data-total'));
-                        const pageSize = parseInt(viewMoreBtn.getAttribute('data-page-size'));
-
-                        fetch(`/Detail/GetMoreComments?comicId=${comicId}&skip=${skip}`)
                             .then(response => response.text())
                             .then(html => {
-                                const commentsContainer = document.getElementById('comments-container');
-                                commentsContainer.insertAdjacentHTML('beforeend', html);
-
-                                const newSkip = skip + pageSize;
-                                viewMoreBtn.setAttribute('data-skip', newSkip);
-
-                                if (newSkip >= totalComments) {
-                                    viewMoreBtn.style.display = 'none';
-                                }
-
-                                attachReplyListeners();
-                                attachViewRepliesListeners();
-                                attachEditListeners();
-                                attachDeleteListeners();
-                            })
-                            .catch(error => console.error('Error loading more comments:', error));
-                    });
-                }
-
-                // Attach event listeners for existing comments
-                attachViewRepliesListeners();
-                attachReplyListeners();
-                attachEditListeners();
-                attachDeleteListeners();
-            });
-
-            function attachReplyListeners() {
-                const replyButtons = document.querySelectorAll('.reply-btn');
-                const replyFormTemplate = document.querySelector('.reply-form-template').children[0];
-
-                replyButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.preventDefault();
-
-                        const existingForm = button.closest('.comment').querySelector('.reply-form');
-                        if (existingForm) {
-                            existingForm.remove();
-                        }
-
-                        const replyForm = replyFormTemplate.cloneNode(true);
-                        replyForm.style.display = 'block';
-
-                        const parentId = button.getAttribute('data-comment-id');
-                        replyForm.querySelector('.parent-id').value = parentId;
-
-                        const comment = button.closest('.comment');
-                        comment.appendChild(replyForm);
-
-                        // Handle cancel button
-                        const cancelButton = replyForm.querySelector('.cancel-reply');
-                        if (cancelButton) {
-                            cancelButton.addEventListener('click', () => {
+                                // Clear the form and hide it
                                 replyForm.remove();
-                            });
-                        }
-
-                        // Handle reply form submission
-                        replyForm.addEventListener('submit', (e) => {
-                            e.preventDefault();
-                            const formData = new FormData(replyForm);
-                            const content = formData.get('content');
-                            const comicId = formData.get('comicId');
-                            const parentId = formData.get('parentId');
-
-                            if (!content.trim()) {
-                                alert('Vui lòng nhập nội dung phản hồi.');
-                                return;
-                            }
-
-                            fetch(`/Detail/Comment`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded',
-                                },
-                                body: `comicId=${comicId}&content=${encodeURIComponent(content)}&parentId=${parentId}`
                             })
-                                .then(response => response.text())
-                                .then(html => {
-                                    // Clear the form and hide it
-                                    replyForm.remove();
-                                })
-                                .catch(error => console.error('Error submitting reply:', error));
-                        });
+                            .catch(error => console.error('Error submitting reply:', error));
                     });
                 });
-            }
+            });
+        }
 
-            function attachViewRepliesListeners() {
-                document.querySelectorAll('.view-replies-btn').forEach(button => {
-                    // Xóa tất cả sự kiện cũ trước khi gán sự kiện mới
-                    button.replaceWith(button.cloneNode(true));
+        function attachViewRepliesListeners() {
+            document.querySelectorAll('.view-replies-btn').forEach(button => {
+                // Xóa tất cả sự kiện cũ trước khi gán sự kiện mới
+                button.replaceWith(button.cloneNode(true));
+            });
+            document.querySelectorAll('.view-replies-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const commentId = button.getAttribute('data-comment-id');
+                    const repliesContainer = button.closest('.comment').querySelector('.replies-container');
+
+                    if (repliesContainer.innerHTML.trim() !== '') {
+                        repliesContainer.classList.toggle('hiddenReply');
+                        button.textContent = repliesContainer.classList.contains('hiddenReply') ? 'Xem phản hồi' : 'Ẩn phản hồi';
+                        return;
+                    }
+
+                    fetch(`/Detail/GetReplies?commentId=${commentId}`)
+                        .then(response => response.text())
+                        .then(html => {
+                            repliesContainer.innerHTML = html;
+                            repliesContainer.classList.remove('hiddenReply');
+                            button.textContent = 'Ẩn phản hồi';
+
+                            attachReplyListeners();
+                            attachViewRepliesListeners();
+                            attachEditListeners();
+                            attachDeleteListeners();
+                        })
+                        .catch(error => console.error('Error loading replies:', error));
                 });
-                document.querySelectorAll('.view-replies-btn').forEach(button => {
-                    button.addEventListener('click', (e) => {
+            });
+        }
+
+        function attachEditListeners() {
+            const editButtons = document.querySelectorAll('.edit-btn');
+            const editFormTemplate = document.querySelector('.edit-form-template').children[0];
+
+            editButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    const commentId = button.getAttribute('data-comment-id');
+                    const comment = button.closest('.comment');
+                    const existingForm = comment.querySelector('.edit-form');
+                    if (existingForm) {
+                        existingForm.remove();
+                    }
+
+                    const editForm = editFormTemplate.cloneNode(true);
+                    editForm.style.display = 'block';
+
+                    // Pre-fill the form with the current comment content
+                    const commentContent = comment.querySelector('.comment-content').textContent;
+                    editForm.querySelector('.edit-content').value = commentContent;
+                    editForm.querySelector('.edit-comment-id').value = commentId;
+
+                    comment.appendChild(editForm);
+
+                    // Handle cancel button
+                    const cancelButton = editForm.querySelector('.cancel-edit');
+                    cancelButton.addEventListener('click', () => {
+                        editForm.remove();
+                    });
+
+                    // Handle form submission
+                    editForm.addEventListener('submit', (e) => {
                         e.preventDefault();
-                        const commentId = button.getAttribute('data-comment-id');
-                        const repliesContainer = button.closest('.comment').querySelector('.replies-container');
+                        const formData = new FormData(editForm);
+                        const content = formData.get('content');
 
-                        if (repliesContainer.innerHTML.trim() !== '') {
-                            repliesContainer.classList.toggle('hiddenReply');
-                            button.textContent = repliesContainer.classList.contains('hiddenReply') ? 'Xem phản hồi' : 'Ẩn phản hồi';
-                            return;
-                        }
-
-                        fetch(`/Detail/GetReplies?commentId=${commentId}`)
+                        fetch(`/Detail/EditComment?commentId=${commentId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `content=${encodeURIComponent(content)}`
+                        })
                             .then(response => response.text())
                             .then(html => {
-                                repliesContainer.innerHTML = html;
-                                repliesContainer.classList.remove('hiddenReply');
-                                button.textContent = 'Ẩn phản hồi';
-
-                                attachReplyListeners();
-                                attachViewRepliesListeners();
-                                attachEditListeners();
-                                attachDeleteListeners();
+                                editForm.remove();
                             })
-                            .catch(error => console.error('Error loading replies:', error));
+                            .catch(error => console.error('Error editing comment:', error));
                     });
                 });
-            }
+            });
+        }
 
-            function attachEditListeners() {
-                const editButtons = document.querySelectorAll('.edit-btn');
-                const editFormTemplate = document.querySelector('.edit-form-template').children[0];
+        function attachDeleteListeners() {
+            const deleteButtons = document.querySelectorAll('.delete-btn');
 
-                editButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        e.preventDefault();
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', async (e) => {
+                    e.preventDefault();
 
-                        const commentId = button.getAttribute('data-comment-id');
-                        const comment = button.closest('.comment');
-                        const existingForm = comment.querySelector('.edit-form');
-                        if (existingForm) {
-                            existingForm.remove();
-                        }
-
-                        const editForm = editFormTemplate.cloneNode(true);
-                        editForm.style.display = 'block';
-
-                        // Pre-fill the form with the current comment content
-                        const commentContent = comment.querySelector('.comment-content').textContent;
-                        editForm.querySelector('.edit-content').value = commentContent;
-                        editForm.querySelector('.edit-comment-id').value = commentId;
-
-                        comment.appendChild(editForm);
-
-                        // Handle cancel button
-                        const cancelButton = editForm.querySelector('.cancel-edit');
-                        cancelButton.addEventListener('click', () => {
-                            editForm.remove();
-                        });
-
-                        // Handle form submission
-                        editForm.addEventListener('submit', (e) => {
-                            e.preventDefault();
-                            const formData = new FormData(editForm);
-                            const content = formData.get('content');
-
-                            fetch(`/Detail/EditComment?commentId=${commentId}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded',
-                                },
-                                body: `content=${encodeURIComponent(content)}`
-                            })
-                                .then(response => response.text())
-                                .then(html => {
-                                    editForm.remove();
-                                })
-                                .catch(error => console.error('Error editing comment:', error));
-                        });
+                    // Hiển thị hộp thoại xác nhận
+                    const result = await Swal.fire({
+                        title: 'Bạn có chắc muốn xóa bình luận này không?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Xóa',
+                        cancelButtonText: 'Hủy',
+                        allowOutsideClick: false
                     });
-                });
-            }
 
-            function attachDeleteListeners() {
-                const deleteButtons = document.querySelectorAll('.delete-btn');
-
-                deleteButtons.forEach(button => {
-                    button.addEventListener('click', async (e) => {
-                        e.preventDefault();
-
-                        // Hiển thị hộp thoại xác nhận
-                        const result = await Swal.fire({
-                            title: 'Bạn có chắc muốn xóa bình luận này không?',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonText: 'Xóa',
-                            cancelButtonText: 'Hủy',
-                            allowOutsideClick: false
-                        });
-
-                        if (!result.isConfirmed) {
-                            return;
-                        }
+                    if (!result.isConfirmed) {
+                        return;
+                    }
 
 
-                        const commentId = button.getAttribute('data-comment-id');
-                        fetch(`/Detail/DeleteComment?commentId=${commentId}`, {
-                            method: 'POST'
+                    const commentId = button.getAttribute('data-comment-id');
+                    fetch(`/Detail/DeleteComment?commentId=${commentId}`, {
+                        method: 'POST'
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+
+                            }
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-
-                                }
-                            })
-                            .catch(error => console.error('Error deleting comment:', error));
-                    });
+                        .catch(error => console.error('Error deleting comment:', error));
                 });
-            }
-        </script>
-    
-    </body><!-- Dynamic page generated in 0.586 seconds. --><!-- Cached page generated by WP-Super-Cache on 2025-03-24 06:32:20 --><!-- super cache -->
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const followButton = document.getElementById("followButton");
+            const followText = document.getElementById("followText");
+
+            if (!followButton) return;
+
+            followButton.addEventListener("click", async (event) => {
+                event.preventDefault(); // Ngăn form submit lại trang
+
+                const comicId = followButton.getAttribute("data-comic-id");
+                if (!comicId) {
+                    alert("Không tìm thấy ID truyện!");
+                    return;
+                }
+
+                console.log("Gửi request với ID:", comicId); // Debug
+
+                try {
+                    const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+                    if (!tokenElement) throw new Error("Không tìm thấy token xác thực.");
+                    const token = tokenElement.value;
+
+                    const response = await fetch("/Detail/ToggleFollow", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "RequestVerificationToken": token
+                        },
+                        body: JSON.stringify({ id: comicId })
+                    });
+
+                    const data = await response.json();
+                    console.log("Response từ server:", data);
+
+                    if (data.success) {
+                        followButton.classList.toggle("bg-primary", data.isFollowing);
+                        followButton.classList.toggle("bg-dark-300", !data.isFollowing);
+                        followText.textContent = data.isFollowing ? "Đang theo dõi" : "Theo dõi";
+                    } else {
+                        alert(data.message);
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi gửi request:", error);
+                    alert("Có lỗi xảy ra: " + error.message);
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const likeButton = document.getElementById("likeButton");
+            const likeText = document.getElementById("likeText");
+
+            if (!likeButton) return;
+
+            likeButton.addEventListener("click", async (event) => {
+                event.preventDefault();
+
+                const comicId = likeButton.getAttribute("data-comic-id");
+                if (!comicId) {
+                    alert("Không tìm thấy ID truyện!");
+                    return;
+                }
+
+                console.log("Gửi request Like với ID:", comicId);
+
+                try {
+                    const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+                    if (!tokenElement) throw new Error("Không tìm thấy token xác thực.");
+                    const token = tokenElement.value;
+
+                    const response = await fetch("/Detail/ToggleLike", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "RequestVerificationToken": token
+                        },
+                        body: JSON.stringify({ id: comicId })
+                    });
+
+                    const data = await response.json();
+                    console.log("Response từ server:", data);
+
+                    if (data.success) {
+                        likeButton.classList.toggle("liked", data.isLiked);
+                        likeText.textContent = data.isLiked ? "Đã thích" : "Thích";
+                        // Nếu muốn hiển thị số lượt thích, có thể thêm:
+                        // likeButton.querySelector(".like-count").textContent = data.likeCount;
+                    } else {
+                        alert(data.message);
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi gửi request:", error)
+                    alert("Có lỗi xảy ra: " + error.message);
+                }
+            });
+        });
+    </script>
+
+
+</body><!-- Dynamic page generated in 0.586 seconds. --><!-- Cached page generated by WP-Super-Cache on 2025-03-24 06:32:20 --><!-- super cache -->

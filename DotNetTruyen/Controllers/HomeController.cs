@@ -1,4 +1,4 @@
-    using DotNetTruyen.Data;
+﻿    using DotNetTruyen.Data;
     using DotNetTruyen.Models;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
@@ -19,8 +19,12 @@
             public IActionResult Index()
             {
                 var comics = _context.Comics.ToList();
+                var advertisements = _context.Advertisements
+                  .Where(a => (a.Title == "left" || a.Title == "right" || a.Title == "top" || a.Title == "bot") && a.DeletedAt == null)
+               .ToList();
 
-                return View(comics);
+            ViewBag.Advertisements = advertisements;
+            return View(comics);
             }
 
             public IActionResult Privacy()

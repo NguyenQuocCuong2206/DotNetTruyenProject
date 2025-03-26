@@ -21,5 +21,10 @@ namespace DotNetTruyen.Hubs
         {
             await base.OnDisconnectedAsync(exception);
         }
+
+        public async Task SendComicUpdate(Guid comicId, int followCount, int likeCount)
+        {
+            await Clients.All.SendAsync("ReceiveComicUpdate", comicId, followCount, likeCount);
+        }
     }
 }
