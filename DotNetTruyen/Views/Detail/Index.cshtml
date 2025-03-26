@@ -989,10 +989,30 @@
                                             <div id="init-links" class="nav-links">
                                                 <a href="@Url.Action("ReadLastChapter", "ReadChapter", new { comicId = Model.Id })" id="btn-read-last" class="c-btn c-btn_style-1">Đọc Mới Nhất</a>
                                                 <a href="@Url.Action("ReadFromBeginning", "ReadChapter", new { comicId = Model.Id })" id="btn-read-first" class="c-btn c-btn_style-1">Đọc Từ Đầu</a>
-                                                <button class="c-btn c-btn_style-1">
-                                                    <i class="fas fa-bookmark"></i>
-                                                    <span>Theo dõi</span>
-                                                </button>
+                                                 <form method="post">
+                                                   @Html.AntiForgeryToken()
+                                                  <div class="flex flex-col space-y-3 mt-6">
+                                                   <button id="likeButton" 
+                                                   class="c-btn c-btn_style-1 @(ViewBag.IsLiked ? "liked" : "")"
+                                                    data-comic-id="@Model.Id">
+                                                  <i class="fa-solid fa-thumbs-up"></i>
+                                                  <span id="likeText">@(ViewBag.IsLiked ? "Đã thích" : "Thích")</span>
+                                                     </button>
+                                                      </div>
+                                                   </form>
+                                                 <form method="post">
+                                                   @Html.AntiForgeryToken()
+                                                  <div class="flex flex-col space-y-3 mt-6">
+                                                  <button id="followButton"
+                                                  class="flex items-center justify-center space-x-2 px-6 py-3 rounded-lg transition w-full border border-gray-800 
+                                                  @(ViewBag.IsFollowing ? "bg-primary hover:bg-red-600" : "bg-dark-300 hover:bg-dark-200")"
+                                                  data-comic-id="@Model.Id">
+                                                  <i class="fas fa-bookmark"></i>
+                                                 <span id="followText">@(ViewBag.IsFollowing ? "Đang theo dõi" : "Theo dõi")</span>
+                                                  </button>
+                                                </div>
+                                                </form>
+
                                             </div>
 
 
@@ -1081,7 +1101,7 @@
                                                 <span>Lượt Thích:</span>
                                             </div>
                                             <div class="summary-content">
-                                                <p class="text-lg">@(Model.Likes)</p>
+                                                <p class="text-lg">@(Model.Likes?.Count() ?? 0)</p>
                                             </div>
                                         </div>
 
@@ -1621,6 +1641,108 @@
             });
         });
     </script>
+      <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const followButton = document.getElementById("followButton");
+    const followText = document.getElementById("followText");
+    
+    if (!followButton) return;
+    
+    followButton.addEventListener("click", async (event) => {
+        event.preventDefault(); // Ngăn form submit lại trang
+        
+        const comicId = followButton.getAttribute("data-comic-id");
+        if (!comicId) {
+            alert("Không tìm thấy ID truyện!");
+            return;
+        }
+        
+        console.log("Gửi request với ID:", comicId); // Debug
+        
+        try {
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) throw new Error("Không tìm thấy token xác thực.");
+            const token = tokenElement.value;
+            
+            const response = await fetch("/Detail/ToggleFollow", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "RequestVerificationToken": token
+                },
+                body: JSON.stringify({ id: comicId })
+            });
+            
+            const data = await response.json();
+            console.log("Response từ server:", data);
+            
+            if (data.success) {
+                followButton.classList.toggle("bg-primary", data.isFollowing);
+                followButton.classList.toggle("bg-dark-300", !data.isFollowing);
+                followText.textContent = data.isFollowing ? "Đang theo dõi" : "Theo dõi";
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error("Lỗi khi gửi request:", error);
+            alert("Có lỗi xảy ra: " + error.message);
+        }
+    });
+});
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const likeButton = document.getElementById("likeButton");
+    const likeText = document.getElementById("likeText");
+    
+    if (!likeButton) return;
+    
+    likeButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+        
+        const comicId = likeButton.getAttribute("data-comic-id");
+        if (!comicId) {
+            alert("Không tìm thấy ID truyện!");
+            return;
+        }
+        
+        console.log("Gửi request Like với ID:", comicId);
+        
+        try {
+            const tokenElement = document.querySelector('input[name="__RequestVerificationToken"]');
+            if (!tokenElement) throw new Error("Không tìm thấy token xác thực.");
+            const token = tokenElement.value;
+            
+            const response = await fetch("/Detail/ToggleLike", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "RequestVerificationToken": token
+                },
+                body: JSON.stringify({ id: comicId })
+            });
+            
+            const data = await response.json();
+            console.log("Response từ server:", data);
+            
+            if (data.success) {
+                likeButton.classList.toggle("liked", data.isLiked);
+                likeText.textContent = data.isLiked ? "Đã thích" : "Thích";
+                // Nếu muốn hiển thị số lượt thích, có thể thêm:
+                // likeButton.querySelector(".like-count").textContent = data.likeCount;
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error("Lỗi khi gửi request:", error);
+            alert("Có lỗi xảy ra: " + error.message);
+        }
+    });
+});
+</script>
+
 
 
 
