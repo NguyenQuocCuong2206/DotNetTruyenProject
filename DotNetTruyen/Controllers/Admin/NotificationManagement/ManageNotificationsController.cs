@@ -174,7 +174,7 @@ namespace DotNetTruyen.Controllers.Admin.NotificationManagement
                 return NotFound();
             }
 
-            var notification = await _context.Notification
+            var notification = await _context.Notifications
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (notification == null)
             {

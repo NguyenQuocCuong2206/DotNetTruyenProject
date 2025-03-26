@@ -32,3 +32,16 @@
 .edit-form button {
     transition: background-color 0.3s;
 }
+
+.bg-dark {
+    background-color: #212122 !important;
+}
+
+#swal2-title {
+    color: #545454;
+}
+
+.scroll-container {
+    height: 800px;
+    overflow: auto; /* Hiển thị thanh cuộn khi nội dung tràn */
+}

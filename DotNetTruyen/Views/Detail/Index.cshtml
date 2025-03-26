@@ -3,644 +3,572 @@
 @{
     ViewData["Title"] = Model.Title;
 }
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Model.Title - DotNetTruyen</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="~/css/comment.css" rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#eb3349',
-                        dark: {
-                            100: '#1a1a1a',
-                            200: '#141414',
-                            300: '#0f0f0f',
-                            400: '#0a0a0a',
-                            500: '#050505'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
 
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
+<!-- Tailwind CSS -->
 
-        ::-webkit-scrollbar-track {
-            background: #0f0f0f;
-        }
+<link href="~/css/comment.css" rel="stylesheet" />
 
-        ::-webkit-scrollbar-thumb {
-            background: #eb3349;
-            border-radius: 4px;
-        }
+<body class="wp-manga-template-default single single-wp-manga postid-249 wp-embed-responsive wp-manga-page manga-page page header-style-1 sticky-enabled sticky-style-1 text-ui-light minimal-reading-layout">
 
-            ::-webkit-scrollbar-thumb:hover {
-                background: #cc2c3d;
-            }
+    <div class="wrap">
+        <div class="body-wrap">
+            <partial name="_HeaderPartial" />
 
-        /* Smooth Transitions */
-        * {
-            transition: all 0.2s ease-in-out;
-        }
-        
-    </style>
-</head>
+            <div class="site-content">
+                <div class="post-249 wp-manga type-wp-manga status-publish has-post-thumbnail hentry wp-manga-tag-tag-1 wp-manga-tag-tag-2 wp-manga-tag-tag-3 wp-manga-release-4 wp-manga-author-the-author wp-manga-artist-artist wp-manga-genre-action wp-manga-genre-adventure wp-manga-genre-boys wp-manga-genre-chinese wp-manga-genre-drama wp-manga-genre-ecchi wp-manga-genre-fighting wp-manga-genre-fun wp-manga-genre-girl wp-manga-genre-horrow wp-manga-genre-manhwa chapter-listing-1">
+                    <div class="profile-manga" style="">
+                        <div class="container">
+                            <div class="row">
+                                <div class="left col-12 col-sm-12 col-md-4">
+                                    <div class="manga-thumb">
+                                        <div class="summary_image">
+                                            <img src="@Model.CoverImage" alt="@Model.Title" width="450" height="450" class="w-full rounded-lg shadow-lg object-cover border border-gray-800">
+                                            <span class="manga-title-badges custom trending">trending</span>                                                        <span class="manga-chapter-type">Video</span>
+                                        </div>
+                                    </div>
 
-<body class="bg-black text-gray-100 min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="bg-dark-300 shadow-lg border-b border-gray-800 sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-8">
-                    <a href="/" class="text-2xl font-bold text-primary">DotNetTruyen</a>
-                    <div class="hidden md:flex space-x-4">
-                        <a href="/" class="hover:text-primary transition">Trang chủ</a>
-                        <a href="/genres" class="hover:text-primary transition">Thể loại</a>
-                        <a href="/latest" class="hover:text-primary transition">Mới cập nhật</a>
-                        <a href="/trending" class="hover:text-primary transition">Trending</a>
-                    </div>
-                </div>
+                                    <div class="action-buttons">
+                                        <div class="left">
 
-                <!-- Search Bar -->
-                <div class="hidden md:flex flex-1 max-w-xl mx-8">
-                    <div class="relative w-full">
-                        <input type="text"
-                               placeholder="Tìm kiếm truyện..."
-                               class="w-full bg-dark-400 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary border border-gray-800">
-                        <button class="absolute right-3 top-2.5 text-gray-400 hover:text-primary">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+                                            <div id="init-links" class="nav-links">
+                                                <a href="@Url.Action("ReadLastChapter", "ReadChapter", new { comicId = Model.Id })" id="btn-read-last" class="c-btn c-btn_style-1">Đọc Mới Nhất</a>
+                                                <a href="@Url.Action("ReadFromBeginning", "ReadChapter", new { comicId = Model.Id })" id="btn-read-first" class="c-btn c-btn_style-1">Đọc Từ Đầu</a>
+                                                <button class="c-btn c-btn_style-1">
+                                                    <i class="fas fa-bookmark"></i>
+                                                    <span>Theo dõi</span>
+                                                </button>
+                                            </div>
 
-                <div class="flex items-center space-x-4">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="relative group">
-                            <button class="flex items-center space-x-2 hover:text-primary transition">
-                                <i class="fas fa-user-circle"></i>
-                                <span>@User.Identity.Name</span>
-                            </button>
-                            <div class="absolute right-0 w-48 py-2 mt-2 bg-dark-300 rounded-lg shadow-xl hidden group-hover:block border border-gray-800">
-                                <a href="/profile" class="block px-4 py-2 hover:bg-dark-200 hover:text-primary">
-                                    <i class="fas fa-user mr-2"></i>Trang cá nhân
-                                </a>
-                                <a href="/bookmarks" class="block px-4 py-2 hover:bg-dark-200 hover:text-primary">
-                                    <i class="fas fa-bookmark mr-2"></i>Truyện đã lưu
-                                </a>
-                                <a href="/history" class="block px-4 py-2 hover:bg-dark-200 hover:text-primary">
-                                    <i class="fas fa-history mr-2"></i>Lịch sử đọc
-                                </a>
-                                <hr class="my-2 border-gray-800">
-                                <a href="/logout" class="block px-4 py-2 hover:bg-dark-200 hover:text-primary">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất
-                                </a>
+
+                                        </div>
+                                    </div>
+                                    <div class="sidebar-col">
+                                        <div id="main-sidebar" class="main-sidebar" role="complementary">
+                                            <div class="row">
+                                                <div id="text-2" class="widget col-12 col-md-12   default  no-icon heading-style-1 widget_text">
+                                                    <div class="widget__inner widget_text__inner c-widget-wrap">
+                                                        <div class="widget-heading font-nav"><h5 class="heading">Sidebar Widget</h5></div><div class="widget-content">
+                                                            <div class="textwidget">
+                                                                <p><a href="https://mangabooth.com/product/madara-child-x/" title="Buy Madara Child X"><img decoding="async" src="images/ads-square.jpg"></a></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right col-12 col-sm-12 col-md-8">
+                                    <div class="post-title">
+                                        <h1>
+                                            @Model.Title
+                                        </h1>
+                                    </div>
+                                    <div class="post-content">
+
+                                        <div class="post-content_item">
+                                            <div class="summary-content">
+                                                <div class="genres-content">
+                                                    <a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a> <a href="https://live.mangabooth.com/x/manga-genre/chinese/" rel="tag">chinese</a> <a href="https://live.mangabooth.com/x/manga-genre/drama/" rel="tag">drama</a> <a href="https://live.mangabooth.com/x/manga-genre/ecchi/" rel="tag">ecchi</a> <a href="https://live.mangabooth.com/x/manga-genre/fighting/" rel="tag">fighting</a> <a href="https://live.mangabooth.com/x/manga-genre/fun/" rel="tag">fun</a> <a href="https://live.mangabooth.com/x/manga-genre/girl/" rel="tag">girl</a> <a href="https://live.mangabooth.com/x/manga-genre/horrow/" rel="tag">horrow</a> <a href="https://live.mangabooth.com/x/manga-genre/manhwa/" rel="tag">manhwa</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="description-summary">
+
+                                            <div class="summary__content">
+                                                <p>@Model.Description</p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="author-row">
+
+                                            <div class="post-content_item">
+                                                <div class="summary-heading">
+                                                    <i class="fas fa-user text-primary me-2"></i>
+                                                    <span class="fw-semibold">Tác Giả:</span>
+                                                </div>
+                                                <div class="summary-content">
+                                                    <div class="author-content">
+                                                        <a href="https://live.mangabooth.com/x/manga-author/the-author/" rel="tag">@Model.Author</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="status manga-info-row">
+                                            <div class="summary-heading">
+                                                <i class="fa fa-rss text-primary me-2"></i>
+                                                <span>Tình trạng</span>
+                                            </div>
+                                            <div class="summary-content">
+                                                <span class="@(Model.Status ? "text-green-500" : "text-yellow-500")">
+                                                    @(Model.Status ? "Hoàn thành" : "Đang tiến hành")
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="summary-heading">
+                                                <i class="fas fa-eye text-primary "></i>
+                                                <span>Lượt Xem:</span>
+                                            </div>
+                                            <div class="summary-content">
+                                                <p class="text-lg">@Model.View</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+
+                                            <div class="summary-heading">
+                                                <i class="fas fa-heart text-primary"></i>
+                                                <span>Lượt Thích:</span>
+                                            </div>
+                                            <div class="summary-content">
+                                                <p class="text-lg">@(Model.Likes)</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex align-items-center">
+
+                                            <div class="summary-heading">
+                                                <i class="fas fa-bookmark text-primary"></i>
+                                                <span>Theo Dõi:</span>
+                                            </div>
+                                            <div class="summary-content">
+                                                <p class="text-lg">@(Model.Follows?.Count() ?? 0)</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="summary-heading">
+                                                <i class="fas fa-bookmark text-primary"></i>
+                                                <span>Số Chương:</span>
+                                            </div>
+                                            <div class="summary-content">
+                                                <p class="text-lg">@(Model.Chapters?.Count() ?? 0)</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="release-time author-row">
+                                        <!-- Chapters List -->
+                                        <div class="bg-dark-300 rounded-lg p-4 border border-gray-800">
+                                            <div class="flex justify-between items-center mb-4">
+                                                <h3 class="font-bold text-lg text-white">Danh sách chương</h3>
+                                                <div class="flex space-x-2">
+                                                    <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
+                                                        <i class="fas fa-sort-amount-down"></i>
+                                                    </button>
+                                                    <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
+                                                        <i class="fas fa-sort-amount-up"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-2 max-h-[500px] overflow-y-auto pr-2">
+                                                @if (Model.Chapters != null && Model.Chapters.Where(c => c.IsPublished && c.DeletedAt == null).Any())
+                                                {
+                                                    @foreach (var chapter in Model.Chapters.Where(c => c.IsPublished && c.DeletedAt == null).OrderByDescending(c => c.ChapterNumber))
+                                                    {
+                                                        <a href="@Url.Action("Index", "ReadChapter", new { id = chapter.Id })"
+                                                           class="flex justify-between items-center p-3 bg-dark-400 hover:bg-dark-200 rounded-lg transition border border-gray-800">
+                                                            <div class="flex items-center space-x-3">
+                                                                <span class="text-primary font-medium">Chapter @chapter.ChapterNumber</span>
+                                                                <span class="text-gray-300">@chapter.ChapterTitle</span>
+                                                            </div>
+                                                            <div class="flex items-center space-x-4">
+                                                                <span class="text-gray-400 text-sm">
+                                                                    <i class="far fa-clock mr-1"></i>
+                                                                    @(chapter.PublishedDate?.ToString("dd/MM/yyyy") ?? chapter.CreatedAt?.ToString("dd/MM/yyyy"))
+                                                                </span>
+                                                            </div>
+                                                        </a>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div class="text-center py-8 text-gray-400">
+                                                        <i class="fas fa-book-open text-4xl mb-2"></i>
+                                                        <p>Chưa có chương nào được xuất bản</p>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1> Truyện khác</h1>
+                            <br />
+                            <div id="c-post-slider-234" class="manga-x-slider no-full-width style-3" data-style="style-3" data-count="4">
+                                <div class="slider_container_custom" role="toolbar">
+                                    @foreach (var comic in ViewBag.Comics as List<Comic>) // Ép kiểu để tránh lỗi
+                                    {
+                                        <div class="slider_item">
+                                            <div class="slider_thumb">
+                                                @if (comic.View > 1000)
+                                                {
+                                                    <span class="manga-title-badges custom trending">trending</span>
+                                                }
+                                                else if (comic.Status)
+                                                {
+                                                    <span class="manga-title-badges hot">HOT</span>
+                                                }
+
+                                                <div class="slider_thumb-item">
+                                                    <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
+                                                        <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
+                                                    </a>
+                                                    <div class="slider-overlay"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Comments Section -->
+                            
+                            <div class="mt-5 scroll-container">
+                                <div class="card bg-dark text-white border-secondary rounded-3 p-4">
+                                    <h3 class="fw-bold fs-4">Bình luận</h3>
+
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <form class="mb-4 comment-form" id="top-level-comment-form">
+                                            <textarea rows="3"
+                                                      class="form-control bg-dark text-light border-secondary rounded-3 p-3 mb-3"
+                                                      placeholder="Viết bình luận..." name="content"></textarea>
+                                            <div class="d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary px-4 py-2">
+                                                    <i class="fas fa-paper-plane me-2"></i>Gửi bình luận
+                                                </button>
+                                            </div>
+                                            <input type="hidden" name="comicId" value="@Model.Id" />
+                                            <input type="hidden" name="parentId" value="" />
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center mb-4 bg-dark p-4 rounded-3 border border-secondary">
+                                            <i class="fas fa-lock fs-2 text-primary mb-2"></i>
+                                            <p class="mb-3">Vui lòng đăng nhập để bình luận</p>
+                                            <a href="/login" class="text-primary text-decoration-underline">
+                                                <i class="fas fa-sign-in-alt me-2"></i>Đăng nhập ngay
+                                            </a>
+                                        </div>
+                                    }
+
+                                    <div class="space-y-4" id="comments-container">
+                                        @if (ViewBag.Comments != null && (ViewBag.Comments as List<Comment>).Count > 0)
+                                        {
+                                            @await Html.PartialAsync("_CommentPartial", ViewBag.Comments as List<Comment>)
+                                        }
+                                        else
+                                        {
+                                            <div class="text-center py-5 text-muted" id="no-comments-message">
+                                                <i class="far fa-comments fs-2 mb-2"></i>
+                                                <p>Chưa có bình luận nào</p>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    @if (ViewBag.TotalComments > ViewBag.PageSize)
+                                    {
+                                        <div class="text-center mt-4">
+                                            <button id="view-more-btn" class="btn btn-primary px-4 py-2"
+                                                    data-skip="@ViewBag.PageSize"
+                                                    data-comic-id="@ViewBag.ComicId"
+                                                    data-total="@ViewBag.TotalComments"
+                                                    data-page-size="@ViewBag.PageSize">
+                                                Xem thêm
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Hidden reply form template -->
+                            <div class="reply-form-template" style="display: none;">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <form class="mb-4 reply-form">
+                                        <textarea rows="2"
+                                                  class="form-control bg-dark text-light border-secondary rounded-3 p-3 mb-3"
+                                                  placeholder="Viết phản hồi..." name="content"></textarea>
+                                        <div class="d-flex justify-content-end gap-2">
+                                            <button type="button" class="btn btn-secondary px-4 py-2 cancel-reply">Hủy</button>
+                                            <button type="submit" class="btn btn-primary px-4 py-2">
+                                                <i class="fas fa-paper-plane me-2"></i>Gửi
+                                            </button>
+                                        </div>
+                                        <input type="hidden" name="comicId" value="@Model.Id" />
+                                        <input type="hidden" name="parentId" class="parent-id" value="" />
+                                    </form>
+                                }
+                                else
+                                {
+                                    <div class="text-center mb-4 bg-dark p-3 rounded-3 border border-secondary">
+                                        <p class="mb-2">Vui lòng đăng nhập để phản hồi</p>
+                                        <a href="/login" class="text-primary text-decoration-underline">
+                                            <i class="fas fa-sign-in-alt me-2"></i>Đăng nhập ngay
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+
+                            <!-- Hidden edit form template -->
+                            <div class="edit-form-template" style="display: none;">
+                                <form class="mb-4 edit-form">
+                                    <textarea rows="2"
+                                              class="form-control bg-dark text-light border-secondary rounded-3 p-3 mb-3 edit-content"
+                                              name="content"></textarea>
+                                    <div class="d-flex justify-content-end gap-2">
+                                        <button type="button" class="btn btn-secondary px-4 py-2 cancel-edit">Hủy</button>
+                                        <button type="submit" class="btn btn-primary px-4 py-2">
+                                            <i class="fas fa-save me-2"></i>Lưu
+                                        </button>
+                                    </div>
+                                    <input type="hidden" class="edit-comment-id" value="" />
+                                </form>
+                            </div>
+
+                        </div>
+                    </div><!-- <div class="site-content"> -->
+
+
+
+
+                    <footer class="site-footer">
+
+                        <div class="ad c-ads custom-code footer-ads col-md-12"><a href="https://mangabooth.com/product/wp-manga-theme-madara/"><img src="images/Build-The-Best-Manga-Site.jpg"></a></div>
+
+                        <div class="c-footer-sidebar">
+                            <div class="container">
+                                <div class="row c-row">
+                                    <div id="manga-genres-id-3" class="widget col-12 col-md-12   default no-icon  manga-genres-class-name">
+                                        <div class="widget__inner manga-genres-class-name__inner c-widget-wrap">
+                                            <div class="genres_wrap">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="widget-heading font-nav"><h5 class="heading">All Genres</h5></div><div class="widget-content">
+                                                            <div class="genres__collapse" style="display:block;">
+                                                                <div class="row genres">
+                                                                    <ul class="list-unstyled">
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/action/">
+                                                                                action                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/adventure/">
+                                                                                adventure                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/boys/">
+                                                                                boys                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/chinese/">
+                                                                                chinese                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/drama/">
+                                                                                drama                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/ecchi/">
+                                                                                ecchi                                                                                                    <span class="count">
+                                                                                    (38)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/fighting/">
+                                                                                fighting                                                                                                    <span class="count">
+                                                                                    (38)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/fun/">
+                                                                                fun                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/girl/">
+                                                                                girl                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/horrow/">
+                                                                                horrow                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="col-xs-6 col-sm-4 col-md-3 col-lg-2 col-6">
+                                                                            <a href="https://live.mangabooth.com/x/manga-genre/manhwa/">
+                                                                                manhwa                                                                                                    <span class="count">
+                                                                                    (37)
+                                                                                </span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    }
-                    else
-                    {
-                        <a href="/login" class="hover:text-primary transition">Đăng nhập</a>
-                        <a href="/register" class="bg-primary hover:bg-red-600 px-4 py-2 rounded-lg transition">Đăng ký</a>
-                    }
-                </div>
-            </div>
 
-            <!-- Mobile Search Bar -->
-            <div class="md:hidden mt-3">
-                <div class="relative">
-                    <input type="text"
-                           placeholder="Tìm kiếm truyện..."
-                           class="w-full bg-dark-400 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary border border-gray-800">
-                    <button class="absolute right-3 top-2.5 text-gray-400 hover:text-primary">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </nav>
-    </header>
+                        <div class="bottom-footer">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto px-4 py-8">
-        <!-- Breadcrumb -->
-        <div class="flex items-center space-x-2 text-sm mb-6">
-            <a href="/" class="hover:text-primary">Trang chủ</a>
-            <i class="fas fa-chevron-right text-xs text-gray-600"></i>
-            <span class="text-white">@Model.Title</span>
-        </div>
+                                        <div class="copyright">
+                                            <h3>Manta</h3>
+                                            <p>Madara WordPress Theme by Mangabooth.com</p>
+                                        </div>
 
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Cover Image -->
-            <div class="md:col-span-1">
-                <div class="sticky top-24">
-                    <img src="@Model.CoverImage" alt="@Model.Title"
-                         class="w-full rounded-lg shadow-lg object-cover border border-gray-800">
-
-                    <!-- Action Buttons -->
-                    <div class="flex flex-col space-y-3 mt-6">
-                        <button class="flex items-center justify-center space-x-2 bg-primary hover:bg-red-600 px-6 py-3 rounded-lg transition w-full">
-                            <i class="fas fa-book-open"></i>
-                            <span>Đọc từ đầu</span>
-                        </button>
-                        <button class="flex items-center justify-center space-x-2 bg-dark-300 hover:bg-dark-200 px-6 py-3 rounded-lg transition border border-gray-800 w-full">
-                            <i class="fas fa-bookmark"></i>
-                            <span>Theo dõi</span>
-                        </button>
-                    </div>
-
-                    <!-- Author Info -->
-                    <div class="mt-6 bg-dark-300 rounded-lg p-4 border border-gray-800">
-                        <h3 class="font-bold text-lg text-white">Thông tin</h3>
-                        <div class="space-y-2">
-                            <p class="flex justify-between">
-                                <span class="text-gray-400">Tác giả:</span>
-                                <span>@Model.Author</span>
-                            </p>
-                            <p class="flex justify-between">
-                                <span class="text-gray-400">Trạng thái:</span>
-                                <span class="@(Model.Status ? "text-green-500" : "text-yellow-500")">
-                                    @(Model.Status ? "Hoàn thành" : "Đang tiến hành")
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Info & Chapters -->
-            <div class="md:col-span-2 space-y-6">
-                <h1 class="text-3xl font-bold">@Model.Title</h1>
-
-                <!-- Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-dark-300 p-4 rounded-lg text-center border border-gray-800">
-                        <i class="fas fa-eye text-primary text-xl mb-2"></i>
-                        <p class="text-sm text-gray-400">Lượt xem</p>
-                        <p class="text-lg">@Model.View</p>
-                    </div>
-                    <div class="bg-dark-300 p-4 rounded-lg text-center border border-gray-800">
-                        <i class="fas fa-heart text-primary text-xl mb-2"></i>
-                        <p class="text-sm text-gray-400">Lượt thích</p>
-                        <p class="text-lg">@(Model.Likes)</p>
-                    </div>
-                    <div class="bg-dark-300 p-4 rounded-lg text-center border border-gray-800">
-                        <i class="fas fa-bookmark text-primary text-xl mb-2"></i>
-                        <p class="text-sm text-gray-400">Theo dõi</p>
-                        <p class="text-lg">@(Model.Follows?.Count() ?? 0)</p>
-                    </div>
-                    <div class="bg-dark-300 p-4 rounded-lg text-center border border-gray-800">
-                        <i class="fas fa-book text-primary text-xl mb-2"></i>
-                        <p class="text-sm text-gray-400">Số chương</p>
-                        <p class="text-lg">@(Model.Chapters?.Count() ?? 0)</p>
-                    </div>
-                </div>
-
-                <!-- Genres -->
-                <div class="space-y-2">
-                    <h3 class="font-bold text-lg text-white">Thể loại</h3>
-                    <div class="flex flex-wrap gap-2">
-                        @if (Model.ComicGenres != null)
-                        {
-                            @foreach (var genre in Model.ComicGenres)
-                            {
-                                <a href="/genres/@genre.Genre.GenreName.ToLower()"
-                                   class="bg-dark-300 px-3 py-1 rounded-full text-sm border border-gray-800 hover:bg-dark-200 hover:text-primary">
-                                    @genre.Genre.GenreName
-                                </a>
-                            }
-                        }
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <div class="bg-dark-300 p-4 rounded-lg border border-gray-800">
-                    <h3 class="font-bold text-lg text-white">Mô tả</h3>
-                    <p class="text-gray-300 leading-relaxed">@Model.Description</p>
-                </div>
-
-                <!-- Chapters List -->
-                <div class="bg-dark-300 rounded-lg p-4 border border-gray-800">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="font-bold text-lg text-white">Danh sách chương</h3>
-                        <div class="flex space-x-2">
-                            <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
-                                <i class="fas fa-sort-amount-down"></i>
-                            </button>
-                            <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
-                                <i class="fas fa-sort-amount-up"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="space-y-2 max-h-[500px] overflow-y-auto pr-2">
-                        @if (Model.Chapters != null && Model.Chapters.Any())
-                        {
-                            @foreach (var chapter in Model.Chapters.OrderByDescending(c => c.ChapterNumber))
-                            {
-                                <a href="@Url.Action("Index", "Chapter", new { id = chapter.Id })"
-                                   class="flex justify-between items-center p-3 bg-dark-400 hover:bg-dark-200 rounded-lg transition border border-gray-800">
-                                    <div class="flex items-center space-x-3">
-                                        <span class="text-primary font-medium">Chapter @chapter.ChapterNumber</span>
-                                        <span class="text-gray-300">@chapter.ChapterTitle</span>
                                     </div>
-                                    <div class="flex items-center space-x-4">
-                                        <span class="text-gray-400 text-sm">
-                                            <i class="far fa-clock mr-1"></i>
-                                            @chapter.CreatedAt
-                                        </span>
-                                    </div>
-                                </a>
-                            }
-                        }
-                        else
-                        {
-                            <div class="text-center py-8 text-gray-400">
-                                <i class="fas fa-book-open text-4xl mb-2"></i>
-                                <p>Chưa có chương nào</p>
+                                </div>
                             </div>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Comments Section -->
-        <div class="mt-8 " >
-            <div class="bg-dark-300 rounded-lg p-6 border border-gray-800">
-                <h3 class="font-bold text-xl text-white">Bình luận</h3>
-
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <form class="mb-6 comment-form" id="top-level-comment-form">
-                        <textarea rows="3"
-                                  class="w-full bg-dark-400 rounded-lg p-4 text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary border border-gray-800"
-                                  placeholder="Viết bình luận..." name="content"></textarea>
-                        <div class="flex justify-end mt-2">
-                            <button type="submit" class="bg-primary hover:bg-red-600 px-6 py-2 rounded-lg transition">
-                                <i class="fas fa-paper-plane mr-2"></i>Gửi bình luận
-                            </button>
                         </div>
-                        <input type="hidden" name="comicId" value="@Model.Id" />
-                        <input type="hidden" name="parentId" value="" />
-                    </form>
-                }
-                else
-                {
-                    <div class="text-center mb-6 bg-dark-400 p-6 rounded-lg border border-gray-800">
-                        <i class="fas fa-lock text-4xl text-primary mb-2"></i>
-                        <p class="mb-4">Vui lòng đăng nhập để bình luận</p>
-                        <a href="/login" class="text-primary hover:underline">
-                            <i class="fas fa-sign-in-alt mr-2"></i>Đăng nhập ngay
-                        </a>
-                    </div>
-                }
 
-                <div class="space-y-4" id="comments-container">
+                    </footer>
                     
-                    @if (ViewBag.Comments != null && (ViewBag.Comments as List<Comment>).Count > 0)
-                    {
-                        @await Html.PartialAsync("_CommentPartial", ViewBag.Comments as List<Comment>)
-                    }
-                    else
-                    {
-                        <div class="text-center py-8 text-gray-400" id="no-comments-message">
-                            <i class="far fa-comments text-4xl mb-2"></i>
-                            <p>Chưa có bình luận nào</p>
-                        </div>
-                    }
-                    
-                </div>
 
-                @if (ViewBag.TotalComments > ViewBag.PageSize)
-                {
-                    <div class="text-center mt-4">
-                        <button id="view-more-btn" class="bg-primary hover:bg-red-600 px-6 py-2 rounded-lg transition text-white"
-                                data-skip="@ViewBag.PageSize"
-                                data-comic-id="@ViewBag.ComicId"
-                                data-total="@ViewBag.TotalComments"
-                                data-page-size="@ViewBag.PageSize">
-                            Xem thêm
-                        </button>
-                    </div>
+                </div> <!-- class="wrap" -->
+            </div> <!-- class="body-wrap" -->
+            
+
+        </div>
+        <div class="go-to-top active">
+            <i class="icon ion-md-arrow-up"></i>
+        </div>
+    </div>
+        <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+        <script src="~/lib/sweetalert2/sweetalert2@11.js"></script>
+        <script>
+            // Back to Top Button
+            const backToTop = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.remove('opacity-0', 'invisible');
+                    backToTop.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTop.classList.add('opacity-0', 'invisible');
+                    backToTop.classList.remove('opacity-100', 'visible');
                 }
-            </div>
-        </div>
-
-        <!-- Hidden reply form template -->
-        <div class="reply-form-template" style="display: none;">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <form class="mb-6 reply-form">
-                    <textarea rows="2"
-                              class="w-full bg-dark-400 rounded-lg p-4 text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary border border-gray-800"
-                              placeholder="Viết phản hồi..." name="content"></textarea>
-                    <div class="flex justify-end mt-2 space-x-2">
-                        <button type="button" class="cancel-reply bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg transition">Hủy</button>
-                        <button type="submit" class="bg-primary hover:bg-red-600 px-4 py-2 rounded-lg transition">
-                            <i class="fas fa-paper-plane mr-2"></i>Gửi
-                        </button>
-                    </div>
-                    <input type="hidden" name="comicId" value="@Model.Id" />
-                    <input type="hidden" name="parentId" class="parent-id" value="" />
-                </form>
-            }
-            else
-            {
-                <div class="text-center mb-6 bg-dark-400 p-4 rounded-lg border border-gray-800">
-                    <p class="mb-2">Vui lòng đăng nhập để phản hồi</p>
-                    <a href="/login" class="text-primary hover:underline">
-                        <i class="fas fa-sign-in-alt mr-2"></i>Đăng nhập ngay
-                    </a>
-                </div>
-            }
-        </div>
-
-        <!-- Hidden edit form template -->
-        <div class="edit-form-template" style="display: none;">
-            <form class="mb-6 edit-form">
-                <textarea rows="2"
-                          class="w-full bg-dark-400 rounded-lg p-4 text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary border border-gray-800 edit-content"
-                          name="content"></textarea>
-                <div class="flex justify-end mt-2 space-x-2">
-                    <button type="button" class="cancel-edit bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-lg transition">Hủy</button>
-                    <button type="submit" class="bg-primary hover:bg-red-600 px-4 py-2 rounded-lg transition">
-                        <i class="fas fa-save mr-2"></i>Lưu
-                    </button>
-                </div>
-                <input type="hidden" class="edit-comment-id" value="" />
-            </form>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-dark-300 py-8 border-t border-gray-800 mt-8">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <h4 class="text-xl font-bold mb-4">DotNetTruyen</h4>
-                    <p class="text-gray-400">Đọc truyện online, đọc truyện chữ, truyện tranh, manga, webtoon, manhwa, manhua. Cập nhật nhanh nhất các truyện hot.</p>
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Liên kết</h4>
-                    <ul class="space-y-2">
-                        <li><a href="/" class="text-gray-400 hover:text-primary">Trang chủ</a></li>
-                        <li><a href="/genres" class="text-gray-400 hover:text-primary">Thể loại</a></li>
-                        <li><a href="/latest" class="text-gray-400 hover:text-primary">Mới cập nhật</a></li>
-                        <li><a href="/trending" class="text-gray-400 hover:text-primary">Trending</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Thể loại</h4>
-                    <ul class="space-y-2">
-                        <li><a href="/genres/action" class="text-gray-400 hover:text-primary">Action</a></li>
-                        <li><a href="/genres/comedy" class="text-gray-400 hover:text-primary">Comedy</a></li>
-                        <li><a href="/genres/drama" class="text-gray-400 hover:text-primary">Drama</a></li>
-                        <li><a href="/genres/fantasy" class="text-gray-400 hover:text-primary">Fantasy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-xl font-bold mb-4">Liên hệ</h4>
-                    <div class="flex space-x-4 mb-4">
-                        <a href="#" class="text-gray-400 hover:text-primary text-xl">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary text-xl">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary text-xl">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-primary text-xl">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                    <p class="text-gray-400">
-                        <i class="fas fa-envelope mr-2"></i>contact@dotnettruyen.com
-                    </p>
-                </div>
-            </div>
-            <div class="text-center mt-8 pt-8 border-t border-gray-800">
-                <p class="text-gray-400">&copy; 2025 DotNetTruyen. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button id="back-to-top"
-            class="fixed bottom-8 right-8 bg-primary hover:bg-red-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 invisible">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
-    <script src="~/lib/sweetalert2/sweetalert2@11.js"></script>
-    <script>
-        // Back to Top Button
-        const backToTop = document.getElementById('back-to-top');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTop.classList.remove('opacity-0', 'invisible');
-                backToTop.classList.add('opacity-100', 'visible');
-            } else {
-                backToTop.classList.add('opacity-0', 'invisible');
-                backToTop.classList.remove('opacity-100', 'visible');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
             });
-        });
 
-        // Chapter Sort Buttons
-        const chapterList = document.querySelector('.max-h-\\[500px\\]');
-        const sortButtons = document.querySelectorAll('.bg-dark-400.rounded');
-
-        sortButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const chapters = Array.from(chapterList.children);
-                chapters.reverse();
-                chapters.forEach(chapter => chapterList.appendChild(chapter));
-            });
-        });
-    </script>
-    <script>
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/commentHub")
-            .withAutomaticReconnect()
-            .build();
-
-        connection.start().then(() => {
-            connection.invoke("JoinComicGroup", "@Model.Id").catch(err => console.error(err));
-        }).catch(err => console.error(err));
-
-        // Listen for the ReloadComments message
-        connection.on("ReloadComments", (comicId) => {
-            setTimeout(() => reloadComments(0), 100);
-            // Reload comments from the beginning
-        });
-
-        // Function to reload comments
-        function reloadComments(skip) {
-            const comicId = "@Model.Id";
-            fetch(`/Detail/GetComments?comicId=${comicId}&skip=${skip}`)
-                .then(response => response.json())
-                .then(data => {
-                    const commentsContainer = document.getElementById('comments-container');
-                    commentsContainer.innerHTML = data.html.result;;
-
-                    const viewMoreBtn = document.getElementById('view-more-btn');
-                    console.log(viewMoreBtn);
-                    if (viewMoreBtn) {
-                        viewMoreBtn.setAttribute('data-total', data.totalComments);
-                        viewMoreBtn.setAttribute('data-skip', skip + 5);
-
-                        if (skip + 5 >= data.totalComments) {
-                            viewMoreBtn.style.display = 'none';
-                        } else {
-                            viewMoreBtn.style.display = 'inline-block';
-                        }
-                    }
-
-                    // Re-attach event listeners
-                    attachReplyListeners();
-                    attachViewRepliesListeners();
-                    attachEditListeners();
-                    attachDeleteListeners();
-                })
-                .catch(error => console.error('Error reloading comments:', error));
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Handle top-level comment form submission
-            const topLevelCommentForm = document.getElementById('top-level-comment-form');
-            if (topLevelCommentForm) {
-                topLevelCommentForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const formData = new FormData(topLevelCommentForm);
-                    const content = formData.get('content');
-                    const comicId = formData.get('comicId');
-                    const parentId = formData.get('parentId') || null;
-
-                    if (!content.trim()) {
-                        alert('Vui lòng nhập nội dung bình luận.');
-                        return;
-                    }
-
-                    fetch(`/Detail/Comment`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: `comicId=${comicId}&content=${encodeURIComponent(content)}&parentId=${parentId}`
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (!data.success) {
-                                alert(data.message || 'Có lỗi xảy ra khi gửi bình luận.');
-                                return;
-                            }
-
-                            // Clear the form
-                            topLevelCommentForm.reset();
-                        })
-                        .catch(error => console.error('Error submitting comment:', error));
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
-            }
+            });
 
-            // Handle "View More" button click
-            const viewMoreBtn = document.getElementById('view-more-btn');
-            if (viewMoreBtn) {
-                viewMoreBtn.addEventListener('click', () => {
-                    const skip = parseInt(viewMoreBtn.getAttribute('data-skip'));
-                    const comicId = viewMoreBtn.getAttribute('data-comic-id');
-                    const totalComments = parseInt(viewMoreBtn.getAttribute('data-total'));
-                    const pageSize = parseInt(viewMoreBtn.getAttribute('data-page-size'));
+            // Chapter Sort Buttons
+            const chapterList = document.querySelector('.max-h-\\[500px\\]');
+            const sortButtons = document.querySelectorAll('.bg-dark-400.rounded');
 
-                    fetch(`/Detail/GetMoreComments?comicId=${comicId}&skip=${skip}`)
-                        .then(response => response.text())
-                        .then(html => {
-                            const commentsContainer = document.getElementById('comments-container');
-                            commentsContainer.insertAdjacentHTML('beforeend', html);
+            sortButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const chapters = Array.from(chapterList.children);
+                    chapters.reverse();
+                    chapters.forEach(chapter => chapterList.appendChild(chapter));
+                });
+            });
+        </script>
+        <script>
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/commentHub")
+                .withAutomaticReconnect()
+                .build();
 
-                            const newSkip = skip + pageSize;
-                            viewMoreBtn.setAttribute('data-skip', newSkip);
+            connection.start().then(() => {
+                connection.invoke("JoinComicGroup", "@Model.Id").catch(err => console.error(err));
+            }).catch(err => console.error(err));
 
-                            if (newSkip >= totalComments) {
+            // Listen for the ReloadComments message
+            connection.on("ReloadComments", (comicId) => {
+                setTimeout(() => reloadComments(0), 300);
+                // Reload comments from the beginning
+            });
+
+            // Function to reload comments
+            function reloadComments(skip) {
+                const comicId = "@Model.Id";
+                fetch(`/Detail/GetComments?comicId=${comicId}&skip=${skip}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const commentsContainer = document.getElementById('comments-container');
+                        commentsContainer.innerHTML = data.html.result;;
+
+                        const viewMoreBtn = document.getElementById('view-more-btn');
+                        console.log(viewMoreBtn);
+                        if (viewMoreBtn) {
+                            viewMoreBtn.setAttribute('data-total', data.totalComments);
+                            viewMoreBtn.setAttribute('data-skip', skip + 5);
+
+                            if (skip + 5 >= data.totalComments) {
                                 viewMoreBtn.style.display = 'none';
+                            } else {
+                                viewMoreBtn.style.display = 'inline-block';
                             }
+                        }
 
-                            attachReplyListeners();
-                            attachViewRepliesListeners();
-                            attachEditListeners();
-                            attachDeleteListeners();
-                        })
-                        .catch(error => console.error('Error loading more comments:', error));
-                });
+                        // Re-attach event listeners
+                        attachReplyListeners();
+                        attachViewRepliesListeners();
+                        attachEditListeners();
+                        attachDeleteListeners();
+                    })
+                    .catch(error => console.error('Error reloading comments:', error));
             }
 
-            // Attach event listeners for existing comments
-            attachViewRepliesListeners();
-            attachReplyListeners();
-            attachEditListeners();
-            attachDeleteListeners();
-        });
-
-        function attachReplyListeners() {
-            const replyButtons = document.querySelectorAll('.reply-btn');
-            const replyFormTemplate = document.querySelector('.reply-form-template').children[0];
-
-            replyButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    const existingForm = button.closest('.comment').querySelector('.reply-form');
-                    if (existingForm) {
-                        existingForm.remove();
-                    }
-
-                    const replyForm = replyFormTemplate.cloneNode(true);
-                    replyForm.style.display = 'block';
-
-                    const parentId = button.getAttribute('data-comment-id');
-                    replyForm.querySelector('.parent-id').value = parentId;
-
-                    const comment = button.closest('.comment');
-                    comment.appendChild(replyForm);
-
-                    // Handle cancel button
-                    const cancelButton = replyForm.querySelector('.cancel-reply');
-                    if (cancelButton) {
-                        cancelButton.addEventListener('click', () => {
-                            replyForm.remove();
-                        });
-                    }
-
-                    // Handle reply form submission
-                    replyForm.addEventListener('submit', (e) => {
+            document.addEventListener('DOMContentLoaded', () => {
+                // Handle top-level comment form submission
+                const topLevelCommentForm = document.getElementById('top-level-comment-form');
+                if (topLevelCommentForm) {
+                    topLevelCommentForm.addEventListener('submit', (e) => {
                         e.preventDefault();
-                        const formData = new FormData(replyForm);
+                        const formData = new FormData(topLevelCommentForm);
                         const content = formData.get('content');
                         const comicId = formData.get('comicId');
-                        const parentId = formData.get('parentId');
+                        const parentId = formData.get('parentId') || null;
 
                         if (!content.trim()) {
-                            alert('Vui lòng nhập nội dung phản hồi.');
+                            alert('Vui lòng nhập nội dung bình luận.');
                             return;
                         }
 
@@ -651,142 +579,243 @@
                             },
                             body: `comicId=${comicId}&content=${encodeURIComponent(content)}&parentId=${parentId}`
                         })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (!data.success) {
+                                    alert(data.message || 'Có lỗi xảy ra khi gửi bình luận.');
+                                    return;
+                                }
+
+                                // Clear the form
+                                topLevelCommentForm.reset();
+                            })
+                            .catch(error => console.error('Error submitting comment:', error));
+                    });
+                }
+
+                // Handle "View More" button click
+                const viewMoreBtn = document.getElementById('view-more-btn');
+                if (viewMoreBtn) {
+                    viewMoreBtn.addEventListener('click', () => {
+                        const skip = parseInt(viewMoreBtn.getAttribute('data-skip'));
+                        const comicId = viewMoreBtn.getAttribute('data-comic-id');
+                        const totalComments = parseInt(viewMoreBtn.getAttribute('data-total'));
+                        const pageSize = parseInt(viewMoreBtn.getAttribute('data-page-size'));
+
+                        fetch(`/Detail/GetMoreComments?comicId=${comicId}&skip=${skip}`)
                             .then(response => response.text())
                             .then(html => {
-                                // Clear the form and hide it
-                                replyForm.remove();
+                                const commentsContainer = document.getElementById('comments-container');
+                                commentsContainer.insertAdjacentHTML('beforeend', html);
+
+                                const newSkip = skip + pageSize;
+                                viewMoreBtn.setAttribute('data-skip', newSkip);
+
+                                if (newSkip >= totalComments) {
+                                    viewMoreBtn.style.display = 'none';
+                                }
+
+                                attachReplyListeners();
+                                attachViewRepliesListeners();
+                                attachEditListeners();
+                                attachDeleteListeners();
                             })
-                            .catch(error => console.error('Error submitting reply:', error));
+                            .catch(error => console.error('Error loading more comments:', error));
                     });
-                });
+                }
+
+                // Attach event listeners for existing comments
+                attachViewRepliesListeners();
+                attachReplyListeners();
+                attachEditListeners();
+                attachDeleteListeners();
             });
-        }
 
-        function attachViewRepliesListeners() {
-            document.querySelectorAll('.view-replies-btn').forEach(button => {
-                // Xóa tất cả sự kiện cũ trước khi gán sự kiện mới
-                button.replaceWith(button.cloneNode(true));
-            });
-            document.querySelectorAll('.view-replies-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const commentId = button.getAttribute('data-comment-id');
-                    const repliesContainer = button.closest('.comment').querySelector('.replies-container');
+            function attachReplyListeners() {
+                const replyButtons = document.querySelectorAll('.reply-btn');
+                const replyFormTemplate = document.querySelector('.reply-form-template').children[0];
 
-                    if (repliesContainer.innerHTML.trim() !== '') {
-                        repliesContainer.classList.toggle('hiddenReply');
-                        button.textContent = repliesContainer.classList.contains('hiddenReply') ? 'Xem phản hồi' : 'Ẩn phản hồi';
-                        return;
-                    }
-
-                    fetch(`/Detail/GetReplies?commentId=${commentId}`)
-                        .then(response => response.text())
-                        .then(html => {
-                            repliesContainer.innerHTML = html;
-                            repliesContainer.classList.remove('hiddenReply');
-                            button.textContent = 'Ẩn phản hồi';
-
-                            attachReplyListeners();
-                            attachViewRepliesListeners();
-                            attachEditListeners();
-                            attachDeleteListeners();
-                        })
-                        .catch(error => console.error('Error loading replies:', error));
-                });
-            });
-        }
-
-        function attachEditListeners() {
-            const editButtons = document.querySelectorAll('.edit-btn');
-            const editFormTemplate = document.querySelector('.edit-form-template').children[0];
-
-            editButtons.forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    const commentId = button.getAttribute('data-comment-id');
-                    const comment = button.closest('.comment');
-                    const existingForm = comment.querySelector('.edit-form');
-                    if (existingForm) {
-                        existingForm.remove();
-                    }
-
-                    const editForm = editFormTemplate.cloneNode(true);
-                    editForm.style.display = 'block';
-
-                    // Pre-fill the form with the current comment content
-                    const commentContent = comment.querySelector('.comment-content').textContent;
-                    editForm.querySelector('.edit-content').value = commentContent;
-                    editForm.querySelector('.edit-comment-id').value = commentId;
-
-                    comment.appendChild(editForm);
-
-                    // Handle cancel button
-                    const cancelButton = editForm.querySelector('.cancel-edit');
-                    cancelButton.addEventListener('click', () => {
-                        editForm.remove();
-                    });
-
-                    // Handle form submission
-                    editForm.addEventListener('submit', (e) => {
+                replyButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
                         e.preventDefault();
-                        const formData = new FormData(editForm);
-                        const content = formData.get('content');
 
-                        fetch(`/Detail/EditComment?commentId=${commentId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: `content=${encodeURIComponent(content)}`
-                        })
+                        const existingForm = button.closest('.comment').querySelector('.reply-form');
+                        if (existingForm) {
+                            existingForm.remove();
+                        }
+
+                        const replyForm = replyFormTemplate.cloneNode(true);
+                        replyForm.style.display = 'block';
+
+                        const parentId = button.getAttribute('data-comment-id');
+                        replyForm.querySelector('.parent-id').value = parentId;
+
+                        const comment = button.closest('.comment');
+                        comment.appendChild(replyForm);
+
+                        // Handle cancel button
+                        const cancelButton = replyForm.querySelector('.cancel-reply');
+                        if (cancelButton) {
+                            cancelButton.addEventListener('click', () => {
+                                replyForm.remove();
+                            });
+                        }
+
+                        // Handle reply form submission
+                        replyForm.addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const formData = new FormData(replyForm);
+                            const content = formData.get('content');
+                            const comicId = formData.get('comicId');
+                            const parentId = formData.get('parentId');
+
+                            if (!content.trim()) {
+                                alert('Vui lòng nhập nội dung phản hồi.');
+                                return;
+                            }
+
+                            fetch(`/Detail/Comment`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: `comicId=${comicId}&content=${encodeURIComponent(content)}&parentId=${parentId}`
+                            })
+                                .then(response => response.text())
+                                .then(html => {
+                                    // Clear the form and hide it
+                                    replyForm.remove();
+                                })
+                                .catch(error => console.error('Error submitting reply:', error));
+                        });
+                    });
+                });
+            }
+
+            function attachViewRepliesListeners() {
+                document.querySelectorAll('.view-replies-btn').forEach(button => {
+                    // Xóa tất cả sự kiện cũ trước khi gán sự kiện mới
+                    button.replaceWith(button.cloneNode(true));
+                });
+                document.querySelectorAll('.view-replies-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const commentId = button.getAttribute('data-comment-id');
+                        const repliesContainer = button.closest('.comment').querySelector('.replies-container');
+
+                        if (repliesContainer.innerHTML.trim() !== '') {
+                            repliesContainer.classList.toggle('hiddenReply');
+                            button.textContent = repliesContainer.classList.contains('hiddenReply') ? 'Xem phản hồi' : 'Ẩn phản hồi';
+                            return;
+                        }
+
+                        fetch(`/Detail/GetReplies?commentId=${commentId}`)
                             .then(response => response.text())
                             .then(html => {
-                                editForm.remove();
+                                repliesContainer.innerHTML = html;
+                                repliesContainer.classList.remove('hiddenReply');
+                                button.textContent = 'Ẩn phản hồi';
+
+                                attachReplyListeners();
+                                attachViewRepliesListeners();
+                                attachEditListeners();
+                                attachDeleteListeners();
                             })
-                            .catch(error => console.error('Error editing comment:', error));
+                            .catch(error => console.error('Error loading replies:', error));
                     });
                 });
-            });
-        }
+            }
 
-        function attachDeleteListeners() {
-            const deleteButtons = document.querySelectorAll('.delete-btn');
+            function attachEditListeners() {
+                const editButtons = document.querySelectorAll('.edit-btn');
+                const editFormTemplate = document.querySelector('.edit-form-template').children[0];
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', async (e) => {
-                    e.preventDefault();
+                editButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
 
-                    // Hiển thị hộp thoại xác nhận
-                    const result = await Swal.fire({
-                        title: 'Bạn có chắc muốn xóa bình luận này không?',
-                        text: 'Hành động này không thể hoàn tác!',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Xóa',
-                        cancelButtonText: 'Hủy',
-                        allowOutsideClick: false
+                        const commentId = button.getAttribute('data-comment-id');
+                        const comment = button.closest('.comment');
+                        const existingForm = comment.querySelector('.edit-form');
+                        if (existingForm) {
+                            existingForm.remove();
+                        }
+
+                        const editForm = editFormTemplate.cloneNode(true);
+                        editForm.style.display = 'block';
+
+                        // Pre-fill the form with the current comment content
+                        const commentContent = comment.querySelector('.comment-content').textContent;
+                        editForm.querySelector('.edit-content').value = commentContent;
+                        editForm.querySelector('.edit-comment-id').value = commentId;
+
+                        comment.appendChild(editForm);
+
+                        // Handle cancel button
+                        const cancelButton = editForm.querySelector('.cancel-edit');
+                        cancelButton.addEventListener('click', () => {
+                            editForm.remove();
+                        });
+
+                        // Handle form submission
+                        editForm.addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const formData = new FormData(editForm);
+                            const content = formData.get('content');
+
+                            fetch(`/Detail/EditComment?commentId=${commentId}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                                body: `content=${encodeURIComponent(content)}`
+                            })
+                                .then(response => response.text())
+                                .then(html => {
+                                    editForm.remove();
+                                })
+                                .catch(error => console.error('Error editing comment:', error));
+                        });
                     });
+                });
+            }
 
-                    if (!result.isConfirmed) {
-                        return;
-                    }
+            function attachDeleteListeners() {
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', async (e) => {
+                        e.preventDefault();
+
+                        // Hiển thị hộp thoại xác nhận
+                        const result = await Swal.fire({
+                            title: 'Bạn có chắc muốn xóa bình luận này không?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Xóa',
+                            cancelButtonText: 'Hủy',
+                            allowOutsideClick: false
+                        });
+
+                        if (!result.isConfirmed) {
+                            return;
+                        }
 
 
-                    const commentId = button.getAttribute('data-comment-id');
-                    fetch(`/Detail/DeleteComment?commentId=${commentId}`, {
-                        method: 'POST'
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-
-                            }
+                        const commentId = button.getAttribute('data-comment-id');
+                        fetch(`/Detail/DeleteComment?commentId=${commentId}`, {
+                            method: 'POST'
                         })
-                        .catch(error => console.error('Error deleting comment:', error));
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+
+                                }
+                            })
+                            .catch(error => console.error('Error deleting comment:', error));
+                    });
                 });
-            });
-        }
-    </script>
-</body>
-</html>
+            }
+        </script>
+    
+    </body><!-- Dynamic page generated in 0.586 seconds. --><!-- Cached page generated by WP-Super-Cache on 2025-03-24 06:32:20 --><!-- super cache -->

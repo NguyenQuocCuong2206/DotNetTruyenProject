@@ -80,7 +80,11 @@ builder.Services.AddAuthorization(options =>
 
 
 var app = builder.Build();
-
+app.MapControllerRoute(
+    name: "comicDetail",
+    pattern: "Comic/Detail/{id}",
+    defaults: new { controller = "Detail", action = "Index" }
+);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -94,7 +98,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/signin-google" && context.Request.Query.ContainsKey("error"))
+    {
+        context.Response.Redirect("/");
+        return;
+    }
+    await next();
+});
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapHub<GenreHub>("/genreHub");

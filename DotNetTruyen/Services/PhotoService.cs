@@ -12,32 +12,15 @@ namespace DotNetTruyen.Services
             _cloudinary = cloudinary;
         }
 
-        public async Task<List<string>> AddListPhotoAsync(List<IFormFile> files)
+        public async Task<List<string>> AddListPhotoAsync(IList<IFormFile> files)
         {
-            if (files == null || files.Count == 0)
-            {
-                return new List<string>();
-            }
+            var uploadTasks = files
+                .Where(file => file != null && file.Length > 0)
+                .Select(file => AddPhotoAsync(file))
+                .ToList();
 
-            var imageUrls = new List<string>();
-
-            foreach (var file in files)
-            {
-                using (var stream = file.OpenReadStream())
-                {
-                    var uploadParams = new ImageUploadParams()
-                    {
-                        File = new FileDescription(file.FileName, stream)
-                    };
-                    var uploadResult = await _cloudinary.UploadAsync(uploadParams);
-                    if (uploadResult != null && !string.IsNullOrEmpty(uploadResult.SecureUrl.ToString()))
-                    {
-                        imageUrls.Add(uploadResult.Url.ToString());
-                    }
-                }
-            }
-
-            return imageUrls;
+            var imageUrls = await Task.WhenAll(uploadTasks);
+            return imageUrls.Where(url => !string.IsNullOrEmpty(url)).ToList();
         }
 
         public async Task<string> AddPhotoAsync(IFormFile file)

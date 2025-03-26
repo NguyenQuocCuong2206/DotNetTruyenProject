@@ -7,7 +7,7 @@
             TimeSpan timeSpan = DateTime.Now - dateTime;
 
             if (timeSpan.TotalSeconds < 60)
-                return $"{(int)timeSpan.TotalSeconds} giây trước";
+                return $"Vừa xong";
             if (timeSpan.TotalMinutes < 60)
                 return $"{(int)timeSpan.TotalMinutes} phút trước";
             if (timeSpan.TotalHours < 24)

@@ -79,7 +79,10 @@ namespace DotNetTruyen.Controllers
                             var roleClaims = await _roleManager.GetClaimsAsync(role);
                             if (roleClaims.Any(c => c.Type == "Permission" && c.Value == "Vào bảng điều khiển"))
                             {
-                                return LocalRedirect("/DashBoard");
+                                if (returnUrl == ("/"))
+                                {
+                                    return LocalRedirect("/DashBoard");
+                                }
                             }
                         }
                     }
@@ -129,6 +132,7 @@ namespace DotNetTruyen.Controllers
         {
             returnUrl ??= Url.Content("~/");
             ViewData["ReturnUrl"] = returnUrl;
+
             var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
             if (!result.Succeeded)
             {
@@ -181,6 +185,23 @@ namespace DotNetTruyen.Controllers
                     return View("Login");
                 }
                 await _signInManager.SignInAsync(existingUser, isPersistent: false);
+                var userRoles = await _userManager.GetRolesAsync(existingUser);
+
+                foreach (var roleName in userRoles)
+                {
+                    var role = await _roleManager.FindByNameAsync(roleName);
+                    if (role != null)
+                    {
+                        var roleClaims = await _roleManager.GetClaimsAsync(role);
+                        if (roleClaims.Any(c => c.Type == "Permission" && c.Value == "Vào bảng điều khiển"))
+                        {
+                            if (returnUrl == ("/"))
+                            {
+                                return LocalRedirect("/DashBoard");
+                            }
+                        }
+                    }
+                }
                 return LocalRedirect(returnUrl);
             }
             return LocalRedirect("/login");

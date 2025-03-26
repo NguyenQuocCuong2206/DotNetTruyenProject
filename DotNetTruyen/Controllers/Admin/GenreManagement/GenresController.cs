@@ -35,12 +35,20 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
         {
             int pageSize = 8;
 
-            var genreQuery = _context.Genres.AsQueryable();
+            var genreQuery = _context.Genres.Where(g => g.DeletedAt == null).AsQueryable();
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 genreQuery = genreQuery.Where(g => g.GenreName.Contains(searchQuery));
             }
-            var totalGenres = await genreQuery.CountAsync();
+
+            // Tính toán thống kê
+            var totalGenres = await _context.Genres.CountAsync(g => g.DeletedAt == null);
+            var totalComics = await _context.Comics.CountAsync(c => c.DeletedAt == null);
+            var activeGenres = await _context.Genres
+                .Where(g => g.DeletedAt == null && g.ComicGenres.Any(cg => cg.Comic.DeletedAt == null))
+                .CountAsync();
+
+            var totalItems = await genreQuery.CountAsync();
 
             var genres = await genreQuery
                 .OrderBy(g => g.GenreName)
@@ -50,8 +58,8 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 {
                     Id = g.Id,
                     GenreName = g.GenreName,
-                    TotalStories = g.ComicGenres.Count(),
-                    UpdatedAt = DateTime.Now,
+                    TotalStories = g.ComicGenres.Count(cg => cg.Comic.DeletedAt == null),
+                    UpdatedAt = g.UpdatedAt ?? DateTime.Now 
                 })
                 .ToListAsync();
 
@@ -60,7 +68,10 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 GenreViewModels = genres,
                 SearchQuery = searchQuery,
                 CurrentPage = page,
-                TotalPages = (int)Math.Ceiling(totalGenres / (double)pageSize)
+                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize),
+                TotalGenres = totalGenres,
+                TotalComics = totalComics,
+                ActiveGenres = activeGenres
             };
 
             return View("~/Views/Admin/Genres/Index.cshtml", viewModel);

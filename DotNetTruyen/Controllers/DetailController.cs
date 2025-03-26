@@ -42,9 +42,11 @@ namespace DotNetTruyen.Controllers
             if (comic == null)
                 return NotFound();
 
-            // Tăng lượt xem
-            //comic.View += 1;
-            //_context.SaveChanges(); // Lưu thay đổi vào database
+            ViewBag.Comics = _context.Comics
+             .Where(c => c.Id != id)
+             .OrderBy(c => Guid.NewGuid())
+            .Take(10)
+         .ToList();
 
             const int pageSize = 5;
             var topLevelComments = await _context.Comments

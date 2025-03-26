@@ -3,12 +3,11 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-@model List<DotNetTruyen.Models.ReadHistory>
+@model DotNetTruyen.ViewModels.ReadHistoryViewModel
 @{
     ViewData["Title"] = "Thông tin tài khoản";
     var user = await UserManager.GetUserAsync(User);
 }
-
 <body class="page-template-default page page-id-7 logged-in wp-embed-responsive header-style-1 sticky-enabled sticky-style-1 text-ui-light minimal-reading-layout">
     <div class="wrap">
         <div class="body-wrap">
@@ -65,7 +64,7 @@
 
                                                                                 <div class="tab-item">
                                                                                     <div class="row">
-                                                                                        @foreach(var history in Model)
+                                                                                        @foreach (var history in Model.ReadHistories)
                                                                                         {
                                                                                             <div class="col-md-4">
                                                                                                 <div class="history-content">
@@ -80,9 +79,9 @@
                                                                                                                 <a href="Detail/Index/@history.Chapter.Comic.Id">@history.Chapter.Comic.Title</a>
                                                                                                             </h3>
                                                                                                         </div>
-                                                                                                        <div class="chapter">
+                                                                                                        <div style="line-height:1.1">
                                                                                                             <span class="chap">
-                                                                                                                <a href="https://live.mangabooth.com/x/manga/manga-16-2/chapter-4/">
+                                                                                                                <a href="/ReadChapter/Index/@history.ChapterId" style="font-weight:bold">
                                                                                                                     Chương @history.Chapter.ChapterNumber
                                                                                                                 </a>
                                                                                                             </span>
@@ -105,10 +104,11 @@
 
                                                                             </div>
                                                                             <!-- Pagination -->
+                                                                            <!-- Pagination -->
                                                                             <div class="d-flex justify-content-end mt-3">
-                                                                                <a >Trước</a>
-                                                                                <span class="badge bg-light text-dark border mx-3 px-3 py-2">Trang 1 / 2</span>
-                                                                                <a>Sau</a>
+                                                                                <a asp-action="Index" asp-controller="ReadHistories" asp-route-page="@(Model.CurrentPage - 1)" class="btn btn-outline-secondary btn-sm @(Model.CurrentPage == 1 ? "disabled" : "")">Trước</a>
+                                                                                <span class="badge bg-light text-dark border mx-3 px-3 py-2">Trang @Model.CurrentPage / @Model.TotalPages</span>
+                                                                                <a asp-action="Index" asp-controller="ReadHistories" asp-route-page="@(Model.CurrentPage + 1)" class="btn btn-outline-secondary btn-sm ms-2 @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">Sau</a>
                                                                             </div>
                                                                         </div>
 
