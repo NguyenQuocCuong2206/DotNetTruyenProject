@@ -263,8 +263,9 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
                             var displayName = worksheet.Cells[row, 2].Text;
                             var username = worksheet.Cells[row, 3].Text;
                             var email = worksheet.Cells[row, 4].Text;
-                            var roles = worksheet.Cells[row, 5].Text.Split(',').Select(r => r.Trim()).ToList();
-                            var status = worksheet.Cells[row, 6].Text;
+                            var password = worksheet.Cells[row, 5].Text;
+                            var roles = worksheet.Cells[row, 6].Text.Split(',').Select(r => r.Trim()).ToList();
+                            var status = worksheet.Cells[row, 7].Text;
 
                             // Kiểm tra email có tồn tại không
                             var existingUser = await _userManager.FindByEmailAsync(email);
@@ -281,8 +282,17 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
                                 NameToDisplay = displayName,
                                 LockoutEnd = (status == "Hoạt động") ? null : DateTimeOffset.MaxValue
                             };
+                            IdentityResult result;
 
-                            var result = await _userManager.CreateAsync(user, "DefaultPassword123!"); // Tạo user với mật khẩu mặc định
+                            if (string.IsNullOrEmpty(password))
+                            {
+                                result = await _userManager.CreateAsync(user, "DefaultPassword123!"); // Tạo user với mật khẩu mặc định
+                            }
+                            else
+                            {
+                                result = await _userManager.CreateAsync(user, password); // Tạo user với mật khẩu do người dùng cung cấp
+                            }
+
                             if (result.Succeeded)
                             {
                                 await _userManager.AddToRolesAsync(user, roles); // Gán vai trò cho user

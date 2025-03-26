@@ -18,5 +18,7 @@ namespace DotNetTruyen.Models
         public Comic Comic { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public User User { get; set; }
+        [NotMapped]
+        public int? ReplyCount { get; set; }
     }
 }
