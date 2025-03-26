@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\Admin\LevelManagement\" />
     <Folder Include="Data\Enum\" />
+    <Folder Include="Views\Admin\Levels\" />
   </ItemGroup>
 
 </Project>

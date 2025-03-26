@@ -45,7 +45,13 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 comicsQuery = comicsQuery.Where(c => c.Title.Contains(searchQuery) || c.Author.Contains(searchQuery));
             }
 
-            var totalComics = await comicsQuery.CountAsync();
+            
+            var totalComics = await _context.Comics.CountAsync(c => c.DeletedAt == null);
+            var totalViews = await _context.Comics.Where(c => c.DeletedAt == null).SumAsync(c => c.View);
+            var totalFollows = await _context.Follows.CountAsync(f => f.Comic.DeletedAt == null);
+            var totalLikes = await _context.Likes.CountAsync(f => f.Comic.DeletedAt == null);
+
+            var totalItems = await comicsQuery.CountAsync();
 
             var comics = await comicsQuery
                 .OrderBy(c => c.Title)
@@ -58,7 +64,11 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 Comics = comics,
                 SearchQuery = searchQuery,
                 CurrentPage = page,
-                TotalPages = (int)Math.Ceiling(totalComics / (double)pageSize)
+                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize),
+                TotalComics = totalComics,
+                TotalViews = totalViews,
+                TotalFollows = totalFollows,
+                TotalLikes = totalLikes
             };
 
             return View("~/Views/Admin/Comics/Index.cshtml", viewModel);
@@ -78,7 +88,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                      Author = c.Author,
                      View = c.View,
                      Status = c.Status,
-                     Likes = c.Likes,
+                     Likes = c.Likes.Count(),
                      Follows = c.Follows.Count(),
                      Genres = c.ComicGenres.Select(g => g.Genre.GenreName).ToList()
                      //RecentChapters = c.Chapters.OrderByDescending(ch => ch.CreatedAt)
@@ -146,7 +156,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                         Console.WriteLine($"Error in {state.Key}: {state.Value.Errors[0].ErrorMessage}");
                     }
                 }
-                // rest of your code...
+
             }
 
             var comic = new Comic
@@ -156,8 +166,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 Description = model.Description,
                 Author = model.Author,
                 Status = model.Status,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
+
                 ComicGenres = new List<ComicGenre>()
             };
 
@@ -430,7 +439,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             {
                 foreach (var chapter in comic.Chapters)
                 {
-                    chapter.DeletedAt = DateTime.UtcNow;
+                    chapter.DeletedAt = DateTime.Now;
                 }
                 _context.Chapters.UpdateRange(comic.Chapters);
             }
@@ -448,7 +457,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             }
 
   
-            comic.DeletedAt = DateTime.UtcNow;
+            comic.DeletedAt = DateTime.Now;
             _context.Update(comic);
 
 
