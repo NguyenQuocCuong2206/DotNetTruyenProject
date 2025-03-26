@@ -227,6 +227,10 @@
             margin-top: 0;
             padding: 1.25em 2.375em
         }
+
+        .summary-heading {
+            min-width: 100px; /* Điều chỉnh giá trị theo nhu cầu */
+        }
     </style>
     <style id="classic-theme-styles-inline-css" type="text/css">
         /*! This file is auto-generated */
@@ -549,6 +553,20 @@
         .has-x-large-font-size {
             font-size: var(--wp--preset--font-size--x-large) !important;
         }
+
+        .slider_container_custom {
+            display: flex;
+            flex-wrap: nowrap; /* Đảm bảo các item không bị xuống hàng */
+            gap: 10px; /* Khoảng cách giữa các truyện */
+            overflow-x: auto; /* Thêm thanh cuộn ngang nếu quá nhiều item */
+            padding: 10px 0;
+        }
+
+        .slider_item {
+            flex: 0 0 auto; /* Giữ nguyên kích thước của từng item */
+            width: 250px; /* Độ rộng cố định */
+        }
+
 
         :where(.wp-block-post-template.is-layout-flex) {
             gap: 1.25em;
@@ -987,8 +1005,8 @@
                                         <div class="left">
 
                                             <div id="init-links" class="nav-links">
-                                                <a href="@Url.Action("ReadLastChapter", "ReadChapter", new { comicId = Model.Id })" id="btn-read-last" class="c-btn c-btn_style-1">Đọc Mới Nhất</a>
-                                                <a href="@Url.Action("ReadFromBeginning", "ReadChapter", new { comicId = Model.Id })" id="btn-read-first" class="c-btn c-btn_style-1">Đọc Từ Đầu</a>
+                                                <a href="@Url.Action("ReadLastChapter", "ReadChapter", new { comicId = Model.Id })" class="c-btn c-btn_style-1">Đọc Mới Nhất</a>
+                                                <a href="@Url.Action("ReadFromBeginning", "ReadChapter", new { comicId = Model.Id })" class="c-btn c-btn_style-1">Đọc Từ Đầu</a>
                                                 <button class="c-btn c-btn_style-1">
                                                     <i class="fas fa-bookmark"></i>
                                                     <span>Theo dõi</span>
@@ -1025,7 +1043,19 @@
                                         <div class="post-content_item">
                                             <div class="summary-content">
                                                 <div class="genres-content">
-                                                    <a href="https://live.mangabooth.com/x/manga-genre/action/" rel="tag">action</a> <a href="https://live.mangabooth.com/x/manga-genre/adventure/" rel="tag">adventure</a> <a href="https://live.mangabooth.com/x/manga-genre/boys/" rel="tag">boys</a> <a href="https://live.mangabooth.com/x/manga-genre/chinese/" rel="tag">chinese</a> <a href="https://live.mangabooth.com/x/manga-genre/drama/" rel="tag">drama</a> <a href="https://live.mangabooth.com/x/manga-genre/ecchi/" rel="tag">ecchi</a> <a href="https://live.mangabooth.com/x/manga-genre/fighting/" rel="tag">fighting</a> <a href="https://live.mangabooth.com/x/manga-genre/fun/" rel="tag">fun</a> <a href="https://live.mangabooth.com/x/manga-genre/girl/" rel="tag">girl</a> <a href="https://live.mangabooth.com/x/manga-genre/horrow/" rel="tag">horrow</a> <a href="https://live.mangabooth.com/x/manga-genre/manhwa/" rel="tag">manhwa</a>
+                                                    @if (Model.ComicGenres != null && Model.ComicGenres.Any())
+                                                    {
+                                                        @foreach (var comicGenre in Model.ComicGenres)
+                                                        {
+                                                            <a href="@Url.Action("Index", "Genre", new { genre = comicGenre.Genre.GenreName.ToLower() })" rel="tag">
+                                                                @comicGenre.Genre.GenreName.ToLower()
+                                                            </a>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>Không có thể loại nào được xác định.</span>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -1042,7 +1072,7 @@
 
                                             <div class="post-content_item">
                                                 <div class="summary-heading">
-                                                    <i class="fas fa-user text-primary me-2"></i>
+                                                    <i class="fas fa-user text-white me-2"></i>
                                                     <span class="fw-semibold">Tác Giả:</span>
                                                 </div>
                                                 <div class="summary-content">
@@ -1056,7 +1086,7 @@
 
                                         <div class="status manga-info-row">
                                             <div class="summary-heading">
-                                                <i class="fa fa-rss text-primary me-2"></i>
+                                                <i class="fa fa-rss text-white me-2"></i>
                                                 <span>Tình trạng</span>
                                             </div>
                                             <div class="summary-content">
@@ -1067,7 +1097,7 @@
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="summary-heading">
-                                                <i class="fas fa-eye text-primary "></i>
+                                                <i class="fas fa-eye text-white me-2 "></i>
                                                 <span>Lượt Xem:</span>
                                             </div>
                                             <div class="summary-content">
@@ -1077,7 +1107,7 @@
                                         <div class="d-flex align-items-center">
 
                                             <div class="summary-heading">
-                                                <i class="fas fa-heart text-primary"></i>
+                                                <i class="fas fa-heart text-white me-2"></i>
                                                 <span>Lượt Thích:</span>
                                             </div>
                                             <div class="summary-content">
@@ -1088,7 +1118,7 @@
                                         <div class="d-flex align-items-center">
 
                                             <div class="summary-heading">
-                                                <i class="fas fa-bookmark text-primary"></i>
+                                                <i class="fas fa-plus text-white me-2"></i>
                                                 <span>Theo Dõi:</span>
                                             </div>
                                             <div class="summary-content">
@@ -1097,7 +1127,7 @@
                                         </div>
                                         <div class="d-flex align-items-center">
                                             <div class="summary-heading">
-                                                <i class="fas fa-bookmark text-primary"></i>
+                                                <i class="fas fa-bookmark text-white me-2"></i>
                                                 <span>Số Chương:</span>
                                             </div>
                                             <div class="summary-content">
@@ -1107,25 +1137,27 @@
                                         </div>
                                     </div>
 
-
+                                    <br />
                                     <div class="release-time author-row">
                                         <!-- Chapters List -->
                                         <div class="bg-dark-300 rounded-lg p-4 border border-gray-800">
                                             <div class="flex justify-between items-center mb-4">
                                                 <h3 class="font-bold text-lg text-white">Danh sách chương</h3>
                                                 <div class="flex space-x-2">
-                                                    <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
+                                                    <button onclick="sortChapters('desc')"
+                                                            class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800 @((ViewBag.SortOrder == "desc") ? "bg-primary" : "")">
                                                         <i class="fas fa-sort-amount-down"></i>
                                                     </button>
-                                                    <button class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800">
+                                                    <button onclick="sortChapters('asc')"
+                                                            class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800 @((ViewBag.SortOrder == "asc") ? "bg-primary" : "")">
                                                         <i class="fas fa-sort-amount-up"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                             <div class="space-y-2 max-h-[500px] overflow-y-auto pr-2">
-                                                @if (Model.Chapters != null && Model.Chapters.Where(c => c.IsPublished && c.DeletedAt == null).Any())
+                                                @if (Model.Chapters != null && Model.Chapters.Any())
                                                 {
-                                                    @foreach (var chapter in Model.Chapters.Where(c => c.IsPublished && c.DeletedAt == null).OrderByDescending(c => c.ChapterNumber))
+                                                    @foreach (var chapter in Model.Chapters)
                                                     {
                                                         <a href="@Url.Action("Index", "ReadChapter", new { id = chapter.Id })"
                                                            class="flex justify-between items-center p-3 bg-dark-400 hover:bg-dark-200 rounded-lg transition border border-gray-800">
@@ -1150,41 +1182,95 @@
                                                     </div>
                                                 }
                                             </div>
+
+                                            <!-- Phân trang -->
+                                            @if (ViewBag.TotalPages > 1)
+                                            {
+                                                <div class="flex justify-center mt-4">
+                                                    <nav aria-label="Page navigation">
+                                                        <ul class="flex space-x-2">
+                                                            <!-- Nút Previous -->
+                                                            @if (ViewBag.CurrentPage > 1)
+                                                            {
+                                                                <li>
+                                                                    <a href="@Url.Action("Index", new { id = Model.Id, page = ViewBag.CurrentPage - 1, sortOrder = ViewBag.SortOrder })"
+                                                                       class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800 text-white">
+                                                                        <i class="fas fa-chevron-left"></i>
+                                                                    </a>
+                                                                </li>
+                                                            }
+
+                                                            <!-- Các trang -->
+                                                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                                            {
+                                                                <li>
+                                                                    <a href="@Url.Action("Index", new { id = Model.Id, page = i, sortOrder = ViewBag.SortOrder })"
+                                                                       class="@(i == ViewBag.CurrentPage ? "bg-primary text-white" : "bg-dark-400 text-white hover:bg-dark-200") px-3 py-1 rounded border border-gray-800">
+                                                                        @i
+                                                                    </a>
+                                                                </li>
+                                                            }
+
+                                                            <!-- Nút Next -->
+                                                            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                                                            {
+                                                                <li>
+                                                                    <a href="@Url.Action("Index", new { id = Model.Id, page = ViewBag.CurrentPage + 1, sortOrder = ViewBag.SortOrder })"
+                                                                       class="px-3 py-1 bg-dark-400 rounded hover:bg-dark-200 border border-gray-800 text-white">
+                                                                        <i class="fas fa-chevron-right"></i>
+                                                                    </a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </nav>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
+
+                                    <script>
+                                        function sortChapters(order) {
+                                            window.location.href = '@Url.Action("Index", new { id = Model.Id, page = 1 })' + '&sortOrder=' + order;
+                                        }
+                                    </script>
                                 </div>
                             </div>
 
 
-
+                            <div class="post-title">
                             <h1> Truyện khác</h1>
+                        </div>
                             <br />
                             <div id="c-post-slider-234" class="manga-x-slider no-full-width style-3" data-style="style-3" data-count="4">
                                 <div class="slider_container_custom" role="toolbar">
-                                    @foreach (var comic in ViewBag.Comics as List<Comic>) // Ép kiểu để tránh lỗi
+                                    @if (ViewBag.Comics is List<Comic> comics)
                                     {
-                                        <div class="slider_item">
-                                            <div class="slider_thumb">
-                                                @if (comic.View > 1000)
-                                                {
-                                                    <span class="manga-title-badges custom trending">trending</span>
-                                                }
-                                                else if (comic.Status)
-                                                {
-                                                    <span class="manga-title-badges hot">HOT</span>
-                                                }
+                                        @foreach (var comic in comics.Take(5))
+                                        {
+                                            <div class="slider_item">
+                                                <div class="slider_thumb">
+                                                    @if (comic.View > 1000)
+                                                    {
+                                                        <span class="manga-title-badges custom trending">Trending</span>
+                                                    }
+                                                    else if (comic.Status)
+                                                    {
+                                                        <span class="manga-title-badges hot">HOT</span>
+                                                    }
 
-                                                <div class="slider_thumb-item">
-                                                    <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
-                                                        <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
-                                                    </a>
-                                                    <div class="slider-overlay"></div>
+                                                    <div class="slider_thumb-item">
+                                                        <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
+                                                            <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
+                                                        </a>
+                                                        <div class="slider-overlay"></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        }
                                     }
                                 </div>
                             </div>
+
 
 
                             <!-- comments-area -->
