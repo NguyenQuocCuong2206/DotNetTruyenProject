@@ -12,10 +12,25 @@ namespace DotNetTruyen.Services
         {
             _context = context;
         }
-        public async Task<int> GetUnreadNotificationCountAsync()
+        public async Task<int> GetUnreadNotificationCountAsync(string userId = null, bool isAdmin = false)
         {
-            return await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+            if (isAdmin)
+            {
+
+                return await _context.Notifications
+                    .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
+            }
+            else if (!string.IsNullOrEmpty(userId))
+            {
+
+                return await _context.Notifications
+                    .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == Guid.Parse(userId));
+            }
+            else
+            {
+
+                return 0;
+            }
         }
     }
 }

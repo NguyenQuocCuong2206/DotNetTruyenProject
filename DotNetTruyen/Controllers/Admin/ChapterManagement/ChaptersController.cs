@@ -200,7 +200,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,
@@ -293,7 +293,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 // Update chapter properties
                 chapter.ChapterTitle = model.ChapterTitle;
                 chapter.ChapterNumber = model.ChapterNumber;
-                chapter.PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.UtcNow;
+                chapter.PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.Now;
                 chapter.IsPublished = model.PublishedDate.HasValue;
                 
 
@@ -366,7 +366,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
 
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -457,7 +457,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
 
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,

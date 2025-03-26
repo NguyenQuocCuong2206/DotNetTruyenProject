@@ -15,14 +15,16 @@ namespace DotNetTruyen.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            
             var notifications = await _context.Notifications
-                .Where(n => n.DeletedAt == null)
+                .Where(n => n.DeletedAt == null && n.UserId == null)
                 .OrderByDescending(n => n.CreatedAt)
                 .Take(3)
                 .ToListAsync();
 
+           
             int unreadCount = await _context.Notifications
-                .CountAsync(n => n.DeletedAt == null && !n.IsRead);
+                .CountAsync(n => n.DeletedAt == null && !n.IsRead && n.UserId == null);
 
             ViewBag.UnreadCount = unreadCount;
             ViewBag.HasUnreadNotifications = unreadCount > 0;

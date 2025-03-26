@@ -214,7 +214,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,
@@ -371,7 +371,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
 
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -475,7 +475,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,
