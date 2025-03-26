@@ -18,7 +18,7 @@ namespace DotNetTruyen.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string searchQuery = "", string genre = "", string status = "", int page = 1, int pageSize = 2)
+        public async Task<IActionResult> Index(string searchQuery = "", string genre = "", string status = "", int page = 1, int pageSize = 6)
         {
             var query = _context.Comics
                 .Where(c => c.DeletedAt == null)

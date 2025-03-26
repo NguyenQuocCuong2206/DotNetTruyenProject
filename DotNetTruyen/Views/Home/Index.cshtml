@@ -27,7 +27,15 @@
     <div class="body-wrap">
             <partial name="_HeaderPartial" />
 
+<style>
+.slider__thumb_item {
+    height: 200px; 
+    overflow: hidden; 
+}
 
+
+}
+</style>
 <div class="c-sidebar c-top-sidebar" style="padding:15px 1px;">
     <div class="container-fluid c-container-fluid">
         <div class="row c-row">
@@ -40,8 +48,8 @@
                                 {
                                     <div class="slider__item">
                                         <div class="slider__thumb">
-                                            <div class="slider__thumb_item">
-                                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
+                                            <div class="slider__thumb_item" >
+                                                <a href="@Url.Action("Index","Detail", new { id = comic.Id })" title="@comic.Title">
                                                     <img src="@comic.CoverImage" alt="@comic.Title">
                                                     <div class="slider-overlay"></div>
                                                 </a>
@@ -55,7 +63,7 @@
                                                         {
                                                             <span class="manga-title-badges hot">HOT</span>
                                                         }
-                                                        <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">@comic.Title</a>
+                                                        <a href="@Url.Action("Index","Detail", new { id = comic.Id })">@comic.Title</a>
                                                     </h4>
                                                 </div>
                                             </div>
@@ -158,7 +166,7 @@
                     }
                    
                     <div class="slider__thumb_item">
-                        <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
+                        <a href="@Url.Action("Index","Detail", new { id = comic.Id })">
                             <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
                             <div class="slider-overlay"></div>
                         </a>
@@ -168,7 +176,7 @@
                     <div class="slider__content_item">
                         <div class="post-title font-title">
                             <h4>
-                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">@comic.Title</a>
+                                <a href="@Url.Action("Index","Detail", new { id = comic.Id })">@comic.Title</a>
                             </h4>
                         </div>
                     </div>
@@ -203,7 +211,7 @@
             <div class="slider__item">
                 <div class="slider__thumb">
                     <div class="slider__thumb_item">
-                        <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
+                        <a href="@Url.Action("Index","Detail", new { id = comic.Id })">
                             <img src="@comic.CoverImage" alt="@comic.Title" width="550" height="315">
                             <div class="slider-overlay"></div>
                         </a>
@@ -221,7 +229,7 @@
                                 {
                                     <span class="manga-title-badges hot">HOT</span>
                                 }
-                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">@comic.Title</a>
+                                <a href="@Url.Action("Index","Detail", new { id = comic.Id })">@comic.Title</a>
                                 <!-- Nếu có thể loại trong tương lai, thêm span manga-genres ở đây -->
                             </h4>
                         </div>
@@ -276,15 +284,15 @@
                     {
                         <tr>
                             <td class="thumb">
-                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })" title="@comic.Title">
+                                <a href="@Url.Action("Index","Detail", new { id = comic.Id })" title="@comic.Title">
                                     <img src="@comic.CoverImage" alt="@comic.Title" width="75" height="106">
                                 </a>
                             </td>
                             <td class="title">
-                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })" title="@comic.Title">@comic.Title</a>
+                                <a href="@Url.Action("Index","Detail", new { id = comic.Id })" title="@comic.Title">@comic.Title</a>
                             </td>
                             <td class="release has-thumb free-chap">
-                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })" title="@comic.Title">Details</a>
+                                <a hhref="@Url.Action("Index","Detail", new { id = comic.Id })" title="@comic.Title">Details</a>
                             </td>
                             <td class="author">
                                 <a href="#">@comic.Author</a>
