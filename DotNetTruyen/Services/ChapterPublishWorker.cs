@@ -34,11 +34,9 @@ namespace DotNetTruyen.Services
 
                 try
                 {
-
                     using (var scope = _serviceProvider.CreateScope())
                     {
                         var dbContext = scope.ServiceProvider.GetRequiredService<DotNetTruyenDbContext>();
-
 
                         var chaptersToPublish = await dbContext.Chapters
                             .Include(c => c.Comic)
@@ -48,12 +46,11 @@ namespace DotNetTruyen.Services
                                      && c.PublishedDate <= DateTime.Now)
                             .ToListAsync(stoppingToken);
 
-
                         if (!chaptersToPublish.Any())
                         {
                             _logger.LogInformation("No chapters to publish at this time.");
                             await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
-                            continue; 
+                            continue;
                         }
 
                         foreach (var chapter in chaptersToPublish)
@@ -63,29 +60,43 @@ namespace DotNetTruyen.Services
                             _logger.LogInformation($"Chapter {chapter.ChapterNumber} of Comic {chapter.ComicId} has been published.");
 
 
-                            var notification = new Notification
+                            var followers = await dbContext.Follows
+                                .Where(f => f.ComicId == chapter.ComicId)
+                                .Select(f => f.UserId)
+                                .ToListAsync(stoppingToken);
+
+                            List<Notification> notifications = new List<Notification>();
+
+                            foreach (var userId in followers)
                             {
-                                Id = Guid.NewGuid(),
-                                Title = "Chapter mới được publish",
-                                Message = $"Chapter {chapter.ChapterNumber} của truyện '{chapter.Comic.Title}' đã được đăng.",
-                                Type = "success",
-                                Icon = "check-circle",
-                                Link = $"/Comic/{chapter.ComicId}/Chapter/{chapter.Id}",
-                                IsRead = false
-                            };
+                                var notification = new Notification
+                                {
+                                    Id = Guid.NewGuid(),
+                                    UserId = userId, 
+                                    Title = "Chapter mới được đăng",
+                                    Message = $"Chapter {chapter.ChapterNumber} của truyện '{chapter.Comic.Title}' đã được đăng.",
+                                    Type = "success",
+                                    Icon = "check-circle",
+                                    Link = $"/Comic/{chapter.ComicId}/Chapter/{chapter.Id}",
+                                    IsRead = false,
+                                    CreatedAt = DateTime.Now
+                                };
 
-                            dbContext.Notifications.Add(notification);
+                                notifications.Add(notification);
 
+                                
+                                await _hubContext.Clients.User(userId.ToString()).SendAsync("ReceiveNotification", new
+                                {
+                                    id = notification.Id,
+                                    title = notification.Title,
+                                    message = notification.Message,
+                                    type = notification.Type,
+                                    icon = notification.Icon,
+                                    link = notification.Link
+                                }, stoppingToken);
+                            }
 
-                            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
-                            {
-                                id = notification.Id,
-                                title = notification.Title,
-                                message = notification.Message,
-                                type = notification.Type,
-                                icon = notification.Icon,
-                                link = notification.Link
-                            }, stoppingToken);
+                            dbContext.Notifications.AddRange(notifications);
                         }
 
                         await dbContext.SaveChangesAsync(stoppingToken);
@@ -96,9 +107,9 @@ namespace DotNetTruyen.Services
                     _logger.LogError(ex, "An error occurred while publishing chapters.");
                 }
 
-
                 await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
             }
         }
+
     }
 }

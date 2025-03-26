@@ -31,7 +31,7 @@ namespace DotNetTruyen.Services
             if (user.Level == null)
             {
                 _logger.LogInformation("User {UserId} has no level in GetUserLevelInfoAsync, creating Level 0.", userId);
-                user.Level = await GetOrCreateLevel0Async();
+                user.Level = await GetLevel0Async();
                 user.LevelId = user.Level.Id;
                 await _context.SaveChangesAsync();
             }
@@ -71,26 +71,15 @@ namespace DotNetTruyen.Services
             };
         }
 
-        private async Task<Level> GetOrCreateLevel0Async()
+        private async Task<Level> GetLevel0Async()
         {
             var level = await _context.Levels
                 .AsNoTracking()
-                .Where(l => l.LevelNumber == 0 && l.DeletedAt == null)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(l => l.LevelNumber == 0 && l.DeletedAt == null);
 
             if (level == null)
             {
-                level = new Level
-                {
-                    Id = Guid.NewGuid(),
-                    LevelNumber = 0,
-                    Name = "Level 0",
-                    ExpRequired = 0,
-                    UpdatedAt = DateTime.Now
-                };
-                _context.Levels.Add(level);
-                await _context.SaveChangesAsync();
-                _logger.LogInformation("Created new Level 0 in database.");
+                throw new Exception("Level 0 not found in the database. Please ensure it exists.");
             }
 
             return level;
