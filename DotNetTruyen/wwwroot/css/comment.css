@@ -45,3 +45,7 @@
     height: 800px;
     overflow: auto; /* Hiển thị thanh cuộn khi nội dung tràn */
 }
+
+a.bg-dark:hover {
+    background-color: #030d09 !important;
+}
