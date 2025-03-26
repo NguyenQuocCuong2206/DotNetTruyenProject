@@ -29,8 +29,9 @@ namespace DotNetTruyen.Controllers
             _hubContext = hubContext;
         }
 
-        public async Task<IActionResult> Index(Guid id)
+        public async Task<IActionResult> Index(Guid id, int page = 1, string sortOrder = "desc")
         {
+            int pageSizeChapter = 5;
             var comic = await _context.Comics
                 .Include(c => c.Chapters)
                 .Include(c => c.ComicGenres)
@@ -38,7 +39,22 @@ namespace DotNetTruyen.Controllers
                 .Include(c => c.Follows)
                 .Include(c => c.Likes)
                 .FirstOrDefaultAsync(c => c.Id == id);
+            var chaptersQuery = comic.Chapters
+               .Where(c => c.IsPublished && c.DeletedAt == null);
 
+            // Sắp xếp theo sortOrder
+            var orderedChapters = sortOrder == "asc"
+                ? chaptersQuery.OrderBy(c => c.ChapterNumber).ToList()
+                : chaptersQuery.OrderByDescending(c => c.ChapterNumber).ToList();
+
+            // Phân trang
+            int totalChapters = orderedChapters.Count;
+            int totalPages = (int)Math.Ceiling(totalChapters / (double)pageSizeChapter);
+
+            var pagedChapters = orderedChapters
+                .Skip((page - 1) * pageSizeChapter)
+                .Take(pageSizeChapter)
+                .ToList();
             if (comic == null)
                 return NotFound();
             if (User.Identity.IsAuthenticated)
@@ -79,6 +95,16 @@ namespace DotNetTruyen.Controllers
             ViewBag.TotalComments = totalTopLevelComments;
             ViewBag.PageSize = pageSize;
             ViewBag.ComicId = id;
+
+            // Truyền thông tin phân trang và sortOrder vào ViewBag
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalChapters = totalChapters;
+            ViewBag.PageSizeChapter = pageSizeChapter;
+            ViewBag.SortOrder = sortOrder;
+
+            // Gán danh sách chương đã phân trang vào Model.Chapters
+            comic.Chapters = pagedChapters;
             return View(comic);
         }
 
