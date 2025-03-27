@@ -30,8 +30,7 @@ namespace DotNetTruyen.Controllers.Admin
 
         public async Task<IActionResult> Index()
         {
-            
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             var currentMonthStart = new DateTime(now.Year, now.Month, 1);
             var previousMonthStart = currentMonthStart.AddMonths(-1);
             var previousMonthEnd = currentMonthStart.AddDays(-1);
@@ -39,7 +38,9 @@ namespace DotNetTruyen.Controllers.Admin
             
             var totalComics = await _context.Comics.CountAsync(c => c.DeletedAt == null);
             var totalChapters = await _context.Chapters.CountAsync(c => c.DeletedAt == null);
-            var totalViews = await _context.Chapters.SumAsync(c => c.Views);
+            var totalViews = await _context.Comics
+                .Where(c => c.DeletedAt == null)
+                .SumAsync(c => c.View); 
             var totalUsers = await _context.Users.CountAsync();
 
             
@@ -49,7 +50,12 @@ namespace DotNetTruyen.Controllers.Admin
                 .CountAsync(c => c.DeletedAt == null && c.CreatedAt < currentMonthStart);
             var previousViews = await _context.Chapters
                 .Where(c => c.DeletedAt == null && c.PublishedDate.HasValue && c.PublishedDate.Value < currentMonthStart)
-                .SumAsync(c => c.Views);
+                .Join(_context.Comics,
+                      chapter => chapter.ComicId,
+                      comic => comic.Id,
+                      (chapter, comic) => new { Comic = comic })
+                .Where(c => c.Comic.DeletedAt == null)
+                .SumAsync(c => c.Comic.View); 
 
             
             double comicsChangePercentage = previousComics > 0 ?
@@ -58,7 +64,7 @@ namespace DotNetTruyen.Controllers.Admin
                 ((double)(totalChapters - previousChapters) / previousChapters * 100) : 0;
             double viewsChangePercentage = previousViews > 0 ?
                 ((double)(totalViews - previousViews) / previousViews * 100) : 0;
-            double usersChangePercentage = 0; 
+            double usersChangePercentage = 0;
 
             
             var recentChapters = await _context.Chapters
@@ -77,6 +83,7 @@ namespace DotNetTruyen.Controllers.Admin
                 })
                 .ToListAsync();
 
+     
             var topGenres = await _context.Genres
                 .Include(g => g.ComicGenres)
                 .Where(g => g.DeletedAt == null)
@@ -90,14 +97,20 @@ namespace DotNetTruyen.Controllers.Admin
                 .Take(5)
                 .ToListAsync();
 
+           
             var viewsByMonthRaw = await _context.Chapters
                 .Where(c => c.DeletedAt == null && c.PublishedDate.HasValue)
-                .GroupBy(c => new { c.PublishedDate.Value.Year, c.PublishedDate.Value.Month })
+                .Join(_context.Comics,
+                      chapter => chapter.ComicId,
+                      comic => comic.Id,
+                      (chapter, comic) => new { Chapter = chapter, Comic = comic })
+                .Where(c => c.Comic.DeletedAt == null)
+                .GroupBy(c => new { c.Chapter.PublishedDate.Value.Year, c.Chapter.PublishedDate.Value.Month })
                 .Select(g => new
                 {
                     Year = g.Key.Year,
                     Month = g.Key.Month,
-                    TotalViews = g.Sum(c => c.Views)
+                    TotalViews = g.Sum(c => c.Comic.View) 
                 })
                 .OrderBy(g => g.Year)
                 .ThenBy(g => g.Month)
@@ -127,7 +140,7 @@ namespace DotNetTruyen.Controllers.Admin
                 ComicsChangePercentage = comicsChangePercentage,
                 ChaptersChangePercentage = chaptersChangePercentage,
                 ViewsChangePercentage = viewsChangePercentage,
-                UsersChangePercentage = usersChangePercentage, // Sẽ là 0
+                UsersChangePercentage = usersChangePercentage,
                 RecentChapters = recentChapters,
                 TopGenres = topGenres,
                 ViewsByMonthLabels = lastSixMonths.Select(v => v.YearMonth).ToList(),
