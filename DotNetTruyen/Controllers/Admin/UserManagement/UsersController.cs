@@ -18,7 +18,7 @@ using OfficeOpenXml;
 
 namespace DotNetTruyen.Controllers.Admin.UserManagement
 {
-    [Authorize(Policy = "CanManageUser")]
+    [Authorize(Policy = "CanManageAdvertise")]
     public class UsersController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
