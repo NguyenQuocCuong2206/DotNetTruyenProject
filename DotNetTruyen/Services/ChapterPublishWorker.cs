@@ -77,7 +77,7 @@ namespace DotNetTruyen.Services
                                     Message = $"Chapter {chapter.ChapterNumber} của truyện '{chapter.Comic.Title}' đã được đăng.",
                                     Type = "success",
                                     Icon = "check-circle",
-                                    Link = $"/Comic/{chapter.ComicId}/Chapter/{chapter.Id}",
+                                    Link = $"/ReadChapter/Index/{chapter.Id}",
                                     IsRead = false,
                                     CreatedAt = DateTime.Now
                                 };

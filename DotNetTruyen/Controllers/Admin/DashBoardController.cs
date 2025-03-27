@@ -31,10 +31,34 @@ namespace DotNetTruyen.Controllers.Admin
         public async Task<IActionResult> Index()
         {
             
+            var now = DateTime.UtcNow;
+            var currentMonthStart = new DateTime(now.Year, now.Month, 1);
+            var previousMonthStart = currentMonthStart.AddMonths(-1);
+            var previousMonthEnd = currentMonthStart.AddDays(-1);
+
+            
             var totalComics = await _context.Comics.CountAsync(c => c.DeletedAt == null);
             var totalChapters = await _context.Chapters.CountAsync(c => c.DeletedAt == null);
             var totalViews = await _context.Chapters.SumAsync(c => c.Views);
             var totalUsers = await _context.Users.CountAsync();
+
+            
+            var previousComics = await _context.Comics
+                .CountAsync(c => c.DeletedAt == null && c.CreatedAt < currentMonthStart);
+            var previousChapters = await _context.Chapters
+                .CountAsync(c => c.DeletedAt == null && c.CreatedAt < currentMonthStart);
+            var previousViews = await _context.Chapters
+                .Where(c => c.DeletedAt == null && c.PublishedDate.HasValue && c.PublishedDate.Value < currentMonthStart)
+                .SumAsync(c => c.Views);
+
+            
+            double comicsChangePercentage = previousComics > 0 ?
+                ((double)(totalComics - previousComics) / previousComics * 100) : 0;
+            double chaptersChangePercentage = previousChapters > 0 ?
+                ((double)(totalChapters - previousChapters) / previousChapters * 100) : 0;
+            double viewsChangePercentage = previousViews > 0 ?
+                ((double)(totalViews - previousViews) / previousViews * 100) : 0;
+            double usersChangePercentage = 0; 
 
             
             var recentChapters = await _context.Chapters
@@ -49,11 +73,10 @@ namespace DotNetTruyen.Controllers.Admin
                     ComicTitle = c.Comic.Title,
                     PublishedDate = c.PublishedDate,
                     IsPublished = c.IsPublished,
-                    Thumbnail =  c.Comic.CoverImage
+                    Thumbnail = c.Comic.CoverImage
                 })
                 .ToListAsync();
 
-            // Thể loại nổi bật
             var topGenres = await _context.Genres
                 .Include(g => g.ComicGenres)
                 .Where(g => g.DeletedAt == null)
@@ -67,7 +90,6 @@ namespace DotNetTruyen.Controllers.Admin
                 .Take(5)
                 .ToListAsync();
 
-            
             var viewsByMonthRaw = await _context.Chapters
                 .Where(c => c.DeletedAt == null && c.PublishedDate.HasValue)
                 .GroupBy(c => new { c.PublishedDate.Value.Year, c.PublishedDate.Value.Month })
@@ -81,7 +103,6 @@ namespace DotNetTruyen.Controllers.Admin
                 .ThenBy(g => g.Month)
                 .ToListAsync();
 
-            
             var lastSixMonths = viewsByMonthRaw
                 .OrderByDescending(v => v.Year * 100 + v.Month)
                 .Take(6)
@@ -89,7 +110,6 @@ namespace DotNetTruyen.Controllers.Admin
                 .Select(v => new { YearMonth = $"{v.Month}/{v.Year}", v.TotalViews })
                 .ToList();
 
-            // Lấy 6 tháng trước đó
             var previousSixMonths = viewsByMonthRaw
                 .OrderByDescending(v => v.Year * 100 + v.Month)
                 .Skip(6)
@@ -104,6 +124,10 @@ namespace DotNetTruyen.Controllers.Admin
                 TotalChapters = totalChapters,
                 TotalViews = totalViews,
                 TotalUsers = totalUsers,
+                ComicsChangePercentage = comicsChangePercentage,
+                ChaptersChangePercentage = chaptersChangePercentage,
+                ViewsChangePercentage = viewsChangePercentage,
+                UsersChangePercentage = usersChangePercentage, // Sẽ là 0
                 RecentChapters = recentChapters,
                 TopGenres = topGenres,
                 ViewsByMonthLabels = lastSixMonths.Select(v => v.YearMonth).ToList(),
@@ -116,20 +140,7 @@ namespace DotNetTruyen.Controllers.Admin
         }
 
 
-        // GET: DashBoardController/Details/5
-        public async Task<IActionResult> Details()
-        {
-            var claims = User.Claims;
-            await _userService.IncreaseExpAsync(_context, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
-            
-            foreach (var claim in claims)
-            {
-                _logger.LogWarning($"Claim Type: {claim.Type}, Value: {claim.Value}");
-            }
 
-
-            return View("~/Views/Admin/Dashboard/Detail.cshtml", claims);
-        }
 
         // GET: DashBoardController/Create
         public ActionResult Create()
