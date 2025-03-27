@@ -262,8 +262,8 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
                             var userId = worksheet.Cells[row, 1].Text;
                             var displayName = worksheet.Cells[row, 2].Text;
                             var username = worksheet.Cells[row, 3].Text;
-                            var email = worksheet.Cells[row, 4].Text;
-                            var password = worksheet.Cells[row, 5].Text;
+                            var password = worksheet.Cells[row, 4].Text;
+                            var email = worksheet.Cells[row, 5].Text;
                             var roles = worksheet.Cells[row, 6].Text.Split(',').Select(r => r.Trim()).ToList();
                             var status = worksheet.Cells[row, 7].Text;
 
@@ -280,7 +280,8 @@ namespace DotNetTruyen.Controllers.Admin.UserManagement
                                 UserName = username,
                                 Email = email,
                                 NameToDisplay = displayName,
-                                LockoutEnd = (status == "Hoạt động") ? null : DateTimeOffset.MaxValue
+                                LockoutEnd = (status == "Hoạt động") ? null : DateTimeOffset.MaxValue,
+                                EmailConfirmed = true
                             };
                             IdentityResult result;
 
