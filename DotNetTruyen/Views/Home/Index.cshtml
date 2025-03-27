@@ -272,9 +272,38 @@
                             <div role="tabpanel" class="c-tabs-item">
                                 <div>
 									<table class="manga-shortcodes manga-chapters-listing"><tbody>
-               @{
-    var comicsList = Model.OrderByDescending(c => c.CreatedAt).ToList(); // Lấy danh sách truyện
+        @{
+    // Sắp xếp comicsList theo PublishedDate của chapter mới nhất và lọc bỏ các comic không có chapter được xuất bản
+    var comicsList = Model
+        .Where(c => c.Chapters != null && c.Chapters.Any(ch => ch.IsPublished)) // Chỉ giữ lại comic có ít nhất 1 chapter được xuất bản
+        .OrderByDescending(c => c.Chapters
+            .Where(ch => ch.IsPublished)
+            .Max(ch => (DateTime?)ch.PublishedDate) ?? c.CreatedAt)
+        .ToList();
+
+  
+    var comicsListForJs = comicsList.Select(comic => new
+    {
+        id = comic.Id,
+        title = comic.Title,
+        coverImage = comic.CoverImage,
+        author = comic.Author,
+        createdAt = comic.CreatedAt?.ToString("yyyy-MM-ddTHH:mm:ss"),
+        latestChapter = comic.Chapters?
+            .Where(ch => ch.IsPublished)
+            .OrderByDescending(ch => ch.PublishedDate)
+            .FirstOrDefault() != null
+            ? new
+            {
+                id = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().Id,
+                chapterTitle = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().ChapterTitle,
+                chapterNumber = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().ChapterNumber,
+                publishedDate = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().PublishedDate?.ToString("yyyy-MM-ddTHH:mm:ss") // Thêm PublishedDate
+            }
+            : null
+    }).ToList();
 }
+
 <div class="tab-content-wrap">
     <div role="tabpanel" class="c-tabs-item">
         <div>
@@ -282,25 +311,36 @@
                 <tbody id="comic-list">
                     @foreach (var comic in comicsList.Take(5))
                     {
+                        var latestChapter = comic.Chapters?.Where(c => c.IsPublished).OrderByDescending(c => c.PublishedDate).FirstOrDefault();
+                        
                         <tr>
                             <td class="thumb">
-                                <a href="@Url.Action("Index","Detail", new { id = comic.Id })" title="@comic.Title">
+                                <a href="@Url.Action("Index", "Detail", new { id = comic.Id })" title="@comic.Title">
                                     <img src="@comic.CoverImage" alt="@comic.Title" width="75" height="106">
                                 </a>
                             </td>
                             <td class="title">
-                                <a href="@Url.Action("Index","Detail", new { id = comic.Id })" title="@comic.Title">@comic.Title</a>
+                                <a href="@Url.Action("Index", "Detail", new { id = comic.Id })" title="@comic.Title">@comic.Title</a>
                             </td>
                             <td class="release has-thumb free-chap">
-                                <a hhref="@Url.Action("Index","Detail", new { id = comic.Id })" title="@comic.Title">Details</a>
+                                @if (latestChapter != null)
+                                {
+                                    <a href="@Url.Action("Index", "ReadChapter", new { id = latestChapter.Id })" 
+                                       title="@(latestChapter.ChapterTitle ?? "Chapter " + latestChapter.ChapterNumber)">
+                                        @(latestChapter.ChapterTitle ?? "Chapter " + latestChapter.ChapterNumber)
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span>No chapters available</span>
+                                }
                             </td>
                             <td class="author">
                                 <a href="#">@comic.Author</a>
                             </td>
                             <td class="time">
-                                <span class="post-on font-meta">@(comic.CreatedAt?.ToString("MMMM d, yyyy") ?? "N/A")</span>
+                                <span class="post-on font-meta">@(latestChapter != null ? latestChapter.PublishedDate?.ToString("d MMMM, yyyy", new System.Globalization.CultureInfo("vi-VN")) : "N/A")</span>
                                 <span style="font-weight: 900;"> • </span>
-                                <span class="post-on font-meta type">Comic</span>
                             </td>
                         </tr>
                     }
@@ -319,7 +359,10 @@
 
 <!-- Truyền danh sách truyện sang JavaScript -->
 <script>
-    var comics = @Html.Raw(Json.Serialize(comicsList)); // Lưu danh sách truyện
+    var comics = @Html.Raw(Json.Serialize(comicsListForJs)); // Sử dụng danh sách mới có thông tin chapter
+    // Lọc lại để chỉ giữ các comic có latestChapter
+    comics = comics.filter(comic => comic.latestChapter != null);
+    
     var pageSize = 5; // Số truyện trên mỗi trang
     var currentPage = 1; // Trang hiện tại
     var totalPages = Math.ceil(comics.length / pageSize); // Tổng số trang
@@ -344,15 +387,17 @@
                     <a href="/Comic/Detail/${comic.id}" title="${comic.title}">${comic.title}</a>
                 </td>
                 <td class="release has-thumb free-chap">
-                    <a href="/Comic/Detail/${comic.id}" title="${comic.title}">Details</a>
+                    <a href="/ReadChapter/Index/${comic.latestChapter.id}" 
+                        title="${comic.latestChapter.chapterTitle || "Chapter " + comic.latestChapter.chapterNumber}">
+                        ${comic.latestChapter.chapterTitle || "Chapter " + comic.latestChapter.chapterNumber}
+                    </a>
                 </td>
                 <td class="author">
                     <a href="#">${comic.author}</a>
                 </td>
                 <td class="time">
-                    <span class="post-on font-meta">${comic.createdAt ?? "N/A"}</span>
+                    <span class="post-on font-meta">${comic.latestChapter && comic.latestChapter.publishedDate ? new Date(comic.latestChapter.publishedDate).toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' }) : "N/A"}</span>
                     <span style="font-weight: 900;"> • </span>
-                   @*  <span class="post-on font-meta type">Comic</span> *@
                 </td>
             `;
             comicList.appendChild(tr);
@@ -402,7 +447,6 @@
 
     renderPage(); // Gọi lần đầu để hiển thị dữ liệu
 </script>
-
 
 
 </tbody>
