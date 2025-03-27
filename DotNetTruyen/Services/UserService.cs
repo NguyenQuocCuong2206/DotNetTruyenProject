@@ -197,5 +197,36 @@ namespace DotNetTruyen.Services
             await context.SaveChangesAsync();
             _logger.LogInformation("Added new level {LevelNumber} - {Name} with ExpRequired {ExpRequired}.", levelNumber, name, expRequired);
         }
-    }
+
+		public async Task<string> GetUserLevelNameAsync(DotNetTruyenDbContext _context, Guid userId)
+		{
+			try
+			{
+				var user = await _context.Users
+					.Include(u => u.Level)
+					.FirstOrDefaultAsync(u => u.Id == userId);
+
+				if (user == null)
+				{
+					_logger.LogWarning("User with ID {UserId} not found in GetUserLevelNameAsync.", userId);
+					throw new Exception("User not found.");
+				}
+
+				if (user.Level == null)
+				{
+					_logger.LogInformation("User {UserId} has no level in GetUserLevelNameAsync, assigning Level 0.", userId);
+					user.Level = await GetLevel0Async(_context);
+					user.LevelId = user.Level.Id;
+					await _context.SaveChangesAsync();
+				}
+
+				return user.Level.Name ?? "Unknown Level";
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error occurred while getting level name for user {UserId}", userId);
+				throw;
+			}
+		}
+	}
 }

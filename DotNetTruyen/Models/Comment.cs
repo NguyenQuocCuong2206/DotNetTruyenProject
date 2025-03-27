@@ -20,5 +20,7 @@ namespace DotNetTruyen.Models
         public User User { get; set; }
         [NotMapped]
         public int? ReplyCount { get; set; }
-    }
+		[NotMapped]
+		public string? UserLevel { get; set; }
+	}
 }

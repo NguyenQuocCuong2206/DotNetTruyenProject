@@ -2,6 +2,7 @@
 using DotNetTruyen.Data;
 using DotNetTruyen.Hubs;
 using DotNetTruyen.Models;
+using DotNetTruyen.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,14 @@ namespace DotNetTruyen.Controllers
         private readonly UserManager<User> _userManager;
         private readonly ICompositeViewEngine _viewEngine;
         private readonly IHubContext<CommentHub> _hubContext;
-        public DetailController(DotNetTruyenDbContext context, UserManager<User> userManager, ICompositeViewEngine viewEngine, IHubContext<CommentHub> hubContext)
+        private readonly UserService _userService;
+        public DetailController(DotNetTruyenDbContext context, UserManager<User> userManager, ICompositeViewEngine viewEngine, IHubContext<CommentHub> hubContext,UserService userService)
         {
             _context = context;
             _userManager = userManager;
             _viewEngine = viewEngine;
             _hubContext = hubContext;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index(Guid id, int page = 1, string sortOrder = "desc")
@@ -89,6 +92,7 @@ namespace DotNetTruyen.Controllers
             foreach (var comment in topLevelComments)
             {
                 comment.ReplyCount = await _context.Comments.CountAsync(c => c.CommentId == comment.Id);
+                comment.UserLevel = await _userService.GetUserLevelNameAsync(_context, comment.UserId);
             }
 
             ViewBag.Comments = topLevelComments;
@@ -125,6 +129,7 @@ namespace DotNetTruyen.Controllers
             foreach (var comment in comments)
             {
                 comment.ReplyCount = await  _context.Comments.CountAsync(c => c.CommentId == comment.Id);
+                comment.UserLevel = await _userService.GetUserLevelNameAsync(_context, comment.UserId);
             }
 
             // Return the comments as a partial view
@@ -147,7 +152,8 @@ namespace DotNetTruyen.Controllers
                 UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)),
                 ComicId = comicId,
                 CommentId = parentId,
-                ReplyCount = 0 // New comment has no replies initially
+                ReplyCount = 0, // New comment has no replies initially
+                UserLevel = await _userService.GetUserLevelNameAsync(_context, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
             };
 
             _context.Comments.Add(comment);
@@ -187,6 +193,7 @@ namespace DotNetTruyen.Controllers
             foreach (var comment in replies)
             {
                 comment.ReplyCount = await _context.Comments.CountAsync(c => c.CommentId == comment.Id);
+                comment.UserLevel = await _userService.GetUserLevelNameAsync(_context, comment.UserId);
             }
 
             // Return the replies as a partial view
@@ -272,7 +279,7 @@ namespace DotNetTruyen.Controllers
             return Json(new { success = true });
         }
         [HttpGet]
-        public IActionResult GetComments(Guid comicId, int skip = 0)
+        public async Task<IActionResult> GetComments(Guid comicId, int skip = 0)
         {
             const int pageSize = 5;
 
@@ -290,6 +297,7 @@ namespace DotNetTruyen.Controllers
             foreach (var comment in comments)
             {
                 comment.ReplyCount = _context.Comments.Count(c => c.CommentId == comment.Id);
+                comment.UserLevel = await _userService.GetUserLevelNameAsync(_context, comment.UserId);
             }
 
             return Json(new
