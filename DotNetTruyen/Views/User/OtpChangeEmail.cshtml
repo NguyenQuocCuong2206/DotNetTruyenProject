@@ -594,7 +594,7 @@
                         <h3>
                             <p>Nhập mã OTP được gửi qua email mới thay đổi</p>
                         </h3>
-                    @if (string.IsNullOrEmpty(ViewBag.ErrorOtpChangeEmail))
+                    @if (!string.IsNullOrEmpty(ViewBag.ErrorOtpChangeEmail))
                         {
                         <p class="text-danger">@ViewBag.ErrorOtpChangeEmail</p>
                         }
