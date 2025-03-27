@@ -132,12 +132,17 @@ namespace DotNetTruyen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangeEmail(string newEmail)
+        public async Task<IActionResult> ChangeEmail(string newEmail,string confirmpass)
         {
             ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
+            
             if (user != null)
             {
+                if (!await _userManager.CheckPasswordAsync(user, confirmpass)){
+                    ViewBag.UpdateErrorMess = "Mật khẩu không chính xác";
+                    return View("UserProfile");
+                }
                 string otp = _otpService.GenerateOtp(newEmail);
                 await _emailService.SendEmailAsync(newEmail, "Mã OTP xác thực đổi email", $"Mã OTP của bạn là: <b>{otp}</b>");
                 ViewBag.Email = newEmail;

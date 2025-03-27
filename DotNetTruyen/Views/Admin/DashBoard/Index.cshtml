@@ -84,9 +84,9 @@
         </div>
         <div class="row">
             <div class="col-lg-9">
-                <div class="chart mb-4">
+                @* <div class="chart mb-4">
                     <canvas id="viewsChart" aria-label="Views statistics" role="img"></canvas>
-                </div>
+                </div> *@
                 <div class="users-table table-wrapper">
                     <h3 class="mt-4 mb-3">Chương gần đây</h3>
                     @if (!Model.RecentChapters.Any())
@@ -328,11 +328,11 @@
                             }
                         },
                         datalabels: {
-                            color: '#fff', // Màu chữ trắng để nổi trên nền màu
+                            color: '#fff', 
                             formatter: (value, context) => {
                                 const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                const percentage = ((value / total) * 100).toFixed(1); // Tính phần trăm
-                                return `${value} (${percentage}%)`; // Hiển thị số liệu + phần trăm
+                                const percentage = ((value / total) * 100).toFixed(1); 
+                                return `${value} (${percentage}%)`; 
                             },
                             font: {
                                 weight: 'bold',

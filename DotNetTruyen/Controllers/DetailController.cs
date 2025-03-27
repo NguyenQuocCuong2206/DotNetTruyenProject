@@ -316,7 +316,7 @@ namespace DotNetTruyen.Controllers
                 Console.WriteLine($"Received Comic ID: {request.Id}");
                 if (!User.Identity.IsAuthenticated)
                 {
-                    return Json(new { success = false, message = "Vui lòng đăng nhập để theo dõi" });
+                    return Unauthorized(new { success = false, message = "Vui lòng đăng nhập" });
                 }
 
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -383,7 +383,7 @@ namespace DotNetTruyen.Controllers
                 Console.WriteLine($"Received Comic ID for Like: {request.Id}");
                 if (!User.Identity.IsAuthenticated)
                 {
-                    return Json(new { success = false, message = "Vui lòng đăng nhập để thích" });
+                    return Unauthorized(new { success = false, message = "Vui lòng đăng nhập" });
                 }
 
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

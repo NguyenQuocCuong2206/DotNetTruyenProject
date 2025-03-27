@@ -369,7 +369,7 @@ var comicsListForJs = comicsList.Select(comic => new
 <!-- Truyền danh sách truyện sang JavaScript -->
 <script>
     var comics = @Html.Raw(Json.Serialize(comicsListForJs));
-    var currentDate = new Date('2025-03-27T00:00:00'); // Ngày hiện tại: 27/03/2025
+    var currentDate = new Date();
 
     // Lọc các comic có latestChapter.publishedDate <= ngày hiện tại
     comics = comics.filter(comic => 
