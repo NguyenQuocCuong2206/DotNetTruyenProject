@@ -151,23 +151,16 @@
 
 						
 
-<div class="x-heading"><h2 style="color:">Truyện hay</h2><div class="sub-links"><a style="color:" href="https://live.mangabooth.com/x/manga/"></a></div></div>
-<div style="height:18px" aria-hidden="true" class="wp-block-spacer"></div>
-
-<div id="c-post-slider-139" class="manga-slider style-1 no-padding" data-style="style-1" data-count="5">
-    <div class="slider__container_custom" role="toolbar">
-        @foreach (var comic in Model.Where(m => m.View > 100).OrderByDescending(m => m.View)) 
+<div class="x-heading"><h2 style="color:">Truyện hay</h2><div class="sub-links"></div></div>
+<div id="c-post-slider-598" class="manga-slider style-2" data-style="style-2" data-count="3">
+    <div class="slider__container" role="toolbar">
+        @foreach (var comic in Model.Take(5).Where(c => c.View > 100)) 
         {
             <div class="slider__item">
                 <div class="slider__thumb">
-                    @if (comic.View > 100) //  Hiển thị "trending" nếu lượt xem > 1000
-                    {
-                        <span class="manga-title-badges custom trending">trending</span>
-                    }
-                   
                     <div class="slider__thumb_item">
                         <a href="@Url.Action("Index","Detail", new { id = comic.Id })">
-                            <img src="@comic.CoverImage" alt="@comic.Title" width="250" height="500">
+                            <img src="@comic.CoverImage" alt="@comic.Title" width="450" height="450">
                             <div class="slider-overlay"></div>
                         </a>
                     </div>
@@ -176,19 +169,22 @@
                     <div class="slider__content_item">
                         <div class="post-title font-title">
                             <h4>
+                                @if (comic.View > 100) 
+                                {
+                                    <span class="manga-title-badges custom trending">trending</span>
+                                }
                                 <a href="@Url.Action("Index","Detail", new { id = comic.Id })">@comic.Title</a>
                             </h4>
                         </div>
                     </div>
                 </div>
-               @*  <div class="slider__meta">
-                    <span class="manga-chapter-type">Truyện</span>
-                </div> *@
+                <div class="slider__meta">
+                    <span class="manga-chapter-type">Comic</span>
+                </div>
             </div>
         }
     </div>
 </div>
-
         
 
 						
@@ -274,34 +270,47 @@
 									<table class="manga-shortcodes manga-chapters-listing"><tbody>
         @{
     // Sắp xếp comicsList theo PublishedDate của chapter mới nhất và lọc bỏ các comic không có chapter được xuất bản
-    var comicsList = Model
-        .Where(c => c.Chapters != null && c.Chapters.Any(ch => ch.IsPublished)) // Chỉ giữ lại comic có ít nhất 1 chapter được xuất bản
-        .OrderByDescending(c => c.Chapters
-            .Where(ch => ch.IsPublished)
-            .Max(ch => (DateTime?)ch.PublishedDate) ?? c.CreatedAt)
-        .ToList();
+   var currentDate = DateTime.Now; // Ngày hiện tại: 27/03/2025
 
-  
-    var comicsListForJs = comicsList.Select(comic => new
-    {
-        id = comic.Id,
-        title = comic.Title,
-        coverImage = comic.CoverImage,
-        author = comic.Author,
-        createdAt = comic.CreatedAt?.ToString("yyyy-MM-ddTHH:mm:ss"),
-        latestChapter = comic.Chapters?
-            .Where(ch => ch.IsPublished)
-            .OrderByDescending(ch => ch.PublishedDate)
-            .FirstOrDefault() != null
-            ? new
-            {
-                id = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().Id,
-                chapterTitle = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().ChapterTitle,
-                chapterNumber = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().ChapterNumber,
-                publishedDate = comic.Chapters.Where(ch => ch.IsPublished).OrderByDescending(ch => ch.PublishedDate).First().PublishedDate?.ToString("yyyy-MM-ddTHH:mm:ss") // Thêm PublishedDate
-            }
-            : null
-    }).ToList();
+var comicsList = Model
+    .Where(c => c.Chapters != null && c.Chapters.Any(ch => ch.IsPublished && ch.PublishedDate.HasValue && ch.PublishedDate.Value <= currentDate)) 
+    .OrderByDescending(c => c.Chapters
+        .Where(ch => ch.IsPublished && ch.PublishedDate.HasValue && ch.PublishedDate.Value <= currentDate)
+        .Max(ch => (DateTime?)ch.PublishedDate) ?? c.CreatedAt)
+    .ToList();
+
+var comicsListForJs = comicsList.Select(comic => new
+{
+    id = comic.Id,
+    title = comic.Title,
+    coverImage = comic.CoverImage,
+    author = comic.Author,
+    createdAt = comic.CreatedAt?.ToString("yyyy-MM-ddTHH:mm:ss"),
+    latestChapter = comic.Chapters?
+        .Where(ch => ch.IsPublished && ch.PublishedDate.HasValue && ch.PublishedDate.Value <= currentDate)
+        .OrderByDescending(ch => ch.PublishedDate)
+        .FirstOrDefault() != null
+        ? new
+        {
+            id = comic.Chapters
+                .Where(ch => ch.IsPublished && ch.PublishedDate.HasValue && ch.PublishedDate.Value <= currentDate)
+                .OrderByDescending(ch => ch.PublishedDate)
+                .First().Id,
+            chapterTitle = comic.Chapters
+                .Where(ch => ch.IsPublished && ch.PublishedDate.HasValue && ch.PublishedDate.Value <= currentDate)
+                .OrderByDescending(ch => ch.PublishedDate)
+                .First().ChapterTitle,
+            chapterNumber = comic.Chapters
+                .Where(ch => ch.IsPublished && ch.PublishedDate.HasValue && ch.PublishedDate.Value <= currentDate)
+                .OrderByDescending(ch => ch.PublishedDate)
+                .First().ChapterNumber,
+            publishedDate = comic.Chapters
+                .Where(ch => ch.IsPublished && ch.PublishedDate.HasValue && ch.PublishedDate.Value <= currentDate)
+                .OrderByDescending(ch => ch.PublishedDate)
+                .First().PublishedDate?.ToString("yyyy-MM-ddTHH:mm:ss")
+        }
+        : null
+}).ToList();
 }
 
 <div class="tab-content-wrap">
@@ -359,9 +368,14 @@
 
 <!-- Truyền danh sách truyện sang JavaScript -->
 <script>
-    var comics = @Html.Raw(Json.Serialize(comicsListForJs)); // Sử dụng danh sách mới có thông tin chapter
-    // Lọc lại để chỉ giữ các comic có latestChapter
-    comics = comics.filter(comic => comic.latestChapter != null);
+    var comics = @Html.Raw(Json.Serialize(comicsListForJs));
+    var currentDate = new Date('2025-03-27T00:00:00'); // Ngày hiện tại: 27/03/2025
+
+    // Lọc các comic có latestChapter.publishedDate <= ngày hiện tại
+    comics = comics.filter(comic => 
+        comic.latestChapter != null && 
+        new Date(comic.latestChapter.publishedDate) <= currentDate
+    );
     
     var pageSize = 5; // Số truyện trên mỗi trang
     var currentPage = 1; // Trang hiện tại
