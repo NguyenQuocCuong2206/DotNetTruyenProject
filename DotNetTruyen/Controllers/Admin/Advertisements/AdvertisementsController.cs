@@ -9,10 +9,12 @@ using DotNetTruyen.Data;
 using DotNetTruyen.Models;
 using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels.Management;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.Advertisement
 {
-    public class AdvertisementsController : Controller
+	[Authorize(Policy = "CanManageUser")]
+	public class AdvertisementsController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IPhoToService _photoService;

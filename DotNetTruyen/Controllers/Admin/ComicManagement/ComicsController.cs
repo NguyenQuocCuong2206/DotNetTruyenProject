@@ -12,10 +12,12 @@ using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels.Management;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.ComicManagement
 {
-    public class ComicsController : Controller
+	[Authorize(Policy = "CanManageComic")]
+	public class ComicsController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IPhoToService _photoService;

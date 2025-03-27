@@ -9,10 +9,12 @@ using DotNetTruyen.Models;
 using DotNetTruyen.ViewModels.Management;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.LevelManagement
 {
-    public class LevelsController : Controller
+	[Authorize(Policy = "CanManageRank")]
+	public class LevelsController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IHubContext<NotificationHub> _hubContext;

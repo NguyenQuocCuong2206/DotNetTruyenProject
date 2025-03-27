@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace DotNetTruyen.Controllers.Admin
 {
-    //[Authorize(Policy = "CanAccessDashboard")]
+    [Authorize(Policy = "CanAccessDashboard")]
     public class DashBoardController : Controller
     {
         

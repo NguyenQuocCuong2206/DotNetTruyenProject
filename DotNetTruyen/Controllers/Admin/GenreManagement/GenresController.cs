@@ -14,10 +14,12 @@ using DotNetTruyen.Hubs;
 using DotNetTruyen.ViewModels.Management;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.GenreManagement
 {
-    public class GenresController : Controller
+	[Authorize(Policy = "CanManageGenre")]
+	public class GenresController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly ILogger<GenresController> _logger;

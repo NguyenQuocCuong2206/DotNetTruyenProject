@@ -12,10 +12,12 @@ using DotNetTruyen.Services;
 using NuGet.Packaging;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.ChapterManagement
 {
-    public class ChaptersController : Controller
+	[Authorize(Policy = "CanManageChapter")]
+	public class ChaptersController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IPhoToService _imageUploadService;

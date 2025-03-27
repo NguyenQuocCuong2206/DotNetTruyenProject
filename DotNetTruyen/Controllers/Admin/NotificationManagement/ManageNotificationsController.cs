@@ -9,10 +9,12 @@ using DotNetTruyen.Data;
 using DotNetTruyen.Models;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.NotificationManagement
 {
-    public class ManageNotificationsController : Controller
+	[Authorize(Policy = "CanManageNotification")]
+	public class ManageNotificationsController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IHubContext<NotificationHub> _hubContext;
