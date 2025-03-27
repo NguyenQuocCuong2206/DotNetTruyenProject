@@ -57,90 +57,97 @@
                                             <h3 class="h4">
                                                 <i class="icon ion-ios-star"></i> @ViewBag.TotalComics truyện bạn đang theo dõi
                                             </h3>
-                                            <div class="search-lists">
-                                                @if (Model.Any())
-                                                {
-                                                    @foreach (var comic in Model)
-                                                    {
-                                                        <div class="manga__item">
-                                                            <div class="manga__thumb">
-                                                                <div class="manga__thumb_item">
-                                                                    <a href="/Comic/Detail/@comic.Id">
-                                                                        <img width="110" height="150" src="@comic.CoverImage" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="@comic.Title">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="manga__content">
-                                                                <div class="manga__content_item">
-                                                                    <div class="post-title font-title">
-                                                                        <h2>
-                                                                            <a href="@Url.Action("Index","Detail", new { id = comic.Id })">@comic.Title</a>
-                                                                        </h2>
-                                                                        <div class="manga-excerpt">
-                                                                            <p>@comic.Description</p>
-                                                                        </div>
-                                                                        <div class="manga-info">
-                                                                            <span class="total">@comic.View View</span>
-                                                                        </div>
-                                                                        <span class="manga-genres">
-                                                                            <h4>Tác Giả: @comic.Author</h4>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    }
-                                                    <!-- Updated Pagination -->
-                                                    <nav class="navigation paging-navigation">
-                                                        <div class="col-12 col-md-12">
-                                                            <h4 class="screen-reader-text">Posts navigation</h4>
-                                                            <div class="nav-links" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-                                                                @if (ViewBag.CurrentPage > 1)
-                                                                {
-                                                                    <div class="prev-page">
-                                                                        <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })" class="btn btn-outline-secondary">
-                                                                            <span class=" ion ion-md-arrow-round-back"></span> Trước
-                                                                        </a>
-                                                                    </div>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <div class="prev-page">
-                                                                        <span class="btn btn-outline-secondary disabled">
-                                                                            <span class="icon ion-md-arrow-back"></span> Trước
-                                                                        </span>
-                                                                    </div>
-                                                                }
-                                                                
-                                                                <span class="page-info">
-                                                                    Trang @ViewBag.CurrentPage trên @ViewBag.TotalPages
-                                                                </span>
+                                            <div class="comic-list-container">
+    <div class="search-lists">
+        @if (Model.Any())
+        {
+            @foreach (var comic in Model)
+            {
+                <div class="manga__item">
+                    <div class="manga__thumb">
+                        <div class="manga__thumb_item">
+                            <a href="/Comic/Detail/@comic.Id">
+                                <img width="110" height="150" src="@comic.CoverImage" class="attachment-manga-thumb-1 size-manga-thumb-1 wp-post-image" alt="@comic.Title">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="manga__content">
+                        <div class="manga__content_item">
+                            <div class="post-title font-title">
+                                <h2>
+                                    <a href="@Url.Action("Index","Detail", new { id = comic.Id })">@comic.Title</a>
+                                </h2>
+                                <div class="manga-excerpt">
+                                    <p>@comic.Description</p>
+                                </div>
+                                <div class="manga-info">
+                                    <span class="total">@comic.View View</span>
+                                </div>
+                                <span class="manga-genres">
+                                    <h4>Tác Giả: @comic.Author</h4>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Bạn chưa theo dõi truyện nào.</p>
+        }
+    </div>
+</div>
 
-                                                                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-                                                                {
-                                                                    <div class="next-page">
-                                                                        <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })" class="btn btn-outline-secondary">
-                                                                            Sau <span class="icon ion-md-arrow-forward"></span>
-                                                                        </a>
-                                                                    </div>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <div class="next-page">
-                                                                        <span class="btn btn-outline-secondary disabled">
-                                                                            Sau <span class=" ion ion-md-arrow-round-forward"></span>
-                                                                        </span>
-                                                                    </div>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </nav>
-                                                }
-                                                else
-                                                {
-                                                    <p>Bạn chưa theo dõi truyện nào.</p>
-                                                }
-                                            </div>
+<!-- Pagination luôn ở dưới -->
+@if (Model.Any())
+{
+    <nav class="navigation paging-navigation">
+        <div class="col-12 col-md-12">
+            <h4 class="screen-reader-text">Posts navigation</h4>
+            <div class="nav-links" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+                @if (ViewBag.CurrentPage > 1)
+                {
+                    <div class="prev-page">
+                        <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })" class="btn btn-outline-secondary">
+                            <span class=" ion ion-md-arrow-round-back"></span> Trước
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="prev-page">
+                        <span class="btn btn-outline-secondary disabled">
+                            <span class="icon ion-md-arrow-back"></span> Trước
+                        </span>
+                    </div>
+                }
+                
+                <span class="page-info">
+                    Trang @ViewBag.CurrentPage trên @ViewBag.TotalPages
+                </span>
+
+                @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                {
+                    <div class="next-page">
+                        <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })" class="btn btn-outline-secondary">
+                            Sau <span class="icon ion-md-arrow-forward"></span>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="next-page">
+                        <span class="btn btn-outline-secondary disabled">
+                            Sau <span class=" ion ion-md-arrow-round-forward"></span>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+}
+
                                         </div>
                                     </div>
                                 </div>
