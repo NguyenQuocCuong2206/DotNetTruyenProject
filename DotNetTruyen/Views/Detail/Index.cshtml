@@ -416,9 +416,9 @@
 
 
 
-                    
 
 
+                        <input type="hidden" id="isAuthenticated" value="@User.Identity.IsAuthenticated.ToString().ToLower()" />
                 </div> <!-- class="wrap" -->
             </div> <!-- class="body-wrap" -->
 
@@ -625,11 +625,17 @@
         function attachReplyListeners() {
             const replyButtons = document.querySelectorAll('.reply-btn');
             const replyFormTemplate = document.querySelector('.reply-form-template').children[0];
-
+                const isAuthenticated = document.getElementById("isAuthenticated")?.value === "true";
             replyButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
                     e.preventDefault();
-
+                        if (!isAuthenticated) {
+                            const confirmLogin = confirm("Bạn cần đăng nhập để thích truyện. Đi đến trang đăng nhập?");
+                            if (confirmLogin) {
+                                window.location.href = "/Login";
+                            }
+                            return;
+                        }
                     const existingForm = button.closest('.comment').querySelector('.reply-form');
                     if (existingForm) {
                         existingForm.remove();

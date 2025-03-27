@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Security.Claims;
+using static System.Net.WebRequestMethods;
 
 namespace DotNetTruyen.Controllers
 {
@@ -65,12 +66,22 @@ namespace DotNetTruyen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangeUserName(string newUserName)
+        public async Task<IActionResult> ChangeUserName(string newUserName,string confirmPassword)
         {
             ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
+                if (!await _userManager.HasPasswordAsync(user))
+                {
+                    ViewBag.UpdateErrorMess = "Tài khoản này chưa có mật khẩu";
+                    return View("UserProfile");
+                }
+                if (!await _userManager.CheckPasswordAsync(user, confirmPassword))
+                {
+                    ViewBag.UpdateErrorMess = "Mật khẩu không chính xác";
+                    return View("UserProfile");
+                }
                 var existingUser = await _userManager.FindByNameAsync(newUserName);
                 if (existingUser != null)
                 {
@@ -98,6 +109,11 @@ namespace DotNetTruyen.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
+                if (!await _userManager.CheckPasswordAsync(user, changePassword.UpdatePasswordViewModel.OldPassword))
+                {
+                    ViewBag.UpdateErrorMess = "Mật khẩu không chính xác";
+                    return View("UserProfile");
+                }
                 var result = await _userManager.ChangePasswordAsync(user, changePassword.UpdatePasswordViewModel.OldPassword, changePassword.UpdatePasswordViewModel.NewPassword);
                 if (result.Succeeded)
                 {
@@ -122,6 +138,7 @@ namespace DotNetTruyen.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.RefreshSignInAsync(user);
+                    await _emailService.SendEmailAsync(user.Email, "Thêm mật khẩu", $"Tài khoản đăng nhập bằng google của bạn vừa được thêm mật khẩu");
                     ViewBag.UpdateSuccessMess = "Đã thêm mật khẩu cho tài khoản";
                     return View("UserProfile");
                 }
@@ -132,14 +149,20 @@ namespace DotNetTruyen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangeEmail(string newEmail,string confirmpass)
+        public async Task<IActionResult> ChangeEmail(string newEmail,string confirmPassword)
         {
             ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
             
             if (user != null)
             {
-                if (!await _userManager.CheckPasswordAsync(user, confirmpass)){
+                if(!await _userManager.HasPasswordAsync(user))
+                {
+                    ViewBag.UpdateErrorMess = "Tài khoản này chưa có mật khẩu";
+                    return View("UserProfile");
+                }
+                if (!await _userManager.CheckPasswordAsync(user, confirmPassword))
+                {
                     ViewBag.UpdateErrorMess = "Mật khẩu không chính xác";
                     return View("UserProfile");
                 }
