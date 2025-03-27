@@ -153,6 +153,7 @@ namespace DotNetTruyen.Controllers
         {
             ViewBag.ProfileTab = "active";
             var user = await _userManager.GetUserAsync(User);
+            
             if (user != null)
             {
                 if(!await _userManager.HasPasswordAsync(user))

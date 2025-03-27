@@ -77,7 +77,7 @@
                                                     {
                                                         @foreach (var comicGenre in Model.ComicGenres)
                                                         {
-                                                            <a href="@Url.Action("Index", "Genre", new { genre = comicGenre.Genre.GenreName.ToLower() })" rel="tag">
+                                                            <a href="@Url.Action("Index", "Search", new { genre = comicGenre.Genre.GenreName.ToLower() })" rel="tag">
                                                                 @comicGenre.Genre.GenreName.ToLower()
                                                             </a>
                                                         }
@@ -267,36 +267,42 @@
 
                             <div class="post-title">
                           <div class="container py-4">
-                           
-    <h1>Truyện khác</h1>
-    <div id="c-post-slider-234" class="manga-x-slider style-3" data-style="style-3" data-count="4">
-        <div class="row slider_container_custom" role="toolbar">
-            @if (ViewBag.Comics is List<Comic> comics)
-            {
-                @foreach (var comic in comics.Take(5))
-                {
-                    <div class="col-6 col-md-3 col-lg-2 mb-4 slider_item">
-                        <div class="slider_thumb position-relative">
-                            @if (comic.View > 1000)
-                            {
-                                <span class="manga-title-badges custom trending position-absolute">Trending</span>
-                            }
-                            else if (comic.Status)
-                            {
-                                <span class="manga-title-badges hot position-absolute">HOT</span>
-                            }
-                            <div class="slider_thumb-item">
-                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
-                                    <img src="@comic.CoverImage" alt="@comic.Title" class="img-fluid" style="max-height: 300px; object-fit: cover;">
-                                </a>
-                                <div class="slider-overlay"></div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            }
-        </div>
-    </div>
+
+                                    <h1>Truyện khác</h1>
+                                    <div id="c-post-slider-234" class="manga-x-slider style-3" data-style="style-3" data-count="4">
+                                        <div class="row slider_container_custom" role="toolbar">
+                                            @if (ViewBag.Comics is List<Comic> comics)
+                                            {
+                                                @foreach (var comic in comics.Take(5))
+                                                {
+                                                    <div class="col-6 col-md-3 col-lg-2 mb-4 slider_item">
+                                                        <div class="slider_thumb position-relative">
+                                                            @if (comic.View > 100)
+                                                            {
+                                                                <span class="manga-title-badges custom trending position-absolute">Trending</span>
+                                                            }
+                                                            else if (comic.Status)
+                                                            {
+                                                                <span class="manga-title-badges hot position-absolute">HOT</span>
+                                                            }
+                                                            <div class="slider_thumb-item">
+                                                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })">
+                                                                    <img src="@comic.CoverImage" alt="@comic.Title" class="img-fluid" style="width: 200px; height: 200px; object-fit: cover;">
+                                                                </a>
+                                                                <div class="slider-overlay"></div>
+                                                            </div>
+                                                            
+                                                            <div class="slider_title mt-2 text-center">
+                                                                <a href="@Url.Action("Detail", "Comic", new { id = comic.Id })" class="text-decoration-none text-white font-weight-bold">
+                                                                    @comic.Title
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
 </div>
                             <!-- Comments Section -->
 
@@ -840,6 +846,13 @@
                         },
                         body: JSON.stringify({ id: comicId })
                     });
+                        if (response.status === 401) { // Unauthorized
+                            const confirmLogin = confirm("Bạn cần đăng nhập để theo dõi truyện. Đi đến trang đăng nhập?");
+                            if (confirmLogin) {
+                                window.location.href = "/Login"; // Đường dẫn mặc định của ASP.NET
+                            }
+                            return;
+                        }
 
                     const data = await response.json();
                     console.log("Response từ server:", data);
@@ -890,6 +903,13 @@
                         },
                         body: JSON.stringify({ id: comicId })
                     });
+                        if (response.status === 401) { // Unauthorized
+                            const confirmLogin = confirm("Bạn cần đăng nhập để thích truyện. Đi đến trang đăng nhập?");
+                            if (confirmLogin) {
+                                window.location.href = "/Login"; // Đường dẫn mặc định của ASP.NET
+                            }
+                            return;
+                        }
 
                     const data = await response.json();
                     console.log("Response từ server:", data);
