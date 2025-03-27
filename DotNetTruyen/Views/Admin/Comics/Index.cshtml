@@ -8,7 +8,7 @@
 <h1>Danh sách truyện</h1>
 
 <!-- Stats Cards -->
-<div class="row stat-cards">
+@* <div class="row stat-cards">
     <div class="col-md-6 col-xl-3">
         <article class="stat-cards-item">
             <div class="stat-cards-icon primary">
@@ -77,7 +77,7 @@
             </div>
         </article>
     </div>
-</div>
+</div> *@
 
 <!-- Search & Add -->
 <div class="d-flex justify-content-between align-items-center mb-2 mt-4">
@@ -142,7 +142,7 @@
                                 </td>
                                 <td>@comic.Title</td>
                                 <td>@comic.Author</td>
-                                <td>@comic.Likes</td>
+                                <td>@comic.Likes.Count()</td>
                                 <td>@comic.Follows.Count()</td>
                                 <td>@comic.View</td>
                                 <td>
@@ -190,27 +190,21 @@
 
 @section Scripts {
     <script>
-        var connection = new signalR.HubConnectionBuilder()
-            .withUrl("/genreHub")
-            .withAutomaticReconnect()
-            .build();
+        
 
-        async function startConnection() {
-            try {
-                await connection.start();
-                console.log("✅ SignalR Connected! State:", connection.state);
-            } catch (err) {
-                console.error("❌ SignalR Connection Failed:", err);
-            }
-        }
-
-        startConnection();
 
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".delete-btn").forEach(button => {
                 button.addEventListener("click", function (e) {
                     e.preventDefault();
                     const form = this.closest(".delete-form");
+
+                    console.log(form); 
+
+                    if (!form) {
+                        console.error("❌ Không tìm thấy form để submit!");
+                        return;
+                    }
 
                     Swal.fire({
                         title: "Bạn có chắc chắn?",
@@ -223,11 +217,13 @@
                         confirmButtonText: "Xóa"
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            console.log("✅ Form đang được submit...");
                             form.submit();
                         }
                     });
                 });
             });
         });
+
     </script>
 }

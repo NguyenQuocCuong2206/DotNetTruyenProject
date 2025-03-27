@@ -7,24 +7,16 @@
             </li>
 
 
-            <li class="">
-                <a href="https://live.mangabooth.com/x/user-settings/?tab=reader-settings"><i class="icon ion-md-cog"></i>Reader Settings                    </a>
-            </li>
-
-
             <li class="@(ViewBag.ProfileTab != null ? "active" : "")">
                 <a href="/userProfile"><i class="icon ion-md-person"></i>Cài đặt tài khoản                   </a>
             </li>
 
 
-            <li class="">
-                <a href="https://live.mangabooth.com/x/user-settings/?tab=balance-history"><i class="icon ion-md-folder-open"></i>Balance History                    </a>
+            <li class="@(ViewBag.NotificationTab != null ? "active" : "")">
+                <a href="/userProfile/Notifications"><i class="fas fa-bell"></i>Thông báo</a>
             </li>
 
-
-            <li class="">
-                <a href="https://live.mangabooth.com/x/user-settings/?tab=bought"><i class="fas fa-coins"></i>My Bought Mangas                    </a>
-            </li>
         </ul>
     </div>
 </div>
+

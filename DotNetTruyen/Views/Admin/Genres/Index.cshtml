@@ -12,7 +12,7 @@
 
 
     <!-- Stats Cards -->
-<div class="row stat-cards">
+@* <div class="row stat-cards">
     <div class="col-md-6 col-xl-4">
         <article class="stat-cards-item">
             <div class="stat-cards-icon primary">
@@ -64,7 +64,7 @@
             </div>
         </article>
     </div>
-</div>
+</div> *@
     
 
     <!-- Search & Add -->
@@ -193,22 +193,7 @@
 @section Scripts{
 
     <script>
-        var connection = new signalR.HubConnectionBuilder()
-            .withUrl("/genreHub")
-            .withAutomaticReconnect() 
-            .build();
-
-        async function startConnection() {
-            try {
-                await connection.start();
-                console.log("✅ SignalR Connected! State:", connection.state);
-            } catch (err) {
-                console.error("❌ SignalR Connection Failed:", err);
-            }
-        }
-
         
-        startConnection();
         connection.on("ReceiveGenreCreated", function (genre) {
             console.log("📩 New Genre Received:", genre);
             

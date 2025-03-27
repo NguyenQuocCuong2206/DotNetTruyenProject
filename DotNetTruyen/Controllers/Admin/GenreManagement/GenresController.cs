@@ -14,10 +14,12 @@ using DotNetTruyen.Hubs;
 using DotNetTruyen.ViewModels.Management;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.GenreManagement
 {
-    public class GenresController : Controller
+	[Authorize(Policy = "CanManageGenre")]
+	public class GenresController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly ILogger<GenresController> _logger;
@@ -133,7 +135,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 await _context.SaveChangesAsync();
 
                 // Gửi thông báo qua SignalR
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -257,7 +259,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 await _context.SaveChangesAsync();
 
                 // Gửi thông báo qua SignalR
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -335,7 +337,7 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
             await _context.SaveChangesAsync();
 
             // Gửi thông báo qua SignalR
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,

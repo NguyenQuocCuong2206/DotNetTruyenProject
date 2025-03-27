@@ -19,6 +19,7 @@ namespace DotNetTruyen.Controllers
         private readonly EmailService _emailService;
         private readonly OtpService _otpService;
         private readonly IPhoToService _photoService;
+        private readonly UserService _userService;
 
         public UserController(
             UserManager<User> userManager,
@@ -180,7 +181,7 @@ namespace DotNetTruyen.Controllers
             return View("UserProfile");
         }
 
-        [HttpGet("/reSendOtp")]
+        [HttpPost("/reSendOtpSetting")]
         public async Task<IActionResult> ReSendOtp(string newEmail)
         {
             ViewBag.Email = newEmail;

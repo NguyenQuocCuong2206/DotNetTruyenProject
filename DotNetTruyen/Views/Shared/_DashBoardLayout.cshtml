@@ -102,29 +102,24 @@
                             </a>
                             <ul class="cat-sub-menu">
                                 <li>
-                                    <a href="/Ranks">Quản lý Level</a>
+                                    <a href="/Levels">Quản lý Level</a>
                                 </li>
-                                <li>
-                                    <a href="/RankTypes">Thể loại Level</a>
-                                </li>
+                                
                             </ul>
                         </li>
                         <li>
                             <a href="/ManageNotifications">
                                 <span class="icon message" aria-hidden="true"></span>
-                                Notifications
+                                Thông báo
                             </a>
                             @{
-                                int unreadCount = await NotificationService.GetUnreadNotificationCountAsync();
+                                int unreadCount = await NotificationService.GetUnreadNotificationCountAsync(isAdmin:true);
                             }
                             <span class="msg-counter">@unreadCount</span>
                         </li>
                     </ul>
                     <span class="system-menu__title">system</span>
                     <ul class="sidebar-body-menu">
-                        <li>
-                            <a href="appearance.html"><span class="icon edit" aria-hidden="true"></span>Appearance</a>
-                        </li>
                         
                         <li>
                             <a class="show-cat-btn" href="##">
@@ -157,9 +152,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="##"><span class="icon setting" aria-hidden="true"></span>Settings</a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -182,7 +174,7 @@
                         <div class="nav-user-wrapper">
                             <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
                                 <span class="sr-only">My profile</span>
-                                @* <span class="nav-user-img">
+                                <span class="nav-user-img">
                                     @if (user.ImageUrl == null)
                                     {
                                         <img src="https://secure.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=100&d=mm&r=g">
@@ -191,7 +183,7 @@
                                     {
                                         <img src="@user.ImageUrl">
                                     }
-                                </span> *@
+                                </span>
                             </button>
                             <ul class="users-item-dropdown nav-user-dropdown dropdown">
                                 <li>
@@ -333,7 +325,7 @@
             });
         });
         connection.on("UpdateUnreadCount", function (unreadCount) {
-            // Cập nhật số lượng thông báo chưa đọc trên sidebar
+            
             const msgCounter = document.querySelector('.msg-counter');
             msgCounter.textContent = unreadCount;
             // msgCounter.style.display = (unreadCount > 0) ? 'inline-block' : 'none';

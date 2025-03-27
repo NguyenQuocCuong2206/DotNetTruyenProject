@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetTruyen.Migrations
 {
     [DbContext(typeof(DotNetTruyenDbContext))]
-    [Migration("20250326030054_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250326143750_changeNotification")]
+    partial class changeNotification
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -322,6 +322,16 @@ namespace DotNetTruyen.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Levels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5608324c-9398-4063-a47b-fdef922173e2"),
+                            ExpRequired = 0,
+                            LevelNumber = 0,
+                            Name = "Level 0",
+                            UpdatedAt = new DateTime(2025, 3, 26, 21, 37, 49, 93, DateTimeKind.Local).AddTicks(4204)
+                        });
                 });
 
             modelBuilder.Entity("DotNetTruyen.Models.Like", b =>
@@ -382,6 +392,9 @@ namespace DotNetTruyen.Migrations
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -497,18 +510,18 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("1bf47af8-78eb-4120-bd89-8755dd3e338a"),
+                            Id = new Guid("3f67619e-0d1f-4b99-ba46-bae1c4408445"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "021155e9-9b0e-4ba9-a446-d75ddf65902b",
+                            ConcurrencyStamp = "9766d098-8b46-43bd-829f-186141a14194",
                             Email = "admin@example.com",
                             EmailConfirmed = true,
                             Exp = 0,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXAMPLE.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPqsq5T3/rfMcg78kx8YLo5rlG8Va0QonjeE7MInZZcBEReEfAcayY3lJznLebzvJw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJxuxeWMbawdkd8ZYlm/ntrdwTw7pFm1fFu+7I9ckVFgJb+3atCeqjegv2IKEXZfzQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b59c6dbf-4df2-43bc-9402-8f3f499d6522",
+                            SecurityStamp = "c62ff94b-dd67-4317-925d-bcd8a91f86ac",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -544,13 +557,13 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("498cf4dd-718b-445b-aab9-c963a99dedaf"),
+                            Id = new Guid("35fae12d-7023-459f-a867-172422651b2e"),
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("3cc1f740-349d-495c-91e1-2a073a7db9a5"),
+                            Id = new Guid("79724d32-f2ff-44be-9723-cef60d2bb12b"),
                             Name = "Reader",
                             NormalizedName = "READER"
                         });
@@ -642,8 +655,8 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("1bf47af8-78eb-4120-bd89-8755dd3e338a"),
-                            RoleId = new Guid("498cf4dd-718b-445b-aab9-c963a99dedaf")
+                            UserId = new Guid("3f67619e-0d1f-4b99-ba46-bae1c4408445"),
+                            RoleId = new Guid("35fae12d-7023-459f-a867-172422651b2e")
                         });
                 });
 

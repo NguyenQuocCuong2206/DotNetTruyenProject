@@ -367,7 +367,7 @@ namespace DotNetTruyen.Controllers
             return View();
         }
 
-        [HttpGet("/reSendOtp")]
+        [HttpPost("/reSendOtpAuth")]
         public async Task<IActionResult> ReSendOtp(string emailConfirm,string request)
         {
             ViewBag.Email = emailConfirm;

@@ -13,11 +13,15 @@ builder.Logging.ClearProviders(); // Nếu muốn loại bỏ các nhà cung c�
 builder.Logging.AddConsole(); // Thêm log ra Console
 builder.Logging.AddDebug();
 builder.Services.AddSignalR();
+
+builder.Services.AddHostedService<ChapterPublishWorker>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<EmailService>();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<OtpService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<UserLevelService>();
 builder.Services.AddScoped<IPhoToService, PhotoService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
@@ -35,6 +39,7 @@ builder.Services.AddDbContext<DotNetTruyenDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 
 builder.Services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<DotNetTruyenDbContext>().AddDefaultTokenProviders().AddErrorDescriber<CustomIdentityErrorDescriber>();
 
@@ -75,6 +80,24 @@ builder.Services.AddAuthorization(options =>
 
     options.AddPolicy("CanManageRole", policy =>
         policy.RequireClaim("Permission", "Quản lý vai trò"));
+
+    options.AddPolicy("CanManageComic", policy =>
+        policy.RequireClaim("Permission", "Quản lý truyện"));
+
+    options.AddPolicy("CanManageChapter", policy =>
+        policy.RequireClaim("Permission", "Quản lý chương"));
+
+    options.AddPolicy("CanManageGenre", policy =>
+        policy.RequireClaim("Permission", "Quản lý thể loại"));
+
+    options.AddPolicy("CanManageNotification", policy =>
+        policy.RequireClaim("Permission", "Quản lý thông báo"));
+
+    options.AddPolicy("CanManageAdvertise", policy =>
+        policy.RequireClaim("Permission", "Quản lý quảng cáo"));
+
+    options.AddPolicy("CanManageRank", policy =>
+        policy.RequireClaim("Permission", "Quản lý xếp hạng"));
 });
 
 
@@ -85,6 +108,8 @@ app.MapControllerRoute(
     pattern: "Comic/Detail/{id}",
     defaults: new { controller = "Detail", action = "Index" }
 );
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -109,7 +134,7 @@ app.Use(async (context, next) =>
 });
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapHub<GenreHub>("/genreHub");
+
 app.MapHub<NotificationHub>("/notificationHub");
 app.MapHub<ComicHub>("/comicHub");
 app.MapHub<CommentHub>("/commentHub");

@@ -1,12 +1,12 @@
 ﻿namespace DotNetTruyen.ViewModels.Management
 {
-    public class RankViewModel
+    public class LevelViewModel
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public int LevelNumber { get; set; }
         public int ExpRequired { get; set; }
-        public int Level { get; set; }
-        public string RankTypeName { get; set; }
+        public string Name { get; set; }
         public int UserCount { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

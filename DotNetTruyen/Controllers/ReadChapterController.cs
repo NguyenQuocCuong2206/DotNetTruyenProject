@@ -1,5 +1,6 @@
 ﻿using DotNetTruyen.Data;
 using DotNetTruyen.Models;
+using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,28 +12,30 @@ using System.Threading.Tasks;
 
 namespace DotNetTruyen.Controllers
 {
-	public class ReadChapterController : Controller
-	{
-		private readonly DotNetTruyenDbContext _context;
+    public class ReadChapterController : Controller
+    {
+        private readonly DotNetTruyenDbContext _context;
+        private readonly UserService _userService;
 
-		public ReadChapterController(DotNetTruyenDbContext context)
-		{
-			_context = context;
-		}
+        public ReadChapterController(DotNetTruyenDbContext context, UserService userService)
+        {
+            _context = context;
+            _userService = userService;
+        }
 
-		// Get chapter by ID
-		public async Task<IActionResult> Index(Guid id)
-		{
-			// Get the current chapter with its images
-			var chapter = await _context.Chapters
-				.Include(c => c.Comic)
-				.Include(c => c.Images.OrderBy(i => i.ImageNumber))
-				.FirstOrDefaultAsync(c => c.Id == id && c.IsPublished && c.DeletedAt == null);
+        // Get chapter by ID
+        public async Task<IActionResult> Index(Guid id)
+        {
+            // Get the current chapter with its images
+            var chapter = await _context.Chapters
+                .Include(c => c.Comic)
+                .Include(c => c.Images.OrderBy(i => i.ImageNumber))
+                .FirstOrDefaultAsync(c => c.Id == id && c.IsPublished && c.DeletedAt == null);
 
-			if (chapter == null)
-			{
-				return NotFound();
-			}
+            if (chapter == null)
+            {
+                return NotFound();
+            }
 
 			
 
@@ -45,67 +48,67 @@ namespace DotNetTruyen.Controllers
 				.OrderByDescending(c => c.ChapterNumber)
 				.FirstOrDefaultAsync();
 
-			// Get next chapter
-			var nextChapter = await _context.Chapters
-				.Where(c => c.ComicId == chapter.ComicId &&
-					   c.ChapterNumber > chapter.ChapterNumber &&
-					   c.IsPublished &&
-					   c.DeletedAt == null)
-				.OrderBy(c => c.ChapterNumber)
-				.FirstOrDefaultAsync();
+            // Get next chapter
+            var nextChapter = await _context.Chapters
+                .Where(c => c.ComicId == chapter.ComicId &&
+                       c.ChapterNumber > chapter.ChapterNumber &&
+                       c.IsPublished &&
+                       c.DeletedAt == null)
+                .OrderBy(c => c.ChapterNumber)
+                .FirstOrDefaultAsync();
 
-			// Get all chapters of this comic for the chapter list
-			var allChapters = await _context.Chapters
-				.Where(c => c.ComicId == chapter.ComicId &&
-					   c.IsPublished &&
-					   c.DeletedAt == null)
-				.OrderByDescending(c => c.ChapterNumber)
-				.ToListAsync();
+            // Get all chapters of this comic for the chapter list
+            var allChapters = await _context.Chapters
+                .Where(c => c.ComicId == chapter.ComicId &&
+                       c.IsPublished &&
+                       c.DeletedAt == null)
+                .OrderByDescending(c => c.ChapterNumber)
+                .ToListAsync();
 
-			// Create view model
-			var viewModel = new ReadChapterViewModel
-			{
-				Chapter = chapter,
-				PreviousChapter = prevChapter,
-				NextChapter = nextChapter,
-				AllChapters = allChapters
-			};
+            // Create view model
+            var viewModel = new ReadChapterViewModel
+            {
+                Chapter = chapter,
+                PreviousChapter = prevChapter,
+                NextChapter = nextChapter,
+                AllChapters = allChapters
+            };
 
-			return View(viewModel);
-		}
+            return View(viewModel);
+        }
 
-		// Read first chapter of a comic
-		public async Task<IActionResult> ReadFromBeginning(Guid comicId)
-		{
-			var firstChapter = await _context.Chapters
-				.Where(c => c.ComicId == comicId &&
-					   c.IsPublished &&
-					   c.DeletedAt == null)
-				.OrderBy(c => c.ChapterNumber)
-				.FirstOrDefaultAsync();
+        // Read first chapter of a comic
+        public async Task<IActionResult> ReadFromBeginning(Guid comicId)
+        {
+            var firstChapter = await _context.Chapters
+                .Where(c => c.ComicId == comicId &&
+                       c.IsPublished &&
+                       c.DeletedAt == null)
+                .OrderBy(c => c.ChapterNumber)
+                .FirstOrDefaultAsync();
 
-			if (firstChapter == null)
-			{
-				TempData["ErrorMessage"] = "Không có chương nào được tìm thấy.";
-				return RedirectToAction("Index", "Detail", new { id = comicId });
-			}
+            if (firstChapter == null)
+            {
+                TempData["ErrorMessage"] = "Không có chương nào được tìm thấy.";
+                return RedirectToAction("Index", "Detail", new { id = comicId });
+            }
 
-			return RedirectToAction("Index", new { id = firstChapter.Id });
-		}
-		public async Task<IActionResult> ReadLastChapter(Guid comicId)
-		{
-			var lastChapter = await _context.Chapters
-				.Where(c => c.ComicId == comicId &&
-					   c.IsPublished &&
-					   c.DeletedAt == null)
-				.OrderByDescending(c => c.ChapterNumber)
-				.FirstOrDefaultAsync();
+            return RedirectToAction("Index", new { id = firstChapter.Id });
+        }
+        public async Task<IActionResult> ReadLastChapter(Guid comicId)
+        {
+            var lastChapter = await _context.Chapters
+                .Where(c => c.ComicId == comicId &&
+                       c.IsPublished &&
+                       c.DeletedAt == null)
+                .OrderByDescending(c => c.ChapterNumber)
+                .FirstOrDefaultAsync();
 
-			if (lastChapter == null)
-			{
-				TempData["ErrorMessage"] = "Không có chương nào được tìm thấy.";
-				return RedirectToAction("Index", "Detail", new { id = comicId });
-			}
+            if (lastChapter == null)
+            {
+                TempData["ErrorMessage"] = "Không có chương nào được tìm thấy.";
+                return RedirectToAction("Index", "Detail", new { id = comicId });
+            }
 
 			return RedirectToAction("Index", new { id = lastChapter.Id });
 		}
@@ -128,10 +131,15 @@ namespace DotNetTruyen.Controllers
 					// Tăng lượt xem
 					chapter.Views += 1;
 					chapter.Comic.View += 1;
-					// Thêm vào lịch sử đọc của user (nếu user đã đăng nhập)
-					if (User.Identity.IsAuthenticated)
+                    
+
+                    
+                    // Thêm vào lịch sử đọc của user (nếu user đã đăng nhập)
+                    if (User.Identity.IsAuthenticated)
 					{
-						var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                        _userService.IncreaseExpAsync(_context, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+                        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
 						var readHistory = await _context.ReadHistories.FirstOrDefaultAsync(r => r.UserId.ToString() == userId && r.ChapterId == chapterId);
 						if (readHistory != null) 
 						{

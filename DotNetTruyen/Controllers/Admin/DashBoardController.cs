@@ -1,22 +1,33 @@
 ﻿using DotNetTruyen.Data;
+using DotNetTruyen.Models;
+using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels.Management;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace DotNetTruyen.Controllers.Admin
 {
-    //[Authorize(Policy = "CanAccessDashboard")]
+    [Authorize(Policy = "CanAccessDashboard")]
     public class DashBoardController : Controller
     {
         
         private readonly DotNetTruyenDbContext _context;
+        private readonly UserService _userService;
+        private readonly UserManager<User> _userManager;
+        private readonly ILogger<DashBoardController> _logger;
 
-        public DashBoardController(DotNetTruyenDbContext context)
+        public DashBoardController(DotNetTruyenDbContext context, UserService userService, UserManager<User> userManager, ILogger<DashBoardController> logger)
         {
             _context = context;
+            _userService = userService;
+            _userManager = userManager;
+            _logger = logger;
         }
+
         public async Task<IActionResult> Index()
         {
             
@@ -56,7 +67,7 @@ namespace DotNetTruyen.Controllers.Admin
                 .Take(5)
                 .ToListAsync();
 
-            // Dữ liệu biểu đồ lượt xem theo tháng
+            
             var viewsByMonthRaw = await _context.Chapters
                 .Where(c => c.DeletedAt == null && c.PublishedDate.HasValue)
                 .GroupBy(c => new { c.PublishedDate.Value.Year, c.PublishedDate.Value.Month })
@@ -70,7 +81,7 @@ namespace DotNetTruyen.Controllers.Admin
                 .ThenBy(g => g.Month)
                 .ToListAsync();
 
-            // Lấy 6 tháng gần nhất
+            
             var lastSixMonths = viewsByMonthRaw
                 .OrderByDescending(v => v.Year * 100 + v.Month)
                 .Take(6)
@@ -106,9 +117,18 @@ namespace DotNetTruyen.Controllers.Admin
 
 
         // GET: DashBoardController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details()
         {
-            return View("~/Views/Admin/Dashboard/Detail.cshtml");
+            var claims = User.Claims;
+            await _userService.IncreaseExpAsync(_context, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            
+            foreach (var claim in claims)
+            {
+                _logger.LogWarning($"Claim Type: {claim.Type}, Value: {claim.Value}");
+            }
+
+
+            return View("~/Views/Admin/Dashboard/Detail.cshtml", claims);
         }
 
         // GET: DashBoardController/Create

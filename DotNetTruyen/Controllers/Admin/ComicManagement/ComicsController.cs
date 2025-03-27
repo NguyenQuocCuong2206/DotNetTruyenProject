@@ -12,10 +12,12 @@ using DotNetTruyen.Services;
 using DotNetTruyen.ViewModels.Management;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.ComicManagement
 {
-    public class ComicsController : Controller
+	[Authorize(Policy = "CanManageComic")]
+	public class ComicsController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IPhoToService _photoService;
@@ -214,7 +216,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,
@@ -371,7 +373,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
 
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -475,7 +477,7 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,

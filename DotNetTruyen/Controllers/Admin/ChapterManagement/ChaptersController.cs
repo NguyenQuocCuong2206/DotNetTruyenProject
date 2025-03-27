@@ -12,10 +12,12 @@ using DotNetTruyen.Services;
 using NuGet.Packaging;
 using Microsoft.AspNetCore.SignalR;
 using DotNetTruyen.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetTruyen.Controllers.Admin.ChapterManagement
 {
-    public class ChaptersController : Controller
+	[Authorize(Policy = "CanManageChapter")]
+	public class ChaptersController : Controller
     {
         private readonly DotNetTruyenDbContext _context;
         private readonly IPhoToService _imageUploadService;
@@ -200,7 +202,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
             _context.Notifications.Add(notification);
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,
@@ -210,7 +212,56 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 link = notification.Link
             });
 
-            
+            if(chapter.IsPublished)
+            {
+                Task.Run(async () =>
+                {
+                    try
+                    {
+                        var followers = await _context.Follows
+                            .Where(f => f.ComicId == model.ComicId)
+                            .Select(f => f.UserId)
+                            .ToListAsync();
+
+                        var userNotifications = followers.Select(userId => new Notification
+                        {
+                            Id = Guid.NewGuid(),
+                            UserId = userId,
+                            Title = "Chương mới",
+                            Message = $"Chương mới '{chapter.ChapterTitle}' của truyện '{comic.Title}' đã được đăng!",
+                            Type = "success",
+                            Icon = "check-circle",
+                            Link = $"/ReadChapter/Index/{chapter.Id}",
+                            IsRead = false,
+                            CreatedAt = DateTime.UtcNow
+                        }).ToList();
+
+                        if (userNotifications.Any())
+                        {
+                            _context.Notifications.AddRange(userNotifications);
+                            await _context.SaveChangesAsync();
+
+                            
+                            foreach (var notification in userNotifications)
+                            {
+                                await _hubContext.Clients.User(notification.UserId.ToString()).SendAsync("ReceiveNotification", new
+                                {
+                                    id = notification.Id,
+                                    title = notification.Title,
+                                    message = notification.Message,
+                                    type = notification.Type,
+                                    icon = notification.Icon,
+                                    link = notification.Link
+                                });
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Error sending notifications to followers for chapter {ChapterId}", chapter.Id);
+                    }
+                });
+            }
             TempData["SuccessMessage"] = "Chương đã được tạo thành công!";
             return RedirectToAction("Index", new { comicId = model.ComicId });
         }
@@ -293,7 +344,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 // Update chapter properties
                 chapter.ChapterTitle = model.ChapterTitle;
                 chapter.ChapterNumber = model.ChapterNumber;
-                chapter.PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.UtcNow;
+                chapter.PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.Now;
                 chapter.IsPublished = model.PublishedDate.HasValue;
                 
 
@@ -366,7 +417,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 _context.Notifications.Add(notification);
                 await _context.SaveChangesAsync();
 
-                await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+                await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
                 {
                     id = notification.Id,
                     title = notification.Title,
@@ -457,7 +508,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
 
             await _context.SaveChangesAsync();
 
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification", new
+            await _hubContext.Clients.Group("Admins").SendAsync("ReceiveNotification", new
             {
                 id = notification.Id,
                 title = notification.Title,
