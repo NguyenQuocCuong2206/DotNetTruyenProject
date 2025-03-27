@@ -77,7 +77,7 @@
                                                     {
                                                         @foreach (var comicGenre in Model.ComicGenres)
                                                         {
-                                                            <a href="@Url.Action("Index", "Genre", new { genre = comicGenre.Genre.GenreName.ToLower() })" rel="tag">
+                                                            <a href="@Url.Action("Index", "Search", new { genre = comicGenre.Genre.GenreName.ToLower() })" rel="tag">
                                                                 @comicGenre.Genre.GenreName.ToLower()
                                                             </a>
                                                         }

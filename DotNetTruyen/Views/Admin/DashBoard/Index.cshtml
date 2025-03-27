@@ -18,8 +18,9 @@
                         <p class="stat-cards-info__num">@Model.TotalComics</p>
                         <p class="stat-cards-info__title">Tổng số truyện</p>
                         <p class="stat-cards-info__progress">
-                            <span class="stat-cards-info__profit success">
-                                <i data-feather="trending-up" aria-hidden="true"></i>4.07%
+                            <span class="stat-cards-info__profit @(Model.ComicsChangePercentage >= 0 ? "success" : "danger")">
+                                <i data-feather="@(Model.ComicsChangePercentage >= 0 ? "trending-up" : "trending-down")" aria-hidden="true"></i>
+                                @Model.ComicsChangePercentage.ToString("F2")%
                             </span>
                             Tháng trước
                         </p>
@@ -35,8 +36,9 @@
                         <p class="stat-cards-info__num">@Model.TotalChapters</p>
                         <p class="stat-cards-info__title">Tổng số chương</p>
                         <p class="stat-cards-info__progress">
-                            <span class="stat-cards-info__profit success">
-                                <i data-feather="trending-up" aria-hidden="true"></i>0.24%
+                            <span class="stat-cards-info__profit @(Model.ChaptersChangePercentage >= 0 ? "success" : "danger")">
+                                <i data-feather="@(Model.ChaptersChangePercentage >= 0 ? "trending-up" : "trending-down")" aria-hidden="true"></i>
+                                @Model.ChaptersChangePercentage.ToString("F2")%
                             </span>
                             Tháng trước
                         </p>
@@ -52,8 +54,9 @@
                         <p class="stat-cards-info__num">@Model.TotalViews.ToString("N0")</p>
                         <p class="stat-cards-info__title">Tổng lượt xem</p>
                         <p class="stat-cards-info__progress">
-                            <span class="stat-cards-info__profit danger">
-                                <i data-feather="trending-down" aria-hidden="true"></i>1.64%
+                            <span class="stat-cards-info__profit @(Model.ViewsChangePercentage >= 0 ? "success" : "danger")">
+                                <i data-feather="@(Model.ViewsChangePercentage >= 0 ? "trending-up" : "trending-down")" aria-hidden="true"></i>
+                                @Model.ViewsChangePercentage.ToString("F2")%
                             </span>
                             Tháng trước
                         </p>
@@ -69,8 +72,9 @@
                         <p class="stat-cards-info__num">@Model.TotalUsers</p>
                         <p class="stat-cards-info__title">Tổng người dùng</p>
                         <p class="stat-cards-info__progress">
-                            <span class="stat-cards-info__profit warning">
-                                <i data-feather="trending-up" aria-hidden="true"></i>0.00%
+                            <span class="stat-cards-info__profit @(Model.UsersChangePercentage >= 0 ? "success" : "danger")">
+                                <i data-feather="@(Model.UsersChangePercentage >= 0 ? "trending-up" : "trending-down")" aria-hidden="true"></i>
+                                @Model.UsersChangePercentage.ToString("F2")%
                             </span>
                             Tháng trước
                         </p>
@@ -114,7 +118,6 @@
                                     <tr>
                                         <td>
                                             <label class="users-table__checkbox">
-                                                
                                                 <div class="categories-table-img">
                                                     <img src="@(chapter.Thumbnail ?? "/images/default-thumbnail.jpg")" alt="@chapter.ChapterTitle" style="width: 50px; height: 50px; object-fit: cover;" />
                                                 </div>
@@ -125,7 +128,7 @@
                                         <td>
                                             @if (chapter.IsPublished)
                                             {
-                                                if (chapter.PublishedDate > DateTime.Now)
+                                                if (chapter.PublishedDate > DateTime.UtcNow)
                                                 {
                                                     <span class="badge-pending">Lên lịch</span>
                                                 }
@@ -205,6 +208,8 @@
 @section Scripts {
     <!-- Thêm Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Thêm plugin datalabels -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <!-- Thêm SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Thêm SignalR (nếu cần) -->
@@ -319,7 +324,19 @@
                     plugins: {
                         legend: {
                             labels: {
-                                color: '#ffffff' 
+                                color: '#ffffff'
+                            }
+                        },
+                        datalabels: {
+                            color: '#fff', // Màu chữ trắng để nổi trên nền màu
+                            formatter: (value, context) => {
+                                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1); // Tính phần trăm
+                                return `${value} (${percentage}%)`; // Hiển thị số liệu + phần trăm
+                            },
+                            font: {
+                                weight: 'bold',
+                                size: 14
                             }
                         }
                     }
@@ -350,9 +367,6 @@
                     });
                 });
             });
-
-
-            
         });
     </script>
 }

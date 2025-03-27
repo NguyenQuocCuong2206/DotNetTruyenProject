@@ -23,14 +23,17 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
         private readonly IPhoToService _imageUploadService;
         private readonly ILogger<ChaptersController> _logger;
         private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly INotificationService _notificationService;
 
-        public ChaptersController(DotNetTruyenDbContext context, IPhoToService imageUploadService, ILogger<ChaptersController> logger, IHubContext<NotificationHub> hubContext)
+        public ChaptersController(DotNetTruyenDbContext context, IPhoToService imageUploadService, ILogger<ChaptersController> logger, IHubContext<NotificationHub> hubContext, INotificationService notificationService)
         {
             _context = context;
             _imageUploadService = imageUploadService;
             _logger = logger;
             _hubContext = hubContext;
+            _notificationService = notificationService;
         }
+
 
 
 
@@ -143,28 +146,30 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 TempData["ErrorMessage"] = "Truyện không tồn tại hoặc đã bị xóa.";
                 return View("~/Views/Admin/Chapters/Create.cshtml", model);
             }
+
             var chapterExists = await _context.Chapters
-            .AnyAsync(c => c.ComicId == model.ComicId
-                    && c.ChapterNumber == model.ChapterNumber
-                    && c.DeletedAt == null);
+                .AnyAsync(c => c.ComicId == model.ComicId
+                            && c.ChapterNumber == model.ChapterNumber
+                            && c.DeletedAt == null);
             if (chapterExists)
             {
                 TempData["ErrorMessage"] = $"Chapter số {model.ChapterNumber} đã tồn tại trong truyện này. Vui lòng chọn số chapter khác.";
                 return View("~/Views/Admin/Chapters/Create.cshtml", model);
             }
+
             var chapter = new Chapter
             {
                 Id = Guid.NewGuid(),
                 ChapterTitle = model.ChapterTitle,
                 ChapterNumber = model.ChapterNumber,
-                PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.Now,
+                PublishedDate = model.PublishedDate.HasValue ? model.PublishedDate.Value.ToUniversalTime() : DateTime.UtcNow,
                 Views = 0,
                 IsPublished = model.PublishedDate.HasValue ? true : false,
                 ComicId = model.ComicId
             };
 
             _context.Chapters.Add(chapter);
-            await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
 
             if (model.Images != null && model.Images.Count > 0)
             {
@@ -181,13 +186,14 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                         Id = Guid.NewGuid(),
                         ChapterId = chapter.Id,
                         ImageUrl = imageUrls[i],
-                        ImageNumber = orders[i] 
+                        ImageNumber = orders[i]
                     });
                 }
 
                 _context.ChapterImages.AddRange(chapterImages);
-                await _context.SaveChangesAsync(); 
+                await _context.SaveChangesAsync();
             }
+
             var comic = await _context.Comics.FirstOrDefaultAsync(c => c.Id == model.ComicId);
             var notification = new Notification
             {
@@ -212,56 +218,20 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 link = notification.Link
             });
 
-            if(chapter.IsPublished)
+ 
+            if (chapter.IsPublished)
             {
-                Task.Run(async () =>
+
+                _ = Task.Factory.StartNew(async () =>
                 {
-                    try
-                    {
-                        var followers = await _context.Follows
-                            .Where(f => f.ComicId == model.ComicId)
-                            .Select(f => f.UserId)
-                            .ToListAsync();
-
-                        var userNotifications = followers.Select(userId => new Notification
-                        {
-                            Id = Guid.NewGuid(),
-                            UserId = userId,
-                            Title = "Chương mới",
-                            Message = $"Chương mới '{chapter.ChapterTitle}' của truyện '{comic.Title}' đã được đăng!",
-                            Type = "success",
-                            Icon = "check-circle",
-                            Link = $"/ReadChapter/Index/{chapter.Id}",
-                            IsRead = false,
-                            CreatedAt = DateTime.UtcNow
-                        }).ToList();
-
-                        if (userNotifications.Any())
-                        {
-                            _context.Notifications.AddRange(userNotifications);
-                            await _context.SaveChangesAsync();
-
-                            
-                            foreach (var notification in userNotifications)
-                            {
-                                await _hubContext.Clients.User(notification.UserId.ToString()).SendAsync("ReceiveNotification", new
-                                {
-                                    id = notification.Id,
-                                    title = notification.Title,
-                                    message = notification.Message,
-                                    type = notification.Type,
-                                    icon = notification.Icon,
-                                    link = notification.Link
-                                });
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex, "Error sending notifications to followers for chapter {ChapterId}", chapter.Id);
-                    }
-                });
+                    await _notificationService.SendFollowerNotificationsAsync(
+                        chapter.Id,
+                        model.ComicId,
+                        chapter.ChapterTitle,
+                        comic.Title);
+                }, TaskCreationOptions.LongRunning).Unwrap();
             }
+
             TempData["SuccessMessage"] = "Chương đã được tạo thành công!";
             return RedirectToAction("Index", new { comicId = model.ComicId });
         }
