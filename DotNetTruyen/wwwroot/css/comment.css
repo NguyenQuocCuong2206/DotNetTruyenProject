@@ -49,3 +49,11 @@
 a.bg-dark:hover {
     background-color: #030d09 !important;
 }
+
+
+.btn-like{
+    background-color: #007bff;
+}
+.btn-dislike {
+    background-color: #dc3545;
+}
