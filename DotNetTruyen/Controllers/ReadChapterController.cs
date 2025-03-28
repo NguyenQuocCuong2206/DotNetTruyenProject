@@ -137,7 +137,7 @@ namespace DotNetTruyen.Controllers
                     // Thêm vào lịch sử đọc của user (nếu user đã đăng nhập)
                     if (User.Identity.IsAuthenticated)
 					{
-                        _userService.IncreaseExpAsync(_context, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+                        await _userService.IncreaseExpAsync(_context, Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
                         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
 						var readHistory = await _context.ReadHistories.FirstOrDefaultAsync(r => r.UserId.ToString() == userId && r.ChapterId == chapterId);
