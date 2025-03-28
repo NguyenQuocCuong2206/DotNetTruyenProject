@@ -110,7 +110,12 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                     _logger.LogWarning("Invalid model state.");
                     return View("Index", createdGenre);
                 }
-
+                bool isExist = await _context.Genres.AnyAsync(g => g.GenreName == createdGenre.GenreName && g.DeletedAt == null);
+                if (isExist)
+                {
+                    TempData["ErrorMessage"] = "Thể loại này đã tồn tại.";
+                    return RedirectToAction(nameof(Index));
+                }
                 var genre = new Genre
                 {
                     GenreName = createdGenre.GenreName
@@ -223,7 +228,12 @@ namespace DotNetTruyen.Controllers.Admin.GenreManagement
                 {
                     return NotFound();
                 }
-
+                bool isExist = await _context.Genres.AnyAsync(g => g.GenreName == model.GenreName && g.Id != id && g.DeletedAt == null);
+                if (isExist)
+                {
+                    TempData["ErrorMessage"] = "Thể loại này đã tồn tại.";
+                    return RedirectToAction(nameof(Index));
+                }
                 genre.GenreName = model.GenreName;
                 List<Guid>? selectedStoryIds = string.IsNullOrEmpty(model.SelectedStoryIds)
                     ? new List<Guid>()

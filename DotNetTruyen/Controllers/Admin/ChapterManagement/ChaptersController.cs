@@ -219,18 +219,18 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
             });
 
  
-            if (chapter.IsPublished)
-            {
+            //if (chapter.IsPublished)
+            //{
 
-                _ = Task.Factory.StartNew(async () =>
-                {
-                    await _notificationService.SendFollowerNotificationsAsync(
-                        chapter.Id,
-                        model.ComicId,
-                        chapter.ChapterTitle,
-                        comic.Title);
-                }, TaskCreationOptions.LongRunning).Unwrap();
-            }
+            //    _ = Task.Factory.StartNew(async () =>
+            //    {
+            //        await _notificationService.SendFollowerNotificationsAsync(
+            //            chapter.Id,
+            //            model.ComicId,
+            //            chapter.ChapterTitle,
+            //            comic.Title);
+            //    }, TaskCreationOptions.LongRunning).Unwrap();
+            //}
 
             TempData["SuccessMessage"] = "Chương đã được tạo thành công!";
             return RedirectToAction("Index", new { comicId = model.ComicId });
@@ -292,7 +292,7 @@ namespace DotNetTruyen.Controllers.Admin.ChapterManagement
                 {
                     return NotFound();
                 }
-
+                
                 var comicExists = await _context.Comics.AnyAsync(c => c.Id == model.ComicId && c.DeletedAt == null);
                 if (!comicExists)
                 {

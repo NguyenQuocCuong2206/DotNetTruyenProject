@@ -160,7 +160,12 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
                 }
 
             }
-
+            bool isExist = await _context.Comics.AnyAsync(g => g.Title == model.Title  && g.DeletedAt == null);
+            if (isExist)
+            {
+                TempData["ErrorMessage"] = "Truyện này đã tồn tại.";
+                return RedirectToAction(nameof(Index));
+            }
             var comic = new Comic
             {
                 Id = Guid.NewGuid(),
@@ -280,7 +285,12 @@ namespace DotNetTruyen.Controllers.Admin.ComicManagement
             {
                 return NotFound();
             }
-
+            bool isExist = await _context.Comics.AnyAsync(g => g.Title == model.Title && g.Id != id && g.DeletedAt == null);
+            if (isExist)
+            {
+                TempData["ErrorMessage"] = "Truyện này đã tồn tại.";
+                return RedirectToAction(nameof(Index));
+            }
             if (!ModelState.IsValid)
             {
                 foreach (var state in ModelState)
