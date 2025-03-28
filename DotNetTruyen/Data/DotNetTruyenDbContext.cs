@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.Metrics;
+using System.Security;
 
 namespace DotNetTruyen.Data
 {
@@ -73,10 +74,57 @@ namespace DotNetTruyen.Data
                     entity.HasKey(x => new { x.UserId, x.ComicId });
                 });
 
-            
+			// Seed dữ liệu
+			var adminRoleId = Guid.NewGuid();
+			var readerRoleId = Guid.NewGuid();
+			var adminUserId = Guid.NewGuid();
 
-            
-            modelBuilder.Entity<Level>().HasData(
+			// Seed Roles
+			modelBuilder.Entity<IdentityRole<Guid>>().HasData(
+				new IdentityRole<Guid> { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
+				new IdentityRole<Guid> { Id = readerRoleId, Name = "Reader", NormalizedName = "READER" }
+			);
+
+			// Seed Admin User
+			var adminUser = new User
+			{
+				Id = adminUserId,
+				UserName = "admin",
+				NormalizedUserName = "ADMIN",
+				Email = "admin@example.com",
+				NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                SecurityStamp = Guid.NewGuid().ToString(),
+				EmailConfirmed = true,
+				LockoutEnabled = false
+			};
+
+			// Hash mật khẩu trước khi lưu
+			var passwordHasher = new PasswordHasher<User>();
+			adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, "Admin@123");
+
+			modelBuilder.Entity<User>().HasData(adminUser);
+
+			// Thêm Admin vào Role
+			modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(
+				new IdentityUserRole<Guid> { UserId = adminUserId, RoleId = adminRoleId }
+			);
+
+			// Seed Role Claims cho Admin
+			modelBuilder.Entity<IdentityRoleClaim<Guid>>().HasData(
+				new IdentityRoleClaim<Guid> { Id = 1, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Vào bảng điều khiển" },
+				new IdentityRoleClaim<Guid> { Id = 2, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý người dùng" },
+				new IdentityRoleClaim<Guid> { Id = 3, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý vai trò" },
+				new IdentityRoleClaim<Guid> { Id = 4, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý truyện" },
+				new IdentityRoleClaim<Guid> { Id = 5, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý chương" },
+				new IdentityRoleClaim<Guid> { Id = 6, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý thể loại" },
+				new IdentityRoleClaim<Guid> { Id = 7, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý thông báo" },
+				new IdentityRoleClaim<Guid> { Id = 8, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý quảng cáo" },
+				new IdentityRoleClaim<Guid> { Id = 9, RoleId = adminRoleId, ClaimType = "Permission", ClaimValue = "Quản lý xếp hạng" }
+			);
+
+
+
+			modelBuilder.Entity<Level>().HasData(
                 new Level
                 {
                     Id = Guid.NewGuid(),

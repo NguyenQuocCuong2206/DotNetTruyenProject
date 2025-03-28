@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders(); // Nếu muốn loại bỏ các nhà cung cấp logging mặc định
@@ -100,8 +101,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("Permission", "Quản lý xếp hạng"));
 });
 
-
-
+ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var app = builder.Build();
 app.MapControllerRoute(
     name: "comicDetail",
@@ -109,10 +109,6 @@ app.MapControllerRoute(
     defaults: new { controller = "Detail", action = "Index" }
 );
 
-using (var scope = app.Services.CreateScope())
-{
-    await SeedData.Initialize(scope.ServiceProvider);
-}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetTruyen.Migrations
 {
     [DbContext(typeof(DotNetTruyenDbContext))]
-    [Migration("20250328084905_Initial")]
-    partial class Initial
+    [Migration("20250328105040_InitialDatabase")]
+    partial class InitialDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -326,11 +326,11 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9d5246f4-eeab-45d8-8e24-d32bec4c3fe3"),
+                            Id = new Guid("ae5494bb-0aa6-45d8-ba23-dba2549cfc8e"),
                             ExpRequired = 0,
                             LevelNumber = 0,
                             Name = "Level 0",
-                            UpdatedAt = new DateTime(2025, 3, 28, 15, 49, 4, 615, DateTimeKind.Local).AddTicks(9597)
+                            UpdatedAt = new DateTime(2025, 3, 28, 17, 50, 38, 796, DateTimeKind.Local).AddTicks(1992)
                         });
                 });
 
@@ -506,6 +506,25 @@ namespace DotNetTruyen.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("710d2e9a-da4e-4162-8498-94b0de70555c"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "95c909e1-2308-49c8-aac7-01127505c958",
+                            Email = "admin@example.com",
+                            EmailConfirmed = true,
+                            Exp = 0,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAENMlkWDQjEgCHIRizsPm/mXHQaS8675pAhXHvIwMs2He137Z6tEvqNiDuvx1qHQR1Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9ff24896-7c54-4e00-ba16-a39712edd50f",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -534,6 +553,20 @@ namespace DotNetTruyen.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9217248f-c608-4151-8921-dc8f922cd994"),
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("171069cf-2f25-4e36-a781-03f739c8abbe"),
+                            Name = "Reader",
+                            NormalizedName = "READER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -558,6 +591,71 @@ namespace DotNetTruyen.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("RoleClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "Permission",
+                            ClaimValue = "Vào bảng điều khiển",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý người dùng",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý vai trò",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý truyện",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý chương",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý thể loại",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý thông báo",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý quảng cáo",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ClaimType = "Permission",
+                            ClaimValue = "Quản lý xếp hạng",
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -618,6 +716,13 @@ namespace DotNetTruyen.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("710d2e9a-da4e-4162-8498-94b0de70555c"),
+                            RoleId = new Guid("9217248f-c608-4151-8921-dc8f922cd994")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
