@@ -109,7 +109,10 @@ app.MapControllerRoute(
     defaults: new { controller = "Detail", action = "Index" }
 );
 
-
+using (var scope = app.Services.CreateScope())
+{
+    await SeedData.Initialize(scope.ServiceProvider);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

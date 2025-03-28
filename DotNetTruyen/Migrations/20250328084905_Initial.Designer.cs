@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetTruyen.Migrations
 {
     [DbContext(typeof(DotNetTruyenDbContext))]
-    [Migration("20250326143750_changeNotification")]
-    partial class changeNotification
+    [Migration("20250328084905_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -326,11 +326,11 @@ namespace DotNetTruyen.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5608324c-9398-4063-a47b-fdef922173e2"),
+                            Id = new Guid("9d5246f4-eeab-45d8-8e24-d32bec4c3fe3"),
                             ExpRequired = 0,
                             LevelNumber = 0,
                             Name = "Level 0",
-                            UpdatedAt = new DateTime(2025, 3, 26, 21, 37, 49, 93, DateTimeKind.Local).AddTicks(4204)
+                            UpdatedAt = new DateTime(2025, 3, 28, 15, 49, 4, 615, DateTimeKind.Local).AddTicks(9597)
                         });
                 });
 
@@ -506,25 +506,6 @@ namespace DotNetTruyen.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3f67619e-0d1f-4b99-ba46-bae1c4408445"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9766d098-8b46-43bd-829f-186141a14194",
-                            Email = "admin@example.com",
-                            EmailConfirmed = true,
-                            Exp = 0,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@EXAMPLE.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJxuxeWMbawdkd8ZYlm/ntrdwTw7pFm1fFu+7I9ckVFgJb+3atCeqjegv2IKEXZfzQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "c62ff94b-dd67-4317-925d-bcd8a91f86ac",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -553,20 +534,6 @@ namespace DotNetTruyen.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("35fae12d-7023-459f-a867-172422651b2e"),
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("79724d32-f2ff-44be-9723-cef60d2bb12b"),
-                            Name = "Reader",
-                            NormalizedName = "READER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -651,13 +618,6 @@ namespace DotNetTruyen.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("3f67619e-0d1f-4b99-ba46-bae1c4408445"),
-                            RoleId = new Guid("35fae12d-7023-459f-a867-172422651b2e")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

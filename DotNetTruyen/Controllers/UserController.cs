@@ -27,7 +27,8 @@ namespace DotNetTruyen.Controllers
             SignInManager<User> signInManager,
             EmailService emailService,
             OtpService otpService,
-            IPhoToService photoService
+            IPhoToService photoService,
+            UserService userService
             )
         {
             _userManager = userManager;
@@ -35,6 +36,7 @@ namespace DotNetTruyen.Controllers
             _emailService = emailService;
             _otpService = otpService;
             _photoService = photoService;
+            _userService = userService;
         }
 
         [HttpGet("/userProfile")]
@@ -147,89 +149,89 @@ namespace DotNetTruyen.Controllers
             return View("UserProfile");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangeEmail(string newEmail,string confirmPassword)
-        {
-            ViewBag.ProfileTab = "active";
-            var user = await _userManager.GetUserAsync(User);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> ChangeEmail(string newEmail,string confirmPassword)
+        //{
+        //    ViewBag.ProfileTab = "active";
+        //    var user = await _userManager.GetUserAsync(User);
             
-            if (user != null)
-            {
-                if(!await _userManager.HasPasswordAsync(user))
-                {
-                    ViewBag.UpdateErrorMess = "Tài khoản này chưa có mật khẩu";
-                    return View("UserProfile");
-                }
-                if (!await _userManager.CheckPasswordAsync(user, confirmPassword))
-                {
-                    ViewBag.UpdateErrorMess = "Mật khẩu không chính xác";
-                    return View("UserProfile");
-                }
-                string otp = _otpService.GenerateOtp(newEmail);
-                await _emailService.SendEmailAsync(newEmail, "Mã OTP xác thực đổi email", $"Mã OTP của bạn là: <b>{otp}</b>");
-                ViewBag.Email = newEmail;
-                ViewBag.ConfirmEmailMessage = "Nhập mã Otp được gửi đến email mới của bạn.";
-                return View("OtpChangeEmail");
-            }
-            ViewBag.UpdateErrorMess = "Thay đổi email không thành công";
-            return View("UserProfile");
-        }
+        //    if (user != null)
+        //    {
+        //        if(!await _userManager.HasPasswordAsync(user))
+        //        {
+        //            ViewBag.UpdateErrorMess = "Tài khoản này chưa có mật khẩu";
+        //            return View("UserProfile");
+        //        }
+        //        if (!await _userManager.CheckPasswordAsync(user, confirmPassword))
+        //        {
+        //            ViewBag.UpdateErrorMess = "Mật khẩu không chính xác";
+        //            return View("UserProfile");
+        //        }
+        //        string otp = _otpService.GenerateOtp(newEmail);
+        //        await _emailService.SendEmailAsync(newEmail, "Mã OTP xác thực đổi email", $"Mã OTP của bạn là: <b>{otp}</b>");
+        //        ViewBag.Email = newEmail;
+        //        ViewBag.ConfirmEmailMessage = "Nhập mã Otp được gửi đến email mới của bạn.";
+        //        return View("OtpChangeEmail");
+        //    }
+        //    ViewBag.UpdateErrorMess = "Thay đổi email không thành công";
+        //    return View("UserProfile");
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> OtpChangeEmail(string newEmail, string otp)
-        {
-            ViewBag.ProfileTab = "active";
-            ViewBag.Email = newEmail;
-            ViewBag.Otp = otp;
-            if (!string.IsNullOrEmpty(newEmail) && !string.IsNullOrEmpty(otp))
-            {
-                var user = await _userManager.GetUserAsync(User);
-                if (user == null)
-                {
-                    ViewBag.ErrorOtpChangeEmail = "Phiên đăng nhập của bạn đã kết thúc";
-                    return View();
-                }
-                if (!_otpService.ValidateOtp(newEmail, otp))
-                {
-                    ViewBag.ErrorOtpChangeEmail = "Mã OTP không hợp lệ hoặc đã hết hạn!";
-                    return View();
-                }
-                var code = await _userManager.GenerateChangeEmailTokenAsync(user,newEmail);
-                var result = await _userManager.ChangeEmailAsync(user,newEmail, code);
-                if (result.Succeeded)
-                {
-                    await _signInManager.RefreshSignInAsync(user);
-                    ViewBag.UpdateSuccessMess = "Đã thay đổi email thành công";
-                    return View("UserProfile");
-                }
-            }
-            ViewBag.UpdateErrorMess = "Thay đổi email không thành công";
-            return View("UserProfile");
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> OtpChangeEmail(string newEmail, string otp)
+        //{
+        //    ViewBag.ProfileTab = "active";
+        //    ViewBag.Email = newEmail;
+        //    ViewBag.Otp = otp;
+        //    if (!string.IsNullOrEmpty(newEmail) && !string.IsNullOrEmpty(otp))
+        //    {
+        //        var user = await _userManager.GetUserAsync(User);
+        //        if (user == null)
+        //        {
+        //            ViewBag.ErrorOtpChangeEmail = "Phiên đăng nhập của bạn đã kết thúc";
+        //            return View();
+        //        }
+        //        if (!_otpService.ValidateOtp(newEmail, otp))
+        //        {
+        //            ViewBag.ErrorOtpChangeEmail = "Mã OTP không hợp lệ hoặc đã hết hạn!";
+        //            return View();
+        //        }
+        //        var code = await _userManager.GenerateChangeEmailTokenAsync(user,newEmail);
+        //        var result = await _userManager.ChangeEmailAsync(user,newEmail, code);
+        //        if (result.Succeeded)
+        //        {
+        //            await _signInManager.RefreshSignInAsync(user);
+        //            ViewBag.UpdateSuccessMess = "Đã thay đổi email thành công";
+        //            return View("UserProfile");
+        //        }
+        //    }
+        //    ViewBag.UpdateErrorMess = "Thay đổi email không thành công";
+        //    return View("UserProfile");
+        //}
 
-        [HttpPost("/reSendOtpSetting")]
-        public async Task<IActionResult> ReSendOtp(string newEmail)
-        {
-            ViewBag.Email = newEmail;
-            if (!string.IsNullOrEmpty(newEmail))
-            {
-                var user = await _userManager.FindByEmailAsync(newEmail);
-                if (user == null)
-                {
-                    ViewBag.ErrorOtpChangeEmail = "Email không tồn tại";
-                    return View("OtpChangeEmail");
-                }
+        //[HttpPost("/reSendOtpSetting")]
+        //public async Task<IActionResult> ReSendOtp(string newEmail)
+        //{
+        //    ViewBag.Email = newEmail;
+        //    if (!string.IsNullOrEmpty(newEmail))
+        //    {
+        //        var user = await _userManager.FindByEmailAsync(newEmail);
+        //        if (user == null)
+        //        {
+        //            ViewBag.ErrorOtpChangeEmail = "Email không tồn tại";
+        //            return View("OtpChangeEmail");
+        //        }
 
-                string otp = _otpService.GenerateOtp(newEmail);
-                await _emailService.SendEmailAsync(newEmail, "Gửi lại mã OTP", $"Mã OTP mới của bạn là: <b>{otp}</b>");
-                return View("OtpChangeEmail");
-            }
-            ViewBag.ErrorOtpChangeEmail = "Email không hợp lệ";
-            return View("OtpChangeEmail");
+        //        string otp = _otpService.GenerateOtp(newEmail);
+        //        await _emailService.SendEmailAsync(newEmail, "Gửi lại mã OTP", $"Mã OTP mới của bạn là: <b>{otp}</b>");
+        //        return View("OtpChangeEmail");
+        //    }
+        //    ViewBag.ErrorOtpChangeEmail = "Email không hợp lệ";
+        //    return View("OtpChangeEmail");
 
-        }
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
