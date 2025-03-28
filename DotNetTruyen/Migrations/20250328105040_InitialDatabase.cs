@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace DotNetTruyen.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -453,7 +455,42 @@ namespace DotNetTruyen.Migrations
             migrationBuilder.InsertData(
                 table: "Levels",
                 columns: new[] { "Id", "CreatedAt", "CreatedBy", "DeletedAt", "ExpRequired", "LevelNumber", "Name", "UpdatedAt", "UpdatedBy" },
-                values: new object[] { new Guid("9d5246f4-eeab-45d8-8e24-d32bec4c3fe3"), null, null, null, 0, 0, "Level 0", new DateTime(2025, 3, 28, 15, 49, 4, 615, DateTimeKind.Local).AddTicks(9597), null });
+                values: new object[] { new Guid("ae5494bb-0aa6-45d8-ba23-dba2549cfc8e"), null, null, null, 0, 0, "Level 0", new DateTime(2025, 3, 28, 17, 50, 38, 796, DateTimeKind.Local).AddTicks(1992), null });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { new Guid("171069cf-2f25-4e36-a781-03f739c8abbe"), null, "Reader", "READER" },
+                    { new Guid("9217248f-c608-4151-8921-dc8f922cd994"), null, "Admin", "ADMIN" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Exp", "ImageUrl", "LevelId", "LockoutEnabled", "LockoutEnd", "NameToDisplay", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("710d2e9a-da4e-4162-8498-94b0de70555c"), 0, "95c909e1-2308-49c8-aac7-01127505c958", "admin@example.com", true, 0, null, null, false, null, null, "ADMIN@EXAMPLE.COM", "ADMIN", "AQAAAAIAAYagAAAAENMlkWDQjEgCHIRizsPm/mXHQaS8675pAhXHvIwMs2He137Z6tEvqNiDuvx1qHQR1Q==", null, false, "9ff24896-7c54-4e00-ba16-a39712edd50f", false, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "RoleClaims",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "RoleId" },
+                values: new object[,]
+                {
+                    { 1, "Permission", "Vào bảng điều khiển", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 2, "Permission", "Quản lý người dùng", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 3, "Permission", "Quản lý vai trò", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 4, "Permission", "Quản lý truyện", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 5, "Permission", "Quản lý chương", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 6, "Permission", "Quản lý thể loại", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 7, "Permission", "Quản lý thông báo", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 8, "Permission", "Quản lý quảng cáo", new Guid("9217248f-c608-4151-8921-dc8f922cd994") },
+                    { 9, "Permission", "Quản lý xếp hạng", new Guid("9217248f-c608-4151-8921-dc8f922cd994") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("9217248f-c608-4151-8921-dc8f922cd994"), new Guid("710d2e9a-da4e-4162-8498-94b0de70555c") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChapterImages_ChapterId",
