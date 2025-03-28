@@ -101,7 +101,6 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("Permission", "Quản lý xếp hạng"));
 });
 
-
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 var app = builder.Build();
 app.MapControllerRoute(
